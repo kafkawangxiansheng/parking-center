@@ -84,8 +84,8 @@ public class PrivateParkingServiceImpl implements ParkingService {
 	}
 
 	@Override
-	public OrdersDto findByNumberPlate(String numberPlate) {
-		OrdersEntity entities = parkingRepository.findByNumberPlate(numberPlate);
+	public OrdersDto findByOrderId(Long orderId) {
+		OrdersEntity entities = parkingRepository.findByOrderId(orderId);
 		if (entities == null) {
 			return null;
 		}

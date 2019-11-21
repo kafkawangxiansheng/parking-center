@@ -28,10 +28,18 @@ public class OrdersEndpoint extends BaseEndpoint {
 	
 	
 	
-	@RequestMapping(value = "/batchinsert", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/batchinsert", method = {RequestMethod.POST})
 	@ApiOperation("Orders batch syncs")
 	public void batchSync(@RequestBody List<OrdersDto> ordersDtos) {
-		parkingService.save(ordersDtos);
+		for(OrdersDto orderDto : ordersDtos) {
+			OrdersDto existingDto = parkingService.findByOrderId(orderDto.getOrderId());
+			if(existingDto != null) {
+				//just update existing record with new data
+				orderDto.setId(existingDto.getId());
+			}
+			parkingService.save(orderDto);
+		}
+		
 	}
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})

@@ -15,7 +15,7 @@ public interface ParkingService {
 
     void delete(OrdersDto parkingDto);
     
-    OrdersDto findByNumberPlate(String numberPlate);
+    OrdersDto findByOrderId(Long orderId);
     
     List<OrdersDto> findAll();
 
