@@ -19,7 +19,7 @@ import net.spm.service.ParkingService;
  */
 
 @Service
-public class PrivateParkingServiceImpl implements ParkingService {
+public class ParkingServiceImpl implements ParkingService {
 
 	@Autowired
 	private ParkingRepository parkingRepository;
