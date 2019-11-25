@@ -9,8 +9,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.spm.dto.MotoMonthlyRevenueDto;
-import net.spm.repository.inhouse.parking.center.MotoMonthlyRevenueRepository;
+import net.spm.common.util.constant.VehicleConstants;
+import net.spm.dto.RevenueDto;
+import net.spm.jpa.entity.RevenueEntity;
+import net.spm.repository.RevenueRepository;
 import net.spm.service.RevenueService;
 
 /**
@@ -21,7 +23,7 @@ import net.spm.service.RevenueService;
 public class RevenueServiceImpl implements RevenueService {
 
 	@Autowired
-	private MotoMonthlyRevenueRepository motoMonthlyRevenueRepository;
+	private RevenueRepository motoMonthlyRevenueRepository;
 
 	ModelMapper mapper;
 
@@ -36,12 +38,33 @@ public class RevenueServiceImpl implements RevenueService {
 	public Map<String, Object> getRevenues() {
 		Map<String, Object> revenues = new HashMap<>();
 		
-		MotoMonthlyRevenueDto revenueDto = new MotoMonthlyRevenueDto();
-		mapper.map(motoMonthlyRevenueRepository.findAll().get(0), revenueDto);
-		revenues.put("motoMonthly", revenueDto);
-		revenues.put("motoNormal", new MotoMonthlyRevenueDto());
-		revenues.put("otoMonthly", new MotoMonthlyRevenueDto());
-		revenues.put("otoNormal", new MotoMonthlyRevenueDto());
+		RevenueDto revenueDto = new RevenueDto();
+		RevenueEntity revenueEntity = motoMonthlyRevenueRepository.findByVehicleId(VehicleConstants.MOTO_MONTHLY_TYPE);
+		if(revenueEntity != null) {
+			mapper.map(revenueEntity, revenueDto);
+		}
+		revenues.put(VehicleConstants.MOTO_MONTHLY_KEY, revenueDto);
+		
+		revenueDto = new RevenueDto();
+		revenueEntity = motoMonthlyRevenueRepository.findByVehicleId(VehicleConstants.MOTO_NORMAL_TYPE);
+		if(revenueEntity != null) {
+			mapper.map(revenueEntity, revenueDto);
+		}
+		revenues.put(VehicleConstants.MOTO_NORMAL_KEY, revenueDto);
+		
+		revenueDto = new RevenueDto();
+		revenueEntity = motoMonthlyRevenueRepository.findByVehicleId(VehicleConstants.OTO_MONTHLY_TYPE);
+		if(revenueEntity != null) {
+			mapper.map(revenueEntity, revenueDto);
+		}
+		revenues.put(VehicleConstants.OTO_MONTHLY_KEY, revenueDto);
+		
+		revenueDto = new RevenueDto();
+		revenueEntity = motoMonthlyRevenueRepository.findByVehicleId(VehicleConstants.OTO_NORMAL_TYPE);
+		if(revenueEntity != null) {
+			mapper.map(revenueEntity, revenueDto);
+		}
+		revenues.put(VehicleConstants.OTO_NORMAL_KEY, revenueDto);
 		return revenues;
 	}
 

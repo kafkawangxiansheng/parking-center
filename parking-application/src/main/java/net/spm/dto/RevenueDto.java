@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by Vincent on 02/10/2018
  */
-public class MotoMonthlyRevenueDto {
+public class RevenueDto {
 	
 	private String id;
 	

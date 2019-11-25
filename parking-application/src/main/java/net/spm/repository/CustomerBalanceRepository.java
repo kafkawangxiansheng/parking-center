@@ -1,4 +1,4 @@
-package net.spm.repository.inhouse.parking.center;
+package net.spm.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -10,11 +10,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="moto_monthly_revenue")
-public class MotoMonthlyRevenueEntity {
+public class RevenueEntity {
 	
 	@Id
     @Column(name="id")
 	private String id;
+	
+	@Column(name="vehicle_id")
+	private int vehicleId;
 	
 	@Column(name="total_checkin")
 	private long totalCheckin;
@@ -31,6 +34,15 @@ public class MotoMonthlyRevenueEntity {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	
+	public int getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(int vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 	public long getTotalCheckin() {

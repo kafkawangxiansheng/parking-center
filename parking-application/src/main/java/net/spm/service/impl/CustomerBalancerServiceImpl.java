@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.spm.jpa.entity.CustomerBalanceEntity;
-import net.spm.repository.inhouse.parking.center.CustomerBalanceRepository;
+import net.spm.repository.CustomerBalanceRepository;
 import net.spm.service.CustomerBalanceService;
 
 /**

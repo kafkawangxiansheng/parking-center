@@ -16,7 +16,7 @@
     <!-- Define Jndi Datasource -->
     <jee:jndi-lookup id="parkingCenter" jndi-name="jdbc/parking_center" expected-type="javax.sql.DataSource"/>
     <!-- Define Spring Repository -->
-    <jpa:repositories base-package="net.spm.repository.inhouse.parking.center" />
+    <jpa:repositories base-package="net.spm.repository" />
 
     <!-- Get the entity manager injected into the factory bean -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />

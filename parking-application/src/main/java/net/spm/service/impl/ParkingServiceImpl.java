@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import net.spm.dto.OrdersDto;
 import net.spm.jpa.entity.OrdersEntity;
-import net.spm.repository.inhouse.parking.center.ParkingRepository;
+import net.spm.repository.ParkingRepository;
 import net.spm.service.ParkingService;
 
 /**
