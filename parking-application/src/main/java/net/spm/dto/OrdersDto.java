@@ -1,5 +1,9 @@
 package net.spm.dto;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -141,6 +145,15 @@ public class OrdersDto {
 	public Long getCheckinTime() {
 		return checkinTime;
 	}
+	
+	public String getCheckinTimeInFormat() {
+		if(checkinTime == null || checkinTime == 0) {
+			return "Chưa vào";
+		}
+		Date date = new Date(checkinTime);
+	    Format format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	    return format.format(date);
+	}
 
 	public void setCheckinTime(Long checkinTime) {
 		this.checkinTime = checkinTime;
@@ -149,7 +162,16 @@ public class OrdersDto {
 	public Long getCheckoutTime() {
 		return checkoutTime;
 	}
-
+	
+	public String getCheckoutTimeInFormat() {
+		if(checkoutTime == null || checkoutTime == 0) {
+			return "Chưa ra";
+		}
+		Date date = new Date(checkoutTime);
+	    Format format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	    return format.format(date);
+	}
+	
 	public void setCheckoutTime(Long checkoutTime) {
 		this.checkoutTime = checkoutTime;
 	}

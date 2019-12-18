@@ -2,6 +2,8 @@ package net.spm.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import net.spm.dto.OrdersDto;
 
 /**
@@ -17,7 +19,7 @@ public interface ParkingService {
     
     OrdersDto findByOrderId(Long orderId);
     
-    List<OrdersDto> findAll();
+    List<OrdersDto> findAll(Pageable pageable);
 
 }
  

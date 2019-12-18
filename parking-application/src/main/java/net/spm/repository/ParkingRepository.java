@@ -1,5 +1,8 @@
 package net.spm.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import net.spm.jpa.entity.OrdersEntity;
@@ -14,5 +17,6 @@ public interface ParkingRepository  extends JpaRepository<OrdersEntity, Long> {
 //	OrdersEntity findByNumberPlate(@Param(value="numberPlate") String numberPlate);
 
 	OrdersEntity findByOrderId(Long orderId);
+	List<OrdersEntity> findAllByOrderByIdDesc(Pageable pageable);
 
 }

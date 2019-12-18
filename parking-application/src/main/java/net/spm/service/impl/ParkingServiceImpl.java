@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.spm.dto.OrdersDto;
@@ -95,8 +96,8 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 
 	@Override
-	public List<OrdersDto> findAll() {
-		List<OrdersEntity> entities = parkingRepository.findAll();
+	public List<OrdersDto> findAll(Pageable pageable) {
+		List<OrdersEntity> entities = parkingRepository.findAllByOrderByIdDesc(pageable);
 
 		return this.map(entities);
 	}
