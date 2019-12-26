@@ -1,0 +1,113 @@
+header{
+    display: flex;
+    position: relative;
+}
+
+header .dropdown a:after {
+    display: none;
+}
+
+header .dropdown .dropdown-toggle {
+    max-height: 50px;
+}
+
+header .dropdown .user-img {
+    width: 25px;
+    height: 25px;
+}
+
+header .dropdown-menu.show{
+    left: auto;
+    right: 0;
+    width: 280px;
+    border: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+header .user-header {
+    background: #CEA052;
+    height: 175px;
+    padding: 10px;
+    text-align: center;
+}
+
+header p{
+    color: rgba(255,255,255,0.8);
+    font-size: 17px;
+    margin-top: 10px;
+
+}
+
+header .user-footer {
+    background: #f9f9f9;
+}
+
+header .user-footer .btn-logout {
+    color: #666666;
+    background-color: #f4f4f4;
+    border-color: #ddd;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 0;
+}
+
+header .img-circle-header {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255,255,255,0.2);
+}
+
+header .navbar-custom-menu a:hover {
+    background: #A0A0A0;
+}
+
+.header-menu {
+    background-color: #CEA052;
+    font-weight: 600;
+    border-bottom: 3px solid lemonchiffon;
+}
+
+.header-menu li {
+    border-right: 2px solid #fff;
+}
+
+.header-menu a {
+    color: #ffffff;
+    font-size: 17px;
+    padding: 13px 23px;
+}
+
+.header-menu li a{
+    transition: 0.2s ease-in-out;
+}
+
+.header-menu li:hover a {
+    background: black;
+}
+
+.header-submenu {
+    background: #CCCCCC;
+    font-weight: 600;
+}
+
+.header-submenu li {
+    border-right: 2px solid #fff;
+}
+
+.header-submenu a {
+    color: #ffffff;
+    font-size: 17px;
+    padding: 13px 23px;
+}
+
+.header-submenu li a{
+    transition: 0.2s ease-in-out;
+}
+
+.header-submenu .nav-submenu li:hover a {
+    color: #000;
+}

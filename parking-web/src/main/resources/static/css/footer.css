@@ -1,0 +1,14 @@
+footer {
+    padding: 15px;
+    border-top: 4px #d2d6de solid;
+    color: #444;
+}
+
+footer a {
+    color: #2E2A25;
+}
+
+footer a:hover {
+    color: #2E2A25;
+    text-decoration: none;
+}

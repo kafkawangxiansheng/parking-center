@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parking Management</title>
+    <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+    <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/mainTemplate :: header}" class="main-header flex-column"></header>
+    <div id="main">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="content-wrapper">
+                        <section class="content-header d-flex justify-content-between align-items-center">
+                            <h1 class="m-0">Tra cứu vào ra</h1>
+                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-home"></i>
+                                        <span>Trang chủ</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Tra cứu vào ra</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="content">
+                            <div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
+                                <h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
+                                <div>
+                                    <form th:action="@{/in-out-logs}" th:object="${orderSearchForm}" method="GET">
+                                        <div class="form-group text col-lg-3 float-left">
+                                            <label for="option1">Mã thẻ</label>
+                                            <input type="text" th:field="*{cardCode}" class="form-control" id="cardCode">
+                                        </div>
+                                        <div class="form-group text col-lg-3 float-left">
+                                            <label for="option1">Biển số</label>
+                                            <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
+                                        </div>
+                                        <div class="form-group text col-lg-3 float-left">
+                                            <label for="option1">Số thẻ</label>
+                                            <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
+                                        </div>
+                                        <div class="form-group col-lg-3 float-left">
+                                            <label for="">Nhiều ngày</label>
+                                            <div class="dateFromToInputs d-flex justify-content-between">
+                                                <div class="form-group text">
+                                                    <input type="text" th:field="*{dateFrom}" class="form-control">
+                                                </div>
+                                                <span class="form_from_to_separator d-flex align-items-center">〜</span>
+                                                <div class="form-group text">
+                                                    <input type="text" th:field="*{dateTo}" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="box box-result">
+                                <table class="table" id="inOutTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Số thẻ</th>
+                                            <th scope="col">Mã thẻ</th>
+                                            <th scope="col">Thời gian vào</th>
+                                            <th scope="col">Thời gian ra</th>
+                                            <th scope="col">Biển số</th>
+                                            <th scope="col">Người vào</th>
+                                            <th scope="col">Người ra</th>
+                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Mất thẻ</th>
+                                            <th scope="col">Giá tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr th:each="order : ${orders}">
+											<td th:text="${{order.id}}"></td>
+											<td th:text="${{order.cardStt}}"></td>
+											<td th:text="${{order.cardCode}}"></td>
+											<td th:text="${{order.checkinTimeInFormat}}"></td>
+											<td th:text="${{order.checkoutTimeInFormat}}"></td>
+											<td th:text="${{order.carNumber}}"></td>
+											<td th:text="${{order.adminCheckinName}}"></td>
+											<td th:text="${{order.adminCheckoutName}}"></td>
+											<td th:text="${{order.vehicleName}}"></td>
+											<td th:text="${{order.isCardLost}}"></td>
+											<td th:text="${{order.totalPrice}}"></td>
+										</tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group button-group d-flex flex-row">
+                                    <div class="form-group">
+                                        <input type="submit" value="Xuất file Excel" class="btn btn-primary"
+                                            style="font-size: 14px;">
+                                    </div>
+                                </div>
+                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
+                                    <ul class="pagination my-4">
+                                    	<th:block th:each="p : ${#numbers.sequence(1, totalPages)}">
+                                    		 <li th:if="${p == currentPage}" class='page-item active'>
+                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+                                    		 		<th:block  th:text="${p}"></th:block>
+                                    		 	</a>
+                                    		 </li>
+                                    		 <li th:if="${p != currentPage}" class='page-item'>
+                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+                                    		 		<th:block  th:text="${p}"></th:block>
+                                    		 	</a>
+                                    		 </li>
+                                    	</th:block>
+            
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
+    <script src="/js/orders.js"></script>
+</body>
+
+</html>

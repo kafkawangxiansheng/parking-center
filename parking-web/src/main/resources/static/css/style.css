@@ -1,0 +1,14 @@
+body{
+    margin: 0;
+    font-size: 14px;
+    padding:0;
+    line-height: 1.42857143;
+    font-family: 'Open Sans', sans-serif;
+}
+.box-search h5{
+	font-weight: 700;
+}
+
+label  {
+	font-weight: 700;
+}

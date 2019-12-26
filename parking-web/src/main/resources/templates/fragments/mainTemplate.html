@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parking Management</title>
+    <link href="http://admin.spmgroup.vn/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/checkinoutlogs-card.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+
+<body>
+    <header th:fragment="header" class="main-header flex-column">
+        <div class="header-menu">
+            <ul class="nav nav-fill align-items-center" style="height: 50px;">
+                <li class="nav-item" style="border-left: 2px solid #fff;">
+                    <a class="nav-link" th:href="@{/}">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/hr}">QL nhân sự</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/company}">QL công ty - dự án</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/revenue-index}">QL doanh thu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cards}">QL thẻ xe - loại xe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/monthlycards-viewlog}">QL vé tháng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/settings-display}">QL hệ thống</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/in-out-logs}" style="background: black;">QL xe ra vào</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}">Cập nhật tài khoản</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header-submenu position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
+                            style="height: 50px;">
+                            <li class="nav-item" style="border-left: 2px solid #fff;">
+                                <a class="nav-link" th:href="@{/in-out-logs}"
+                                    style="color: #000; background: #fff;">Tra cứu vào ra</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/in-out-mothly-logs}">Tra cứu vé tháng</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-custom-menu position-absolute" style="top: 0; right: 0;">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle d-flex flex-row align-items-center" data-toggle="dropdown">
+                            <img src="/image/index/spm_logo_2.png" alt="" class="user-img mr-2">
+                            <span>SPM group</span>
+                        </a>
+                        <ul class="dropdown-menu p-0">
+                            <li class="user-header">
+                                <img src="/image/index/spm_logo_2.png" alt="" class="img-circle-header">
+                                <p>SPM group</p>
+                            </li>
+                            <li class="user-footer d-flex flex-row-reverse p-2">
+                                <div class="user-logout">
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat btn-logout">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="main">
+        Main content here
+    </div>
+    <footer th:fragment="footer" class="main-footer d-flex justify-content-between">
+        <div class="pull-left">
+            Copyright © 2019 <strong><a href="#">SPM group</a></strong>. All rights reserved.
+        </div>
+        <div class="pull-right">
+            <b>Version</b> 1.0
+        </div>
+    </footer>
+    <script src="/js/libs/jquery-3.4.1.min.js"></script>
+    <script src="/js/libs/fontawesome.min.js"></script>
+    <script src="/js/libs/popper.min.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/libs/jquery-ui.js"></script>
+    <script src="/js/libs/accordion.js"></script>
+</body>
+
+</html>
