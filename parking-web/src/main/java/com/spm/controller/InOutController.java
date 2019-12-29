@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +53,26 @@ public class InOutController {
 		Pageable pageable = PageRequest.of(page, PagingConstants.MAX_ROWS_CAN_DISPLAY);
 		ResultObject<List<OrderDto>> result = orderService.getAllOrder(orderSearchForm,pageable);
 		
-
+		List<Integer>  totalPages = new ArrayList<Integer>();
+		if( page <= 5) {
+			for(int p = 1; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > 10) {
+					break;
+				}
+			}
+		} else {
+			for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > (page + 5)) {
+					break;
+				}
+			}
+		}
+		
 		model.addAttribute("orders", result.getData());
-		model.addAttribute("totalPages", result.getTotalPages());
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("maxPage", result.getTotalPages());
 		model.addAttribute("currentPage", page+1);
 		
         return "inOutPage";

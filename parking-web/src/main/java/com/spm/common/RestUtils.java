@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -247,6 +249,32 @@ public class RestUtils<T> {
 		return result;
 	}
 	
+	public ResultObject<Map<Object, T>> getWithMap(String getUrl, String... token) {
+		ResultObject<Map<Object, T>> result = new ResultObject<>();
+		try {
+			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+			HttpGet getRequest = new HttpGet(getUrl);
+			if (token != null && token.length > 0) {
+				getRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token[0]);
+			}
+
+			HttpResponse response = httpClient.execute(getRequest);
+			if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_UNAUTHORIZED) {
+				result.setStatus(response.getStatusLine().getStatusCode());
+				result.setDescription(response.getStatusLine().getReasonPhrase());
+				return result;
+			}
+			String entityStringResult = EntityUtils.toString(response.getEntity(), "UTF-8");
+			bindingDataForMap(entityStringResult, result);
+
+			return result;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return result;
+	}
+	
 	private void bindingDataForList(String dataString, ResultObject<List<T>> result) {
 		JsonObject  datafromApi = JsonParser.parseString(dataString).getAsJsonObject();
 		JsonArray array = datafromApi.get("data").getAsJsonArray();
@@ -255,6 +283,21 @@ public class RestUtils<T> {
 		for(final JsonElement json: array){
             T entity = gson.fromJson(json.toString(), clazz);
             data.add(entity);
+        }
+		result.setData(data);
+		if(datafromApi.has("totalPages")) {
+			result.setTotalPages(datafromApi.get("totalPages").getAsInt());
+		}
+	}
+	
+	private void bindingDataForMap(String dataString, ResultObject<Map<Object, T>> result) {
+		JsonObject  datafromApi = JsonParser.parseString(dataString).getAsJsonObject();
+		
+		Gson gson = new Gson();
+		Map<Object,T> data =  new HashMap<>();
+		for(final Object key: datafromApi.keySet()){
+            T entity = gson.fromJson(datafromApi.get(String.valueOf(key)).getAsString(), clazz);
+            data.put(key, entity);
         }
 		result.setData(data);
 		if(datafromApi.has("totalPages")) {

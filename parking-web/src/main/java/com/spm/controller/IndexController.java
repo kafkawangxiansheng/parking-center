@@ -18,6 +18,12 @@ public class IndexController extends CustomExceptionHandler{
 	
 	private static final Logger logger = LogManager.getLogger(IndexController.class);
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+		return "redirect:/in-out-logs";
+    
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
@@ -28,7 +34,7 @@ public class IndexController extends CustomExceptionHandler{
 	@RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
     public String loginPost(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		return "redirect:/list-profile";
+		return "redirect:/in-out-logs";
     
 	}
  
