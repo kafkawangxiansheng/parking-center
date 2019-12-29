@@ -19,7 +19,7 @@ public class DatabaseConfiguration {
     private String url;
     @Value("${spring.datasource.username:root}")
     private String username;
-    @Value("${spring.datasource.password:root}")
+    @Value("${spring.datasource.password:}")
     private String password;
 
     @Bean

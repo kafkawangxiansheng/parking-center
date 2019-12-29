@@ -2,3 +2,13 @@
 *.project
 *.class*
 .settings/*
+parking-api/.DS_Store
+parking-api/src/.DS_Store
+parking-api/src/main/java/com/.DS_Store
+parking-api/src/main/resources/application.properties
+parking-web/.DS_Store
+parking-web/logs/app.log
+parking-web/src/.DS_Store
+parking-web/src/main/.DS_Store
+parking-web/src/main/resources/.DS_Store
+parking-web/src/main/resources/application.properties
