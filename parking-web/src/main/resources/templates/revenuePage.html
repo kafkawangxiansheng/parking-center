@@ -13,7 +13,6 @@
 <body>
     <header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
     	<div class="header-submenu position-relative">
-    		<div th:insert="~{fragments/mainTemplate :: sub-header}"  class="container"></div>
     		<div th:insert="~{fragments/mainTemplate :: navi-header}"  class="container"></div>
     	</div>
     </header>
@@ -23,7 +22,7 @@
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Tra cứu vào ra</h1>
+                            <h1 class="m-0">Báo cáo doanh thu</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -36,74 +35,28 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Tra cứu vào ra</span>
+                                        <span>Báo cáo doanh thu</span>
                                     </a>
                                 </li>
                             </ul>
                         </section>
                         <section class="content">
-                            <div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
-                                <h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
-                                <div>
-                                    <form th:action="@{/in-out-logs}" th:object="${orderSearchForm}" method="GET">
-                                        <div class="form-group text col-lg-3 float-left">
-                                            <label for="option1">Biển số</label>
-                                            <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
-                                        </div>
-                                        <div class="form-group text col-lg-3 float-left">
-                                            <label for="option1">Số thẻ</label>
-                                            <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
-                                        </div>
-                                        <div class="form-group col-lg-3 float-left">
-                                            <label for="">Nhiều ngày</label>
-                                            <div class="dateFromToInputs d-flex justify-content-between">
-                                                <div class="form-group text">
-                                                    <input type="text" th:field="*{dateFrom}" class="form-control">
-                                                </div>
-                                                <span class="form_from_to_separator d-flex align-items-center">〜</span>
-                                                <div class="form-group text">
-                                                    <input type="text" th:field="*{dateTo}" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                             <div class="box box-result">
                                 <table class="table" id="inOutTable">
                                     <thead>
                                         <tr>
-                                            <th scope="col">STT</th>
-                                            <th scope="col">Số thẻ</th>
-                                            <th scope="col">Thời gian vào</th>
-                                            <th scope="col">Thời gian ra</th>
-                                            <th scope="col">Biển số ĐK</th>
-                                            <th scope="col">Biển số vào</th>
-                                            <th scope="col">Biển số ra</th>
-                                            <th scope="col">Người vào</th>
-                                            <th scope="col">Người ra</th>
-                                            <th scope="col">Tên loại xe</th>
-                                            <th scope="col">Mất thẻ</th>
-                                            <th scope="col">Giá tiền</th>
+                                            <th scope="col">Loại xe</th>
+                                            <th scope="col">Lượt vào</th>
+                                            <th scope="col">Lượt ra</th>
+                                            <th scope="col">Tiền thu</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<tr th:each="order : ${orders}">
-											<td th:text="${{order.id}}"></td>
-											<td th:text="${{order.cardStt}}"></td>
-											<td th:text="${{order.checkinTimeInFormat}}"></td>
-											<td th:text="${{order.checkoutTimeInFormat}}"></td>
-											<td th:text="${{order.carNumber}}"></td>
-											<td th:text="${{order.carNumberIn}}"></td>
-											<td th:text="${{order.carNumberOut}}"></td>
-											<td th:text="${{order.adminCheckinName}}"></td>
-											<td th:text="${{order.adminCheckoutName}}"></td>
-											<td th:text="${{order.vehicleName}}"></td>
-											<td th:text="${{order.isCardLost}}"></td>
-											<td th:text="${{order.totalPrice}}"></td>
+                                    	<tr th:each="revenue : ${revenues}">
+											<td th:text="${{revenue.label}}"></td>
+											<td th:text="${{revenue.totalCheckin}}"></td>
+											<td th:text="${{revenue.totalCheckout}}"></td>
+											<td th:text="${{revenue.totalPrice}}"></td>
 										</tr>
                                     </tbody>
                                 </table>

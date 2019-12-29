@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfiguration {
-    @Value("${spring.datasource.url:jdbc:mysql://localhost:3306/spm_parking?useUnicode=true&characterEncoding=UTF8}")
+    @Value("${spring.datasource.url:jdbc:mysql://localhost:3306/spm_parking?useUnicode=true&amp;characterEncoding=utf-8}")
     private String url;
     @Value("${spring.datasource.username:root}")
     private String username;
@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);

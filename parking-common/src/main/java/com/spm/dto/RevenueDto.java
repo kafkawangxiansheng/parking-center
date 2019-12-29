@@ -1,7 +1,5 @@
 package com.spm.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Created by Vincent on 02/10/2018
  */
@@ -9,13 +7,12 @@ public class RevenueDto {
 	
 	private String id;
 	
-	@JsonProperty("total_checkin")
+	private String label;
+	
 	private long totalCheckin;
 	
-	@JsonProperty("total_checkout")
 	private  long totalCheckout;
 	
-	@JsonProperty("total_price")
 	private long totalPrice;
 
 	public String getId() {
@@ -24,6 +21,14 @@ public class RevenueDto {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public long getTotalCheckin() {
