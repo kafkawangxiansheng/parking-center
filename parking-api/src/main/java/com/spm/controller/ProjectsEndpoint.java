@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spm.dto.ProjectsDto;
+import com.spm.dto.ResultObject;
 import com.spm.service.ProjectsService;
 
 import io.swagger.annotations.Api;
@@ -28,19 +30,27 @@ public class ProjectsEndpoint {
 	
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
 	@ApiOperation("Add new project")
-	public void addNewCard(@RequestBody ProjectsDto projectsDto) {
-		projectsService.save(projectsDto);
+	public @ResponseBody ResultObject<List<ProjectsDto>> addNewCard(@RequestBody ProjectsDto projectsDto) {
+		return projectsService.save(projectsDto);
 	}
 	
 	@RequestMapping(value = "/update", method = {RequestMethod.PUT})
 	@ApiOperation("Update existing project")
-	public void updateExistingCard(@RequestBody ProjectsDto projectsDto) {
-		projectsService.save(projectsDto);
+	public @ResponseBody ResultObject<List<ProjectsDto>> updateExistingCard(@RequestBody ProjectsDto projectsDto) {
+		return projectsService.save(projectsDto);
 	}
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
-	@ApiOperation("Orders batch syncs")
-	public @ResponseBody List<ProjectsDto> getAll() {
+	@ApiOperation("Get all projects")
+	public @ResponseBody ResultObject<List<ProjectsDto>> getAll() {
 		return projectsService.findAll();
+	}
+	
+	
+	
+	@RequestMapping(value = "projectId", method = {RequestMethod.GET})
+	@ApiOperation("Get all projects")
+	public @ResponseBody ResultObject<List<ProjectsDto>> getProjectById(@RequestParam(name="projectId") Long projectId) {
+		return projectsService.findById(projectId);
 	}
 }
