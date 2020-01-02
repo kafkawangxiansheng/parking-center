@@ -7,11 +7,15 @@ import javax.annotation.PostConstruct;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.CardsDto;
+import com.spm.dto.ResultObject;
 import com.spm.entity.CardsEntity;
 import com.spm.repository.CardRepository;
+import com.spm.search.form.CardSearchForm;
 import com.spm.service.CardsService;
 
 /**
@@ -76,16 +80,18 @@ public class CardsServiceImpl implements CardsService {
 
 
 	@Override
-	public List<CardsDto> findAll() {
-		List<CardsEntity> entities = cardRepository.findAll();
-
-		return this.map(entities);
+	public ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm) {
+		Page<CardsEntity> entities = cardRepository.search(cardSearchForm.getCode(), cardSearchForm.getStt(), cardSearchForm.getVehicleId(), pageable);
+		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
+		resultObject.setData(this.map(entities.getContent()));
+		resultObject.setTotalPages(entities.getTotalPages());
+		return resultObject;
 	}
 
 	@Override
 	public List<CardsDto> save(List<CardsDto> cardsDtos) {
 		List<CardsEntity> cardsEntities = reMap(cardsDtos);
-		
+
 		cardsEntities = cardRepository.saveAll(cardsEntities);
 		cardsDtos = map(cardsEntities);
 		return cardsDtos;
