@@ -14,3 +14,11 @@ function paging(page) {
 	}
 	window.location.href = currentURL;
 }
+
+$(function() {
+	$(".datepicker" ).datepicker({
+		dateFormat: "dd/mm/yy",
+		changeMonth: true,
+		changeYear: true
+	});
+});
