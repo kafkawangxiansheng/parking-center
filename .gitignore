@@ -1,6 +1,8 @@
 */.settings/*
 *.project
 *.class*
+*.DS_Store
+*.log
 .settings/*
 parking-api/.DS_Store
 parking-api/src/.DS_Store
