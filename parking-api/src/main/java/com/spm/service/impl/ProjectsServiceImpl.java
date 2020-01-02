@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.ProjectsDto;
+import com.spm.dto.ResultObject;
 import com.spm.entity.ProjectsEntity;
 import com.spm.repository.ProjectRepository;
 import com.spm.service.ProjectsService;
@@ -54,20 +55,25 @@ public class ProjectsServiceImpl implements ProjectsService{
 	}
 	
 	@Override
-	public ProjectsDto save(ProjectsDto projectsDto) {
+	public ResultObject<List<ProjectsDto>> save(ProjectsDto projectsDto) {
+		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
+		List<ProjectsDto> listObject = new ArrayList<>();
 		ProjectsEntity entity = new ProjectsEntity();
 		mapper.map(projectsDto, entity);
 		entity = projectRepository.save(entity);
 		mapper.map(entity, projectsDto);
-		return projectsDto;
+		listObject.add(projectsDto);
+		resultObj.setData(listObject);
+		return resultObj;
 	}
 
 	@Override
-	public List<ProjectsDto> save(List<ProjectsDto> projectsDtos) {
+	public ResultObject<List<ProjectsDto>> save(List<ProjectsDto> projectsDtos) {
+		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
 		List<ProjectsEntity> projectsEntities = reMap(projectsDtos);
 		projectsEntities = projectRepository.saveAll(projectsEntities);
-		projectsDtos = map(projectsEntities);
-		return projectsDtos;
+		resultObj.setData(map(projectsEntities));
+		return resultObj;
 	}
 
 	@Override
@@ -77,9 +83,22 @@ public class ProjectsServiceImpl implements ProjectsService{
 	}
 
 	@Override
-	public List<ProjectsDto> findAll() {
+	public ResultObject<List<ProjectsDto>> findAll() {
+		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
 		List<ProjectsEntity> entities = projectRepository.findAll();
-		return this.map(entities);
+		resultObj.setData(this.map(entities));
+		return resultObj;
 	}
 
+	@Override
+	public ResultObject<List<ProjectsDto>> findById(Long projectId) {
+		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
+		ProjectsEntity entity = projectRepository.findById(projectId).get();
+		List<ProjectsDto> listProjectDto = new ArrayList<ProjectsDto>();
+		ProjectsDto projectsDto = new ProjectsDto();
+		mapper.map(entity, projectsDto);
+		listProjectDto.add(projectsDto);
+		resultObj.setData(listProjectDto);
+		return resultObj;
+	}
 }
