@@ -1,6 +1,6 @@
 */.settings/*
 *.project
-**.properties
+parking-api/src/main/resources/application.properties
 *.class*
 *.DS_Store
 *.log
