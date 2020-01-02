@@ -1,5 +1,6 @@
 */.settings/*
 *.project
+*.properties
 *.class*
 *.DS_Store
 *.log
