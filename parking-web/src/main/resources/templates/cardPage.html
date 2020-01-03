@@ -97,12 +97,15 @@
 											<td th:text="${{card.code}}"></td>
 											<td th:text="${{card.stt}}"></td>
 											<td th:text="${{card.vehicleId}}"></td>
+											<td>
+												<a th:href="@{/editCard/{cardId}/(id=${card.id})}">Chỉnh sửa</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
 								<div class="form-group button-group d-flex flex-row">
 									<div class="form-group">
-										<a href="cards/cardsAddNew"> <input type="submit"
+										<a href="cards/addNewCard"> <input type="submit"
 											value="Thêm mới" class="btn btn-success"
 											style="font-size: 14px; margin-right: 20px;">
 										</a>

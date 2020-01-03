@@ -47,27 +47,28 @@
 								</div>
 								<div class="box-body p-2">
 									<div class="form-body">
-										<form id="formCardsData" method="POST">
+										<form id="formCardsData" th:action="@{/addNewCard}"
+											th:object="${cardsAddNew}" method="POST">
 											<div class="form-group text">
-												<label for="stt">STT*</label> <input type="text" name="stt"
-													class="form-control" id="stt">
+												<label for="stt">STT*</label> <input type="text"
+													th:field="*{stt}" class="form-control" id="stt">
 											</div>
 											<div class="form-group text">
 												<label for="code">Mã thẻ</label> <input type="text"
-													name="code" class="form-control" id="code">
+													th:field="*{code}" class="form-control" id="code">
 											</div>
 											<div class="form-group">
 												<label for="vehicle_id">Tên loại xe</label> <select
-													class="form-control" name="vehicle_id" id="vehicle_id">
+													name="vehicleId" class="form-control" id="vehicle_id">
 													<option value="1">Xe đạp điện</option>
 													<option value="2">Xe oto</option>
 													<option value="3">Xe máy</option>
-													<option value="4">Xe tay ga</option>
+													<option value="3">Xe tay ga</option>
 												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">
-													<button id="savecardsData" class="btn btn-primary"
+													<button type="submit" class="btn btn-primary"
 														style="font-size: 14px; margin-right: 20px;">Lưu</button>
 												</div>
 												<div class="form-group">

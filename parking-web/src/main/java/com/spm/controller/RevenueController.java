@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.dto.ResultObject;
 import com.spm.dto.RevenueDto;
+import com.spm.search.form.RevenueSearchForm;
 import com.spm.service.RevenueService;
 
 /**
@@ -29,9 +30,20 @@ public class RevenueController {
 	
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
-	public String getRevenue(@RequestParam(name="projectId", required=false, defaultValue="1")int projectId,
+	public String getRevenue(
+			@RequestParam(name="employeeId", required=false)String employeeId,
+			@RequestParam(name="dateFrom", required=false)String dateFrom,
+			@RequestParam(name="dateTo", required=false)String dateTo,
 			Model model,  HttpServletRequest request) {
-		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(projectId);
+		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
+		revenueSearchForm.setProjectId(1); //TODO: get project assigned to logined user
+		revenueSearchForm.setEmployeeId(employeeId);
+		revenueSearchForm.setDateFrom(dateFrom);
+		revenueSearchForm.setDateTo(dateTo);
+		
+		model.addAttribute("revenueSearchForm", revenueSearchForm);
+		
+		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(revenueSearchForm);
 		model.addAttribute("revenues", revenueMap.getData());
 		return "revenuePage";
 	}

@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.RevenueDto;
+import com.spm.entity.OrderEntity;
 import com.spm.entity.RevenueEntity;
 import com.spm.entity.SettingEntity;
-import com.spm.repository.RevenueRepository;
+import com.spm.repository.OrderRepository;
 import com.spm.repository.SettingRepository;
+import com.spm.search.form.RevenueSearchForm;
 import com.spm.service.RevenueService;
 
 /**
@@ -24,7 +26,7 @@ import com.spm.service.RevenueService;
 public class RevenueServiceImpl implements RevenueService {
 
 	@Autowired
-	private RevenueRepository motoMonthlyRevenueRepository;
+	private OrderRepository orderRepository;
 	
 	@Autowired
 	private SettingRepository  settingRepository;
@@ -39,13 +41,24 @@ public class RevenueServiceImpl implements RevenueService {
 
 
 	@Override
-	public List<RevenueDto> getRevenues(int projectId) {
+	public List<RevenueDto> getRevenues(RevenueSearchForm revenueSearchForm) {
 		
 		List<RevenueDto> revenues = new ArrayList<>();
-		List<SettingEntity> settings = settingRepository.findAllByProjectId(projectId);
+		List<SettingEntity> settings = settingRepository.findAllByProjectId(revenueSearchForm.getProjectId());
+		List<OrderEntity> orderEntities  = orderRepository.findAll(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		
 		for(SettingEntity setting :  settings) {
 			RevenueDto revenueDto = new RevenueDto();
-			RevenueEntity revenueEntity = motoMonthlyRevenueRepository.findByVehicleId(setting.getVehicleId());
+			RevenueEntity revenueEntity = new RevenueEntity() ;
+			
+			revenueEntity.setVehicleId(setting.getVehicleId());
+			orderEntities.forEach(order -> {
+				if(order.getVehicleId() == setting.getVehicleId())  {
+					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
+					revenueEntity.setTotalCheckout(((order.getCheckoutTime()!=null && order.getCheckoutTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckout());
+					revenueEntity.setTotalPrice(revenueEntity.getTotalPrice() + order.getTotalPrice());
+				}
+			});
 			if(revenueEntity != null) {
 				mapper.map(revenueEntity, revenueDto);
 			}
