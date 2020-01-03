@@ -13,8 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
+import com.spm.dto.ResultObject;
+import com.spm.dto.UserAttributeDto;
 import com.spm.dto.UserDto;
-import com.spm.dto.UserRoleDto;
 
 @Service(value = "userService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -31,25 +32,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("User " + userName + " was not found in the database");
 		}
 
-		String getRolesByUserIdURL = URLConstants.URL_ROLES_BY_USER_ID.replace("{userId}",
-				String.valueOf(userEntity.getId()));
+		String getRolesByUserIdURL = URLConstants.URL_ATTRIBUTES_BY_USER_ID.replace("{userId}", String.valueOf(userEntity.getId()));
 
-		RestUtils<UserRoleDto> restUtilsForRoles = new RestUtils<>(UserRoleDto.class);
+		RestUtils<UserAttributeDto> restUtilsForRoles = new RestUtils<>(UserAttributeDto.class);
 
 		// get user roles by user id
-		List<UserRoleDto> userRoles = restUtilsForRoles.getUserRolesByUserId(getRolesByUserIdURL);
+		ResultObject<List<UserAttributeDto>> userProperties = restUtilsForRoles.get(getRolesByUserIdURL);
 		
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-		if (userRoles != null) {
-			for (UserRoleDto userRole : userRoles) {
+		if (userProperties != null) {
+			for (UserAttributeDto userAttributeDto : userProperties.getData()) {
 				// ROLE_USER, ROLE_ADMIN,..
-				GrantedAuthority authority = new SimpleGrantedAuthority(userRole.getRole().getName());
+				GrantedAuthority authority = new SimpleGrantedAuthority(userAttributeDto.getType().name() +  "_"  + userAttributeDto.getValue());
 				grantList.add(authority);
 			}
 		}
 
-		UserDetails userDetails = (UserDetails) new User(userEntity.getUsername(), //
-				userEntity.getPassword(), grantList);
+		UserDetails userDetails = (UserDetails) new User(userEntity.getUsername(), userEntity.getPassword(), grantList);
 
 		return userDetails;
 	}

@@ -67,4 +67,15 @@ public class ProjectServiceImpl implements ProjectService{
 		}
 	}
 
+	@Override
+	public List<Integer> getProjectIdsByUsername(Long userId) {
+		RestUtils<Integer> restUtils = new RestUtils<>(Integer.class);
+		ResultObject<List<Integer>> resultFromAPI = new ResultObject<>();
+		
+		String finalURL = URLConstants.URL_GET_PROJECT_IDS_BY_USER_ID.replace("{userId}", String.valueOf(userId));
+		resultFromAPI  = restUtils.get(finalURL);
+		
+		return resultFromAPI.getData();
+	}
+
 }
