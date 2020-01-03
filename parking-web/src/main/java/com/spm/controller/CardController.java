@@ -79,12 +79,12 @@ public class CardController {
 	
 	@RequestMapping (value="addNewCard", method = { RequestMethod.GET})
 	public String showAddNewCardPage(Model model)throws UnauthorizedException{
-		model.addAttribute("editCard", new CardsDto());
+		model.addAttribute("addCard", new CardsDto());
 		return "addNewCardPage";
 	}
 	
 	@RequestMapping (value="addNewCard", method= {RequestMethod.POST})
-	public String addCard(Model model, @ModelAttribute("cardsAddNew") CardsDto cardsDto) throws UnauthorizedException{
+	public String addCard(Model model, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
 		cardService.addCard(cardsDto);
 		return "redirect:/cards";
 	}
