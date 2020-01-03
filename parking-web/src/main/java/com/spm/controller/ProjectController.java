@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spm.dto.CompanyDto;
 import com.spm.dto.ProjectsDto;
 import com.spm.dto.ResultObject;
 import com.spm.exception.UnauthorizedException;
+import com.spm.service.CompanyService;
 import com.spm.service.ProjectService;
 
 @Controller
@@ -24,6 +26,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private CompanyService companyService;
 	
 	@RequestMapping(value = "", method= {RequestMethod.GET})
 	public String index(Model model,  HttpServletRequest request) throws UnauthorizedException {
@@ -35,6 +40,8 @@ public class ProjectController {
 	@RequestMapping(value = "/add-project", method= {RequestMethod.GET})
 	public  String addProfile(Model model) throws UnauthorizedException{
 		model.addAttribute("projectDto", new ProjectsDto());
+		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
+		model.addAttribute("listCompanies", companyMap.getData());
 		return "addProject";
 	}
 	

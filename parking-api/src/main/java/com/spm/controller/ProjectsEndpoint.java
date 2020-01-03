@@ -18,9 +18,6 @@ import com.spm.service.ProjectsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
- * Created by Sudo on 28/12/2019
- */
 @RestController
 @RequestMapping("/project")
 @Api(value = "Project Endpoint", description = "The URL to handle projects endpoint")
