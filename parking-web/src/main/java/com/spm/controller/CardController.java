@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,8 +77,23 @@ public class CardController {
 		return "cardPage";
 	}
 	
-	@RequestMapping (value="cardsAddNew", method = { RequestMethod.GET })
-	public String showCardUpdatePage() {
-		return "cardAddNewPage";
+	@RequestMapping (value="addNewCard", method = { RequestMethod.GET})
+	public String showAddNewCardPage(Model model)throws UnauthorizedException{
+		model.addAttribute("editCard", new CardsDto());
+		return "addNewCardPage";
 	}
+	
+	@RequestMapping (value="addNewCard", method= {RequestMethod.POST})
+	public String addCard(Model model, @ModelAttribute("cardsAddNew") CardsDto cardsDto) throws UnauthorizedException{
+		cardService.addCard(cardsDto);
+		return "redirect:/cards";
+	}
+	
+	@RequestMapping (value="editCard/{cardId}", method = { RequestMethod.GET})
+	public String editCard(Model model, @PathVariable("cardId")Long cardId) throws UnauthorizedException{
+		CardsDto result = cardService.getCardById(cardId);
+		model.addAttribute("editCard", result);
+		return "cardEditPage";
+	}
+	
 }
