@@ -100,7 +100,7 @@
 												<a th:href="@{/project/edit-project/{id}(id=${project.id})}">Edit</a>
 												| 
 												
-												<a th:href="@{/project/deleteProject/{id}(id=${project.id})}">Delete</a>
+												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a>
 												<!-- <a href="#" th:onclick="'/project/deleteProject(\''+${project.id}+'\');'">Delete</a> -->
 											</td>
 										</tr>
@@ -108,8 +108,8 @@
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <a href="/project/add-profile">
-                                            <input type="submit" value="Thêm mới" class="btn btn-success"
+                                        <a href="/project/add-project">
+                                            <input value="Thêm mới" class="btn btn-success"
                                                 style="font-size: 14px; margin-right: 20px;">
                                         </a>
                                     </div>

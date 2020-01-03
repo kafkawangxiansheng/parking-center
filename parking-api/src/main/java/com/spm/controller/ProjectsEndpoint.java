@@ -55,8 +55,8 @@ public class ProjectsEndpoint {
 		return projectsService.findById(id);
 	}
 	
-	@RequestMapping(path="/{id}", method = {RequestMethod.DELETE})
-	@ApiOperation("This method support us can delete the specific profile by id")
+	@RequestMapping(path="/delete/{id}", method = {RequestMethod.DELETE})
+	@ApiOperation("This method support us can delete the specific project by id")
 	public void delete(@PathVariable("id") Long id) {
 		projectsService.delete(id);
 	}

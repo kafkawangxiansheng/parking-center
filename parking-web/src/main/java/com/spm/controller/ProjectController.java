@@ -34,7 +34,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/add-project", method= {RequestMethod.GET})
 	public  String addProfile(Model model) throws UnauthorizedException{
-		model.addAttribute("projecstDto", new ProjectsDto());
+		model.addAttribute("projectDto", new ProjectsDto());
 		return "addProject";
 	}
 	
@@ -51,7 +51,7 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	
-	@RequestMapping(value = "/deleteProject/{id}", method= {RequestMethod.GET})
+	@RequestMapping(value = "/delete-project/{id}", method= {RequestMethod.GET})
 	public  String deleteProfile(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
 		projectService.deleteProject(id);
 		return "redirect:/project";

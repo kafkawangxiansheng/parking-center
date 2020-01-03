@@ -17,18 +17,18 @@
     	</div>
     </header>
     <div id="main">
-        <form th:action="@{/project/add-profile}" th:object="${projectDto}" method="POST">
+        <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
           <div class="form-group text">
-                <label for="option1">Tên dự án*</label>
+                <label>Tên dự án*</label>
                 <input type="text" required="required" th:field="*{name}" class="form-control" id="name">
             </div>
             <div class="form-group text">
-                <label for="option1">Địa chỉ</label>
+                <label>Địa chỉ</label>
                 <input type="text" required="required" th:field="*{address}" class="form-control" id="address">
             </div>
             
             <div class="form-group text">
-                <label for="option1">Địa chỉ</label>
+                <label>Tên Công Ty</label>
                 <input type="text" required="required" th:field="*{companyId}" class="form-control" id="companyId">
             </div>
             <!-- <div class="form-group">
