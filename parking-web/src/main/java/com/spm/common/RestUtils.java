@@ -163,7 +163,7 @@ public class RestUtils<T> {
 		}
 		HttpResponse response = httpClient.execute(postRequest);
 		String entityStringResult = EntityUtils.toString(response.getEntity(), "UTF-8");
-		if(entityStringResult != null) {
+		if(entityStringResult != null && !entityStringResult.isEmpty()) {
 			bindingDataForList(entityStringResult,result);
 		}
 		return result;

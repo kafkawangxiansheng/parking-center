@@ -24,7 +24,7 @@ public class RevenueServiceImpl implements RevenueService {
 		String dateFromInLong = revenueSearchForm.getDateFrom();
 		String dateToInLong = revenueSearchForm.getDateTo();
 		
-		if(revenueSearchForm.getDateFrom() != null) {
+		if(revenueSearchForm.getDateFrom() != null && !revenueSearchForm.getDateFrom().isEmpty()) {
 			try {
 				dateFromInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFromInLong +  " 00:00:00"));
 			} catch (ParseException e) {
@@ -32,7 +32,7 @@ public class RevenueServiceImpl implements RevenueService {
 			}
 		}
 		
-		if(revenueSearchForm.getDateTo() != null) {
+		if(revenueSearchForm.getDateTo() != null && !revenueSearchForm.getDateTo().isEmpty()) {
 			try {
 				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong +  " 23:59:59"));
 			} catch (ParseException e) {
