@@ -2,6 +2,7 @@ package com.spm.common.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class DateUtil {
 	
@@ -17,6 +18,26 @@ public class DateUtil {
 		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
 		
 		return dateFormat.parse(date).getTime();
+	}
+	
+	public static Long getBeginOfCurrentDate() throws ParseException {
+		String formatter = new String("dd/MM/yyyy 00:00:00");
+		
+		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
+		
+		String dateString = dateFormat.format(Calendar.getInstance());
+		
+		return dateFormat.parse(dateString).getTime();
+	}
+	
+	public static Long getEndOfCurrentDate() throws ParseException {
+		String formatter = new String("dd/MM/yyyy 23:59:59");
+		
+		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
+		
+		String dateString = dateFormat.format(Calendar.getInstance());
+		
+		return dateFormat.parse(dateString).getTime();
 	}
 	
 }
