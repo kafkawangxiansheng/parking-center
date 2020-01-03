@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (userProperties != null) {
 			for (UserAttributeDto userAttributeDto : userProperties.getData()) {
 				// ROLE_USER, ROLE_ADMIN,..
-				GrantedAuthority authority = new SimpleGrantedAuthority(userAttributeDto.getType().name() +  "_"  + userAttributeDto.getValue());
+				GrantedAuthority authority = new SimpleGrantedAuthority(userAttributeDto.getValue());
 				grantList.add(authority);
 			}
 		}
