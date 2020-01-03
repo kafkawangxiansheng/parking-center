@@ -14,7 +14,7 @@ public interface ProjectsService {
     
 	ResultObject<List<ProjectsDto>> save(List<ProjectsDto> projectsDtos);
 
-    void delete(ProjectsDto projectsDto);
+    void delete(Long id);
     
     ResultObject<List<ProjectsDto>> findAll();
     

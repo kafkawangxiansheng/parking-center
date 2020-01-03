@@ -8,6 +8,10 @@ import com.spm.dto.ResultObject;
 public interface ProjectService {
 	ResultObject<List<ProjectsDto>> getAllProjects();
 	
-	ResultObject<List<ProjectsDto>> getProjectById(Long projectId);
+	ProjectsDto getProjectById(Long projectId);
+	
+	ProjectsDto addProject(ProjectsDto projectsDto);
+	
+	void deleteProject(Long id);
 	
 }

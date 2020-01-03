@@ -40,6 +40,23 @@ public class RevenueServiceImpl implements RevenueService {
 			}
 		}
 		
+		if(dateFromInLong == null || dateFromInLong.isEmpty()) {
+			try {
+				dateFromInLong = String.valueOf(DateUtil.getBeginOfCurrentDate());
+				dateToInLong = String.valueOf(DateUtil.getEndOfCurrentDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}  else  {
+			if(dateToInLong == null || dateToInLong.isEmpty()) {
+				try {
+					dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(revenueSearchForm.getDateFrom() +  " 23:59:59"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		finalURL  =  finalURL.replace("::employeeId", revenueSearchForm.getEmployeeId()!= null ? revenueSearchForm.getEmployeeId() : "");
 		finalURL  =  finalURL.replace("::dateFrom", dateFromInLong != null ? dateFromInLong :  "");
 		finalURL  =  finalURL.replace("::dateTo", dateToInLong != null ? dateToInLong : "");

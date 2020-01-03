@@ -11,8 +11,10 @@ public class URLConstants {
 	public static final String URL_USER_BY_USERNAME = MAIN_DOMAIN + "/users/{username}/";
 	public static final String URL_ROLES_BY_USER_ID = MAIN_DOMAIN + "/roles/get-roles/{userId}/";
 	
-	public static final String URL_GET_ALL_PROJECT = MAIN_DOMAIN + "/projects";
-	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/projects/projectId?projectId=::projectId";
+	public static final String URL_GET_ALL_PROJECT = MAIN_DOMAIN + "/project";
+	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/project/getProject?id=::id";
+	public static final String URL_POST_ADD_PROJECT = MAIN_DOMAIN + "/project/addProject";
+	public static final String URL_DELETE_PROJECT = MAIN_DOMAIN + "/project/delete/?id=::id";
 	
 	public static final String URL_ADD_CARD = MAIN_DOMAIN + "/cards/add";
 	public static final String URL_GET_CARD_BY_ID = MAIN_DOMAIN + "/cards/cardId?cardId=::cardId";

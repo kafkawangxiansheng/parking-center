@@ -77,9 +77,8 @@ public class ProjectsServiceImpl implements ProjectsService{
 	}
 
 	@Override
-	public void delete(ProjectsDto projectsDto) {
-		ProjectsEntity entity = new ProjectsEntity();
-		mapper.map(projectsDto, entity);
+	public void delete(Long id) {
+		projectRepository.deleteById(id);
 	}
 
 	@Override

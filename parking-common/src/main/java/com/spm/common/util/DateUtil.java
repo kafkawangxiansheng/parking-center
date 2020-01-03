@@ -25,7 +25,10 @@ public class DateUtil {
 		
 		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
 		
-		String dateString = dateFormat.format(Calendar.getInstance());
+		String dateString = dateFormat.format(Calendar.getInstance().getTime());
+		
+		formatter = new String("dd/MM/yyyy HH:mm:ss");
+		dateFormat = new SimpleDateFormat(formatter);
 		
 		return dateFormat.parse(dateString).getTime();
 	}
@@ -35,7 +38,9 @@ public class DateUtil {
 		
 		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
 		
-		String dateString = dateFormat.format(Calendar.getInstance());
+		String dateString = dateFormat.format(Calendar.getInstance().getTime());
+		formatter = new String("dd/MM/yyyy HH:mm:ss");
+		dateFormat = new SimpleDateFormat(formatter);
 		
 		return dateFormat.parse(dateString).getTime();
 	}
