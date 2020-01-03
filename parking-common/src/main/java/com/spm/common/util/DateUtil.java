@@ -20,6 +20,16 @@ public class DateUtil {
 		return dateFormat.parse(date).getTime();
 	}
 	
+	public static String getCurrentDateString() throws ParseException {
+		String formatter = new String("dd/MM/yyyy");
+		
+		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
+		
+		String dateString = dateFormat.format(Calendar.getInstance().getTime());
+		
+		return dateString;
+	}
+	
 	public static Long getBeginOfCurrentDate() throws ParseException {
 		String formatter = new String("dd/MM/yyyy 00:00:00");
 		

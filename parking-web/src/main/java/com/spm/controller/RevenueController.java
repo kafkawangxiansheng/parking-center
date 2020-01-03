@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spm.common.util.DateUtil;
 import com.spm.dto.ResultObject;
 import com.spm.dto.RevenueDto;
 import com.spm.search.form.RevenueSearchForm;
@@ -34,11 +36,15 @@ public class RevenueController {
 			@RequestParam(name="employeeId", required=false)String employeeId,
 			@RequestParam(name="dateFrom", required=false)String dateFrom,
 			@RequestParam(name="dateTo", required=false)String dateTo,
-			Model model,  HttpServletRequest request) {
+			Model model,  HttpServletRequest request) throws ParseException {
 		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
 		revenueSearchForm.setProjectId(1); //TODO: get project assigned to logined user
 		revenueSearchForm.setEmployeeId(employeeId);
 		revenueSearchForm.setDateFrom(dateFrom);
+		if(dateFrom ==  null || dateFrom.isEmpty()) {
+			revenueSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+		}
+		
 		revenueSearchForm.setDateTo(dateTo);
 		
 		model.addAttribute("revenueSearchForm", revenueSearchForm);
