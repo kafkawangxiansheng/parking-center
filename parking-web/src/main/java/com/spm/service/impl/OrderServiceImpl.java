@@ -20,19 +20,19 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResultObject<List<OrderDto>> getAllOrder(OrderSearchForm orderSearhForm, Pageable pageable){
 		
-		String dateToInLong = orderSearhForm.getDateTo()+" 23:59:59";
-		String dateFormInLong = orderSearhForm.getDateFrom()+" 00:00:00";
+		String dateToInLong = orderSearhForm.getDateTo();
+		String dateFormInLong = orderSearhForm.getDateFrom();
 		
-		if(dateToInLong  != null &&  !dateToInLong.isEmpty()) {
+		if(orderSearhForm.getDateTo()  != null &&  !orderSearhForm.getDateTo().isEmpty()) {
 			try {
-				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong));
+				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong+" 23:59:59"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
-		if(dateFormInLong  != null &&  !dateFormInLong.isEmpty()) {
+		if(orderSearhForm.getDateFrom()  != null &&  !orderSearhForm.getDateFrom().isEmpty()) {
 			try {
-				dateFormInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFormInLong));
+				dateFormInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFormInLong+" 00:00:00"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
