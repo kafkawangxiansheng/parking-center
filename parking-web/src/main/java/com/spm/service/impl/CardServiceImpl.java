@@ -41,7 +41,7 @@ public class CardServiceImpl implements CardService{
 		StringEntity stringEntity;
 		try {
 			stringEntity = new StringEntity(gson.toJson(cardsDto), "UTF-8");
-			resultFromApi = restUtils.postJSON(URLConstants.URL_GET_ALL_CARD, stringEntity);
+			resultFromApi = restUtils.postJSON(URLConstants.URL_ADD_CARD, stringEntity);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {

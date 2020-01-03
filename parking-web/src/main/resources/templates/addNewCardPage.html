@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="refresh" content="10" />
 <title>Parking Management</title>
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
@@ -47,7 +46,7 @@
 								</div>
 								<div class="box-body p-2">
 									<div class="form-body">
-										<form id="formCardsData" th:action="@{/addNewCard}"
+										<form id="formCardsData" th:action="@{/cards/addNewCard}"
 											th:object="${addCard}" method="POST">
 											<div class="form-group text">
 												<label for="stt">STT*</label> <input type="text"
@@ -58,8 +57,8 @@
 													th:field="*{code}" class="form-control" id="code">
 											</div>
 											<div class="form-group">
-												<label for="vehicle_id">Tên loại xe</label> <select
-													name="vehicleId" class="form-control" id="vehicleId">
+												<label for="">Tên loại xe</label> <select name="vehicleId"
+													class="form-control" id="">
 													<option value="1">Xe đạp điện</option>
 													<option value="2">Xe oto</option>
 													<option value="3">Xe máy</option>

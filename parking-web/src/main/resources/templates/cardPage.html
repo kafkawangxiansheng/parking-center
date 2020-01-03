@@ -55,7 +55,7 @@
 										</div>
 										<div class="form-group col-lg-3 float-left">
 											<label for="">Tên loại xe</label> <select name="vehicleId"
-												class="form-control" id="stt">
+												class="form-control" id="">
 												<option value="">Chọn loại xe</option>
 												<option value="1">Xe đạp điện</option>
 												<option value="2">Xe oto</option>
@@ -97,9 +97,8 @@
 											<td th:text="${{card.code}}"></td>
 											<td th:text="${{card.stt}}"></td>
 											<td th:text="${{card.vehicleId}}"></td>
-											<td>
-												<a th:href="@{/editCard/{cardId}/(id=${card.id})}">Chỉnh sửa</a>
-											</td>
+											<td><a th:href="@{/editCard/{cardId}/(id=${card.id})}">Chỉnh
+													sửa</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -123,28 +122,23 @@
 								<div class="dataTables_paginate paging_bootstrap d-flex"
 									style="min-height: 80px;">
 									<ul class="pagination my-4">
-										<li th:if="${currentPage > 5}" class='page-item'>
-                                    		<a class="page-link" th:onclick="'paging(1)'">
-                                    		Trang đầu
-                                    		</a>
-                                    	</li>
-                                    	<th:block th:each="p : ${totalPages}">
-                                    		 <li th:if="${p == currentPage}" class='page-item active'>
-                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
-                                    		 		<th:block  th:text="${p}"></th:block>
-                                    		 	</a>
-                                    		 </li>
-                                    		 <li th:if="${p != currentPage}" class='page-item'>
-                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
-                                    		 		<th:block  th:text="${p}"></th:block>
-                                    		 	</a>
-                                    		 </li>
-                                    	</th:block>
-            							<li  th:if="${currentPage != maxPage}" class='page-item'>
-                                    		<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">
-                                    			Trang cuối
-                                    		</a>
-                                    	</li>
+										<li th:if="${currentPage > 5}" class='page-item'><a
+											class="page-link" th:onclick="'paging(1)'"> Trang đầu </a></li>
+										<th:block th:each="p : ${totalPages}">
+											<li th:if="${p == currentPage}" class='page-item active'>
+												<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+													<th:block th:text="${p}"></th:block>
+											</a>
+											</li>
+											<li th:if="${p != currentPage}" class='page-item'><a
+												class="page-link" th:onclick="'paging('+ *{p} +')'"> <th:block
+														th:text="${p}"></th:block>
+											</a></li>
+										</th:block>
+										<li th:if="${currentPage != maxPage}" class='page-item'>
+											<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">
+												Trang cuối </a>
+										</li>
 									</ul>
 								</div>
 							</div>
