@@ -75,8 +75,8 @@ public class CardController {
 		return "cardPage";
 	}
 	
-	@RequestMapping (value="cardsUpdate", method = { RequestMethod.GET })
+	@RequestMapping (value="cardsAddNew", method = { RequestMethod.GET })
 	public String showCardUpdatePage() {
-		return "cardUpdatePage";
+		return "cardAddNewPage";
 	}
 }
