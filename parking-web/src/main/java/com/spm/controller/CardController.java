@@ -46,7 +46,7 @@ public class CardController {
 		if(page > 0) {
 			page = page - 1;
 		}
-		Pageable pageable = PageRequest.of(page, PagingConstants.MAX_ROWS_CAN_DISPLAY);
+		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		
 		ResultObject<List<CardsDto>> result = cardService.getAllCard(cardSearchForm, pageable);
 		

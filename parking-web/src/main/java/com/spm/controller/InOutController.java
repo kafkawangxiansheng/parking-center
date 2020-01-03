@@ -18,6 +18,7 @@ import com.spm.constants.PagingConstants;
 import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
 import com.spm.exception.UnauthorizedException;
+import com.spm.export.InOutExport;
 import com.spm.search.form.OrderSearchForm;
 import com.spm.service.OrderService;
 
@@ -50,7 +51,7 @@ public class InOutController {
 		if(page > 0) {
 			page = page - 1;
 		}
-		Pageable pageable = PageRequest.of(page, PagingConstants.MAX_ROWS_CAN_DISPLAY);
+		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		ResultObject<List<OrderDto>> result = orderService.getAllOrder(orderSearchForm,pageable);
 		
 		List<Integer>  totalPages = new ArrayList<Integer>();
@@ -77,4 +78,36 @@ public class InOutController {
 		
         return "inOutPage";
 	}
+	
+	@RequestMapping(value = "/export", method= {RequestMethod.GET})
+	public InOutExport export(
+			@RequestParam(name="page", required=false, defaultValue="0")int page,
+			@RequestParam(name="cardCode", required  =  false) String cardCode,
+			@RequestParam(name="cardStt", required  =  false) String cardStt,
+			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
+			@RequestParam(name="dateTo", required  =  false) String dateTo,
+			@RequestParam(name="carNumber", required  =  false) String carNumber,
+			Model model,  HttpServletRequest request) throws UnauthorizedException {
+		
+		OrderSearchForm orderSearchForm = new OrderSearchForm();
+		orderSearchForm.setCardCode(cardCode);
+		orderSearchForm.setCardStt(cardStt);
+		orderSearchForm.setCarNumber(carNumber);
+		orderSearchForm.setDateFrom(dateFrom);
+		orderSearchForm.setDateTo(dateTo);
+		
+		
+		if(page > 0) {
+			page = page - 1;
+		}
+		Pageable pageable = PageRequest.of(page, PagingConstants.MAX_ROWS_FOR_EXPORT);
+		ResultObject<List<OrderDto>> result = orderService.exportAllOrder(orderSearchForm,pageable);
+		
+		
+		model.addAttribute("orders", result.getData());
+		model.addAttribute("fileName", "in-out-logs.xls");
+		
+        return new InOutExport();
+	}
+	
 }

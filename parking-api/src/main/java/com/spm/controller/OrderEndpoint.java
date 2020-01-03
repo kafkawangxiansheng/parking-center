@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spm.constants.PagingConstants;
 import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.OrderSearchForm;
@@ -56,7 +57,37 @@ public class OrderEndpoint {
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber ) {
-		Pageable paging = PageRequest.of(page, 100);
+		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+		OrderSearchForm orderSearchForm = new OrderSearchForm();
+		if(cardCode != null && !cardCode.isEmpty()) {
+			orderSearchForm.setCardCode(cardCode);
+		}
+		if(cardStt != null && !cardStt.isEmpty()) {
+			orderSearchForm.setCardStt(cardStt);
+		}
+		if(carNumber != null && !carNumber.isEmpty()) {
+			orderSearchForm.setCarNumber(carNumber);
+		}
+		if(dateFrom != null && !dateFrom.isEmpty()) {
+			orderSearchForm.setDateFrom(dateFrom);
+		}
+		if(dateTo != null && !dateTo.isEmpty()) {
+			orderSearchForm.setDateTo(dateTo);
+		}
+		
+		return parkingService.findAll(paging, orderSearchForm);
+	}
+	
+	@RequestMapping(value = "/export", method = {RequestMethod.GET})
+	@ApiOperation("Export all in/out logs")
+	public @ResponseBody ResultObject<List<OrderDto>> export(
+			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
+			@RequestParam(name="cardCode", required  =  false) String cardCode,
+			@RequestParam(name="cardStt", required  =  false) String cardStt,
+			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
+			@RequestParam(name="dateTo", required  =  false) String dateTo,
+			@RequestParam(name="carNumber", required  =  false) String carNumber ) {
+		Pageable paging = PageRequest.of(page, PagingConstants.MAX_ROWS_FOR_EXPORT);
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		if(cardCode != null && !cardCode.isEmpty()) {
 			orderSearchForm.setCardCode(cardCode);
