@@ -37,8 +37,11 @@ public class RevenueController {
 			@RequestParam(name="dateFrom", required=false)String dateFrom,
 			@RequestParam(name="dateTo", required=false)String dateTo,
 			Model model,  HttpServletRequest request) throws ParseException {
+		
+		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
+		
 		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
-		revenueSearchForm.setProjectId(1); //TODO: get project assigned to logined user
+		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));
 		revenueSearchForm.setEmployeeId(employeeId);
 		revenueSearchForm.setDateFrom(dateFrom);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {

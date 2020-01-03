@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.UserDto;
+import com.spm.dto.UserProjectDto;
 import com.spm.dto.UserRoleDto;
 import com.spm.entity.UserEntity;
+import com.spm.entity.UserProjectEntity;
 import com.spm.entity.UserRoleEntity;
+import com.spm.repository.UserProjectRepository;
 import com.spm.repository.UserRepository;
 import com.spm.repository.UserRoleRepository;
 import com.spm.service.UserService;
@@ -35,6 +38,10 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRoleRepository userRoleRepository;
 	
+    @Autowired
+    private UserProjectRepository  userProjectRepository;
+    
+    
 	private List<UserDto> map(List<UserEntity> source) {
 
 		ArrayList<UserDto> rtn = new ArrayList<>();
@@ -53,6 +60,19 @@ public class UserServiceImpl implements UserService{
 		ArrayList<UserRoleDto> rtn = new ArrayList<>();
 		source.stream().map((entity) -> {
 			UserRoleDto dto = new UserRoleDto();
+			mapper.map(entity, dto);
+			return dto;
+		}).forEachOrdered((dto) -> {
+			rtn.add(dto);
+		});
+		return rtn;
+	}
+	
+	private List<UserProjectDto> mapUserProjectDtos(List<UserProjectEntity> source) {
+
+		ArrayList<UserProjectDto> rtn = new ArrayList<>();
+		source.stream().map((entity) -> {
+			UserProjectDto dto = new UserProjectDto();
 			mapper.map(entity, dto);
 			return dto;
 		}).forEachOrdered((dto) -> {
@@ -89,6 +109,11 @@ public class UserServiceImpl implements UserService{
 		List<UserRoleEntity> entities = userRoleRepository.findByUserId(userId);
 		List<UserRoleDto> dtos = this.mapUserRoleDtos(entities);
 		return dtos;
+	}
+
+	@Override
+	public List<UserProjectDto> getUserProjectsByUserId(Long userId) {
+		return this.mapUserProjectDtos(userProjectRepository.findByUserId(userId));
 	}
 	
 	
