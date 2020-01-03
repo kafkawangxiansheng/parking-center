@@ -13,4 +13,6 @@ public class URLConstants {
 	public static final String URL_GET_ALL_PROJECT = MAIN_DOMAIN + "/projects";
 	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/projects/projectId?projectId=::projectId";
 	
+	public static final String URL_GET_CARD_BY_ID = MAIN_DOMAIN + "/cards/cardId?cardId=::cardId";
+	
 }
