@@ -93,7 +93,7 @@ public class CardController {
 	public String editCard(Model model, @PathVariable("cardId")Long cardId) throws UnauthorizedException{
 		CardsDto result = cardService.getCardById(cardId);
 		model.addAttribute("editCard", result);
-		return "cardEditPage";
+		return "editCardPage";
 	}
 	
 }

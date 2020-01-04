@@ -20,6 +20,8 @@ public interface CardsService {
     void delete(CardsDto cardsDto);
     
     ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm);
+    
+    ResultObject<List<CardsDto>> findById(Long cardId);
 
 }
  

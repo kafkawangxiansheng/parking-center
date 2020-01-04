@@ -62,5 +62,11 @@ public class CardsEndpoint {
 		}
 		return cardsService.findAll(paging, cardSearchForm);
 	}
+	
+	@RequestMapping(value="/getById", method = {RequestMethod.GET})
+	@ApiOperation("Get CardId")
+	public @ResponseBody ResultObject<List<CardsDto>> getCardById(@RequestParam(name="cardId") Long cardId) {
+		return cardsService.findById(cardId);
+	}
 
 }
