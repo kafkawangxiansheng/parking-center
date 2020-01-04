@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.spm.common.util.DateUtil;
 import com.spm.dto.ResultObject;
 import com.spm.dto.RevenueDto;
+import com.spm.export.RevenueExport;
 import com.spm.search.form.RevenueSearchForm;
 import com.spm.service.RevenueService;
 
@@ -37,8 +38,11 @@ public class RevenueController {
 			@RequestParam(name="dateFrom", required=false)String dateFrom,
 			@RequestParam(name="dateTo", required=false)String dateTo,
 			Model model,  HttpServletRequest request) throws ParseException {
+		
+		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
+		
 		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
-		revenueSearchForm.setProjectId(1); //TODO: get project assigned to logined user
+		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));
 		revenueSearchForm.setEmployeeId(employeeId);
 		revenueSearchForm.setDateFrom(dateFrom);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
@@ -52,6 +56,30 @@ public class RevenueController {
 		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(revenueSearchForm);
 		model.addAttribute("revenues", revenueMap.getData());
 		return "revenuePage";
+	}
+	
+	@RequestMapping(value = "/export", method = {RequestMethod.GET})
+	public RevenueExport exportRevenue(
+			@RequestParam(name="employeeId", required=false)String employeeId,
+			@RequestParam(name="dateFrom", required=false)String dateFrom,
+			@RequestParam(name="dateTo", required=false)String dateTo,
+			Model model,  HttpServletRequest request) throws ParseException {
+		
+		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
+		
+		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
+		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));
+		revenueSearchForm.setEmployeeId(employeeId);
+		revenueSearchForm.setDateFrom(dateFrom);
+		if(dateFrom ==  null || dateFrom.isEmpty()) {
+			revenueSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+		}
+		revenueSearchForm.setDateTo(dateTo);
+		
+		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(revenueSearchForm);
+		model.addAttribute("revenueDtos", revenueMap.getData());
+		model.addAttribute("fileName", "revenues.xls");
+		return new RevenueExport();
 	}
 	
 	

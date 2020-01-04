@@ -9,7 +9,8 @@ public class URLConstants {
 	
 	public static final String URL_GET_ACCESS_TOKEN = MAIN_DOMAIN + "/oauth/token";
 	public static final String URL_USER_BY_USERNAME = MAIN_DOMAIN + "/users/{username}/";
-	public static final String URL_ROLES_BY_USER_ID = MAIN_DOMAIN + "/roles/get-roles/{userId}/";
+	public static final String URL_ATTRIBUTES_BY_USER_ID = MAIN_DOMAIN + "/users/get-attributes/{userId}/";
+	public static final String URL_GET_PROJECT_IDS_BY_USER_ID = MAIN_DOMAIN + "/project/get-project-ids/{userId}/";
 	
 	public static final String URL_GET_ALL_PROJECT = MAIN_DOMAIN + "/project";
 	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/project/getProject?id=::id";

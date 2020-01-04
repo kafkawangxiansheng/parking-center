@@ -22,9 +22,3 @@ $(function() {
 		changeYear: true
 	});
 });
-
-function exportOrders() {
-	var currentURL = window.location.href;
-	currentURL = currentURL.replace("/in-out-logs", "/in-out-logs/export");
-	window.location.href = currentURL;
-}

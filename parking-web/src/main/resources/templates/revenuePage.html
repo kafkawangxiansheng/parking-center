@@ -93,35 +93,8 @@
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <input type="submit" value="Xuất file Excel" class="btn btn-primary"
-                                            style="font-size: 14px;">
+                                        <button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
                                     </div>
-                                </div>
-                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
-                                    <ul class="pagination my-4">
-                                    	<li th:if="${currentPage > 5}" class='page-item'>
-                                    		<a class="page-link" th:onclick="'paging(1)'">
-                                    		Trang đầu
-                                    		</a>
-                                    	</li>
-                                    	<th:block th:each="p : ${totalPages}">
-                                    		 <li th:if="${p == currentPage}" class='page-item active'>
-                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
-                                    		 		<th:block  th:text="${p}"></th:block>
-                                    		 	</a>
-                                    		 </li>
-                                    		 <li th:if="${p != currentPage}" class='page-item'>
-                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
-                                    		 		<th:block  th:text="${p}"></th:block>
-                                    		 	</a>
-                                    		 </li>
-                                    	</th:block>
-            							<li  th:if="${currentPage != maxPage}" class='page-item'>
-                                    		<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">
-                                    			Trang cuối
-                                    		</a>
-                                    	</li>
-                                    </ul>
                                 </div>
                             </div>
                         </section>
