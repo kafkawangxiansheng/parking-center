@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.EmployeeDto;
+import com.spm.dto.ResultObject;
 import com.spm.entity.EmployeeEntity;
 import com.spm.repository.EmployeeRepository;
 import com.spm.service.EmployeeService;
@@ -45,19 +46,34 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 
 	@Override
-	public EmployeeDto getById(long id) {
+	public ResultObject<List<EmployeeDto>> getById(long id) {
+		ResultObject<List<EmployeeDto>> result  = new ResultObject<>();
 		EmployeeDto dto = new EmployeeDto();
 		EmployeeEntity entity = employeeRepository.getOne(id);
 		mapper.map(entity, dto);
-		return dto;
+		List<EmployeeDto>  listData = new ArrayList<>();
+		listData.add(dto);
+		result.setData(listData);
+		return result;
 	}
 
 
 	@Override
-	public List<EmployeeDto> findAll() {
+	public ResultObject<List<EmployeeDto>> findAll() {
 		List<EmployeeEntity> entities = employeeRepository.findAll();
 		List<EmployeeDto> dtos = this.map(entities);
-		return dtos;
+		ResultObject<List<EmployeeDto>> result  = new ResultObject<>();
+		result.setData(dtos);
+		return result;
+	}
+	
+	@Override
+	public ResultObject<List<EmployeeDto>> findAllByProjectId(long projectId) {
+		List<EmployeeEntity> entities = employeeRepository.findAll();
+		List<EmployeeDto> dtos = this.map(entities);
+		ResultObject<List<EmployeeDto>> result  = new ResultObject<>();
+		result.setData(dtos);
+		return result;
 	}
 
 

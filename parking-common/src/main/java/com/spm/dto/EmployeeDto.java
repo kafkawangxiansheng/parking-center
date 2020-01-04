@@ -4,13 +4,15 @@ public class EmployeeDto {
 	
 	private Long id;
 	
+	private long projectId;
+	
 	private String name;
 	
 	private String email;
 	
 	private String tel;
 	
-	private boolean enabled;
+	private boolean disabled;
 	
 	private String createdBy;
 	
@@ -24,6 +26,14 @@ public class EmployeeDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getName() {
@@ -50,12 +60,12 @@ public class EmployeeDto {
 		this.tel = tel;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+	public boolean getDisabled() {
+		return disabled;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public String getCreatedBy() {

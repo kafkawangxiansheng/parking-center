@@ -16,6 +16,9 @@ public class EmployeeEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="project_id")
+	private long projectId;
+	
 	@Column(name="name")
 	private String name;
 	
@@ -25,8 +28,8 @@ public class EmployeeEntity {
 	@Column(name="tel")
 	private String tel;
 	
-	@Column(name="enabled")
-	private boolean enabled;
+	@Column(name="disabled")
+	private boolean disabled;
 	
 	@Column(name="created_by")
 	private String createdBy;
@@ -43,6 +46,14 @@ public class EmployeeEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getName() {
@@ -69,12 +80,12 @@ public class EmployeeEntity {
 		this.tel = tel;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+	public boolean getDisabled() {
+		return disabled;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public String getCreatedBy() {
