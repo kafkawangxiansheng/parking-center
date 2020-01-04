@@ -91,10 +91,21 @@ public class CardsServiceImpl implements CardsService {
 	@Override
 	public List<CardsDto> save(List<CardsDto> cardsDtos) {
 		List<CardsEntity> cardsEntities = reMap(cardsDtos);
-
 		cardsEntities = cardRepository.saveAll(cardsEntities);
 		cardsDtos = map(cardsEntities);
 		return cardsDtos;
+	}
+	
+	@Override
+	public ResultObject<List<CardsDto>> findById(Long cardId) {
+		ResultObject<List<CardsDto>> resultObj = new ResultObject<>();
+		CardsEntity entity = cardRepository.findById(cardId).get();
+		List<CardsDto> listCardDto = new ArrayList<CardsDto>();
+		CardsDto cardsDto = new CardsDto();
+		mapper.map(entity, cardsDto);
+		listCardDto.add(cardsDto);
+		resultObj.setData(listCardDto);
+		return resultObj;
 	}
 
 }

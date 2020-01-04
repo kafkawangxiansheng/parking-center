@@ -18,7 +18,7 @@ public class URLConstants {
 	public static final String URL_DELETE_PROJECT = MAIN_DOMAIN + "/project/delete/::id";
 	
 	public static final String URL_ADD_CARD = MAIN_DOMAIN + "/cards/add";
-	public static final String URL_GET_CARD_BY_ID = MAIN_DOMAIN + "/cards/cardId?cardId=::cardId";
+	public static final String URL_GET_CARD_BY_ID = MAIN_DOMAIN + "/cards/getById/?cardId=::cardId";
 	
 	public static final String URL_GET_ALL_COMPANIES = MAIN_DOMAIN + "/company";
 	public static final String URL_GET_LIST_COMPANIES = MAIN_DOMAIN + "/company/listAllCompanies";

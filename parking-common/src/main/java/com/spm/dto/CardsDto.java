@@ -2,37 +2,26 @@ package com.spm.dto;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class CardsDto {
 
 	private Long id;
 
-	@JsonProperty("code")
 	private String code;
 
-	@JsonProperty("stt")
 	private long stt;
 
-	@JsonProperty("vehicle_id")
 	private long vehicleId;
 
-	@JsonProperty("monthly_card_id")
 	private long monthlyCardId;
 
-	@JsonProperty("created")
 	private Date created;
 
-	@JsonProperty("updated")
 	private Date updated;
 
-	@JsonProperty("disable")
 	private int disable;
 
-	@JsonProperty("admin_id")
 	private long adminId;
 
-	@JsonProperty("company_id")
 	private long companyId;
 
 	public Long getId() {
