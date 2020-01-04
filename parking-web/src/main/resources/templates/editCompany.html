@@ -17,45 +17,37 @@
     	</div>
     </header>
     <div id="main">
-    <div class="header-submenu position-relative">
+    	<div class="header-submenu position-relative">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
                             style="height: 50px;">
                             <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="company">Quản lý
+                                <a class="" href="company" style="color: #000; background: #fff;">Quản lý
                                     công ty</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="project" style="color: #000; background: #fff;">Quản lý
+                                <a class="" href="project" >Quản lý
                                     dự án</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
         </div>
-        <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
+        <form th:action="@{/company/add-company}" th:object="${companyDto}" method="POST">
         <div class="form-group text">
                 <label for="option1">ID</label>
                 <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">
             </div>
           <div class="form-group text">
-                <label for="option1">Tên dự án*</label>
+                <label for="option1">Tên Công Ty (*)</label>
                 <input type="text" required="required" th:field="*{name}" class="form-control" id="name">
             </div>
             <div class="form-group text">
                 <label for="option1">Địa chỉ</label>
                 <input type="text" required="required" th:field="*{address}" class="form-control" id="address">
-            </div>
-            
-            <div class="form-group">
-                <label for="">Tên công ty</label>
-                <select th:field="*{companyId}" class="form-control">
-				    <option th:each="i : ${listCompanies}" th:value="${i.id}" th:text="${i.name}"></option>
-				</select>
             </div>
             <div class="form-group button-group d-flex flex-row">
                 

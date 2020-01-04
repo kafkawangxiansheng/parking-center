@@ -17,18 +17,18 @@
     	</div>
     </header>
     <div id="main">
-    <div class="header-submenu position-relative">
+    	<div class="header-submenu position-relative">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
                             style="height: 50px;">
                             <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="company">Quản lý
+                                <a class="nav-link" href="company" style="color: #000; background: #fff;">Quản lý
                                     công ty</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="project" style="color: #000; background: #fff;">Quản lý
+                                <a class="nav-link" href="project" >Quản lý
                                     dự án</a>
                             </li>
                         </ul>
@@ -42,7 +42,7 @@
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Danh sách dự án</h1>
+                            <h1 class="m-0">Danh sách công ty</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -55,7 +55,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Danh sách dự án</span>
+                                        <span>Danh sách công ty</span>
                                     </a>
                                 </li>
                             </ul>
@@ -69,32 +69,29 @@
                                                 <input type="checkbox">
                                             </th>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Tên dự án</th>
                                             <th scope="col">Tên công ty</th>
                                             <th scope="col">Địa chỉ</th>
                                             <th scope="col" style="width: 100px;">Chỉnh sửa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<tr th:each="project : ${projects}">
+                                    	<tr th:each="company : ${companies}">
                                     		<td></td>
-											<td th:text="${{project.id}}"></td>
-											<td th:text="${{project.name}}"></td>
-											<td th:text="${{project.companyId}}"></td>
-											<td th:text="${{project.address}}"></td>
+											<td th:text="${{company.id}}"></td>
+											<td th:text="${{company.name}}"></td>
+											<td th:text="${{company.address}}"></td>
 											<td>
-												<a th:href="@{/project/edit-project/{id}(id=${project.id})}">Edit</a>
+												<a th:href="@{/company/edit-company/{id}(id=${company.id})}">Edit</a>
 												| 
 												
-												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a>
-												<!-- <a href="#" th:onclick="'project/delete-project(\''+${project.id}+'\');'">Delete</a> -->
+												<a th:href="@{/company/delete-company/{id}(id=${company.id})}">Delete</a>
 											</td>
 										</tr>
                                     </tbody>
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <a href="/project/add-project">
+                                        <a href="/company/add-company">
                                             <input value="Thêm mới" class="btn btn-success"
                                                 style="font-size: 14px; margin-right: 20px;">
                                         </a>

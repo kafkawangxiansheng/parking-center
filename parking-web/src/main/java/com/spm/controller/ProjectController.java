@@ -49,6 +49,8 @@ public class ProjectController {
 	public  String editProfile(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
 		ProjectsDto projecstDto = projectService.getProjectById(id);
 		model.addAttribute("projectDto", projecstDto);
+		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
+		model.addAttribute("listCompanies", companyMap.getData());
 		return "editProject";
 	}
 	

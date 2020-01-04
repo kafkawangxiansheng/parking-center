@@ -1,11 +1,15 @@
 package com.spm.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "companies")
@@ -26,10 +30,12 @@ public class CompanyEntity {
 	private boolean disable;
 	
 	@Column(name = "created")
-	private long created;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
 	
 	@Column(name = "updated")
-	private long updated;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updated;
 
 	public Long getId() {
 		return id;
@@ -63,22 +69,20 @@ public class CompanyEntity {
 		this.disable = disable;
 	}
 
-	public long getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(long created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public long getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(long updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	
-	
 
 }

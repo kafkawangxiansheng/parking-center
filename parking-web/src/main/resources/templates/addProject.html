@@ -17,6 +17,26 @@
     	</div>
     </header>
     <div id="main">
+    <div class="header-submenu position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
+                            style="height: 50px;">
+                            <li class="nav-item" style="border-left: 2px solid #fff;">
+                                <a class="nav-link" href="company">Quản lý
+                                    công ty</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="project" style="color: #000; background: #fff;">Quản lý
+                                    dự án</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
           <div class="form-group text">
                 <label>Tên dự án*</label>
@@ -45,6 +65,11 @@
                 </div>
             </div>
         </form>
+        <!-- Check if errorMessage is not null and not empty -->
+       
+      <!-- <div th:if="${errorMessage}" th:utext="${errorMessage}" 	style="color:red;font-style:italic;">
+         ...
+      </div> -->
     </div>
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>

@@ -26,6 +26,15 @@ public class CompanyServiceImpl implements CompanyService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+	
+	@Override
+	public ResultObject<List<CompanyDto>> getAllCompanies() {
+		RestUtils<CompanyDto> restUtils = new RestUtils<>(CompanyDto.class);
+		ResultObject<List<CompanyDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_ALL_COMPANIES;
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
 
 	@Override
 	public CompanyDto getCompanyById(Long companyId) {
