@@ -1,13 +1,15 @@
 package com.spm.dto;
 
+import java.util.Date;
+
 public class CompanyDto {
 	
 	private Long id;
 	private String name;
 	private String address;
 	private boolean disable;
-	private long created;
-	private long updated;
+	private Date created;
+	private Date updated;
 	public Long getId() {
 		return id;
 	}
@@ -32,17 +34,17 @@ public class CompanyDto {
 	public void setDisable(boolean disable) {
 		this.disable = disable;
 	}
-	public long getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(long created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public long getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
-	public void setUpdated(long updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	
+
 }
