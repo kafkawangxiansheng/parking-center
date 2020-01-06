@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,9 @@ public class ProjectsEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "company_id")
-	private long companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private CompanyEntity company;
 	
 	@Column(name="name")
 	private String name;
@@ -40,14 +43,6 @@ public class ProjectsEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getName() {
@@ -89,7 +84,13 @@ public class ProjectsEntity {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-	
-	
+
+	public CompanyEntity getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyEntity company) {
+		this.company = company;
+	}
 
 }

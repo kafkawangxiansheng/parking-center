@@ -4,7 +4,7 @@ public class ProjectsDto {
 
 	private Long id;
 	
-	private long companyId;
+	private CompanyDto company;
 	
 	private String name;
 	
@@ -22,14 +22,6 @@ public class ProjectsDto {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getName() {
@@ -71,4 +63,13 @@ public class ProjectsDto {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
+
+	public CompanyDto getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyDto company) {
+		this.company = company;
+	}
+
 }

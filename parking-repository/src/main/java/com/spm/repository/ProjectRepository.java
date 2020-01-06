@@ -1,13 +1,15 @@
 package com.spm.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spm.entity.ProjectsEntity;
 
-/**
- * Created by sudo 28/12/2019
- */
-
 public interface ProjectRepository  extends JpaRepository<ProjectsEntity, Long> {
+	
+	@EntityGraph(attributePaths = { "company"})
+	List<ProjectsEntity> findAll();
 
 }

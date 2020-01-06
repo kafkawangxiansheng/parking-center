@@ -80,7 +80,7 @@
                                     		<td></td>
 											<td th:text="${{project.id}}"></td>
 											<td th:text="${{project.name}}"></td>
-											<td th:text="${{project.companyId}}"></td>
+											<td th:text="${{project.company.name}}"></td>
 											<td th:text="${{project.address}}"></td>
 											<td>
 												<a th:href="@{/project/edit-project/{id}(id=${project.id})}">Edit</a>
@@ -101,7 +101,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
                     </div>
                 </div>
             </div>
