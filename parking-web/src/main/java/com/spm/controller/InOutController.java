@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spm.common.util.DateUtil;
 import com.spm.constants.PagingConstants;
 import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
@@ -37,7 +39,7 @@ public class InOutController {
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
-			Model model,  HttpServletRequest request) throws UnauthorizedException {
+			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		orderSearchForm.setCardCode(cardCode);
@@ -45,6 +47,12 @@ public class InOutController {
 		orderSearchForm.setCarNumber(carNumber);
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setDateTo(dateTo);
+		if(dateFrom  == null || dateFrom.isEmpty()) {
+			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+		}
+		if(dateTo  == null || dateTo.isEmpty()) {
+			orderSearchForm.setDateTo(orderSearchForm.getDateFrom());
+		}
 		
 		model.addAttribute("orderSearchForm", orderSearchForm);
 		
@@ -87,7 +95,7 @@ public class InOutController {
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
-			Model model,  HttpServletRequest request) throws UnauthorizedException {
+			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		orderSearchForm.setCardCode(cardCode);
@@ -95,7 +103,12 @@ public class InOutController {
 		orderSearchForm.setCarNumber(carNumber);
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setDateTo(dateTo);
-		
+		if(dateFrom  == null || dateFrom.isEmpty()) {
+			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+		}
+		if(dateTo  == null || dateTo.isEmpty()) {
+			orderSearchForm.setDateTo(orderSearchForm.getDateFrom());
+		}
 		
 		if(page > 0) {
 			page = page - 1;

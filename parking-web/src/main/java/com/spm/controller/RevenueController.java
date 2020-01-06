@@ -36,7 +36,12 @@ public class RevenueController {
 	public String getRevenue(
 			@RequestParam(name="employeeId", required=false)String employeeId,
 			@RequestParam(name="dateFrom", required=false)String dateFrom,
+			@RequestParam(name="hourFrom", required=false)String hourFrom,
+			@RequestParam(name="minFrom", required=false)String minFrom,
 			@RequestParam(name="dateTo", required=false)String dateTo,
+			@RequestParam(name="hourTo", required=false)String hourTo,
+			@RequestParam(name="minTo", required=false)String minTo,
+			
 			Model model,  HttpServletRequest request) throws ParseException {
 		
 		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
@@ -45,11 +50,23 @@ public class RevenueController {
 		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));
 		revenueSearchForm.setEmployeeId(employeeId);
 		revenueSearchForm.setDateFrom(dateFrom);
+		revenueSearchForm.setHourFrom(hourFrom);
+		revenueSearchForm.setMinFrom(minFrom);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
 			revenueSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+			revenueSearchForm.setHourFrom("00");
+			revenueSearchForm.setMinFrom("00");
 		}
 		
 		revenueSearchForm.setDateTo(dateTo);
+		revenueSearchForm.setHourTo(hourTo);
+		revenueSearchForm.setMinTo(minTo);
+		if(dateTo == null || dateTo.isEmpty()) {
+			revenueSearchForm.setDateTo(revenueSearchForm.getDateFrom());
+			revenueSearchForm.setHourTo("23");
+			revenueSearchForm.setMinTo("59");
+		}
+		
 		
 		model.addAttribute("revenueSearchForm", revenueSearchForm);
 		
@@ -62,7 +79,11 @@ public class RevenueController {
 	public RevenueExport exportRevenue(
 			@RequestParam(name="employeeId", required=false)String employeeId,
 			@RequestParam(name="dateFrom", required=false)String dateFrom,
+			@RequestParam(name="hourFrom", required=false)String hourFrom,
+			@RequestParam(name="minFrom", required=false)String minFrom,
 			@RequestParam(name="dateTo", required=false)String dateTo,
+			@RequestParam(name="hourTo", required=false)String hourTo,
+			@RequestParam(name="minTo", required=false)String minTo,
 			Model model,  HttpServletRequest request) throws ParseException {
 		
 		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
@@ -71,10 +92,22 @@ public class RevenueController {
 		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));
 		revenueSearchForm.setEmployeeId(employeeId);
 		revenueSearchForm.setDateFrom(dateFrom);
+		revenueSearchForm.setHourFrom(hourFrom);
+		revenueSearchForm.setMinFrom(minFrom);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
 			revenueSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+			revenueSearchForm.setHourFrom("00");
+			revenueSearchForm.setMinFrom("00");
 		}
+		
 		revenueSearchForm.setDateTo(dateTo);
+		revenueSearchForm.setHourTo(hourTo);
+		revenueSearchForm.setMinTo(minTo);
+		if(dateTo == null || dateTo.isEmpty()) {
+			revenueSearchForm.setDateTo(revenueSearchForm.getDateFrom());
+			revenueSearchForm.setHourTo("23");
+			revenueSearchForm.setMinTo("59");
+		}
 		
 		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(revenueSearchForm);
 		model.addAttribute("revenueDtos", revenueMap.getData());

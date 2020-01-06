@@ -9,8 +9,12 @@ public class RevenueSearchForm {
 	private int projectId;
 	
 	private String dateFrom;
+	private String hourFrom;
+	private String minFrom;
 	
 	private String dateTo;
+	private String hourTo;
+	private String minTo;
 	
 	private String employeeId;
 
@@ -30,12 +34,44 @@ public class RevenueSearchForm {
 		this.dateFrom = dateFrom;
 	}
 
+	public String getHourFrom() {
+		return hourFrom;
+	}
+
+	public void setHourFrom(String hourFrom) {
+		this.hourFrom = hourFrom;
+	}
+
+	public String getMinFrom() {
+		return minFrom;
+	}
+
+	public void setMinFrom(String minFrom) {
+		this.minFrom = minFrom;
+	}
+
 	public String getDateTo() {
 		return dateTo;
 	}
 
 	public void setDateTo(String dateTo) {
 		this.dateTo = dateTo;
+	}
+
+	public String getHourTo() {
+		return hourTo;
+	}
+
+	public void setHourTo(String hourTo) {
+		this.hourTo = hourTo;
+	}
+
+	public String getMinTo() {
+		return minTo;
+	}
+
+	public void setMinTo(String minTo) {
+		this.minTo = minTo;
 	}
 
 	public String getEmployeeId() {
