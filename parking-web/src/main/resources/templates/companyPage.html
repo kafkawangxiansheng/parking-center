@@ -80,11 +80,17 @@
 											<td th:text="${{company.id}}"></td>
 											<td th:text="${{company.name}}"></td>
 											<td th:text="${{company.address}}"></td>
-											<td>
-												<a th:href="@{/company/edit-company/{id}(id=${company.id})}">Edit</a>
-												| 
-												
-												<a th:href="@{/company/delete-company/{id}(id=${company.id})}">Delete</a>
+											<td width="13%">
+												<div style="padding-right: 10px; float: left;">
+			                                        <a th:href="@{/company/edit-company/{id}(id=${company.id})}">
+			                                            <button class="btn-info">Edit</button>
+			                                        </a>
+			                                     </div>
+			                                     <div>
+			                                        <a th:href="@{/company/delete-company/{id}(id=${company.id})}">
+			                                            <button class="btn-warning">Delete</button>
+			                                        </a>
+			                                     </div>
 											</td>
 										</tr>
                                     </tbody>
