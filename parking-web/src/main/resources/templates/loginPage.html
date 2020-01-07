@@ -1,45 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
-<title>Login page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Login Page</title>
+<link href="http://admin.spmgroup.vn/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
+<link rel="stylesheet" href="/css/all.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
-	<h1>Login</h1>
-       
-      <!-- /login?error=true -->
-      <div th:if="${#request.getParameter('error') == 'true'}"
-            style="color:red;margin:10px 0px;">
-         Login Failed!!!<br />
-         Reason :
-         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-            th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
-                Static summary
-         </span>
-            
-      </div>
-      
-      <h3>Enter user name and password:</h3>
-      <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
-         <table>
-            <tr>
-               <td>User:</td>
-               <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-               <td>Password:</td>
-               <td><input type='password' name='password' /></td>
-            </tr>         
-            <tr>
-               <td><input name="submit" type="submit" value="submit" /></td>
-            </tr>
-         </table>
-      </form>
-       
-      <br>
-      Username/pass:
-      <ul>
-        <li>admin/password</li>
-      </ul>  
+<main>
+	<div class="container">
+		<div class="row">
+			<div class="col-10 offset-1 col-md-4 offset-md-4">
+				<div class="login-container">
+					<div class="login-logo-top d-flex justify-content-center">
+						<img src="/image/login/login_img_top.png" width="76px" class="">
+					</div>
+					<div class="login-body">
+						<form name='f' th:action="@{/j_spring_security_check}"
+							method='POST'>
+							<p class="login-msg">Welcome</p>
+							<div
+								class="form-group position-relative d-flex align-items-center">
+								<input type="text" class="form-control" name="username"
+									placeholder="User"> <span
+									class="form-input-user position-absolute"> <i
+									class="fas fa-user-tie"></i>
+								</span>
+							</div>
+							<div
+								class="form-group position-relative d-flex align-items-center">
+								<input type="password" class="form-control" name="password"
+									placeholder="Password"> <span
+									class="form-input-password position-absolute"> <i
+									class="fas fa-lock"></i>
+								</span>
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" class="form-check-input"
+									id="exampleCheck1"> <label class="form-check-label"
+									for="exampleCheck1">Remember me</label>
+							</div>
+							<!-- /login?error=true -->
+							<div th:if="${#request.getParameter('error') == 'true'}"
+								style="color: red; margin: 10px 0px;">
+								Login Failed!!!<br /> Reason : <span
+									th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+									th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+									Static summary </span>
+
+							</div>
+							<button name="submit" type="submit"
+								class="button-login btn w-100">LOGIN</button>
+						</form>
+					</div>
+					<div class="login-logo-bottom d-flex justify-content-center">
+						<img src="/image/login/login_img_bottom.png" width="125px"
+							class="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<footer class="d-flex justify-content-center align-items-center">
+		<b>SPM</b> - SMART PARKING MANAGEMENT
+	</footer>
+	<script src="/js/jquery-3.4.1.min.js"></script>
+	<script src="/js/fontawesome.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
+
 </html>
