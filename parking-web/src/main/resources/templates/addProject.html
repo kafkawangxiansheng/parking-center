@@ -1,73 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Parking Management</title>
-    <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-    <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Parking Management</title>
+<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
 </head>
 
 <body>
-    <header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
-    	<div class="header-submenu position-relative">
-    		<div th:insert="~{fragments/mainTemplate :: sub-header}"  class="container"></div>
-    		<div th:insert="~{fragments/mainTemplate :: navi-header}"  class="container"></div>
-    	</div>
-    </header>
-    <div id="main">
-    <div class="header-submenu position-relative">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-                            style="height: 50px;">
-                            <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="/company">Quản lý
-                                    công ty</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/project" style="color: #000; background: #fff;">Quản lý
-                                    dự án</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
-          <div class="form-group text">
-                <label>Tên dự án*</label>
-                <input type="text" required="required" th:field="*{name}" class="form-control" id="name">
-            </div>
-            <div class="form-group text">
-                <label>Địa chỉ</label>
-                <input type="text" required="required" th:field="*{address}" class="form-control" id="address">
-            </div>
-            <div class="form-group">
-                <label for="">Tên công ty</label>
-                <select th:field="*{company.id}" class="form-control">
-				    <option th:each="i : ${listCompanies}" th:value="${i.id}" th:text="${i.name}"></option>
-				</select>
-            </div>
-            <div class="form-group button-group d-flex flex-row">
-                
-                <div class="form-group">
-                    <input type="submit" value="Lưu" class="btn btn-secondary"
-                        style="font-size: 14px;">
-                </div>
-            </div>
-        </form>
-        <!-- Check if errorMessage is not null and not empty -->
-       
-      <!-- <div th:if="${errorMessage}" th:utext="${errorMessage}" 	style="color:red;font-style:italic;">
-         ...
-      </div> -->
-    </div>
-    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
-    <script src="/js/orders.js"></script>
-</body>
+	<header th:insert="~{fragments/mainTemplate :: main-header}"
+		class="main-header flex-column">
+		<div class="header-submenu position-relative">
+			<div th:insert="~{fragments/mainTemplate :: sub-header}"
+				class="container"></div>
+			<div th:insert="~{fragments/mainTemplate :: navi-header}"
+				class="container"></div>
+		</div>
+	</header>
+	<div id="main">
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/company">Quản lý công ty</a></li>
+							<li class="nav-item"><a class="nav-link" href="/project"
+								style="color: #000; background: #fff;">Quản lý dự án</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="content-wrapper">
+						<section class="content-header d-flex justify-content-between align-items-center">
+                            <h1 class="m-0">Thêm mới</h1>
+                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-home"></i>
+                                        <span>Trang chủ</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Danh sách dự án</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Thêm mới</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+						<section class="content">
+							<div class="box box-update d-flex flex-column">
+								<div class="box-header d-flex" style="padding: 10px;">
+									<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+								</div>
+								<div class="box-body p-2">
+									<div class="form-body">
+										<form th:action="@{/project/add-project}"
+											th:object="${projectDto}" method="POST">
+											<div class="form-group text">
+												<label>Tên dự án*</label> <input type="text"
+													required="required" th:field="*{name}" class="form-control"
+													id="name">
+											</div>
+											<div class="form-group text">
+												<label>Địa chỉ</label> <input type="text"
+													required="required" th:field="*{address}"
+													class="form-control" id="address">
+											</div>
+											<div class="form-group">
+												<label for="">Tên công ty</label> <select
+													th:field="*{company.id}" class="form-control">
+													<option th:each="i : ${listCompanies}" th:value="${i.id}"
+														th:text="${i.name}"></option>
+												</select>
+											</div>
+											<div class="form-group button-group d-flex flex-row">
+
+												<div class="form-group">
+													<input type="submit" value="Lưu" class="btn btn-secondary"
+														style="font-size: 14px;">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:insert="~{fragments/mainTemplate :: footer}"
+		class="main-footer d-flex justify-content-between"> </footer>
+	<script src="/js/orders.js"></script>
+</body>
 </html>
