@@ -21,12 +21,12 @@ public class RevenueServiceImpl implements RevenueService {
 		
 		String finalURL = URLConstants.URL_GET_ALL_REVENUE.replace("::projectId", String.valueOf(revenueSearchForm.getProjectId()));
 		
-		String dateFromInLong = revenueSearchForm.getDateFrom();
-		String dateToInLong = revenueSearchForm.getDateTo();
+		String dateFromInLong = revenueSearchForm.getDateFrom()+" "+revenueSearchForm.getHourFrom()+":"+revenueSearchForm.getMinFrom()+":00";
+		String dateToInLong = revenueSearchForm.getDateTo()+" "+revenueSearchForm.getHourTo()+":"+revenueSearchForm.getMinTo()+":59";
 		
 		if(revenueSearchForm.getDateFrom() != null && !revenueSearchForm.getDateFrom().isEmpty()) {
 			try {
-				dateFromInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFromInLong +  " 00:00:00"));
+				dateFromInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFromInLong));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -34,7 +34,7 @@ public class RevenueServiceImpl implements RevenueService {
 		
 		if(revenueSearchForm.getDateTo() != null && !revenueSearchForm.getDateTo().isEmpty()) {
 			try {
-				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong +  " 23:59:59"));
+				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -50,7 +50,7 @@ public class RevenueServiceImpl implements RevenueService {
 		}  else  {
 			if(dateToInLong == null || dateToInLong.isEmpty()) {
 				try {
-					dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(revenueSearchForm.getDateFrom() +  " 23:59:59"));
+					dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(revenueSearchForm.getDateFrom()));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}

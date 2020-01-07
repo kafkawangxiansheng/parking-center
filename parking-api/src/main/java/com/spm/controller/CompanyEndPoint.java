@@ -18,6 +18,10 @@ import com.spm.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * Created by thanhtuan on 06/01/2020
+ */
+
 @Controller
 @RequestMapping("company")
 @Api(value = "Company Endpoint", description = "The URL to handle companies endpoint")

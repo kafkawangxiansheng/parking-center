@@ -80,28 +80,35 @@
                                     		<td></td>
 											<td th:text="${{project.id}}"></td>
 											<td th:text="${{project.name}}"></td>
-											<td th:text="${{project.companyId}}"></td>
+											<td th:text="${{project.company.name}}"></td>
 											<td th:text="${{project.address}}"></td>
-											<td>
-												<a th:href="@{/project/edit-project/{id}(id=${project.id})}">Edit</a>
+											<td width="13%">
+												 	<div style="padding-right: 10px; float: left;">
+				                                        <a th:href="@{/project/edit-project/{id}(id=${project.id})}">
+				                                            <button class="btn-info">Edit</button>
+				                                        </a>
+				                                     </div>
+				                                     <div>
+				                                        <a th:href="@{/project/delete-project/{id}(id=${project.id})}">
+				                                            <button class="btn-warning">Delete</button>
+				                                        </a>
+				                                     </div>
+												<!-- <a th:href="@{/project/edit-project/{id}(id=${project.id})}" >Edit</a>
 												| 
-												
-												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a>
-												<!-- <a href="#" th:onclick="'project/delete-project(\''+${project.id}+'\');'">Delete</a> -->
+												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a> -->
 											</td>
 										</tr>
                                     </tbody>
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <a href="/project/add-project">
+                                        <a href="project/add-project">
                                             <input value="Thêm mới" class="btn btn-success"
                                                 style="font-size: 14px; margin-right: 20px;">
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                        </section>
                     </div>
                 </div>
             </div>

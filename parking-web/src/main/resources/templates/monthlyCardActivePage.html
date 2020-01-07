@@ -17,32 +17,39 @@
     	</div>
     </header>
     <div id="main">
-    	<div class="header-submenu position-relative">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-                            style="height: 50px;">
-                            <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="company" style="color: #000; background: #fff;">Quản lý
-                                    công ty</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="project" >Quản lý
-                                    dự án</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
+	    <div class="header-submenu position-relative">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col">
+	                    <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
+	                        style="height: 50px;">
+	                        <li class="nav-item" style="border-left: 2px solid #fff;">
+	                            <a class="nav-link" href="monthlycard/viewlog">Xem nhật ký vé tháng</a>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link" href="/monthlycard">Thông tin vé tháng</a>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link" href="/monthlycard/renewal">Gia hạn - thông tin hết hạn</a>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link" href="/monthlycard/disablelist">Mất thẻ / Đổi mã thẻ</a>
+	                        </li>
+	                        <li class="nav-item">
+	                            <a class="nav-link" href="/monthlycard/active"
+	                            style="color: #000; background: #fff;">Kích hoạt thẻ tháng</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Danh sách công ty</h1>
+                            <h1 class="m-0">Thông tin vé tháng</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -55,52 +62,39 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Danh sách công ty</span>
+                                        <span>Thông tin vé tháng</span>
                                     </a>
                                 </li>
                             </ul>
                         </section>
-                        
-                            <div class="box box-result">
-                                <table class="table table-hover" id="projectTale">
+                        <section class="content">
+                           <div class="box box-result">
+                                <table class="table table-hover" id="inOutTable">
                                     <thead>
                                         <tr>
                                             <th class="checkbox-item">
                                                 <input type="checkbox">
                                             </th>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Tên công ty</th>
-                                            <th scope="col">Địa chỉ</th>
+                                            <th scope="col" style="width: 50px;">ID</th>
+                                            <th scope="col">Mã thẻ</th>
+                                            <th scope="col">Số ngày</th>
+                                            <th scope="col">Biển số</th>
+                                            <th scope="col">Tên KH</th>
+                                            <th scope="col">CMND</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Ngày đăng ký</th>
+                                            <th scope="col">Ngày hết hạn</th>
                                             <th scope="col" style="width: 100px;">Chỉnh sửa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<tr th:each="company : ${companies}">
-                                    		<td></td>
-											<td th:text="${{company.id}}"></td>
-											<td th:text="${{company.name}}"></td>
-											<td th:text="${{company.address}}"></td>
-											<td width="13%">
-												<div style="padding-right: 10px; float: left;">
-			                                        <a th:href="@{/company/edit-company/{id}(id=${company.id})}">
-			                                            <button class="btn-info">Edit</button>
-			                                        </a>
-			                                     </div>
-			                                     <div>
-			                                        <a th:href="@{/company/delete-company/{id}(id=${company.id})}">
-			                                            <button class="btn-warning">Delete</button>
-			                                        </a>
-			                                     </div>
-											</td>
-										</tr>
                                     </tbody>
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <a href="/company/add-company">
-                                            <input value="Thêm mới" class="btn btn-success"
-                                                style="font-size: 14px; margin-right: 20px;">
-                                        </a>
+                                        <input type="submit" value="Kích hoạt thẻ" class="btn btn-success"
+                                            style="font-size: 14px; margin-right: 20px;">
                                     </div>
                                 </div>
                             </div>

@@ -37,34 +37,80 @@
             </div>
             
         </div>
-        <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
-        <div class="form-group text">
-                <label for="option1">ID</label>
-                <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">
-            </div>
-          <div class="form-group text">
-                <label for="option1">Tên dự án*</label>
-                <input type="text" required="required" th:field="*{name}" class="form-control" id="name">
-            </div>
-            <div class="form-group text">
-                <label for="option1">Địa chỉ</label>
-                <input type="text" required="required" th:field="*{address}" class="form-control" id="address">
-            </div>
-            
-            <div class="form-group">
-                <label for="">Tên công ty</label>
-                <select th:field="*{companyId}" class="form-control">
-				    <option th:each="i : ${listCompanies}" th:value="${i.id}" th:text="${i.name}"></option>
-				</select>
-            </div>
-            <div class="form-group button-group d-flex flex-row">
-                
-                <div class="form-group">
-                    <input type="submit" value="Lưu" class="btn btn-secondary"
-                        style="font-size: 14px;">
-                </div>
-            </div>
-        </form>
+        <div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="content-wrapper">
+						<section class="content-header d-flex justify-content-between align-items-center">
+                            <h1 class="m-0">Chỉnh Sửa</h1>
+                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-home"></i>
+                                        <span>Trang chủ</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Danh sách dự án</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Chỉnh Sửa</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+						<section class="content">
+							<div class="box box-update d-flex flex-column">
+								<div class="box-header d-flex" style="padding: 10px;">
+									<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+								</div>
+								<div class="box-body p-2">
+									<div class="form-body">
+								        <form th:action="@{/project/add-project}" th:object="${projectDto}" method="POST">
+								        <div class="form-group text">
+								                <label for="option1">ID</label>
+								                <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">
+								            </div>
+								          <div class="form-group text">
+								                <label for="option1">Tên dự án*</label>
+								                <input type="text" required="required" th:field="*{name}" class="form-control" id="name">
+								            </div>
+								            <div class="form-group text">
+								                <label for="option1">Địa chỉ</label>
+								                <input type="text" required="required" th:field="*{address}" class="form-control" id="address">
+								            </div>
+								            
+								            <div class="form-group">
+								                <label for="">Tên công ty</label>
+								                <select th:field="*{company.id}" class="form-control">
+												    <option th:each="i : ${listCompanies}" th:value="${i.id}" th:text="${i.name}"></option>
+												</select>
+								            </div>
+								            <div class="form-group button-group d-flex flex-row">
+								                
+								                <div class="form-group">
+								                    <input type="submit" value="Lưu" class="btn btn-secondary"
+								                        style="font-size: 14px;">
+								                </div>
+								            </div>
+								        </form>
+								    </div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>

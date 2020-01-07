@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +18,9 @@ public class ProjectsEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "company_id")
-	private long companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private CompanyEntity company;
 	
 	@Column(name="name")
 	private String name;
@@ -29,10 +32,10 @@ public class ProjectsEntity {
 	private boolean disable;
 	
 	@Column(name = "created")
-	private String created;
+	private Long created;
 	
 	@Column(name = "updated")
-	private String updated;
+	private Long updated;
 
 	public Long getId() {
 		return id;
@@ -40,14 +43,6 @@ public class ProjectsEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getName() {
@@ -74,22 +69,28 @@ public class ProjectsEntity {
 		this.disable = disable;
 	}
 
-	public String getCreated() {
+	public CompanyEntity getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyEntity company) {
+		this.company = company;
+	}
+
+	public Long getCreated() {
 		return created;
 	}
 
-	public void setCreated(String created) {
+	public void setCreated(Long created) {
 		this.created = created;
 	}
 
-	public String getUpdated() {
+	public Long getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(String updated) {
+	public void setUpdated(Long updated) {
 		this.updated = updated;
 	}
-	
-	
 
 }

@@ -54,6 +54,12 @@ public class ProjectsServiceImpl implements ProjectsService{
 		mapper = new ModelMapper();
 	}
 	
+//	@PostConstruct
+//	private void postConstruct() {
+//	mapper.getConfiguration().setAmbiguityIgnored(true);
+//		
+//	}
+	
 	@Override
 	public ResultObject<List<ProjectsDto>> save(ProjectsDto projectsDto) {
 		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
