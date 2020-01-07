@@ -12,9 +12,9 @@ public class ProjectsDto {
 	
 	private boolean disable;
 	
-	private String created;
+	private Long created;
 	
-	private String updated;
+	private Long updated;
 
 	public Long getId() {
 		return id;
@@ -48,19 +48,19 @@ public class ProjectsDto {
 		this.disable = disable;
 	}
 
-	public String getCreated() {
+	public Long getCreated() {
 		return created;
 	}
 
-	public void setCreated(String created) {
+	public void setCreated(Long created) {
 		this.created = created;
 	}
 
-	public String getUpdated() {
+	public Long getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(String updated) {
+	public void setUpdated(Long updated) {
 		this.updated = updated;
 	}
 

@@ -32,10 +32,10 @@ public class ProjectsEntity {
 	private boolean disable;
 	
 	@Column(name = "created")
-	private String created;
+	private Long created;
 	
 	@Column(name = "updated")
-	private String updated;
+	private Long updated;
 
 	public Long getId() {
 		return id;
@@ -69,28 +69,28 @@ public class ProjectsEntity {
 		this.disable = disable;
 	}
 
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
-	public String getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(String updated) {
-		this.updated = updated;
-	}
-
 	public CompanyEntity getCompany() {
 		return company;
 	}
 
 	public void setCompany(CompanyEntity company) {
 		this.company = company;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
 	}
 
 }
