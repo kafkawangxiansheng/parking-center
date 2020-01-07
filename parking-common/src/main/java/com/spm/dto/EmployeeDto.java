@@ -1,5 +1,7 @@
 package com.spm.dto;
 
+import java.util.Date;
+
 public class EmployeeDto {
 	
 	private Long id;
@@ -16,9 +18,17 @@ public class EmployeeDto {
 	
 	private String createdBy;
 	
-	private String createdAt;
+	private Date createdAt;
 	
-	private String updatedAt;
+	private Date updatedAt;
+	
+	private String userName;
+	
+	private String pass;
+	
+	private String position;
+	
+	private String sex;
 
 	public Long getId() {
 		return id;
@@ -27,7 +37,7 @@ public class EmployeeDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public long getProjectId() {
 		return projectId;
 	}
@@ -60,7 +70,7 @@ public class EmployeeDto {
 		this.tel = tel;
 	}
 
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		return disabled;
 	}
 
@@ -76,20 +86,52 @@ public class EmployeeDto {
 		this.createdBy = createdBy;
 	}
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(String updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 }

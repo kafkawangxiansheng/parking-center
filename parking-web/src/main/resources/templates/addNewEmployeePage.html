@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="refresh" content="10" />
+<title>Parking Management</title>
+<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+</head>
+
+<body>
+	<header th:insert="~{fragments/mainTemplate :: main-header}"
+		class="main-header flex-column">
+		<div class="header-submenu position-relative">
+			<div th:insert="~{fragments/mainTemplate :: sub-header}"
+				class="container"></div>
+			<div th:insert="~{fragments/mainTemplate :: navi-header}"
+				class="container"></div>
+		</div>
+	</header>
+	<div id="main">
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/employees"
+								style="color: #000; background: #fff;">Thông tin nhân sự</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/employees/viewLog">Dò bảng chấm công</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/employees/type">Thông tin chức vụ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="content-wrapper">
+						<section
+							class="content-header d-flex justify-content-between align-items-center">
+							<h1 class="m-0">Thêm mới</h1>
+							<ul class="breadcrump d-flex flex-row p-0 m-0">
+								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
+											chủ</span>
+								</a></li>
+								<li class="li-between"><i class="fas fa-angle-right"></i></li>
+								<li><a href="#"> <span>Thông tin nhân sự</span>
+								</a></li>
+								<li class="li-between"><i class="fas fa-angle-right"></i></li>
+								<li><a href="#"> <span>Thêm mới</span>
+								</a></li>
+							</ul>
+						</section>
+						<section class="content">
+							<div class="box box-update d-flex flex-column">
+								<div class="box-header d-flex" style="padding: 10px;">
+									<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+								</div>
+								<div class="box-body p-2">
+									<div class="form-body">
+										<form>
+											<div class="form-group text">
+												<label for="">Họ tên*</label> <input type="text" name=""
+													class="form-control" id="">
+											</div>
+											<div class="form-group text">
+												<label for="">Tài khoản*</label> <input type="text" name=""
+													class="form-control" id="">
+											</div>
+											<div class="form-group text">
+												<label for="">Mật khẩu*</label> <input type="text" name=""
+													class="form-control" id="">
+											</div>
+											<div class="form-group">
+												<label for="">Chức vụ*</label> <select class="form-control"
+													id="">
+													<option>Ca trưởng</option>
+													<option>Admin1</option>
+													<option>Nhân viên1</option>
+													<option>Quản lý</option>
+													<option>Admin</option>
+													<option>Nhân viên</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="">Giới tính</label> <select class="form-control"
+													id="">
+													<option>Nam</option>
+													<option>Nữ</option>
+												</select>
+											</div>
+											<div class="form-group text company"
+												style="font-weight: 300;">
+												<label for="">Chọn công ty - Dự án</label>
+												<div class="form-group checkbox">
+													<label for=""> <input type="checkbox"> Cong
+														ty 286
+													</label>
+												</div>
+												<div class="form-group checkbox">
+													<label for=""> <input type="checkbox"> cty
+														1
+													</label>
+													<div class="subCheckbox subCheckbox-1">
+														<label for=""> <input type="checkbox">
+															Nguyen Kiem
+														</label> <label for=""> <input type="checkbox"> !8
+															TTC
+														</label>
+													</div>
+												</div>
+												<div class="form-group checkbox">
+													<label for=""> <input type="checkbox"> cty
+														2
+													</label>
+													<div class="subCheckbox subCheckbox-1">
+														<label for=""> <input type="checkbox"> Du
+															an 21
+														</label> <label for=""> <input type="checkbox"> Du
+															an 22
+														</label>
+													</div>
+												</div>
+												<div class="form-group checkbox">
+													<label for=""> <input type="checkbox"> cty
+														3
+													</label>
+													<div class="subCheckbox subCheckbox-1">
+														<label for=""> <input type="checkbox"> Du
+															an 31
+														</label> <label for=""> <input type="checkbox"> Du
+															an 32
+														</label> <label for=""> <input type="checkbox"> Du
+															an 33
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group button-group d-flex flex-row">
+												<div class="form-group">
+													<button onclick="saveData()" class="btn btn-primary"
+														style="font-size: 14px; margin-right: 20px;">Lưu</button>
+												</div>
+												<div class="form-group">
+													<button id="cancel" data-direction="reverse" type="submit"
+														class="btn btn-secondary" style="font-size: 14px;">Quay
+														lại</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:insert="~{fragments/mainTemplate :: footer}"
+		class="main-footer d-flex justify-content-between"> </footer>
+	<script src="/js/orders.js"></script>
+</body>
+
+</html>

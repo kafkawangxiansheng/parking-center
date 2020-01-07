@@ -1,0 +1,16 @@
+package com.spm.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping(path="/employees")
+public class EmployeeViewLogController {
+
+	@RequestMapping(value="viewLog", method = { RequestMethod.GET})
+	public String showEmployeeViewLogPage(){
+		return "employeeViewLogPage";
+	}
+	
+}

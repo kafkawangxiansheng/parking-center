@@ -16,8 +16,6 @@ public interface CardsService {
     CardsDto save(CardsDto cardsDto);
     
     List<CardsDto> save(List<CardsDto> cardsDtos);
-
-    void delete(CardsDto cardsDto);
     
     ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm);
     

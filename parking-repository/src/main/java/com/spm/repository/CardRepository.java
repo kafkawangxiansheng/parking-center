@@ -14,8 +14,6 @@ import com.spm.entity.CardsEntity;
 
 public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 
-	CardsEntity findByCode(Long code);
-
 	@Query(
 			value = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:stt is null OR stt = :stt) AND (:vehicleId is null OR vehicle_id = :vehicleId) order by updated DESC",
 			countQuery = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:stt is null OR stt = :stt) AND (:vehicleId is null OR vehicle_id = :vehicleId) order by updated DESC",

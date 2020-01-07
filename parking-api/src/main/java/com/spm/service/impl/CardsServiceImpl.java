@@ -69,15 +69,6 @@ public class CardsServiceImpl implements CardsService {
 		mapper.map(entity, cardDto);
 		return cardDto;
 	}
-	
-
-	@Override
-	public void delete(CardsDto cardsDto) {
-		CardsEntity entity = new CardsEntity();
-		mapper.map(cardsDto, entity);
-
-	}
-
 
 	@Override
 	public ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm) {

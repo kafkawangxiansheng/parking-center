@@ -1,11 +1,15 @@
 package com.spm.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="employees")
@@ -34,11 +38,25 @@ public class EmployeeEntity {
 	@Column(name="created_by")
 	private String createdBy;
 	
-	@Column(name="created_at")
-	private String createdAt;
-	
+	@Column(name = "created_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
+
 	@Column(name="updated_at")
-	private String updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedAt;
+	
+	@Column(name="username")
+	private String userName;
+	
+	@Column(name="pass")
+	private String pass;
+	
+	@Column(name="position")
+	private String position;
+	
+	@Column(name="sex")
+	private String sex;
 
 	public Long getId() {
 		return id;
@@ -47,7 +65,7 @@ public class EmployeeEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public long getProjectId() {
 		return projectId;
 	}
@@ -80,7 +98,7 @@ public class EmployeeEntity {
 		this.tel = tel;
 	}
 
-	public boolean getDisabled() {
+	public boolean isDisabled() {
 		return disabled;
 	}
 
@@ -96,20 +114,52 @@ public class EmployeeEntity {
 		this.createdBy = createdBy;
 	}
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(String updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 }
