@@ -11,7 +11,7 @@ import com.spm.exception.UnauthorizedException;
 
 @Controller
 @RequestMapping(path = "monthlycard")
-public class monthlycardController {
+public class MonthlyCardController {
 
 	//index == monthlycardPage
 	@RequestMapping(value = "", method = { RequestMethod.GET })
@@ -20,7 +20,7 @@ public class monthlycardController {
 		return "monthlyCardPage";
 	}
 	
-	@RequestMapping(value = "/viewlog", method = { RequestMethod.GET })
+	@RequestMapping(value = "viewlog", method = { RequestMethod.GET })
 	public String monthlyCardViewlog(Model model, HttpServletRequest request) throws UnauthorizedException {
 		model.addAttribute("monthlycards","");
 		return "monthlyCardViewLogPage";

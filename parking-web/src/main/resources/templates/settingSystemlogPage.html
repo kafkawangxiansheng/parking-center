@@ -18,38 +18,35 @@
     </header>
     <div id="main">
 	    <div class="header-submenu position-relative">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col">
-	                    <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-	                        style="height: 50px;">
-	                        <li class="nav-item" style="border-left: 2px solid #fff;">
-	                            <a class="nav-link" href="/monthlycard/viewlog"
-	                            style="color: #000; background: #fff;" >Xem nhật ký vé tháng</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard">Thông tin vé tháng</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/renewal">Gia hạn - thông tin hết hạn</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/disablelist">Mất thẻ / Đổi mã thẻ</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/active">Kích hoạt thẻ tháng</a>
-	                        </li>
-	                    </ul>
-	                </div>
-	            </div>
-	        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
+                            style="height: 50px;">
+                            <li class="nav-item" style="border-left: 2px solid #fff;">
+                                <a class="nav-link" href="/setting/display">Cấu hình hiển thị</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/setting/order">Quản lý thu tiền xe</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/setting/permission">Phân quyền truy cập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/setting/systemlog"
+                                style="color: #000; background: #fff;">Nhật ký hệ thống</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Thông tin vé tháng</h1>
+                            <h1 class="m-0">Nhật ký hệ thống</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -62,12 +59,13 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Thông tin vé tháng</span>
+                                        <span>Nhật ký hệ thống</span>
                                     </a>
                                 </li>
                             </ul>
                         </section>
                         <section class="content">
+                            
                             <div class="box box-result">
                                 <table class="table table-hover" id="revenueIndexTable">
                                     <thead>
@@ -76,17 +74,8 @@
                                             <th scope="col">Thao tác</th>
                                             <th scope="col">Ngày tạo</th>
                                             <th scope="col">Nhân viên</th>
-                                            <th scope="col">ID vé</th>
-                                            <th scope="col">Mã thẻ</th>
-                                            <th scope="col">Biển số</th>
-                                            <th scope="col">Ngày đăng ký</th>
-                                            <th scope="col">Ngày hết hạn</th>
-                                            <th scope="col">Tên KH</th>
-                                            <th scope="col">CMND</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Địa chỉ</th>
-                                            <th scope="col">Nhãn hiệu</th>
-                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Nội dung</th>
+                                            <th scope="col">Máy tính</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,6 +96,14 @@
                                             </span>
                                         </li>
                                         <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">8</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">9</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">10</a></li>
                                         <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
@@ -124,5 +121,4 @@
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>
 </body>
-
 </html>
