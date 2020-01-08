@@ -9,9 +9,9 @@
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
 <style>
-	header .item2 {
-		background: black;
-	}
+header .item5 {
+	background: black;
+}
 </style>
 </head>
 
@@ -34,11 +34,12 @@
 							class="nav nav-submenu align-items-center d-flex justify-content-center"
 							style="height: 50px;">
 							<li class="nav-item" style="border-left: 2px solid #fff;"><a
-								class="nav-link" href="/employees">Thông tin nhân sự</a></li>
+								class="nav-link" href="/cards">Quản lý thẻ xe</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="/employees/viewLog">Dò bảng chấm công</a></li>
+								href="/cards/vehicle" style="color: #000; background: #fff;">Quản
+									lý loại xe</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="/employees/type" style="color: #000; background: #fff;">Thông tin chức vụ</a></li>
+								href="/cards/card-active">Kích hoạt thẻ</a></li>
 						</ul>
 					</div>
 				</div>
@@ -49,7 +50,7 @@
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Thông tin chức vụ</h1>
+                            <h1 class="m-0">Quản lý loại xe</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -62,7 +63,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Thông tin chức vụ</span>
+                                        <span>Quản lý loại xe</span>
                                     </a>
                                 </li>
                             </ul>
@@ -72,9 +73,15 @@
                                 <h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
                                 <div class="panel">
                                     <form>
-                                        <div class="form-group text">
-                                            <label for="option1">Chức vụ</label>
-                                            <input type="text" name="option1" class="form-control" id="option1">
+                                        <div class="form-group">
+                                            <label for="">Tên loại xe</label>
+                                            <select class="form-control" id="">
+                                                <option>Chọn loại xe</option>
+                                                <option>Xe đạp điện</option>
+                                                <option>Xe oto</option>
+                                                <option>Xe máy</option>
+                                                <option>Xe tay ga</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="">Giới hạn</label>
@@ -97,10 +104,15 @@
                                     <thead>
                                         <tr>
                                             <th class="checkbox-item">
-                                                <input type="checkbox">
+                                                <input type="checkbox"
+                                                    onclick="checkAll('items[]', this.checked ? 1 : 0)">
                                             </th>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Chức vụ</th>
+                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Ký hiệu</th>
+                                            <th scope="col">Tiền thu tháng</th>
+                                            <th scope="col">Loại xe</th>
+                                            <th scope="col">Loại vé</th>
                                             <th scope="col" style="width: 100px;">Chỉnh sửa</th>
                                         </tr>
                                     </thead>
@@ -109,7 +121,7 @@
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <a href="/employees/addNewEmployeeType">
+                                        <a href="/cards/addNewVehicle">
                                             <input type="submit" value="Thêm mới" class="btn btn-success"
                                                 style="font-size: 14px; margin-right: 20px;">
                                         </a>

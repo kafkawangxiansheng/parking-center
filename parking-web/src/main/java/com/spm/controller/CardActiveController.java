@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path="/home")
-public class HomeController {
+@RequestMapping(path="/cards")
+public class CardActiveController {
 	
-	@RequestMapping(value="", method = { RequestMethod.GET})
-	public String showHomePage() {
-		return "homePage";
+	@RequestMapping(value="card-active", method = { RequestMethod.GET })
+	public String showCardActivePage() {
+		return "cardActivePage";
 	}
 
 }
