@@ -44,12 +44,6 @@ public class MonthlyCardController {
 		return "monthlyCardActivePage";
 	}
 	
-	@RequestMapping(value = "addCard", method = { RequestMethod.GET })
-	public String update(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
-		return "addMonthlyCardForm";
-	}
-	
 	@RequestMapping(value = "addNewMonthlyCard", method = { RequestMethod.GET })
 	public String showAddNewMonthlyCardPage() {
 		return "addNewMonthlyCardPage";
