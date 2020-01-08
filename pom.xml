@@ -35,6 +35,7 @@
 		<module>parking-common</module>
 		<module>parking-repository</module>
 		<module>parking-api</module>
+		<module>sync-api</module>
 		<module>parking-web</module>
 	</modules>
 

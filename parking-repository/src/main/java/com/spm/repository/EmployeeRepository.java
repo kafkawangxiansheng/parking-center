@@ -14,6 +14,7 @@ import com.spm.entity.EmployeeEntity;
 @Repository
 @Transactional
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+	
 	List<EmployeeEntity> findAllByProjectId(long projectId);
 
 	@Query(
@@ -21,7 +22,6 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 			countQuery = "SELECT * from employees WHERE (:name is null OR name = :name) AND (:userName is null OR userName = :userName) AND (:pass is null OR pass = :pass) AND (:position is null OR position = :position) AND (:sex is null OR sex = :sex)",
 			nativeQuery = true
 	)
-
-	Page<EmployeeEntity> search(@Param(value = "name") String name, @Param(value = "position") String position,
-			Pageable pageable);
+	Page<EmployeeEntity> search(@Param(value = "name") String name, @Param(value = "position") String position, Pageable pageable);
+	
 }

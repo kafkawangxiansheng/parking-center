@@ -1,0 +1,58 @@
+html {
+    background-image: url(../image/login/bg_login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    background: rgb(46,42,37,0.8);
+}
+
+.login-container {
+    padding: 0 40px;
+    color: white;
+    margin-top: 130px;
+}
+
+.login-container .login-msg {
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+.login-container .form-input-user {
+    color: black;
+    font-size: 1.3rem;
+    right: 10px;
+}
+
+.login-container .form-input-password {
+    color: black;
+    font-size: 1.3rem;
+    right: 10px;
+}
+
+.login-container .button-login {
+    color: white;
+    background: #CEA052;
+    padding: 4px;
+}
+
+.login-container .button-login:hover {
+    background: #3c8dbc;
+}
+
+.login-container .login-logo-bottom {
+    margin: 67px 0;
+}
+
+footer {
+    height: 39px;
+    background-image: url(../image/login/login_img_bottom_bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
