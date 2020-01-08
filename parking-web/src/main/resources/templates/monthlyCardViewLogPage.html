@@ -7,6 +7,11 @@
     <title>Parking Management</title>
     <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
     <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+    <style>
+		header .item6 {
+			background: black;
+		}
+	</style>
 </head>
 
 <body>
@@ -24,20 +29,20 @@
 	                    <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
 	                        style="height: 50px;">
 	                        <li class="nav-item" style="border-left: 2px solid #fff;">
-	                            <a class="nav-link" href="/monthlycard/viewlog"
+	                            <a class="nav-link" href="/monthlyCard/viewlog"
 	                            style="color: #000; background: #fff;" >Xem nhật ký vé tháng</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard">Thông tin vé tháng</a>
+	                            <a class="nav-link" href="/monthlyCard">Thông tin vé tháng</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/renewal">Gia hạn - thông tin hết hạn</a>
+	                            <a class="nav-link" href="/monthlyCard/renewal">Gia hạn - thông tin hết hạn</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/disablelist">Mất thẻ / Đổi mã thẻ</a>
+	                            <a class="nav-link" href="/monthlyCard/disablelist">Mất thẻ / Đổi mã thẻ</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlycard/active">Kích hoạt thẻ tháng</a>
+	                            <a class="nav-link" href="/monthlyCard/active">Kích hoạt thẻ tháng</a>
 	                        </li>
 	                    </ul>
 	                </div>

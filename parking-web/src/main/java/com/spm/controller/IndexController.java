@@ -28,7 +28,7 @@ public class IndexController extends CustomExceptionHandler{
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		return "redirect:/in-out-logs";
+		return "redirect:/home";
     
 	}
 	
@@ -51,7 +51,7 @@ public class IndexController extends CustomExceptionHandler{
 			}
 		});
 		request.getSession().setAttribute(SessionConstants.PROJECT_SESSION_NAME, projectIds);
-		return "redirect:/in-out-logs";
+		return "redirect:/home";
     
 	}
  
