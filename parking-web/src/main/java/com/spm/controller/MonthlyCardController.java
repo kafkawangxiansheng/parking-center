@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.spm.exception.UnauthorizedException;
 
 @Controller
-@RequestMapping(path = "monthlycard")
+@RequestMapping(path = "monthlyCard")
 public class MonthlyCardController {
 
 	//index == monthlycardPage
@@ -44,10 +44,10 @@ public class MonthlyCardController {
 		return "monthlyCardActivePage";
 	}
 	
-	@RequestMapping(value = "newCard", method = { RequestMethod.GET })
+	@RequestMapping(value = "addCard", method = { RequestMethod.GET })
 	public String update(Model model, HttpServletRequest request) throws UnauthorizedException {
 		model.addAttribute("monthlycards","");
-		return "monthlyCardAddForm";
+		return "addMonthlyCardForm";
 	}
 	
 	@RequestMapping(value = "addNewMonthlyCard", method = { RequestMethod.GET })
