@@ -70,8 +70,8 @@ public class SettingServiceImpl implements SettingService {
 	}
 
 	@Override
-	public List<SettingDto> findAllByAdminType(int adminType) {
-		List<SettingEntity> entities = settingRepository.findAllByAdminType(adminType);
+	public List<SettingDto> findAllByAdminType(int adminType, int projectId) {
+		List<SettingEntity> entities = settingRepository.findAllByAdminTypeAndProjectId(adminType, projectId);
 		return this.map(entities);
 	}
 

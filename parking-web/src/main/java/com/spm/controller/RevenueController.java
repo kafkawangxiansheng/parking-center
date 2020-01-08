@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.common.util.DateUtil;
+import com.spm.common.util.constant.SessionConstants;
 import com.spm.dto.ResultObject;
 import com.spm.dto.RevenueDto;
 import com.spm.export.RevenueExport;
@@ -44,7 +45,7 @@ public class RevenueController {
 			
 			Model model,  HttpServletRequest request) throws ParseException {
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute("projects");
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		
 		RevenueSearchForm revenueSearchForm = new RevenueSearchForm();
 		revenueSearchForm.setProjectId(Integer.valueOf(projects.get(0)));

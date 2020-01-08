@@ -41,6 +41,8 @@ public class OrderServiceImpl implements OrderService {
 		ResultObject<List<OrderDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_GET_ALL_IN_OUT.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
 		finalURL = finalURL.replaceAll("::cardCode", orderSearhForm.getCardCode()!= null ? orderSearhForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
+		finalURL = finalURL.replaceAll("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
 		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
 		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
 		finalURL = finalURL.replaceAll("::dateFrom", dateFormInLong != null ? dateFormInLong: "");
@@ -72,6 +74,8 @@ public class OrderServiceImpl implements OrderService {
 		ResultObject<List<OrderDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_EXPORT_ALL_IN_OUT.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
 		finalURL = finalURL.replaceAll("::cardCode", orderSearhForm.getCardCode()!= null ? orderSearhForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
+		finalURL = finalURL.replaceAll("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
 		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
 		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
 		finalURL = finalURL.replaceAll("::dateFrom", dateFormInLong != null ? dateFormInLong: "");

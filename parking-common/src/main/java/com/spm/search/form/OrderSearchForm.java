@@ -15,6 +15,10 @@ public class OrderSearchForm {
 	private String dateTo;
 	
 	private String carNumber;
+	
+	private String projectId;
+	
+	private int isMonthlyCard;
 
 	public String getCardCode() {
 		return cardCode;
@@ -54,6 +58,23 @@ public class OrderSearchForm {
 
 	public void setCarNumber(String carNumber) {
 		this.carNumber = carNumber;
+	}
+
+	
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public int getIsMonthlyCard() {
+		return isMonthlyCard;
+	}
+
+	public void setIsMonthlyCard(int isMonthlyCard) {
+		this.isMonthlyCard = isMonthlyCard;
 	}
 	
 }

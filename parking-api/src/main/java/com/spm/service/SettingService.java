@@ -13,7 +13,7 @@ public interface SettingService {
 
 	List<SettingDto> findAllByProjectId(int projectId);
 
-	List<SettingDto> findAllByAdminType(int adminType);
+	List<SettingDto> findAllByAdminType(int adminType, int projectId);
 
 	SettingDto findOneById(long id);
 

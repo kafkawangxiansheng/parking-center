@@ -31,7 +31,7 @@
 							<li class="nav-item" style="border-left: 2px solid #fff;"><a
 								class="nav-link" href="/in-out-logs">Tra cứu vào ra</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="/in-out-logs/monthlyCard"
+								href="in-out-monthly-logs"
 								style="color: #000; background: #fff;">Tra cứu vé tháng</a></li>
 						</ul>
 					</div>
@@ -55,93 +55,103 @@
 							</ul>
 						</section>
 						<section class="content">
-							<div class="box box-search d-flex flex-column"
-								style="border-top-color: #CEA052;">
-								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm
-									kiếm</h5>
-								<div class="panel">
-									<form>
-										<div class="form-group text">
-											<label for="option1">Tên KH</label> <input type="text"
-												name="option1" class="form-control" id="option1">
-										</div>
-										<div class="form-group text">
-											<label for="option1">Công ty</label> <input type="text"
-												name="option1" class="form-control" id="option1">
-										</div>
-										<div class="form-group">
-											<label for="">Nhiều ngày</label>
-											<div class="dateFromToInputs d-flex justify-content-between">
-												<div class="form-group text">
-													<input type="text" class="form-control" value="">
-												</div>
-												<span
-													class="form_from_to_separator d-flex align-items-center">〜</span>
-												<div class="form-group text">
-													<input type="text" class="form-control" value="">
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="">Giới hạn</label> <select class="form-control"
-												id="">
-												<option>10</option>
-												<option>20</option>
-												<option>50</option>
-												<option>80</option>
-												<option>100</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<button type="submit" class="btn btn-primary">Tìm
-												kiếm</button>
-										</div>
-									</form>
-								</div>
+							<div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
+								<h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
+                                <div>
+                                    <form th:action="@{/in-out-monthly-logs}" th:object="${orderSearchForm}" method="GET">
+                                        <div class="form-group text col-lg-4 float-left">
+                                            <label for="option1">Biển số</label>
+                                            <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
+                                        </div>
+                                        <div class="form-group text col-lg-4 float-left">
+                                            <label for="option1">Số thẻ</label>
+                                            <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
+                                        </div>
+                                        <div class="form-group col-lg-4 float-left">
+                                            <label for="">Nhiều ngày</label>
+                                            <div class="dateFromToInputs d-flex justify-content-between">
+                                                <div class="form-group text">
+                                                    <input type="text" th:field="*{dateFrom}" class="form-control  datepickerInOut" >
+                                                </div>
+                                                <span class="form_from_to_separator d-flex align-items-center">〜</span>
+                                                <div class="form-group text">
+                                                    <input type="text" th:field="*{dateTo}" class="form-control  datepickerInOut">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                        </div>
+                                    </form>
+                                </div>
 							</div>
 							<div class="box box-result">
 								<table class="table" id="inOutTable">
-									<thead>
-										<tr>
-											<th scope="col">ID</th>
-											<th scope="col">Mã thẻ</th>
-											<th scope="col">Công ty</th>
-											<th scope="col">Tên KH</th>
-											<th scope="col">Biển số</th>
-											<th scope="col">Thời gian vào</th>
-											<th scope="col">Thời gian ra</th>
-											<th scope="col">Tên loại xe</th>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Số thẻ</th>
+                                            <th scope="col">Thời gian vào</th>
+                                            <th scope="col">Thời gian ra</th>
+                                            <th scope="col">Biển số ĐK</th>
+                                            <th scope="col">Biển số vào</th>
+                                            <th scope="col">Biển số ra</th>
+                                            <th scope="col">Người vào</th>
+                                            <th scope="col">Người ra</th>
+                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Mất thẻ</th>
+                                            <th scope="col">Giá tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr th:each="order : ${orders}">
+											<td th:text="${{order.id}}"></td>
+											<td th:text="${{order.cardStt}}"></td>
+											<td th:text="${{order.checkinTimeInFormat}}"></td>
+											<td th:text="${{order.checkoutTimeInFormat}}"></td>
+											<td th:text="${{order.carNumber}}"></td>
+											<td th:text="${{order.carNumberIn}}"></td>
+											<td th:text="${{order.carNumberOut}}"></td>
+											<td th:text="${{order.adminCheckinName}}"></td>
+											<td th:text="${{order.adminCheckoutName}}"></td>
+											<td th:text="${{order.vehicleName}}"></td>
+											<td th:text="${{order.isCardLost}}"></td>
+											<td th:text="${{#numbers.formatDecimal(order.totalPrice,0, 'COMMA', 0, 'POINT')}}"></td>
 										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-								<div class="form-group button-group d-flex flex-row">
-									<div class="form-group">
-										<input type="submit" value="Xuất file Excel"
-											class="btn btn-primary" style="font-size: 14px;">
-									</div>
-								</div>
-								<div class="dataTables_paginate paging_bootstrap d-flex"
-									style="min-height: 80px;">
-									<ul class="pagination my-4">
-										<li class="page-item active" aria-current="page"><span
-											class="page-link"> 1 <span class="sr-only">(current)</span>
-										</span></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">4</a></li>
-										<li class="page-item"><a class="page-link" href="#">5</a></li>
-										<li class="page-item"><a class="page-link" href="#">6</a></li>
-										<li class="page-item"><a class="page-link" href="#">7</a></li>
-										<li class="page-item"><a class="page-link" href="#">8</a></li>
-										<li class="page-item"><a class="page-link" href="#">9</a></li>
-										<li class="page-item"><a class="page-link" href="#">10</a></li>
-										<li class="page-item"><a class="page-link" href="#"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</ul>
-								</div>
+                                    </tbody>
+                                </table>
+                                <div class="form-group button-group d-flex flex-row">
+                                    <div class="form-group">
+                                        <button onclick="return exportExcel('/in-out-monthly-logs');" id="exportButton" class="btn btn-primary"
+                                            style="font-size: 14px;">Xuất file Excel</button>
+                                    </div>
+                                </div>
+                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
+                                    <ul class="pagination my-4">
+                                    	<li th:if="${currentPage > 5}" class='page-item'>
+                                    		<a class="page-link" th:onclick="'paging(1)'">
+                                    		Trang đầu
+                                    		</a>
+                                    	</li>
+                                    	<th:block th:each="p : ${totalPages}">
+                                    		 <li th:if="${p == currentPage}" class='page-item active'>
+                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+                                    		 		<th:block  th:text="${p}"></th:block>
+                                    		 	</a>
+                                    		 </li>
+                                    		 <li th:if="${p != currentPage}" class='page-item'>
+                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+                                    		 		<th:block  th:text="${p}"></th:block>
+                                    		 	</a>
+                                    		 </li>
+                                    	</th:block>
+            							<li  th:if="${currentPage != maxPage}" class='page-item'>
+                                    		<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">
+                                    			Trang cuối
+                                    		</a>
+                                    	</li>
+                                    </ul>
+                                </div>
 							</div>
 						</section>
 					</div>

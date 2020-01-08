@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.common.util.DateUtil;
+import com.spm.common.util.constant.SessionConstants;
 import com.spm.constants.PagingConstants;
 import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
@@ -41,12 +42,18 @@ public class InOutController {
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
 			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		
+		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		orderSearchForm.setCardCode(cardCode);
 		orderSearchForm.setCardStt(cardStt);
 		orderSearchForm.setCarNumber(carNumber);
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setDateTo(dateTo);
+		orderSearchForm.setIsMonthlyCard(0);
+		orderSearchForm.setProjectId(projects.get(0));
+		
 		if(dateFrom  == null || dateFrom.isEmpty()) {
 			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
 		}
@@ -97,12 +104,17 @@ public class InOutController {
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
 			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		orderSearchForm.setCardCode(cardCode);
 		orderSearchForm.setCardStt(cardStt);
 		orderSearchForm.setCarNumber(carNumber);
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setDateTo(dateTo);
+		orderSearchForm.setIsMonthlyCard(0);
+		orderSearchForm.setProjectId(projects.get(0));
+		
 		if(dateFrom  == null || dateFrom.isEmpty()) {
 			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
 		}

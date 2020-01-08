@@ -52,13 +52,18 @@ public class OrderEndpoint {
 	@ApiOperation("Get all in/out logs")
 	public @ResponseBody ResultObject<List<OrderDto>> getAll(
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
+			@RequestParam(name="projectId", required  =  false) String projectId,
 			@RequestParam(name="cardCode", required  =  false) String cardCode,
 			@RequestParam(name="cardStt", required  =  false) String cardStt,
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
-			@RequestParam(name="carNumber", required  =  false) String carNumber ) {
+			@RequestParam(name="carNumber", required  =  false) String carNumber,
+			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard) {
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
+		if(projectId != null && !projectId.isEmpty()) {
+			orderSearchForm.setProjectId(projectId);
+		}
 		if(cardCode != null && !cardCode.isEmpty()) {
 			orderSearchForm.setCardCode(cardCode);
 		}
@@ -74,6 +79,7 @@ public class OrderEndpoint {
 		if(dateTo != null && !dateTo.isEmpty()) {
 			orderSearchForm.setDateTo(dateTo);
 		}
+		orderSearchForm.setIsMonthlyCard(isMonthlyCard);
 		
 		return parkingService.findAll(paging, orderSearchForm);
 	}
@@ -82,13 +88,21 @@ public class OrderEndpoint {
 	@ApiOperation("Export all in/out logs")
 	public @ResponseBody ResultObject<List<OrderDto>> export(
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
+			@RequestParam(name="projectId", required  =  false) String projectId,
 			@RequestParam(name="cardCode", required  =  false) String cardCode,
 			@RequestParam(name="cardStt", required  =  false) String cardStt,
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
-			@RequestParam(name="carNumber", required  =  false) String carNumber ) {
+			@RequestParam(name="carNumber", required  =  false) String carNumber,
+			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard) {
+		
 		Pageable paging = PageRequest.of(page, PagingConstants.MAX_ROWS_FOR_EXPORT);
+		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
+		
+		if(projectId != null && !projectId.isEmpty()) {
+			orderSearchForm.setProjectId(projectId);
+		}
 		if(cardCode != null && !cardCode.isEmpty()) {
 			orderSearchForm.setCardCode(cardCode);
 		}
@@ -104,6 +118,7 @@ public class OrderEndpoint {
 		if(dateTo != null && !dateTo.isEmpty()) {
 			orderSearchForm.setDateTo(dateTo);
 		}
+		orderSearchForm.setIsMonthlyCard(isMonthlyCard);
 		
 		return parkingService.findAll(paging, orderSearchForm);
 	}

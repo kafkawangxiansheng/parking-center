@@ -13,6 +13,6 @@ import com.spm.entity.SettingEntity;
 public interface SettingRepository  extends JpaRepository<SettingEntity, Long> {
 
 	List<SettingEntity> findAllByProjectId(int projectId);
-	List<SettingEntity> findAllByAdminType(int adminType);
+	List<SettingEntity> findAllByAdminTypeAndProjectId(int adminType,  int projectId);
 	
 }
