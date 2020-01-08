@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path="/home")
+@RequestMapping(path="home")
 public class HomeController {
 	
-	@RequestMapping(value="home", method = { RequestMethod.GET})
+	@RequestMapping(value="", method = { RequestMethod.GET})
 	public String showHomePage() {
 		return "homePage";
 	}
