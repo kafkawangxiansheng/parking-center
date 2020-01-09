@@ -99,7 +99,7 @@
 											</div>
 											<div class="form-group">
 												<label for="">Dự Án</label>
-												<ul>
+												<!-- <ul>
 												  <li th:each="project : ${listProjectDto}">
 												    <input type="checkbox" 
 												        th:field="*{project.id}"
@@ -108,7 +108,12 @@
 												        th:for="${project}"
 												        th:text=" 'Dự Án: ' + ${project.name} + ' -- Công Ty: ' + ${project.company.name} "></label>
 												  </li>
-												</ul>
+												</ul> -->
+												<select
+													th:field="*{project.id}" class="form-control">
+													<option th:each="i : ${listProjectDto}" th:value="${i.id}"
+														th:text="${i.name}"></option>
+												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">
