@@ -6,13 +6,17 @@ public class EmployeeDto {
 	
 	private Long id;
 	
-	private long projectId;
+	private ProjectsDto project;
 	
 	private String name;
 	
-	private String email;
+	private boolean gender;
 	
-	private String tel;
+	private String username;
+	
+	private String password;
+	
+	private String position;
 	
 	private boolean disabled;
 	
@@ -21,14 +25,6 @@ public class EmployeeDto {
 	private Date createdAt;
 	
 	private Date updatedAt;
-	
-	private String userName;
-	
-	private String pass;
-	
-	private String position;
-	
-	private String sex;
 
 	public Long getId() {
 		return id;
@@ -38,12 +34,12 @@ public class EmployeeDto {
 		this.id = id;
 	}
 
-	public long getProjectId() {
-		return projectId;
+	public ProjectsDto getProject() {
+		return project;
 	}
 
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
+	public void setProject(ProjectsDto project) {
+		this.project = project;
 	}
 
 	public String getName() {
@@ -54,20 +50,36 @@ public class EmployeeDto {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public boolean isGender() {
+		return gender;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(boolean gender) {
+		this.gender = gender;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public boolean isDisabled() {
@@ -102,36 +114,4 @@ public class EmployeeDto {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	
 }

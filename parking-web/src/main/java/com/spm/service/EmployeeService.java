@@ -10,4 +10,13 @@ import com.spm.search.form.EmployeeSearchForm;
 
 public interface EmployeeService {
 	ResultObject<List<EmployeeDto>> getAllEmployee(EmployeeSearchForm employeeSearchForm, Pageable pageable);
+	
+	ResultObject<List<EmployeeDto>> getAll();
+	
+	EmployeeDto getEmployeeById(Long id);
+	
+	EmployeeDto addEmployee(EmployeeDto employeeDto);
+	
+	void deleteEmployee(Long id);
+	
 }

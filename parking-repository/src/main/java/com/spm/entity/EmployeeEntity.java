@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,17 +22,24 @@ public class EmployeeEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="project_id")
-	private long projectId;
+	@ManyToOne
+	@JoinColumn(name="project_id")
+	private ProjectsEntity project;
 	
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="gender")
+	private boolean gender;
 	
-	@Column(name="tel")
-	private String tel;
+	@Column(name="username")
+	private String username;
+	
+	@Column(name="password")
+	private String password;
+	
+	@Column(name="position")
+	private String position;
 	
 	@Column(name="disabled")
 	private boolean disabled;
@@ -45,18 +54,6 @@ public class EmployeeEntity {
 	@Column(name="updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
-	
-	@Column(name="username")
-	private String userName;
-	
-	@Column(name="pass")
-	private String pass;
-	
-	@Column(name="position")
-	private String position;
-	
-	@Column(name="sex")
-	private String sex;
 
 	public Long getId() {
 		return id;
@@ -66,12 +63,12 @@ public class EmployeeEntity {
 		this.id = id;
 	}
 
-	public long getProjectId() {
-		return projectId;
+	public ProjectsEntity getProject() {
+		return project;
 	}
 
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
+	public void setProject(ProjectsEntity project) {
+		this.project = project;
 	}
 
 	public String getName() {
@@ -82,20 +79,36 @@ public class EmployeeEntity {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public boolean isGender() {
+		return gender;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(boolean gender) {
+		this.gender = gender;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public boolean isDisabled() {
@@ -130,36 +143,4 @@ public class EmployeeEntity {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	
 }

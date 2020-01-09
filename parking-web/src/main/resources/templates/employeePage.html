@@ -100,15 +100,21 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="employee : ${employees}">
+										<tr th:each="employee : ${listEmployee}">
 											<td th:text="${{employee.id}}"></td>
 											<td th:text="${{employee.name}}"></td>
-											<td th:text="${{employee.userName}}"></td>
-											<td th:text="${{employee.pass}}"></td>
+											<td th:text="${{employee.username}}"></td>
+											<td th:text="${{employee.password}}"></td>
 											<td th:text="${{employee.position}}"></td>
-											<td th:text="${{employee.sex}}"></td>
-											<td><a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh
-													sửa</a></td>
+											<td th:text="${{employee.gender}}"></td>
+											<td>
+												<div style="padding-right: 10px; float: left;">
+													<a
+														th:href="@{/employees/editEmployee/{id}(id=${employee.id})}">
+														<button class="btn-info">Edit</button>
+													</a>
+												</div>
+											</td>
 										</tr>
 									</tbody>
 								</table>

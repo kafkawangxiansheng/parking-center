@@ -46,6 +46,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		});
 		return rtn;
 	}
+	
+	private List<EmployeeEntity> reMap(List<EmployeeDto> source) {
+
+		ArrayList<EmployeeEntity> rtn = new ArrayList<>();
+		source.stream().map((dto) -> {
+			EmployeeEntity entity = new EmployeeEntity();
+			mapper.map(dto, entity);
+			return entity;
+		}).forEachOrdered((entity) -> {
+			rtn.add(entity);
+		});
+		return rtn;
+	}
 
 
 	@Override
@@ -78,19 +91,60 @@ public class EmployeeServiceImpl implements EmployeeService{
 		result.setData(dtos);
 		return result;
 	}
-
+	
+	/**
+	 * Created by thanhtuan 08/01/2020
+	 */
 
 	@Override
-	public void save(EmployeeDto employeeDto) {
-		EmployeeEntity entity = new EmployeeEntity();
-		mapper.map(employeeDto, entity);
-		employeeRepository.save(entity);
+	public void delete(Long id) {
+		employeeRepository.deleteById(id);
 	}
 
 
 	@Override
-	public void delete(long id) {
-		employeeRepository.deleteById(id);
+	public ResultObject<List<EmployeeDto>> findAll() {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeEntity> entities = employeeRepository.findAll();
+		resultObj.setData(this.map(entities));
+		return resultObj;
+	}
+
+
+	@Override
+	public ResultObject<List<EmployeeDto>> findById(Long Id) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		EmployeeEntity entity = employeeRepository.findById(Id).get();
+		List<EmployeeDto> listEmployeeDto = new ArrayList<EmployeeDto>();
+		EmployeeDto employeeDto = new EmployeeDto();
+		mapper.map(entity, employeeDto);
+		listEmployeeDto.add(employeeDto);
+		resultObj.setData(listEmployeeDto);
+		return resultObj;
+	}
+
+
+	@Override
+	public ResultObject<List<EmployeeDto>> save(EmployeeDto employeeDto) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeDto> listEmployee = new ArrayList<>();
+		EmployeeEntity entity = new EmployeeEntity();
+		mapper.map(employeeDto, entity);
+		entity = employeeRepository.save(entity);
+		mapper.map(entity, employeeDto);
+		listEmployee.add(employeeDto);
+		resultObj.setData(listEmployee);
+		return resultObj;
+	}
+
+
+	@Override
+	public ResultObject<List<EmployeeDto>> save(List<EmployeeDto> listEmployeeDto) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeEntity> listEntity = reMap(listEmployeeDto);
+		listEntity = employeeRepository.saveAll(listEntity);
+		resultObj.setData(map(listEntity));
+		return resultObj;
 	}
 		
 	
