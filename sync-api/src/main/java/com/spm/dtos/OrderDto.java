@@ -16,7 +16,7 @@ public class OrderDto {
 	@JsonProperty("card_code")
 	private String cardCode;
 	
-	@JsonProperty("card_Stt")
+	@JsonProperty("card_stt")
 	private String cardStt;
 	
 	@JsonProperty("checkin_time")
@@ -25,7 +25,7 @@ public class OrderDto {
 	@JsonProperty("checkout_time")
 	private Long checkoutTime;
 	
-	@JsonProperty("card_number")
+	@JsonProperty("car_number")
 	private String carNumber;
 	
 	@JsonProperty("admin_checkin_id")

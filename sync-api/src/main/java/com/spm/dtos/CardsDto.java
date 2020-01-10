@@ -10,7 +10,7 @@ public class CardsDto {
 
 	private String code;
 
-	private long stt;
+	private String stt;
 
 	@JsonProperty("vehicle_id")
 	private long vehicleId;
@@ -32,6 +32,12 @@ public class CardsDto {
 
 	@JsonProperty("company_id")
 	private long companyId;
+	
+	@JsonProperty("area_id")
+	private Long areaId;
+	
+	@JsonProperty("project_id")
+	private Long projectId;
 
 	public Long getId() {
 		return id;
@@ -49,11 +55,11 @@ public class CardsDto {
 		this.code = code;
 	}
 
-	public long getStt() {
+	public String getStt() {
 		return stt;
 	}
 
-	public void setStt(long stt) {
+	public void setStt(String stt) {
 		this.stt = stt;
 	}
 
@@ -111,6 +117,22 @@ public class CardsDto {
 
 	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
+	}
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 }
