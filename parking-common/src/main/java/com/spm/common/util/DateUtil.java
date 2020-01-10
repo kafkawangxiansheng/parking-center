@@ -55,4 +55,14 @@ public class DateUtil {
 		return dateFormat.parse(dateString).getTime();
 	}
 	
+	public static Long getParseStringDateToLong(String date, String...pattern) throws ParseException {
+		String formatter = new String("dd/MM/yyyy");
+		if(pattern  != null && pattern.length > 0) {
+			formatter = new String(pattern[0]);
+		}
+		SimpleDateFormat  dateFormat = new SimpleDateFormat(formatter);
+		
+		return dateFormat.parse(date).getTime();
+	}
+	
 }

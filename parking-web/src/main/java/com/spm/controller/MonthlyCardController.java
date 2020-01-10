@@ -68,13 +68,13 @@ public class MonthlyCardController {
 	
 //	monthlyCard
 	
-	@RequestMapping(value = "addMonthlyCard", method = { RequestMethod.GET })
+	@RequestMapping(value = "add", method = { RequestMethod.GET })
 	public String showAddNewMonthlyCardPage(Model model) throws UnauthorizedException {
 		model.addAttribute("monthlyCardDto", new MonthlyCardDto());
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-		model.addAttribute("listCompanny", companyMap.getData());
+		model.addAttribute("listCompany", companyMap.getData());
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProjectDto", projectMap.getData());	
+		model.addAttribute("listProject", projectMap.getData());	
 		return "addMonthlyCardForm";
 	}
 	
