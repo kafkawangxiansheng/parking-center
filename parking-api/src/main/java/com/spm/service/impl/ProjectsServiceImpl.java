@@ -90,8 +90,8 @@ public class ProjectsServiceImpl implements ProjectsService{
 	@Override
 	public ResultObject<List<ProjectsDto>> findAll() {
 		ResultObject<List<ProjectsDto>> resultObj = new ResultObject<>();
-		List<ProjectsEntity> entities = projectRepository.findAll();
-		resultObj.setData(this.map(entities));
+		List<ProjectsEntity> ListEntity = projectRepository.findAll();
+		resultObj.setData(this.map(ListEntity));
 		return resultObj;
 	}
 

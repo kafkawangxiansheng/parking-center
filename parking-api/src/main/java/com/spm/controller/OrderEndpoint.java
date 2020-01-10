@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 public class OrderEndpoint {
 
 	@Autowired
-	private OrderService parkingService;
+	private OrderService orderService;
 	
 	
 	
@@ -38,12 +38,12 @@ public class OrderEndpoint {
 	@ApiOperation("Orders batch syncs")
 	public void batchSync(@RequestBody List<OrderDto> ordersDtos) {
 		for(OrderDto orderDto : ordersDtos) {
-			OrderDto existingDto = parkingService.findByOrderId(orderDto.getOrderId());
+			OrderDto existingDto = orderService.findByOrderId(orderDto.getOrderId());
 			if(existingDto != null && (existingDto.getCheckoutTime() == null || existingDto.getCheckoutTime()==  0)) {
 				//just update existing record with new data
 				orderDto.setId(existingDto.getId());
 			}
-			parkingService.save(orderDto);
+			orderService.save(orderDto);
 		}
 		
 	}
@@ -58,7 +58,8 @@ public class OrderEndpoint {
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
-			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard) {
+			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard,
+			@RequestParam(name="employeeId", required=false)String employeeId) {
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		if(projectId != null && !projectId.isEmpty()) {
@@ -79,9 +80,15 @@ public class OrderEndpoint {
 		if(dateTo != null && !dateTo.isEmpty()) {
 			orderSearchForm.setDateTo(dateTo);
 		}
+		if(employeeId != null && !employeeId.isEmpty()) {
+			orderSearchForm.setEmployeeId(employeeId);
+		}
+		
 		orderSearchForm.setIsMonthlyCard(isMonthlyCard);
 		
-		return parkingService.findAll(paging, orderSearchForm);
+		
+		
+		return orderService.findAll(paging, orderSearchForm);
 	}
 	
 	@RequestMapping(value = "/export", method = {RequestMethod.GET})
@@ -94,7 +101,8 @@ public class OrderEndpoint {
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
-			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard) {
+			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard,
+			@RequestParam(name="employeeId", required=false)String employeeId) {
 		
 		Pageable paging = PageRequest.of(page, PagingConstants.MAX_ROWS_FOR_EXPORT);
 		
@@ -118,9 +126,12 @@ public class OrderEndpoint {
 		if(dateTo != null && !dateTo.isEmpty()) {
 			orderSearchForm.setDateTo(dateTo);
 		}
+		if(employeeId != null && !employeeId.isEmpty()) {
+			orderSearchForm.setEmployeeId(employeeId);
+		}
 		orderSearchForm.setIsMonthlyCard(isMonthlyCard);
 		
-		return parkingService.findAll(paging, orderSearchForm);
+		return orderService.findAll(paging, orderSearchForm);
 	}
 	 
 	

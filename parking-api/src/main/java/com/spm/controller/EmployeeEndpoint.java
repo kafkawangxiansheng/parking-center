@@ -88,7 +88,7 @@ public class EmployeeEndpoint {
 		return employeeService.findAll();
 	}
 	
-	@RequestMapping(value = "getEmployee", method = {RequestMethod.GET})
+	@RequestMapping(value = "getEmployeeById", method = {RequestMethod.GET})
 	@ApiOperation("Get EmployeeDto")
 	public @ResponseBody ResultObject<List<EmployeeDto>> getEmployeeById(@RequestParam(name="id") Long id) {
 		return employeeService.findById(id);
