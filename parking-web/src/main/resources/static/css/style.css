@@ -16,3 +16,10 @@ label  {
 footer{
 	width:  100%;
 }
+.revenue-sub-total {
+	background: #f5f5dc;
+}
+.revenue-total {
+	background: #ce7907;
+    font-weight: 600;
+}

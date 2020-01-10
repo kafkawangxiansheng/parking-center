@@ -286,16 +286,19 @@
 											<th scope="col">Loại xe</th>
 											<th scope="col">Lượt vào</th>
 											<th scope="col">Lượt ra</th>
+											<th scope="col">Xe còn trong bãi</th>
 											<th scope="col">Tiền thu</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="revenue : ${revenues}">
+										<tr th:each="revenue : ${revenues}"  th:class="${{revenue.cssClass}}">
 											<td th:text="${{revenue.label}}"></td>
 											<td
 												th:text="${{#numbers.formatDecimal(revenue.totalCheckin, 0, 'COMMA', 0, 'POINT')}}"></td>
 											<td
 												th:text="${{#numbers.formatDecimal(revenue.totalCheckout, 0, 'COMMA', 0, 'POINT')}}"></td>
+											<td
+												th:text="${{#numbers.formatDecimal(revenue.existingVerhicle, 0, 'COMMA', 0, 'POINT')}}"></td>
 											<td
 												th:text="${{#numbers.formatDecimal(revenue.totalPrice, 0, 'COMMA', 0, 'POINT')}}"></td>
 										</tr>
