@@ -132,6 +132,7 @@ public class OrderServiceImpl implements OrderService {
 		ResultObject<List<OrderDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities.getContent()));
 		resultObject.setTotalPages(entities.getTotalPages());
+		resultObject.setTotalRows(entities.getTotalElements());
 		return resultObject;
 	}
 
