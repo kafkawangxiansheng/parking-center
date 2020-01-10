@@ -38,7 +38,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/add-project", method= {RequestMethod.GET})
-	public  String addProfile(Model model) throws UnauthorizedException{
+	public  String addProject(Model model) throws UnauthorizedException{
 		model.addAttribute("projectDto", new ProjectsDto());
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
 		model.addAttribute("listCompanies", companyMap.getData());
@@ -46,7 +46,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/edit-project/{id}", method= {RequestMethod.GET})
-	public  String editProfile(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
+	public  String editProject(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
 		ProjectsDto projecstDto = projectService.getProjectById(id);
 		model.addAttribute("projectDto", projecstDto);
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
@@ -55,13 +55,13 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/add-project", method= {RequestMethod.POST,RequestMethod.PUT})
-	public  String doAddProfile(Model model, @Valid @ModelAttribute("projectDto") ProjectsDto projecstDto) throws UnauthorizedException{
+	public  String doAddProject(Model model, @Valid @ModelAttribute("projectDto") ProjectsDto projecstDto) throws UnauthorizedException{
 		projectService.addProject(projecstDto);
 		return "redirect:/project";
 	}
 	
 	@RequestMapping(value = "/delete-project/{id}", method= {RequestMethod.GET})
-	public  String deleteProfile(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
+	public  String deleteProject(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
 		projectService.deleteProject(id);
 		return "redirect:/project";
 	}

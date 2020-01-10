@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="refresh" content="10" />
 <title>Parking Management</title>
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
@@ -66,83 +65,55 @@
 								</div>
 								<div class="box-body p-2">
 									<div class="form-body">
-										<form>
+										<form th:action="@{/employees/addNewEmployee}" th:object="${employeeDto}" method="POST">
 											<div class="form-group text">
-												<label for="">Họ tên*</label> <input type="text" name=""
-													class="form-control" id="">
+												<label for="">Họ tên*</label> 
+												<input type="text" th:field="*{name}" class="form-control" id="name">
 											</div>
 											<div class="form-group text">
-												<label for="">Tài khoản*</label> <input type="text" name=""
-													class="form-control" id="">
+												<label for="">Tài khoản*</label> 
+												<input type="text" th:field="*{username}" class="form-control" id="userName">
 											</div>
 											<div class="form-group text">
-												<label for="">Mật khẩu*</label> <input type="text" name=""
-													class="form-control" id="">
+												<label for="">Mật khẩu*</label> 
+												<input type="text" th:field="*{password}" class="form-control" id="pass">
 											</div>
 											<div class="form-group">
-												<label for="">Chức vụ*</label> <select class="form-control"
-													id="">
-													<option>Ca trưởng</option>
-													<option>Admin1</option>
-													<option>Nhân viên1</option>
-													<option>Quản lý</option>
-													<option>Admin</option>
-													<option>Nhân viên</option>
+												<label for="">Chức vụ*</label>
+												 <select class="form-control" id="position" th:field="*{position}">
+													<option value="TRUONGCA">Trưởng Ca</option>
+													<option value="TRUONGNHOM">Trưởng Nhóm</option>
+													<option value="GIAMSAT">Giám Sát</option>
+													<option value="QUANLY">Quản Lý</option>
+													<option value="THUNGAN">Thu Ngân</option>
+													<option value="NHANVIEN">Nhân viên</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<label for="">Giới tính</label> <select class="form-control"
-													id="">
-													<option>Nam</option>
-													<option>Nữ</option>
+												<label for="">Giới tính</label> 
+												<select class="form-control"
+													id="sex" th:field="*{gender}">
+													<option value="1">Nam</option>
+													<option value="0">Nữ</option>
 												</select>
 											</div>
-											<div class="form-group text company"
-												style="font-weight: 300;">
-												<label for="">Chọn công ty - Dự án</label>
-												<div class="form-group checkbox">
-													<label for=""> <input type="checkbox"> Cong
-														ty 286
-													</label>
-												</div>
-												<div class="form-group checkbox">
-													<label for=""> <input type="checkbox"> cty
-														1
-													</label>
-													<div class="subCheckbox subCheckbox-1">
-														<label for=""> <input type="checkbox">
-															Nguyen Kiem
-														</label> <label for=""> <input type="checkbox"> !8
-															TTC
-														</label>
-													</div>
-												</div>
-												<div class="form-group checkbox">
-													<label for=""> <input type="checkbox"> cty
-														2
-													</label>
-													<div class="subCheckbox subCheckbox-1">
-														<label for=""> <input type="checkbox"> Du
-															an 21
-														</label> <label for=""> <input type="checkbox"> Du
-															an 22
-														</label>
-													</div>
-												</div>
-												<div class="form-group checkbox">
-													<label for=""> <input type="checkbox"> cty
-														3
-													</label>
-													<div class="subCheckbox subCheckbox-1">
-														<label for=""> <input type="checkbox"> Du
-															an 31
-														</label> <label for=""> <input type="checkbox"> Du
-															an 32
-														</label> <label for=""> <input type="checkbox"> Du
-															an 33
-														</label>
-													</div>
-												</div>
+											<div class="form-group">
+												<label for="">Dự Án</label>
+												<!-- <ul>
+												  <li th:each="project : ${listProjectDto}">
+												    <input type="checkbox" 
+												        th:field="*{project.id}"
+												        th:value="${project.id}" />
+												    <label 
+												        th:for="${project}"
+												        th:text=" 'Dự Án: ' + ${project.name} + ' -- Công Ty: ' + ${project.company.name} "></label>
+												  </li>
+												</ul> -->
+												<select
+													th:field="*{project.id}" class="form-control">
+													<option th:each="i : ${listProjectDto}" th:value="${i.id}"
+														th:text="${i.name}"></option>
+												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">

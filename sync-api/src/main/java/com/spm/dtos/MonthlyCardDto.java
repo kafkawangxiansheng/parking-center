@@ -59,6 +59,12 @@ public class MonthlyCardDto {
 	
 	@JsonProperty("company_id")
 	private long companyId;
+	
+	@JsonProperty("area_id")
+	private Long areaId;
+	
+	@JsonProperty("project_id")
+	private Long projectId;
 
 	public Long getId() {
 		return id;
@@ -203,6 +209,21 @@ public class MonthlyCardDto {
 	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
 	}
-	
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
 	
 }

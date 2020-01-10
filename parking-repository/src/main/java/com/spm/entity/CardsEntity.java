@@ -22,7 +22,7 @@ public class CardsEntity {
 	private String code;
 	
 	@Column(name="stt")
-	private  long  stt;
+	private  String  stt;
 	
 	@Column(name="vehicle_id")
 	private long vehicleId;
@@ -61,11 +61,11 @@ public class CardsEntity {
 		this.code = code;
 	}
 
-	public long getStt() {
+	public String getStt() {
 		return stt;
 	}
 
-	public void setStt(long stt) {
+	public void setStt(String stt) {
 		this.stt = stt;
 	}
 

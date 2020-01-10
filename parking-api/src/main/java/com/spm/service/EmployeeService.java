@@ -15,8 +15,22 @@ public interface EmployeeService {
 	ResultObject<List<EmployeeDto>> findAll(Pageable pageable, EmployeeSearchForm employeeSearchForm); 
 	
 	ResultObject<List<EmployeeDto>> findAllByProjectId(long projectId); 
+
+	//	void save(EmployeeDto employeeDto);
+//	void delete(Long id);
 	
-	void save(EmployeeDto employeeDto);
-	void delete(long id);
+	/**
+	 * Created by thanhtuan 08/01/2020
+	 */
+	
+	void delete(Long id);
+	
+	ResultObject<List<EmployeeDto>> findAll();
+	
+	ResultObject<List<EmployeeDto>> findById(Long Id);
+	
+	ResultObject<List<EmployeeDto>> save(EmployeeDto employeeDto);
+    
+	ResultObject<List<EmployeeDto>> save(List<EmployeeDto> listEmployeeDto);
 	
 }
