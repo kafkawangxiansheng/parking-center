@@ -68,6 +68,12 @@ public class MonthlyCardEntity {
 	
 	@Column(name="company_id")
 	private long companyId;
+	
+	@Column(name="area_id")
+	private Long areaId;
+	
+	@Column(name="project_id")
+	private Long projectId;
 
 	public Long getId() {
 		return id;
@@ -211,6 +217,22 @@ public class MonthlyCardEntity {
 
 	public void setCompanyId(long companyId) {
 		this.companyId = companyId;
+	}
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 	
 	
