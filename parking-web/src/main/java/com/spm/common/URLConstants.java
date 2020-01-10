@@ -28,4 +28,5 @@ public class URLConstants {
 	
 	public static final String URL_GET_ALL_EMPLOYEE = MAIN_DOMAIN + "/employee/?page=::page&name=::name&userName=::userName&pass=::pass&position=::position&sex=::sex";
 	
+	public static final String URL_GET_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle";
 }
