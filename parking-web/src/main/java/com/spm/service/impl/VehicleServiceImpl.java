@@ -19,6 +19,7 @@ public class VehicleServiceImpl implements VehicleService{
 		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
 		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_GET_ALL_VEHICLE;
+		finalURL = finalURL.replaceAll("::projectId", vehicleSearchForm.getProjectId()!=null ? vehicleSearchForm.getProjectId():"");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
