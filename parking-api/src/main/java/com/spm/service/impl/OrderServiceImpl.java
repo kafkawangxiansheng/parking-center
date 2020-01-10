@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
 		Page<OrderEntity> entities = null;
 		
 		if(orderSearchForm.getIsMonthlyCard() == 0) {
-			entities =  orderRepository.search(orderSearchForm.getProjectId(), orderSearchForm.getCardCode(), orderSearchForm.getCardStt(), 
+			entities =  orderRepository.search(orderSearchForm.getProjectId(), orderSearchForm.getEmployeeId(), orderSearchForm.getCardCode(), orderSearchForm.getCardStt(), 
 				orderSearchForm.getCarNumber(), orderSearchForm.getDateFrom(), orderSearchForm.getDateTo(), pageable);
 		} else {
 		

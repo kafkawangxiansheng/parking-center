@@ -11,8 +11,12 @@ public class OrderSearchForm {
 	private String cardStt;
 	
 	private String dateFrom;
+	private String hourFrom;
+	private String minFrom;
 	
 	private String dateTo;
+	private String hourTo;
+	private String minTo;
 	
 	private String carNumber;
 	
@@ -20,6 +24,8 @@ public class OrderSearchForm {
 	
 	private int isMonthlyCard;
 
+	private String employeeId;
+	
 	public String getCardCode() {
 		return cardCode;
 	}
@@ -76,5 +82,46 @@ public class OrderSearchForm {
 	public void setIsMonthlyCard(int isMonthlyCard) {
 		this.isMonthlyCard = isMonthlyCard;
 	}
+
+	public String getHourFrom() {
+		return hourFrom;
+	}
+
+	public void setHourFrom(String hourFrom) {
+		this.hourFrom = hourFrom;
+	}
+
+	public String getMinFrom() {
+		return minFrom;
+	}
+
+	public void setMinFrom(String minFrom) {
+		this.minFrom = minFrom;
+	}
+
+	public String getHourTo() {
+		return hourTo;
+	}
+
+	public void setHourTo(String hourTo) {
+		this.hourTo = hourTo;
+	}
+
+	public String getMinTo() {
+		return minTo;
+	}
+
+	public void setMinTo(String minTo) {
+		this.minTo = minTo;
+	}
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+	
 	
 }

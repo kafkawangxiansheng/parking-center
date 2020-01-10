@@ -20,19 +20,19 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public ResultObject<List<OrderDto>> getAllOrder(OrderSearchForm orderSearhForm, Pageable pageable){
 		
-		String dateToInLong = orderSearhForm.getDateTo();
-		String dateFormInLong = orderSearhForm.getDateFrom();
+		String dateFromInLong = orderSearhForm.getDateFrom()+" "+orderSearhForm.getHourFrom()+":"+orderSearhForm.getMinFrom()+":00";
+		String dateToInLong = orderSearhForm.getDateTo()+" "+orderSearhForm.getHourTo()+":"+orderSearhForm.getMinTo()+":59";
 		
 		if(orderSearhForm.getDateTo()  != null &&  !orderSearhForm.getDateTo().isEmpty()) {
 			try {
-				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong+" 23:59:59"));
+				dateToInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateToInLong));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
 		if(orderSearhForm.getDateFrom()  != null &&  !orderSearhForm.getDateFrom().isEmpty()) {
 			try {
-				dateFormInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFormInLong+" 00:00:00"));
+				dateFromInLong = String.valueOf(DateUtil.parseStringToMiliseconds(dateFromInLong));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -45,8 +45,10 @@ public class OrderServiceImpl implements OrderService {
 		finalURL = finalURL.replaceAll("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
 		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
 		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
-		finalURL = finalURL.replaceAll("::dateFrom", dateFormInLong != null ? dateFormInLong: "");
+		finalURL = finalURL.replaceAll("::dateFrom", dateFromInLong != null ? dateFromInLong: "");
 		finalURL = finalURL.replaceAll("::dateTo",  dateToInLong!= null ? dateToInLong : "");
+		finalURL  =  finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
+		
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
@@ -79,6 +81,7 @@ public class OrderServiceImpl implements OrderService {
 		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
 		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
 		finalURL = finalURL.replaceAll("::dateFrom", dateFormInLong != null ? dateFormInLong: "");
+		finalURL  =  finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
 		finalURL = finalURL.replaceAll("::dateTo",  dateToInLong!= null ? dateToInLong : "");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
