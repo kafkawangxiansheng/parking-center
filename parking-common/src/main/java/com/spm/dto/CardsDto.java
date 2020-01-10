@@ -8,7 +8,7 @@ public class CardsDto {
 
 	private String code;
 
-	private long stt;
+	private String stt;
 
 	private long vehicleId;
 
@@ -40,11 +40,11 @@ public class CardsDto {
 		this.code = code;
 	}
 
-	public long getStt() {
+	public String getStt() {
 		return stt;
 	}
 
-	public void setStt(long stt) {
+	public void setStt(String stt) {
 		this.stt = stt;
 	}
 
