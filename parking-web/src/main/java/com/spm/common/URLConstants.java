@@ -13,7 +13,7 @@ public class URLConstants {
 	public static final String URL_GET_PROJECT_IDS_BY_USER_ID = MAIN_DOMAIN + "/project/get-project-ids/{userId}/";
 	
 	public static final String URL_GET_ALL_PROJECT = MAIN_DOMAIN + "/project";
-	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/project/getProject?id=::id";
+	public static final String URL_GET_PROJECT_BY_ID = MAIN_DOMAIN + "/project/getProjectById?id=::id";
 	public static final String URL_POST_ADD_PROJECT = MAIN_DOMAIN + "/project/addProject";
 	public static final String URL_DELETE_PROJECT = MAIN_DOMAIN + "/project/delete/::id";
 	
@@ -22,15 +22,20 @@ public class URLConstants {
 	
 	public static final String URL_GET_ALL_COMPANIES = MAIN_DOMAIN + "/company";
 	public static final String URL_GET_LIST_COMPANIES = MAIN_DOMAIN + "/company/listAllCompanies";
-	public static final String URL_GET_COMPANY_BY_ID = MAIN_DOMAIN + "/company/getCompany?id=::id";
+	public static final String URL_GET_COMPANY_BY_ID = MAIN_DOMAIN + "/company/getCompanyById?id=::id";
 	public static final String URL_POST_ADD_COMPANY = MAIN_DOMAIN + "/company/addCompany";
 	public static final String URL_DELETE_COMPANY = MAIN_DOMAIN + "/company/delete/::id";
 	
 	public static final String URL_GET_ALL_EMPLOYEE = MAIN_DOMAIN + "/employee/?page=::page&name=::name&userName=::userName&pass=::pass&position=::position&sex=::sex";
 	public static final String URL_GET_LIST_EMPLOYEE = MAIN_DOMAIN + "/employee/listAllEmployee";
-	public static final String URL_GET_EMPLOYEE_BY_ID = MAIN_DOMAIN + "/employee/getEmployee?id=::id";
+	public static final String URL_GET_EMPLOYEE_BY_ID = MAIN_DOMAIN + "/employee/getEmployeeById?id=::id";
 	public static final String URL_POST_ADD_EMPLOYEE = MAIN_DOMAIN + "/employee/addEmployee";
 	public static final String URL_DELETE_EMPLOYEE = MAIN_DOMAIN + "/employee/delete/::id";
+	
+	public static final String URL_GET_ALL_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard";
+	public static final String URL_GET_MONTHLY_CARD_BY_ID = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardById?id=::id";
+	public static final String URL_POST_ADD_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/addProject";
+	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
 	
 	public static final String URL_GET_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle";
 }

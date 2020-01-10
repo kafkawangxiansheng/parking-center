@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.MonthlyCardDto;
+import com.spm.dto.ResultObject;
 import com.spm.entity.MonthlyCardEntity;
 import com.spm.repository.MonthlyCardRepository;
 import com.spm.service.MonthlyCardService;
@@ -89,6 +90,18 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		monthlyCardsEntities = monthlyCardRepository.saveAll(monthlyCardsEntities);
 		monthlyCardDtos = map(monthlyCardsEntities);
 		return monthlyCardDtos;
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> findById(Long monthlyCardId) {
+		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
+		MonthlyCardEntity entity = monthlyCardRepository.findById(monthlyCardId).get();
+		List<MonthlyCardDto> listMonthlyCardDto = new ArrayList<MonthlyCardDto>();
+		MonthlyCardDto monthlyCardDto = new MonthlyCardDto();
+		mapper.map(entity, monthlyCardDto);
+		listMonthlyCardDto.add(monthlyCardDto);
+		resultObj.setData(listMonthlyCardDto);
+		return resultObj;
 	}
 
 }
