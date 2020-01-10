@@ -9,12 +9,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.jdbc.util.VersionFSHierarchyMaker;
 import com.spm.dto.RevenueDto;
 import com.spm.entity.OrderEntity;
 import com.spm.entity.RevenueEntity;
 import com.spm.entity.SettingEntity;
+import com.spm.entity.VehicleEntity;
 import com.spm.repository.OrderRepository;
 import com.spm.repository.SettingRepository;
+import com.spm.repository.VehicleRepository;
 import com.spm.search.form.RevenueSearchForm;
 import com.spm.service.RevenueService;
 
@@ -29,7 +32,7 @@ public class RevenueServiceImpl implements RevenueService {
 	private OrderRepository orderRepository;
 	
 	@Autowired
-	private SettingRepository  settingRepository;
+	private VehicleRepository  vehicleRepository;
 
 	ModelMapper mapper;
 
@@ -44,16 +47,15 @@ public class RevenueServiceImpl implements RevenueService {
 	public List<RevenueDto> getRevenues(RevenueSearchForm revenueSearchForm) {
 		
 		List<RevenueDto> revenues = new ArrayList<>();
-		List<SettingEntity> settings = settingRepository.findAllByProjectId(revenueSearchForm.getProjectId());
+		List<VehicleEntity> vehicles = vehicleRepository.findAllByProjectId(revenueSearchForm.getProjectId());
 		List<OrderEntity> orderEntities  = orderRepository.findAll(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
 		
-		for(SettingEntity setting :  settings) {
+		for(VehicleEntity vehicle :  vehicles) {
 			RevenueDto revenueDto = new RevenueDto();
 			RevenueEntity revenueEntity = new RevenueEntity() ;
-			
-			revenueEntity.setVehicleId(setting.getVehicleId());
+			revenueEntity.setVehicleId(vehicle.getCardType());
 			orderEntities.forEach(order -> {
-				if(order.getVehicleId() == setting.getVehicleId())  {
+				if(order.getVehicleId() == vehicle.getCardType())  {
 					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
 					revenueEntity.setTotalCheckout(((order.getCheckoutTime()!=null && order.getCheckoutTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckout());
 					revenueEntity.setTotalPrice(revenueEntity.getTotalPrice() + order.getTotalPrice());
@@ -62,7 +64,7 @@ public class RevenueServiceImpl implements RevenueService {
 			if(revenueEntity != null) {
 				mapper.map(revenueEntity, revenueDto);
 			}
-			revenueDto.setLabel(setting.getName());
+			revenueDto.setLabel(vehicle.getName());
 			revenues.add(revenueDto);
 			
 		}

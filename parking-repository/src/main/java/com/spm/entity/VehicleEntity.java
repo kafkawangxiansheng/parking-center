@@ -28,10 +28,10 @@ public class VehicleEntity {
 	private long monthlyCost;
 	
 	@Column(name="type")
-	private long type;
+	private int type;
 	
 	@Column(name="card_type")
-	private long cardType;
+	private int cardType;
 	
 	@ManyToOne
 	@JoinColumn(name="project_id")
@@ -70,19 +70,19 @@ public class VehicleEntity {
 		this.monthlyCost = monthlyCost;
 	}
 
-	public long getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public long getCardType() {
+	public int getCardType() {
 		return cardType;
 	}
 
-	public void setCardType(long cardType) {
+	public void setCardType(int cardType) {
 		this.cardType = cardType;
 	}
 

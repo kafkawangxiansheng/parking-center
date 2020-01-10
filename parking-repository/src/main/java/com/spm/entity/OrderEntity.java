@@ -56,7 +56,7 @@ public class OrderEntity {
 	private Long  monthlyCardId;
 	
 	@Column(name="vehicle_id")
-	private Long vehicleId;
+	private int vehicleId;
 	
 	@Column(name="vehicle_name")
 	private String vehicleName;
@@ -219,11 +219,11 @@ public class OrderEntity {
 		this.monthlyCardId = monthlyCardId;
 	}
 
-	public Long getVehicleId() {
+	public int getVehicleId() {
 		return vehicleId;
 	}
 
-	public void setVehicleId(Long vehicleId) {
+	public void setVehicleId(int vehicleId) {
 		this.vehicleId = vehicleId;
 	}
 
