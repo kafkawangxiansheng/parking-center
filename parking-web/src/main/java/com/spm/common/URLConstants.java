@@ -32,5 +32,5 @@ public class URLConstants {
 	public static final String URL_POST_ADD_EMPLOYEE = MAIN_DOMAIN + "/employee/addEmployee";
 	public static final String URL_DELETE_EMPLOYEE = MAIN_DOMAIN + "/employee/delete/::id";
 	
-	public static final String URL_GET_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle";
+	public static final String URL_GET_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle/?projectId=::projectId";
 }
