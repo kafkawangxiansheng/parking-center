@@ -290,6 +290,9 @@ public class RestUtils<T> {
 		if(datafromApi.has("totalPages")) {
 			result.setTotalPages(datafromApi.get("totalPages").getAsInt());
 		}
+		if(datafromApi.has("totalRows")) {
+			result.setTotalRows(datafromApi.get("totalRows").getAsInt());
+		}
 	}
 	
 	private void bindingDataForMap(String dataString, ResultObject<Map<Object, T>> result) {

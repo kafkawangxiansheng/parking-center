@@ -9,6 +9,7 @@ public class ResultObject<T> {
 	private int status;
 	private T data;
 	private int totalPages;
+	private long totalRows;
 	private String description;
 	public int getStatus() {
 		return status;
@@ -27,6 +28,13 @@ public class ResultObject<T> {
 	}
 	public void setTotalPages(int totalPages) {
 		this.totalPages = totalPages;
+	}
+	
+	public long getTotalRows() {
+		return totalRows;
+	}
+	public void setTotalRows(long totalRows) {
+		this.totalRows = totalRows;
 	}
 	public String getDescription() {
 		return description;

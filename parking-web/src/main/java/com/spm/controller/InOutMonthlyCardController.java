@@ -35,10 +35,15 @@ public class InOutMonthlyCardController {
 	@RequestMapping(value = "", method= {RequestMethod.GET})
 	public String index(
 			@RequestParam(name="page", required=false, defaultValue="0")int page,
+			@RequestParam(name="employeeId", required=false)String employeeId,
 			@RequestParam(name="cardCode", required  =  false) String cardCode,
 			@RequestParam(name="cardStt", required  =  false) String cardStt,
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
+			@RequestParam(name="hourFrom", required=false)String hourFrom,
+			@RequestParam(name="minFrom", required=false)String minFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
+			@RequestParam(name="hourTo", required=false)String hourTo,
+			@RequestParam(name="minTo", required=false)String minTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
 			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
@@ -46,11 +51,24 @@ public class InOutMonthlyCardController {
 		
 		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
-		orderSearchForm.setCardCode(cardCode);
-		orderSearchForm.setCardStt(cardStt);
-		orderSearchForm.setCarNumber(carNumber);
+		orderSearchForm.setEmployeeId(employeeId);
 		orderSearchForm.setDateFrom(dateFrom);
+		orderSearchForm.setHourFrom(hourFrom);
+		orderSearchForm.setMinFrom(minFrom);
+		if(dateFrom ==  null || dateFrom.isEmpty()) {
+			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+			orderSearchForm.setHourFrom("00");
+			orderSearchForm.setMinFrom("00");
+		}
+		
 		orderSearchForm.setDateTo(dateTo);
+		orderSearchForm.setHourTo(hourTo);
+		orderSearchForm.setMinTo(minTo);
+		if(dateTo == null || dateTo.isEmpty()) {
+			orderSearchForm.setDateTo(orderSearchForm.getDateFrom());
+			orderSearchForm.setHourTo("23");
+			orderSearchForm.setMinTo("59");
+		}
 		orderSearchForm.setIsMonthlyCard(1);
 		orderSearchForm.setProjectId(projects.get(0));
 		
@@ -89,6 +107,7 @@ public class InOutMonthlyCardController {
 		model.addAttribute("orders", result.getData());
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("maxPage", result.getTotalPages());
+		model.addAttribute("totalRows", result.getTotalRows());
 		model.addAttribute("currentPage", page+1);
 		
         return "inOutMonthlyCardPage";
@@ -97,21 +116,39 @@ public class InOutMonthlyCardController {
 	@RequestMapping(value = "/export", method= {RequestMethod.GET})
 	public InOutExport export(
 			@RequestParam(name="page", required=false, defaultValue="0")int page,
+			@RequestParam(name="employeeId", required=false)String employeeId,
 			@RequestParam(name="cardCode", required  =  false) String cardCode,
 			@RequestParam(name="cardStt", required  =  false) String cardStt,
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
+			@RequestParam(name="hourFrom", required=false)String hourFrom,
+			@RequestParam(name="minFrom", required=false)String minFrom,
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
+			@RequestParam(name="hourTo", required=false)String hourTo,
+			@RequestParam(name="minTo", required=false)String minTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
 			Model model,  HttpServletRequest request) throws UnauthorizedException, ParseException {
 		
 		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
-		orderSearchForm.setCardCode(cardCode);
-		orderSearchForm.setCardStt(cardStt);
-		orderSearchForm.setCarNumber(carNumber);
+		orderSearchForm.setEmployeeId(employeeId);
 		orderSearchForm.setDateFrom(dateFrom);
+		orderSearchForm.setHourFrom(hourFrom);
+		orderSearchForm.setMinFrom(minFrom);
+		if(dateFrom ==  null || dateFrom.isEmpty()) {
+			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
+			orderSearchForm.setHourFrom("00");
+			orderSearchForm.setMinFrom("00");
+		}
+		
 		orderSearchForm.setDateTo(dateTo);
+		orderSearchForm.setHourTo(hourTo);
+		orderSearchForm.setMinTo(minTo);
+		if(dateTo == null || dateTo.isEmpty()) {
+			orderSearchForm.setDateTo(orderSearchForm.getDateFrom());
+			orderSearchForm.setHourTo("23");
+			orderSearchForm.setMinTo("59");
+		}
 		orderSearchForm.setIsMonthlyCard(1);
 		orderSearchForm.setProjectId(projects.get(0));
 		
@@ -121,6 +158,7 @@ public class InOutMonthlyCardController {
 		if(dateTo  == null || dateTo.isEmpty()) {
 			orderSearchForm.setDateTo(orderSearchForm.getDateFrom());
 		}
+		
 		
 		if(page > 0) {
 			page = page - 1;

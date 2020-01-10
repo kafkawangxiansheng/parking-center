@@ -3,6 +3,8 @@ package com.spm.search.form;
 public class VehicleSearchForm {
 
 	private String name;
+	
+	private String projectId;
 
 	public String getName() {
 		return name;
@@ -10,6 +12,14 @@ public class VehicleSearchForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 	
 }
