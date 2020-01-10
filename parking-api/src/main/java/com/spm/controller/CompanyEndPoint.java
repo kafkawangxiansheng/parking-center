@@ -54,7 +54,7 @@ public class CompanyEndPoint {
 		return companyService.save(companysDto);
 	}
 	
-	@RequestMapping(value = "getCompany", method = {RequestMethod.GET})
+	@RequestMapping(value = "getCompanyById", method = {RequestMethod.GET})
 	@ApiOperation("Get Company")
 	public @ResponseBody ResultObject<List<CompanyDto>> getCompanyById(@RequestParam(name="id") Long id) {
 		return companyService.findById(id);

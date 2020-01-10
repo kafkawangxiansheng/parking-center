@@ -70,9 +70,9 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public ResultObject<List<CompanyDto>> save(List<CompanyDto> companyDtos) {
 		ResultObject<List<CompanyDto>> resultObj = new ResultObject<>();
-		List<CompanyEntity> projectsEntities = reMap(companyDtos);
-		projectsEntities = companyRepository.saveAll(projectsEntities);
-		resultObj.setData(map(projectsEntities));
+		List<CompanyEntity> listEntity = reMap(companyDtos);
+		listEntity = companyRepository.saveAll(listEntity);
+		resultObj.setData(map(listEntity));
 		return resultObj;
 	}
 

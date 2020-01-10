@@ -50,7 +50,7 @@ public class ProjectsEndpoint {
 	
 	
 	
-	@RequestMapping(value = "getProject", method = {RequestMethod.GET})
+	@RequestMapping(value = "getProjectById", method = {RequestMethod.GET})
 	@ApiOperation("Get Project")
 	public @ResponseBody ResultObject<List<ProjectsDto>> getProjectById(@RequestParam(name="id") Long id) {
 		return projectsService.findById(id);
