@@ -80,18 +80,43 @@
                                         <tr>
                                             <th scope="col" style="width: 50px;">ID</th>
                                             <th scope="col">Mã thẻ</th>
-                                            <th scope="col">Số ngày</th>
                                             <th scope="col">Biển số</th>
                                             <th scope="col">Tên KH</th>
                                             <th scope="col">CMND</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Tên loại xe</th>
                                             <th scope="col">Ngày đăng ký</th>
                                             <th scope="col">Ngày hết hạn</th>
                                             <th scope="col" style="width: 100px;">Chỉnh sửa</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    	<tr th:each="monthlyCard : ${listMonthlycard}">
+											<td th:text="${{monthlyCard.id}}"></td>
+											<td th:text="${{monthlyCard.cardId}}"></td>
+											<td th:text="${{monthlyCard.cardNumber}}"></td>
+											<td th:text="${{monthlyCard.customerName}}"></td>
+											<td th:text="${{monthlyCard.idNumber}}"></td>
+											<td th:text="${{monthlyCard.email}}"></td>
+											<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yy')}"></td>
+											<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yy')}"></td>
+											
+											<td width="13%">
+												<div style="padding-right: 10px; float: left;">
+													<a
+														th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
+														<button class="btn-info">Edit</button>
+													</a>
+												</div>
+												<div>
+													<a
+														th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
+														<button class="btn-warning">Delete</button>
+													</a>
+												</div> <!-- <a th:href="@{/project/edit-project/{id}(id=${project.id})}" >Edit</a>
+												| 
+												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a> -->
+											</td>
+										</tr>
                                     </tbody>
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">

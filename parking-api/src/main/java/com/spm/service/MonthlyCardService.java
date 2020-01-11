@@ -9,16 +9,16 @@ import com.spm.dto.ResultObject;
  * Created by Vincent 23/05/2018
  */
 public interface MonthlyCardService {
+    
+	ResultObject<List<MonthlyCardDto>> save(MonthlyCardDto monthlyCardDto);
+    
+	ResultObject<List<MonthlyCardDto>> save(List<MonthlyCardDto> listMonthlyCardDto);
 
-    MonthlyCardDto save(MonthlyCardDto monthlyCardDto);
+    void delete(Long id);
     
-    List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos);
-
-    void delete(MonthlyCardDto monthlyCardDto);
+    ResultObject<List<MonthlyCardDto>> findAll();
     
-    List<MonthlyCardDto> findAll();
-    
-    ResultObject<List<MonthlyCardDto>> findById(Long monthlyCardId);
+    ResultObject<List<MonthlyCardDto>> findById(Long id);
 
 }
  
