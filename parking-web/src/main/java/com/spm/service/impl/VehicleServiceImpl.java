@@ -1,9 +1,14 @@
 package com.spm.service.impl;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.entity.StringEntity;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.ResultObject;
@@ -23,4 +28,44 @@ public class VehicleServiceImpl implements VehicleService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+	
+	@Override
+	public ResultObject<List<VehicleDto>> addVehicle(VehicleDto vehicleDto) {
+		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
+		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(vehicleDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_ADD_VEHICLE, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return resultFromApi;
+	}
+	
+	@Override
+	public VehicleDto getVehicleById(Long vehicleId){
+		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
+		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_VEHICLE_BY_ID.replace("::vehicleId", String.valueOf(vehicleId));
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi.getData().get(0);
+	}
+	
+	@Override
+	public void deleteVehicle(Long vehicleId) {
+		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
+		String finalURL = URLConstants.URL_DELETE_VEHICLE.replace("::id", String.valueOf(vehicleId));
+		try {
+			restUtils.delete(finalURL);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

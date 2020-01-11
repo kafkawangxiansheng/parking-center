@@ -61,39 +61,6 @@ header .item5 {
 							</ul>
 						</section>
 						<section class="content">
-							<div class="box box-search d-flex flex-column"
-								style="border-top-color: #CEA052;">
-								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm
-									kiếm</h5>
-								<div class="panel">
-									<form>
-										<div class="form-group">
-											<label for="">Tên loại xe</label> <select
-												class="form-control" id="">
-												<option>Chọn loại xe</option>
-												<option>Xe đạp điện</option>
-												<option>Xe oto</option>
-												<option>Xe máy</option>
-												<option>Xe tay ga</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<label for="">Giới hạn</label> <select class="form-control"
-												id="">
-												<option>10</option>
-												<option>20</option>
-												<option>50</option>
-												<option>80</option>
-												<option>100</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<button type="submit" class="btn btn-primary">Tìm
-												kiếm</button>
-										</div>
-									</form>
-								</div>
-							</div>
 							<div class="box box-result">
 								<table class="table table-hover" id="inOutTable">
 									<thead>
@@ -115,8 +82,20 @@ header .item5 {
 											<td th:text="${{vehicle.monthlyCost}}"></td>
 											<td th:text="${{vehicle.type}}"></td>
 											<td th:text="${{vehicle.cardType}}"></td>
-											<td><a th:href="aa">Chỉnh
-													sửa</a></td>
+											<td width="15%">
+												<div style="padding-right: 10px; float: left;">
+													<a th:href="@{/cards/editVehicle/{id}/(id=${vehicle.id})}">
+														<button class="btn-info">Chỉnh sửa</button>
+													</a>
+												</div>
+												<div>
+													<a
+														th:href="@{/cards/deleteVehicle/{id}/(id=${vehicle.id})}"
+														onclick="return confirm('Bạn có chắc chắn muốn xóa dữ liệu này?');">
+														<button class="btn-warning">Xóa</button>
+													</a>
+												</div>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -126,10 +105,6 @@ header .item5 {
 											value="Thêm mới" class="btn btn-success"
 											style="font-size: 14px; margin-right: 20px;">
 										</a>
-									</div>
-									<div class="form-group">
-										<input type="submit" value="Xóa" class="btn btn-danger"
-											style="font-size: 14px;">
 									</div>
 								</div>
 							</div>

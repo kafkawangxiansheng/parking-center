@@ -37,6 +37,19 @@ public class VehicleServiceImpl implements VehicleService{
 		return rtn;
 	}
 	
+	private List<VehicleEntity> reMap(List<VehicleDto> source) {
+
+		ArrayList<VehicleEntity> rtn = new ArrayList<>();
+		source.stream().map((dto) -> {
+			VehicleEntity entity = new VehicleEntity();
+			mapper.map(dto, entity);
+			return entity;
+		}).forEachOrdered((entity) -> {
+			rtn.add(entity);
+		});
+		return rtn;
+	}
+	
 	@PostConstruct
 	public void initialize() {
 		mapper = new ModelMapper();
@@ -48,6 +61,40 @@ public class VehicleServiceImpl implements VehicleService{
 		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;
+	}
+	
+	@Override
+	public VehicleDto save(VehicleDto vehicleDto) {
+		VehicleEntity entity = new VehicleEntity();
+		mapper.map(vehicleDto, entity);
+		entity = vehicleRepository.save(entity);
+		mapper.map(entity, vehicleDto);
+		return vehicleDto;
+	}
+	
+	@Override
+	public List<VehicleDto> save(List<VehicleDto> vehicleDtos) {
+		List<VehicleEntity> vehicleEntities = reMap(vehicleDtos);
+		vehicleEntities = vehicleRepository.saveAll(vehicleEntities);
+		vehicleDtos = map(vehicleEntities);
+		return vehicleDtos;
+	}
+	
+	@Override
+	public ResultObject<List<VehicleDto>> findById(Long vehicleId) {
+		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
+		VehicleEntity entity = vehicleRepository.findById(vehicleId).get();
+		List<VehicleDto> listVehicleDto = new ArrayList<VehicleDto>();
+		VehicleDto vehicleDto = new VehicleDto();
+		mapper.map(entity, vehicleDto);
+		listVehicleDto.add(vehicleDto);
+		resultObject.setData(listVehicleDto);
+		return resultObject;
+	}
+	
+	@Override
+	public void delete(Long vehicleId) {
+		vehicleRepository.deleteById(vehicleId);
 	}
 
 }

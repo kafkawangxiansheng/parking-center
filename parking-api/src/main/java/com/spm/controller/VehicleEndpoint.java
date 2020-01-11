@@ -3,6 +3,8 @@ package com.spm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +37,30 @@ public class VehicleEndpoint {
 			vehicleSearchForm.setProjectId(projectId);
 		}
 		return vehicleService.findAll(vehicleSearchForm);
-		
+	}
+	
+	@RequestMapping(value="/add", method = { RequestMethod.POST })
+	@ApiOperation("Add new vehicle")
+	public void addNewVehicle(@RequestBody VehicleDto vehicleDto) {
+		vehicleService.save(vehicleDto);
+	}
+	
+	@RequestMapping(value="/update", method = { RequestMethod.PUT })
+	@ApiOperation("Update existing vehicle")
+	public void updateExistingVehicle(@RequestBody VehicleDto vehicleDto) {
+		vehicleService.save(vehicleDto);
+	}
+	
+	@RequestMapping(value="/getById", method = {RequestMethod.GET})
+	@ApiOperation("Get VehicleId")
+	public @ResponseBody ResultObject<List<VehicleDto>> getVehicleById(@RequestParam(name="vehicleId") Long vehicleId) {
+		return vehicleService.findById(vehicleId);
+	}
+	
+	@RequestMapping(path="delete/{id}", method = {RequestMethod.DELETE})
+	@ApiOperation("This method support us can delete the specific vehicle by id")
+	public void delete(@PathVariable("id") Long vehicleId) {
+		vehicleService.delete(vehicleId);
 	}
 
 }

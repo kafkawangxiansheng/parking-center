@@ -50,7 +50,7 @@ header .item5 {
 					<div class="content-wrapper">
 						<section
 							class="content-header d-flex justify-content-between align-items-center">
-							<h1 class="m-0">Thêm mới</h1>
+							<h1 class="m-0">Chỉnh sửa</h1>
 							<ul class="breadcrump d-flex flex-row p-0 m-0">
 								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
 											chủ</span>
@@ -59,7 +59,7 @@ header .item5 {
 								<li><a href="#"> <span>Quản lý loại xe</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Thêm mới</span>
+								<li><a href="#"> <span>Chỉnh sửa</span>
 								</a></li>
 							</ul>
 						</section>
@@ -71,7 +71,9 @@ header .item5 {
 								<div class="box-body p-2">
 									<div class="form-body">
 										<form id="formVehicleData" th:action="@{/cards/addNewVehicle}"
-											th:object="${addVehicle}" method="POST">
+											th:object="${editVehicle}" method="POST">
+											<input type="hidden"
+													th:field="*{id}" class="form-control" id="id">
 											<div class="form-group text">
 												<label for="name">Tên loại xe*</label> <input type="text"
 													th:field="*{name}" class="form-control" id="name" required="required">
@@ -99,8 +101,9 @@ header .item5 {
 													<option value="2">Vé tháng</option>
 												</select>
 											</div>
-											<div>
-												<input type="text" th:field="*{project.id}" readonly="readonly">
+											<div class="form-group">
+												<label for="projectId">Dự án</label>
+												<input type="text" class="form-control" th:field="*{project.id}" readonly="readonly">
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">
