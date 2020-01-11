@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spm.common.util.DateUtil;
 import com.spm.dto.CompanyDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ProjectsDto;
@@ -90,7 +92,12 @@ public class MonthlyCardController {
 	}
 	
 	@RequestMapping(value = "/add", method= {RequestMethod.POST,RequestMethod.PUT})
-	public  String doAddMonthlyCard(Model model, @Valid @ModelAttribute("monthlyCardDto") MonthlyCardDto monthlyCardDto) throws UnauthorizedException{
+	public  String doAddMonthlyCard(Model model, @Valid @ModelAttribute("monthlyCardDto") MonthlyCardDto monthlyCardDto) throws UnauthorizedException, ParseException{
+		
+		long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
+		long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
+		monthlyCardDto.setStartDate(startDateLong);
+		monthlyCardDto.setEndDate(endDateLong);
 		monthlyCradService.addMonthlyCard(monthlyCardDto);
 		return "redirect:/monthlyCard";
 	}

@@ -43,6 +43,10 @@ public class MonthlyCardDto {
 	private Long areaId;
 	
 	private Long projectId;
+	
+	private String startDateString;
+	
+	private String endDateString;
 
 	public Long getId() {
 		return id;
@@ -202,6 +206,22 @@ public class MonthlyCardDto {
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
+	}
+
+	public String getStartDateString() {
+		return startDateString;
+	}
+
+	public void setStartDateString(String startDateString) {
+		this.startDateString = startDateString;
+	}
+
+	public String getEndDateString() {
+		return endDateString;
+	}
+
+	public void setEndDateString(String endDateString) {
+		this.endDateString = endDateString;
 	}
 	
 }
