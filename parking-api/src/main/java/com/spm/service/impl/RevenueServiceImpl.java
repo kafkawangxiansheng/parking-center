@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import com.spm.dto.RevenueDto;
 import com.spm.entity.OrderEntity;
 import com.spm.entity.RevenueEntity;
-import com.spm.entity.SettingEntity;
+import com.spm.entity.VehicleEntity;
 import com.spm.repository.OrderRepository;
-import com.spm.repository.SettingRepository;
+import com.spm.repository.VehicleRepository;
 import com.spm.search.form.RevenueSearchForm;
 import com.spm.service.RevenueService;
 
@@ -29,7 +29,7 @@ public class RevenueServiceImpl implements RevenueService {
 	private OrderRepository orderRepository;
 	
 	@Autowired
-	private SettingRepository  settingRepository;
+	private VehicleRepository  vehicleRepository;
 
 	ModelMapper mapper;
 
@@ -43,17 +43,28 @@ public class RevenueServiceImpl implements RevenueService {
 	@Override
 	public List<RevenueDto> getRevenues(RevenueSearchForm revenueSearchForm) {
 		
-		List<RevenueDto> revenues = new ArrayList<>();
-		List<SettingEntity> settings = settingRepository.findAllByProjectId(revenueSearchForm.getProjectId());
-		List<OrderEntity> orderEntities  = orderRepository.findAll(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		List<RevenueDto> normalRevenues = new ArrayList<>();
+		List<RevenueDto> monthRevenues = new ArrayList<>();
+		List<RevenueDto> totalRevenues = new ArrayList<>();
 		
-		for(SettingEntity setting :  settings) {
+		List<VehicleEntity> vehicles = vehicleRepository.findAllByProjectId(revenueSearchForm.getProjectId());
+		List<OrderEntity> orderEntities  = orderRepository.findAll(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		RevenueDto normalRevenueTotalDto = new RevenueDto();
+		normalRevenueTotalDto.setLabel("___ Tổng cộng xe thường");
+		normalRevenueTotalDto.setCssClass("revenue-sub-total");
+		RevenueDto monthlyRevenueTotalDto = new RevenueDto();
+		monthlyRevenueTotalDto.setLabel("___ Tổng cộng xe tháng");
+		monthlyRevenueTotalDto.setCssClass("revenue-sub-total");
+		RevenueDto revenueTotalDto = new RevenueDto();
+		revenueTotalDto.setLabel("Tổng cộng:");
+		revenueTotalDto.setCssClass("revenue-total");
+		
+		for(VehicleEntity vehicle :  vehicles) {
 			RevenueDto revenueDto = new RevenueDto();
 			RevenueEntity revenueEntity = new RevenueEntity() ;
-			
-			revenueEntity.setVehicleId(setting.getVehicleId());
+			revenueEntity.setVehicleId(vehicle.getCardType());
 			orderEntities.forEach(order -> {
-				if(order.getVehicleId() == setting.getVehicleId())  {
+				if(order.getVehicleId() == vehicle.getCardType())  {
 					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
 					revenueEntity.setTotalCheckout(((order.getCheckoutTime()!=null && order.getCheckoutTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckout());
 					revenueEntity.setTotalPrice(revenueEntity.getTotalPrice() + order.getTotalPrice());
@@ -62,12 +73,41 @@ public class RevenueServiceImpl implements RevenueService {
 			if(revenueEntity != null) {
 				mapper.map(revenueEntity, revenueDto);
 			}
-			revenueDto.setLabel(setting.getName());
-			revenues.add(revenueDto);
+			revenueDto.setLabel(vehicle.getName());
+			revenueDto.setExistingVerhicle(revenueDto.getTotalCheckin() - revenueDto.getTotalCheckout());
+			if(vehicle.getType() == 1)  {
+				normalRevenues.add(revenueDto);
+				normalRevenueTotalDto.setTotalCheckin(normalRevenueTotalDto.getTotalCheckin() + revenueDto.getTotalCheckin());
+				normalRevenueTotalDto.setTotalCheckout(normalRevenueTotalDto.getTotalCheckout() + revenueDto.getTotalCheckout());
+				normalRevenueTotalDto.setExistingVerhicle(normalRevenueTotalDto.getExistingVerhicle() + revenueDto.getExistingVerhicle());
+				normalRevenueTotalDto.setTotalPrice(normalRevenueTotalDto.getTotalPrice()+revenueDto.getTotalPrice());
+			} else {
+				monthRevenues.add(revenueDto);
+				monthlyRevenueTotalDto.setTotalCheckin(monthlyRevenueTotalDto.getTotalCheckin()+revenueDto.getTotalCheckin());
+				monthlyRevenueTotalDto.setTotalCheckout(monthlyRevenueTotalDto.getTotalCheckout()+revenueDto.getTotalCheckout());
+				monthlyRevenueTotalDto.setExistingVerhicle(monthlyRevenueTotalDto.getExistingVerhicle() + revenueDto.getExistingVerhicle());
+				monthlyRevenueTotalDto.setTotalPrice(monthlyRevenueTotalDto.getTotalPrice()+revenueDto.getTotalPrice());
+			}
+			
 			
 		}
+		for(RevenueDto normalReveneu : normalRevenues) {
+			totalRevenues.add(normalReveneu);
+		}
+		totalRevenues.add(normalRevenueTotalDto);
+		for(RevenueDto monthlyReveneu : monthRevenues) {
+			totalRevenues.add(monthlyReveneu);
+		}
+		totalRevenues.add(monthlyRevenueTotalDto);
 		
-		return revenues;
+		revenueTotalDto.setTotalCheckin(normalRevenueTotalDto.getTotalCheckin()  + monthlyRevenueTotalDto.getTotalCheckin());
+		revenueTotalDto.setTotalCheckout(normalRevenueTotalDto.getTotalCheckout()  + monthlyRevenueTotalDto.getTotalCheckout());
+		revenueTotalDto.setExistingVerhicle(normalRevenueTotalDto.getExistingVerhicle()  + monthlyRevenueTotalDto.getExistingVerhicle());
+		revenueTotalDto.setTotalPrice(normalRevenueTotalDto.getTotalPrice()  + monthlyRevenueTotalDto.getTotalPrice());
+		
+		totalRevenues.add(revenueTotalDto);
+		
+		return totalRevenues;
 	}
 
 	

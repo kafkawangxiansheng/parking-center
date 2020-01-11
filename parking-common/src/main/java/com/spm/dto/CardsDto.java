@@ -23,6 +23,10 @@ public class CardsDto {
 	private long adminId;
 
 	private long companyId;
+	
+	private Long areaId;
+	
+	private Long projectId;
 
 	public Long getId() {
 		return id;
@@ -104,4 +108,20 @@ public class CardsDto {
 		this.companyId = companyId;
 	}
 
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+	
 }

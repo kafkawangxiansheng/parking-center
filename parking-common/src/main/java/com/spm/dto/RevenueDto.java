@@ -9,9 +9,13 @@ public class RevenueDto {
 	
 	private String label;
 	
+	private String cssClass;
+	
 	private long totalCheckin;
 	
 	private  long totalCheckout;
+	
+	private long existingVerhicle;
 	
 	private long totalPrice;
 
@@ -31,6 +35,14 @@ public class RevenueDto {
 		this.label = label;
 	}
 
+	public String getCssClass() {
+		return cssClass;
+	}
+
+	public void setCssClass(String cssClass) {
+		this.cssClass = cssClass;
+	}
+
 	public long getTotalCheckin() {
 		return totalCheckin;
 	}
@@ -45,6 +57,14 @@ public class RevenueDto {
 
 	public void setTotalCheckout(long totalCheckout) {
 		this.totalCheckout = totalCheckout;
+	}
+
+	public long getExistingVerhicle() {
+		return existingVerhicle;
+	}
+
+	public void setExistingVerhicle(long existingVerhicle) {
+		this.existingVerhicle = existingVerhicle;
 	}
 
 	public long getTotalPrice() {

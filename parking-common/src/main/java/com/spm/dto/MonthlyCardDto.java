@@ -2,68 +2,46 @@ package com.spm.dto;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class MonthlyCardDto {
 	
-	@JsonProperty("id")
 	private Long id;
 	
-	@JsonProperty("card_id")
 	private long cardId;
 	
-	@JsonProperty("car_number")
 	private String cardNumber;
 	
-	@JsonProperty("customer_name")
 	private String customerName;
 	
-	@JsonProperty("id_number")
 	private String idNumber;
 	
-	@JsonProperty("email")
 	private String email;
 	
-	@JsonProperty("company")
 	private String company;
 	
-	@JsonProperty("address")
 	private String  address;
 	
-	@JsonProperty("brand")
 	private  String brand;
 	
-	@JsonProperty("parking_fee")
 	private long parkingFee;
 	
-	@JsonProperty("vehicle_id")
 	private long vehicleId;
 	
-	@JsonProperty("start_date")
 	private long startDate;
 	
-	@JsonProperty("end_date")
 	private long endDate;
 	
-	@JsonProperty("created")
 	private Date created;
 	
-	@JsonProperty("updated")
 	private Date updated;
 	
-	@JsonProperty("disable")
 	private int disable;
 	
-	@JsonProperty("admin_id")
 	private long adminId;
 	
-	@JsonProperty("company_id")
 	private long companyId;
 	
-	@JsonProperty("area_id")
 	private Long areaId;
 	
-	@JsonProperty("project_id")
 	private Long projectId;
 	
 	private String startDateString;

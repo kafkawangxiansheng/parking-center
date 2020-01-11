@@ -37,19 +37,6 @@ public class VehicleServiceImpl implements VehicleService{
 		return rtn;
 	}
 	
-//	private List<VehicleEntity> reMap(List<VehicleDto> source) {
-//
-//		ArrayList<VehicleEntity> rtn = new ArrayList<>();
-//		source.stream().map((dto) -> {
-//			VehicleEntity entity = new VehicleEntity();
-//			mapper.map(dto, entity);
-//			return entity;
-//		}).forEachOrdered((entity) -> {
-//			rtn.add(entity);
-//		});
-//		return rtn;
-//	}
-	
 	@PostConstruct
 	public void initialize() {
 		mapper = new ModelMapper();
@@ -57,7 +44,7 @@ public class VehicleServiceImpl implements VehicleService{
 	
 	@Override
 	public ResultObject<List<VehicleDto>> findAll(VehicleSearchForm vehicleSearchForm){
-		List<VehicleEntity> entities = vehicleRepository.findAll(vehicleSearchForm.getProjectId());
+		List<VehicleEntity> entities = vehicleRepository.findAllByProjectId(Long.valueOf(vehicleSearchForm.getProjectId()));
 		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;
