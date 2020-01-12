@@ -15,6 +15,9 @@ public interface EmployeeService {
 	
 	EmployeeDto getEmployeeById(Long id);
 	
+	ResultObject<List<EmployeeDto>> getAllEmployeeByProjectId(long projectId);
+	
+	
 	EmployeeDto addEmployee(EmployeeDto employeeDto);
 	
 	void deleteEmployee(Long id);

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.common.util.DateUtil;
 import com.spm.common.util.constant.SessionConstants;
+import com.spm.dto.EmployeeDto;
 import com.spm.dto.ResultObject;
 import com.spm.dto.RevenueDto;
 import com.spm.export.RevenueExport;
 import com.spm.search.form.RevenueSearchForm;
+import com.spm.service.EmployeeService;
 import com.spm.service.RevenueService;
 
 /**
@@ -30,7 +32,8 @@ public class RevenueController {
 	@Autowired
 	private RevenueService revenueService;
 	
-	
+	@Autowired
+	private EmployeeService employeeServie;
 	
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
@@ -72,6 +75,11 @@ public class RevenueController {
 		model.addAttribute("revenueSearchForm", revenueSearchForm);
 		
 		ResultObject<List<RevenueDto>> revenueMap = revenueService.getAllRevenue(revenueSearchForm);
+		
+		ResultObject<List<EmployeeDto>>  employees = employeeServie.getAllEmployeeByProjectId(Long.valueOf(projects.get(0)));
+		
+		model.addAttribute("employees", employees.getData());
+		
 		model.addAttribute("revenues", revenueMap.getData());
 		return "revenuePage";
 	}

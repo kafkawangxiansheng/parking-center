@@ -71,9 +71,9 @@
 										<div class="form-group col-lg-5 float-left">
 											<label for="">Nhân viên</label>
 											<div class="dateFromToInputs d-flex justify-content-between">
-												<select name="employeeId">
+												<select th:field="*{employeeId}">
 													<option value="">Chọn nhân viên</option>
-													<option value="4">Admin</option>
+													<option th:each="employee : ${employees}" th:value="${{employee.id}}" th:text="${{employee.name}}"></option>
 												</select>
 											</div>
 										</div>

@@ -82,7 +82,7 @@
 											<div class="dateFromToInputs d-flex justify-content-between">
 												<select th:field="*{employeeId}" class="form-control">
 													<option value="">Chọn nhân viên</option>
-													<option value="4">Admin</option>
+													<option th:each="employee : ${employees}" th:value="${{employee.id}}" th:text="${{employee.name}}"></option>
 												</select>
 											</div>
 										</div>

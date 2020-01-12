@@ -32,6 +32,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
+	public ResultObject<List<EmployeeDto>> getAllEmployeeByProjectId(long projectId){
+		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
+		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_LIST_EMPLOYEE_BY_PROJECT_ID.replaceAll("::projectId", String.valueOf(projectId));
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
+	
+	@Override
 	public EmployeeDto getEmployeeById(Long id) {
 		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
 		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
