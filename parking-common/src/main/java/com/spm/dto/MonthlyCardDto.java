@@ -1,7 +1,5 @@
 package com.spm.dto;
 
-import java.util.Date;
-
 public class MonthlyCardDto {
 	
 	private Long id;
@@ -30,9 +28,9 @@ public class MonthlyCardDto {
 	
 	private long endDate;
 	
-	private Date created;
+	private long created;
 	
-	private Date updated;
+	private long updated;
 	
 	private int disable;
 	
@@ -152,19 +150,19 @@ public class MonthlyCardDto {
 		this.endDate = endDate;
 	}
 
-	public Date getCreated() {
+	public long getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(long created) {
 		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public long getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(long updated) {
 		this.updated = updated;
 	}
 
