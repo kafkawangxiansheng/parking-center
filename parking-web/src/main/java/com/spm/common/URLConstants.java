@@ -34,7 +34,7 @@ public class URLConstants {
 	public static final String URL_POST_ADD_EMPLOYEE = MAIN_DOMAIN + "/employee/addEmployee";
 	public static final String URL_DELETE_EMPLOYEE = MAIN_DOMAIN + "/employee/delete/::id";
 	
-	
+	public static final String URL_GET_LIST_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle/getListAll";
 	public static final String URL_GET_ALL_VEHICLE = MAIN_DOMAIN + "/vehicle/?projectId=::projectId";
 	public static final String URL_ADD_VEHICLE = MAIN_DOMAIN + "/vehicle/add";
 	public static final String URL_GET_VEHICLE_BY_ID = MAIN_DOMAIN + "/vehicle/getById/?vehicleId=::vehicleId";
@@ -44,4 +44,5 @@ public class URLConstants {
 	public static final String URL_GET_MONTHLY_CARD_BY_ID = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardById?id=::id";
 	public static final String URL_POST_ADD_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/add";
 	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
+	public static final String URL_GET_MONTHLY_CARD_BY_CARD_CODE = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardByCardCode?cardCode=::cardCode";
 }
