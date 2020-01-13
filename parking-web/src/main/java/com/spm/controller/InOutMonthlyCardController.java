@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.spm.common.util.DateUtil;
 import com.spm.common.util.constant.SessionConstants;
 import com.spm.constants.PagingConstants;
+import com.spm.dto.EmployeeDto;
 import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
 import com.spm.exception.UnauthorizedException;
 import com.spm.export.InOutExport;
 import com.spm.search.form.OrderSearchForm;
+import com.spm.service.EmployeeService;
 import com.spm.service.OrderService;
 
 @Controller
@@ -31,6 +33,9 @@ public class InOutMonthlyCardController {
 	
 	@Autowired
 	OrderService  orderService;
+	
+	@Autowired
+	EmployeeService employeeServie;
 	
 	@RequestMapping(value = "", method= {RequestMethod.GET})
 	public String index(
@@ -104,6 +109,9 @@ public class InOutMonthlyCardController {
 			}
 		}
 		
+		ResultObject<List<EmployeeDto>>  employees = employeeServie.getAllEmployeeByProjectId(Long.valueOf(projects.get(0)));
+		
+		model.addAttribute("employees", employees.getData());
 		model.addAttribute("orders", result.getData());
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("maxPage", result.getTotalPages());

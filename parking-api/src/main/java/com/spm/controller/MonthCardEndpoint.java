@@ -3,6 +3,7 @@ package com.spm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
  * Created by Vincent on 02/10/2018
  */
 @RestController
-@RequestMapping("/monthlycards")
+@RequestMapping("monthlyCard")
 @Api(value = "Monthly cards Endpoint", description = "The URL to handle monthly cards endpoint")
 public class MonthCardEndpoint{
 
@@ -31,27 +32,33 @@ public class MonthCardEndpoint{
 	
 	
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
-	@ApiOperation("Add new monthly card")
-	public void addNewCard(@RequestBody MonthlyCardDto monthlyCardDto) {
-		monthCardsService.save(monthlyCardDto);
+	@ApiOperation("Add MonthlyCard")
+	public ResultObject<List<MonthlyCardDto>> addMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
+		return monthCardsService.save(monthlyCardDto);
 	}
 	
 	@RequestMapping(value = "/update", method = {RequestMethod.PUT})
-	@ApiOperation("Update existing monthly card")
-	public void updateExistingCard(@RequestBody MonthlyCardDto monthlyCardDto) {
+	@ApiOperation("Update monthly card")
+	public void updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
 		monthCardsService.save(monthlyCardDto);
 	}
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
-	@ApiOperation("Orders batch syncs")
-	public @ResponseBody List<MonthlyCardDto> getAll() {
+	@ApiOperation("Get all MonthlyCards")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAll() {
 		return monthCardsService.findAll();
 	}
 	
 	@RequestMapping(value = "getMonthlyCardById", method = {RequestMethod.GET})
 	@ApiOperation("Get Monthly Card")
-	public @ResponseBody ResultObject<List<MonthlyCardDto>> getProjectById(@RequestParam(name="id") Long id) {
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> getMonthlyCardById(@RequestParam(name="id") Long id) {
 		return monthCardsService.findById(id);
+	}
+	
+	@RequestMapping(path="/delete/{id}", method = {RequestMethod.DELETE})
+	@ApiOperation("This method support us can delete the specific monthCard by id")
+	public void delete(@PathVariable("id") Long id) {
+		monthCardsService.delete(id);
 	}
 	
 }

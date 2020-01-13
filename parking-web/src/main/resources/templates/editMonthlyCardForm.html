@@ -49,7 +49,7 @@
                 <div class="col">
                     <div class="content-wrapper">
                         <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Thêm mới</h1>
+                            <h1 class="m-0">Chỉnh Sửa</h1>
                             <ul class="breadcrump d-flex flex-row p-0 m-0">
                                 <li>
                                     <a href="#">
@@ -70,7 +70,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <span>Thêm mới</span>
+                                        <span>Chỉnh Sửa</span>
                                     </a>
                                 </li>
                             </ul>
@@ -89,68 +89,110 @@
 								                <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">
 								            </div>
                                             <div class="form-group text">
-                                                <label for="option1">Mã thẻ</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Mã thẻ</label>
+                                                <input type="text" required="required" th:field="*{cardId}" class="form-control"
+													id="card_id">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Biển số</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label>Biển số</label>
+                                                <input type="text" required="required" th:field="*{cardNumber}" class="form-control"
+													id="cardNumber">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Tên KH</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Tên KH</label>
+                                                <input type="text" required="required" th:field="*{customerName}" class="form-control"
+													id="customer_name">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">CMND</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >CMND</label>
+                                               <input type="text" required="required" th:field="*{idNumber}" class="form-control"
+													id="id_number">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Email</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Email</label>
+                                                <input type="text" required="required" th:field="*{email}" class="form-control"
+													id="email">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Công ty</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Công ty</label>
+                                                <input type="text" required="required" th:field="*{company}" class="form-control"
+													id="company">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Nhãn hiệu</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Nhãn hiệu</label>
+                                                <input type="text" required="required" th:field="*{brand}" class="form-control"
+													id="brand">
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Địa chỉ</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Địa chỉ</label>
+                                                <input type="text" required="required" th:field="*{address}" class="form-control"
+													id="address">
                                             </div>
-                                            <div class="form-group text">
-                                                <label for="option1">Phí đậu xe</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                            
+                                            <div class="form-group">
+                                                <label >Công Ty Thầu</label>
+												<select th:field="*{companyId}" class="form-control">
+												    <option th:each="i : ${listCompany}" th:value="${i.id}" th:text="${i.name}"></option>
+												</select>
+                                            </div>
+                                             <div class="form-group">
+                                                <label >Dự Án Thầu</label>
+                                                 <select th:field="*{projectId}" class="form-control">
+												    <option th:each="i : ${listProject}" th:value="${i.id}" th:text="${i.name}"></option>
+												</select>
                                             </div>
                                             <div class="form-group">
+                                                <label >Khu Vực</label>
+                                                 <select th:field="*{areaId}" class="form-control">
+												    <option th:each="i : ${listArea}" th:value="${i.id}" th:text="${i.name}"></option>
+												</select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Admin Cấp Thẻ</label>
+                                                 <select th:field="*{adminId}" class="form-control">
+												    <option th:each="i : ${listAdmin}" th:value="${i.id}" th:text="${i.name}"></option>
+												</select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Loại Vé</label>
+                                                <select th:field="*{vehicleId}" class="form-control">
+													<option th:each="i : ${listVehicle}" th:value="${i.id}"
+														th:text="${i.name}"></option>
+												</select>
+                                            </div>
+                                            <div class="form-group text">
+                                                <label >Phí đậu xe</label>
+                                                 <input type="text" required="required" th:field="*{parkingFee}" class="form-control"
+													id="parking_fee">
+                                            </div>
+                                            <!-- <div class="form-group">
                                                 <label for="">Tên loại xe</label>
-                                                <select class="form-control" id="">
-                                                    <option>Xe đạp điện</option>
-                                                    <option>Xe oto</option>
-                                                    <option>Xe máy</option>
-                                                    <option>Xe tay ga</option>
-                                                </select>
+                                                <select class="form-control" id="position" th:field="*{position}">
+													<option value="XE_DAP">Xe đạp</option>
+													<option value="XE_DAP_DIEN">Xe đạp điện</option>
+													<option value="XE_MAY">Xe máy</option>
+													<option value="XE_OTO">Xe Ôtô</option>
+													<option value="XE_TAY_GA">Xe tay ga</option>
+												</select>
+                                            </div> -->
+                                            <div class="form-group text">
+                                                <label >Ngày đăng ký</label>
+                                                <input type="text" required="required" th:field="*{startDateString}" class="form-control  datepickerInOut"
+													id="start_date">
+												<!-- <input type="text" required="required" th:value="${startDateString}?${#dates.format(startDateString, 'dd-MM-yyyy')}:''" class="form-control  datepickerInOut"
+												id="start_date"  placeholder="dd-mm-yyyy"> -->
                                             </div>
                                             <div class="form-group text">
-                                                <label for="option1">Ngày đăng ký</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label for="option1">Ngày hết hạn</label>
-                                                <input type="text" name="option1" class="form-control" id="option1">
+                                                <label >Ngày hết hạn</label>
+                                                <input type="text" required="required" th:field="*{endDateString}" class="form-control  datepickerInOut"
+													id="end_date">
                                             </div>
                                             <div class="form-group button-group d-flex flex-row">
-                                                <div class="form-group">
-                                                    <button onclick="saveData()" class="btn btn-primary"
-                                                        style="font-size: 14px; margin-right: 20px;">Lưu</button>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="submit" value="Quay lại" class="btn btn-secondary"
-                                                        style="font-size: 14px;">
-                                                </div>
-                                            </div>
+								                <div class="form-group">
+								                    <input type="submit" value="Lưu" class="btn btn-success"
+								                        style="font-size: 14px;">
+								                </div>
+								            </div>
                                         </form>
                                     </div>
                                 </div>

@@ -28,39 +28,6 @@ public class EmployeeEndpoint {
 
 	@Autowired
 	private EmployeeService employeeService;
-
-//	@RequestMapping(value = "/", method = { RequestMethod.POST })
-//	@ApiOperation("Add new employee")
-//	public void addMember(@RequestBody EmployeeDto employeeDto) {
-//		employeeService.save(employeeDto);
-//	}
-//
-//	@RequestMapping(value = "/", method = { RequestMethod.PUT })
-//	@ApiOperation("Update existing card")
-//	public void updateExistingCard(@RequestBody EmployeeDto employeeDto) {
-//		employeeService.save(employeeDto);
-//	}
-
-//	@RequestMapping(value = "", method = { RequestMethod.GET })
-//	@ApiOperation("get all employees for search")
-//	public @ResponseBody ResultObject<List<EmployeeDto>> getAll(
-//			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
-//			@RequestParam(name="name", required = false) String name,
-//			@RequestParam(name="userName", required = false) String userName,
-//			@RequestParam(name="pass", required = false) String pass,
-//			@RequestParam(name="position", required = false) String position,
-//			@RequestParam(name="sex", required = false) String sex) {
-//		
-//		Pageable paging = PageRequest.of(page, 100);
-//		EmployeeSearchForm employeeSearchForm = new EmployeeSearchForm();
-//		if(name != null && !name.isEmpty()) {
-//			employeeSearchForm.setName(name);
-//		}
-//		if(position != null && !position.isEmpty()) {
-//			employeeSearchForm.setPosition(position);
-//		}
-//		return employeeService.findAll(paging, employeeSearchForm);
-//	}
 	
 	@RequestMapping(value="/get-by-id", method = {RequestMethod.GET})
 	@ApiOperation("Get employee by id")
@@ -92,6 +59,12 @@ public class EmployeeEndpoint {
 	@ApiOperation("Get EmployeeDto")
 	public @ResponseBody ResultObject<List<EmployeeDto>> getEmployeeById(@RequestParam(name="id") Long id) {
 		return employeeService.findById(id);
+	}
+	
+	@RequestMapping(value = "getEmployeeByProjectId", method = {RequestMethod.GET})
+	@ApiOperation("Get Employee  by project id")
+	public @ResponseBody ResultObject<List<EmployeeDto>> getEmployeeByProjectId(@RequestParam(name="projectId") Long projectId) {
+		return employeeService.findAllByProjectId(projectId);
 	}
 	
 	@RequestMapping(path="/delete/{id}", method = {RequestMethod.DELETE})

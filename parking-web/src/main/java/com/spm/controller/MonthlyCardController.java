@@ -1,6 +1,9 @@
 package com.spm.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +28,7 @@ import com.spm.service.MonthlyCradService;
 import com.spm.service.ProjectService;
 
 @Controller
-@RequestMapping(path = "monthlyCard")
+@RequestMapping(path = "/monthlyCard")
 public class MonthlyCardController {
 	
 	@Autowired
@@ -40,7 +43,8 @@ public class MonthlyCardController {
 	//index == monthlycardPage
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String index(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
+		ResultObject<List<MonthlyCardDto>> monthlyCardMap = monthlyCradService.getAllMonthlyCard();
+		model.addAttribute("listMonthlycard",monthlyCardMap.getData());
 		return "monthlyCardPage";
 	}
 	
@@ -80,14 +84,22 @@ public class MonthlyCardController {
 		return "addMonthlyCardForm";
 	}
 	
-	@RequestMapping(value = "/edit/{id}", method= {RequestMethod.GET})
+	@RequestMapping(value = "edit/{id}", method= {RequestMethod.GET})
 	public  String editMonthlyCard(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
 		MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
+		
+		//  convert long date to string date
+		String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
+		String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
+		
+		monthlyCardDto.setStartDateString(startDateString);
+		monthlyCardDto.setEndDateString(endDateString);
+		
 		model.addAttribute("monthlyCardDto", monthlyCardDto);
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-		model.addAttribute("listCompanny", companyMap.getData());
+		model.addAttribute("listCompany", companyMap.getData());
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProjectDto", projectMap.getData());	
+		model.addAttribute("listProject", projectMap.getData());
 		return "editMonthlyCardForm";
 	}
 	

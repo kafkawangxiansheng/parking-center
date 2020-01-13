@@ -59,49 +59,49 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	}
 
 	@Override
-	public MonthlyCardDto save(MonthlyCardDto monthlyCardDto) {
+	public ResultObject<List<MonthlyCardDto>> save(MonthlyCardDto monthlyCardDto) {
+		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
+		List<MonthlyCardDto> listObject = new ArrayList<>();
 		MonthlyCardEntity entity = new MonthlyCardEntity();
 		mapper.map(monthlyCardDto, entity);
 		entity = monthlyCardRepository.save(entity);
 		mapper.map(entity, monthlyCardDto);
-		return monthlyCardDto;
-	}
-	
-
-	@Override
-	public void delete(MonthlyCardDto monthlyCardDto) {
-		MonthlyCardEntity entity = new MonthlyCardEntity();
-		mapper.map(monthlyCardDto, entity);
-		monthlyCardRepository.delete(entity);
-
-	}
-
-
-	@Override
-	public List<MonthlyCardDto> findAll() {
-		List<MonthlyCardEntity> entities = monthlyCardRepository.findAll();
-		return this.map(entities);
-	}
-
-	@Override
-	public List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos) {
-		List<MonthlyCardEntity> monthlyCardsEntities = reMap(monthlyCardDtos);
-		
-		monthlyCardsEntities = monthlyCardRepository.saveAll(monthlyCardsEntities);
-		monthlyCardDtos = map(monthlyCardsEntities);
-		return monthlyCardDtos;
-	}
-
-	@Override
-	public ResultObject<List<MonthlyCardDto>> findById(Long monthlyCardId) {
-		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
-		MonthlyCardEntity entity = monthlyCardRepository.findById(monthlyCardId).get();
-		List<MonthlyCardDto> listMonthlyCardDto = new ArrayList<MonthlyCardDto>();
-		MonthlyCardDto monthlyCardDto = new MonthlyCardDto();
-		mapper.map(entity, monthlyCardDto);
-		listMonthlyCardDto.add(monthlyCardDto);
-		resultObj.setData(listMonthlyCardDto);
+		listObject.add(monthlyCardDto);
+		resultObj.setData(listObject);
 		return resultObj;
 	}
 
+	@Override
+	public ResultObject<List<MonthlyCardDto>> save(List<MonthlyCardDto> listMonthlyCardDto) {
+		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
+		List<MonthlyCardEntity> projectsEntities = reMap(listMonthlyCardDto);
+		projectsEntities = monthlyCardRepository.saveAll(projectsEntities);
+		resultObj.setData(map(projectsEntities));
+		return resultObj;
+	}
+
+	@Override
+	public void delete(Long id) {
+		monthlyCardRepository.deleteById(id);
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> findAll() {
+		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
+		List<MonthlyCardEntity> ListEntity = monthlyCardRepository.findAll();
+		resultObj.setData(this.map(ListEntity));
+		return resultObj;
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> findById(Long id) {
+		ResultObject<List<MonthlyCardDto>> resultObj = new ResultObject<>();
+		MonthlyCardEntity entity = monthlyCardRepository.findById(id).get();
+		List<MonthlyCardDto> listProjectDto = new ArrayList<MonthlyCardDto>();
+		MonthlyCardDto monthlyCardDto = new MonthlyCardDto();
+		mapper.map(entity, monthlyCardDto);
+		listProjectDto.add(monthlyCardDto);
+		resultObj.setData(listProjectDto);
+		return resultObj;
+	}
 }

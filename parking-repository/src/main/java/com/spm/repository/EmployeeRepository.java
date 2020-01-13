@@ -25,6 +25,4 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 	)
 	Page<EmployeeEntity> search(@Param(value = "name") String name, @Param(value = "position") String position, Pageable pageable);
 	
-//	@EntityGraph(attributePaths = { "project"})
-//	List<EmployeeEntity> findAll();
 }
