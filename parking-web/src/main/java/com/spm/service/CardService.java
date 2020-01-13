@@ -12,4 +12,5 @@ public interface CardService {
 	ResultObject<List<CardsDto>> getAllCard(CardSearchForm cardSearchForm, Pageable pageable);
 	ResultObject<List<CardsDto>> addCard(CardsDto cardsDto);
 	CardsDto getCardById(Long cardId);
+	ResultObject<List<CardsDto>> getAllDisabledCard(CardSearchForm cardSearchForm);
 }

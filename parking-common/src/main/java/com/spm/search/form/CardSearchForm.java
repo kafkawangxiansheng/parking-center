@@ -5,6 +5,7 @@ public class CardSearchForm {
 	private String code;
 	private String stt;
 	private String vehicleId;
+	private String disable;
 	
 	public String getCode() {
 		return code;
@@ -23,6 +24,12 @@ public class CardSearchForm {
 	}
 	public void setVehicleId(String vehicleId) {
 		this.vehicleId = vehicleId;
+	}
+	public String getDisable() {
+		return disable;
+	}
+	public void setDisable(String disable) {
+		this.disable = disable;
 	}
 	
 }

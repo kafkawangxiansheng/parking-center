@@ -68,5 +68,16 @@ public class CardsEndpoint {
 	public @ResponseBody ResultObject<List<CardsDto>> getCardById(@RequestParam(name="cardId") Long cardId) {
 		return cardsService.findById(cardId);
 	}
+	
+	@RequestMapping(value="/disabledCard", method = {RequestMethod.GET})
+	@ApiOperation("Show Disabled Card")
+	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(
+			@RequestParam(name = "disable", required = false) String disable) {
+		CardSearchForm cardSearchForm = new CardSearchForm();
+		if(disable != null && !disable.isEmpty()) {
+			cardSearchForm.setDisable(disable);
+		}
+		return cardsService.findAllDisabledCard(cardSearchForm);
+	}
 
 }

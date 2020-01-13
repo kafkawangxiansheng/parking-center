@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Parking Management</title>
+<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+<style>
+header .item5 {
+	background: black;
+}
+</style>
+</head>
+
+<body>
+	<header th:insert="~{fragments/mainTemplate :: main-header}"
+		class="main-header flex-column">
+		<div class="header-submenu position-relative">
+			<div th:insert="~{fragments/mainTemplate :: sub-header}"
+				class="container"></div>
+			<div th:insert="~{fragments/mainTemplate :: navi-header}"
+				class="container"></div>
+		</div>
+	</header>
+	<div id="main">
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/cards">Quản lý thẻ xe</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/cards/vehicle">Quản lý loại xe</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/cards/active-card" style="color: #000; background: #fff;">Kích
+									hoạt thẻ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="content-wrapper">
+						<section
+							class="content-header d-flex justify-content-between align-items-center">
+							<h1 class="m-0">Kích hoạt thẻ</h1>
+							<ul class="breadcrump d-flex flex-row p-0 m-0">
+								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
+											chủ</span>
+								</a></li>
+								<li class="li-between"><i class="fas fa-angle-right"></i></li>
+								<li><a href="#"> <span>Kích hoạt thẻ</span>
+								</a></li>
+							</ul>
+						</section>
+						<section class="content">
+							<div class="box box-search d-flex flex-column"
+								style="border-top-color: #CEA052;">
+								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm
+									kiếm</h5>
+								<div class="panel">
+									<form>
+										<div class="form-group text">
+											<label for="option1">Mã thẻ</label> <input type="text"
+												name="option1" class="form-control" id="option1">
+										</div>
+										<div class="form-group text">
+											<label for="option1">STT</label> <input type="text"
+												name="option1" class="form-control" id="option1">
+										</div>
+										<div class="form-group">
+											<label for="">Tên loại xe</label> <select
+												class="form-control" id="">
+												<option>Chọn loại xe</option>
+												<option>Xe đạp điện</option>
+												<option>Xe oto</option>
+												<option>Xe máy</option>
+												<option>Xe tay ga</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="">Giới hạn</label> <select class="form-control"
+												id="">
+												<option>10</option>
+												<option>20</option>
+												<option>50</option>
+												<option>80</option>
+												<option>100</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary">Tìm
+												kiếm</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="box box-result">
+								<table class="table table-hover" id="inOutTable">
+									<thead>
+										<tr>
+											<th class="checkbox-item"><input type="checkbox"
+												onclick="checkAll('items[]', this.checked ? 1 : 0)">
+											</th>
+											<th scope="col">ID</th>
+											<th scope="col">Mã thẻ</th>
+											<th scope="col">STT</th>
+											<th scope="col">Tên loại xe</th>
+											<th scope="col" style="width: 100px;">Kích hoạt thẻ</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="disabledCard : ${disabledCards}">
+											<td th:text="${{disabledCard.id}}"></td>
+											<td th:text="${{disabledCard.code}}"></td>
+											<td th:text="${{disabledCard.stt}}"></td>
+											<td th:text="${{disabledCard.vehicleId}}"></td>
+											<td width="15%">
+												<div style="padding-right: 10px; float: left;">
+													<a th:href="@{/cards/editVehicle/{id}/(id=${vehicle.id})}"
+														onclick="return confirm('Bạn muốn kích hoạt lại thẻ này?');">
+														<button class="btn-info">Kích hoạt</button>
+													</a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="form-group button-group d-flex flex-row">
+									<div class="form-group">
+										<input type="submit" value="Kích hoạt thẻ"
+											class="btn btn-success" style="font-size: 14px;">
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:insert="~{fragments/mainTemplate :: footer}"
+		class="main-footer d-flex justify-content-between"> </footer>
+	<script src="/js/orders.js"></script>
+</body>
+
+</html>

@@ -20,6 +20,8 @@ public interface CardsService {
     ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm);
     
     ResultObject<List<CardsDto>> findById(Long cardId);
+    
+    ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm);
 
 }
  

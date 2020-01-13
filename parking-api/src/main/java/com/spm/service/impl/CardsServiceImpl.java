@@ -98,5 +98,12 @@ public class CardsServiceImpl implements CardsService {
 		resultObj.setData(listCardDto);
 		return resultObj;
 	}
-
+	
+	@Override
+	public ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm){
+		List<CardsEntity> entities = cardRepository.findAllDisabledCard(Integer.valueOf(cardSearchForm.getDisable()));
+		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
+		resultObject.setData(this.map(entities));
+		return resultObject;
+	}
 }
