@@ -61,4 +61,14 @@ public class CardServiceImpl implements CardService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi.getData().get(0);
 	}
+	
+	@Override
+	public ResultObject<List<CardsDto>> getAllDisabledCard(CardSearchForm cardSearchForm) {
+		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
+		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_ALL_DISCARD;
+		finalURL = finalURL.replaceAll("::disable", cardSearchForm.getDisable()!= null ? cardSearchForm.getDisable():"");
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
 }

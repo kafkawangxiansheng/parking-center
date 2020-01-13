@@ -1,5 +1,7 @@
 package com.spm.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +16,8 @@ import com.spm.entity.CardsEntity;
 
 public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 
+	List<CardsEntity> findAllDisabledCard(int disable);
+	
 	@Query(
 			value = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:stt is null OR stt = :stt) AND (:vehicleId is null OR vehicle_id = :vehicleId) order by updated DESC",
 			countQuery = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:stt is null OR stt = :stt) AND (:vehicleId is null OR vehicle_id = :vehicleId) order by updated DESC",
@@ -21,4 +25,5 @@ public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 		)
 	Page<CardsEntity> search(@Param(value = "code") String code, @Param(value = "stt") String stt,
 			@Param(value = "vehicleId") String vehicleId, Pageable  pageable);
+	
 }

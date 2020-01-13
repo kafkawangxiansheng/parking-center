@@ -96,4 +96,15 @@ public class CardController {
 		return "editCardPage";
 	}
 	
+	@RequestMapping(value="active-card", method = { RequestMethod.GET})
+	public String getAllDisabledCard(Model model, HttpServletRequest request) throws UnauthorizedException {
+		String disable = "1";
+		CardSearchForm cardSearchForm = new CardSearchForm();
+		cardSearchForm.setDisable(disable);
+		model.addAttribute("cardSearchForm", cardSearchForm);
+		ResultObject<List<CardsDto>> result = cardService.getAllDisabledCard(cardSearchForm);
+		model.addAttribute("disabledCards", result.getData());
+		return "activeCardPage";
+	}
+	
 }

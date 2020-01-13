@@ -72,9 +72,18 @@ header .item5 {
 									<div class="form-body">
 										<form id="formVehicleData" th:action="@{/cards/addNewVehicle}"
 											th:object="${addVehicle}" method="POST">
-											<div class="form-group text">
+											<!-- <div class="form-group text">
 												<label for="name">Tên loại xe*</label> <input type="text"
 													th:field="*{name}" class="form-control" id="name" required="required">
+											</div> -->
+											<div class="form-group">
+												<label for="name">Tên loại xe*</label> 
+												<select th:field="*{name}" class="form-control" id="name" required="required">
+													<option value="xe đạp điện">Xe đạp điện</option>
+													<option value="xe oto">Xe oto</option>
+													<option value="xe máy">Xe máy</option>
+													<option value="xe tay ga">Xe tay ga</option>
+												</select>
 											</div>
 											<div class="form-group text">
 												<label for="code">Ký hiệu</label> <input type="text"
@@ -99,8 +108,9 @@ header .item5 {
 													<option value="2">Vé tháng</option>
 												</select>
 											</div>
-											<div>
-												<input type="text" th:field="*{project.id}" readonly="readonly">
+											<div class="form-group">
+												<label for="projectId">Dự án</label>
+												<input type="text" class="form-control" th:field="*{project.id}" readonly="readonly">
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">
