@@ -16,7 +16,7 @@ import com.spm.entity.CardsEntity;
 
 public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 
-	List<CardsEntity> findAllDisabledCard(int disable);
+	List<CardsEntity> findAllByDisable(int disable);
 	
 	@Query(
 			value = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:stt is null OR stt = :stt) AND (:vehicleId is null OR vehicle_id = :vehicleId) order by updated DESC",
