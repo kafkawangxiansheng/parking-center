@@ -1,5 +1,6 @@
 package com.spm.entity;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -52,8 +53,10 @@ public class EmployeeEntity {
 	private Date createdAt;
 
 	@Column(name="updated_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
+	private Long updatedAt;
+	
+	@Column(name="last_sync")
+	private Long lastSync;
 
 	public Long getId() {
 		return id;
@@ -128,6 +131,9 @@ public class EmployeeEntity {
 	}
 
 	public Date getCreatedAt() {
+		if(createdAt == null) {
+			createdAt = Calendar.getInstance().getTime();
+		}
 		return createdAt;
 	}
 
@@ -135,12 +141,23 @@ public class EmployeeEntity {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Long getUpdatedAt() {
+		if(updatedAt == null) {
+			updatedAt = Calendar.getInstance().getTime().getTime();
+		}
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(Long lastSync) {
+		this.lastSync = lastSync;
 	}
 
 }

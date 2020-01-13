@@ -24,7 +24,9 @@ public class EmployeeDto {
 	
 	private Date createdAt;
 	
-	private Date updatedAt;
+	private Long updatedAt;
+	
+	private Long lastSync;
 
 	public Long getId() {
 		return id;
@@ -106,12 +108,22 @@ public class EmployeeDto {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Long getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public Long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(Long lastSync) {
+		this.lastSync = lastSync;
+	}
+
+	
 
 }

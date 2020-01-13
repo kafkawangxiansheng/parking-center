@@ -105,7 +105,7 @@
 											<td th:text="${{employee.username}}"></td>
 											<td th:text="${{employee.password}}"></td>
 											<td th:text="${{employee.position}}"></td>
-											<td th:text="${{employee.gender}}"></td>
+											<td th:text="${{employee.gender?'Nam':'Nữ'}}"></td>
 											<td>
 												<div style="padding-right: 10px; float: left;">
 													<a
