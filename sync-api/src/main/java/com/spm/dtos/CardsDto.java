@@ -1,7 +1,5 @@
 package com.spm.dtos;
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CardsDto {
@@ -19,10 +17,10 @@ public class CardsDto {
 	private long monthlyCardId;
 
 	@JsonProperty("created")
-	private Date created;
+	private long created;
 
 	@JsonProperty("updated")
-	private Date updated;
+	private long updated;
 
 	@JsonProperty("disable")
 	private int disable;
@@ -79,19 +77,19 @@ public class CardsDto {
 		this.monthlyCardId = monthlyCardId;
 	}
 
-	public Date getCreated() {
+	public long getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(long created) {
 		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public long getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(long updated) {
 		this.updated = updated;
 	}
 
