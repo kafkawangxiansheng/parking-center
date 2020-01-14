@@ -13,5 +13,7 @@ public interface VehicleService {
 	ResultObject<List<VehicleDto>> findAll(VehicleSearchForm vehicleSearchForm);
 	ResultObject<List<VehicleDto>> findById(Long vehicleId);
 	void delete(Long vehicleId);
+	ResultObject<List<VehicleDto>> getListAll();
+	
 
 }

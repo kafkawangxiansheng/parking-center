@@ -104,4 +104,12 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		resultObj.setData(listProjectDto);
 		return resultObj;
 	}
+
+	@Override
+	public MonthlyCardDto findByCardCode(String cardCode) {
+		MonthlyCardEntity monthlyCardEntity = monthlyCardRepository.findByCardCode(cardCode);
+		MonthlyCardDto monthlyCardDto = new MonthlyCardDto();
+		mapper.map(monthlyCardEntity, monthlyCardDto);
+		return monthlyCardDto;
+	}
 }

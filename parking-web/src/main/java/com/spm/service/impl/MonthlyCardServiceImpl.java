@@ -66,6 +66,4 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 			e.printStackTrace();
 		}
 	}
-
-
 }

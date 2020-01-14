@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
+import com.spm.service.CardsService;
 import com.spm.service.MonthlyCardService;
 
 import io.swagger.annotations.Api;
@@ -29,12 +30,26 @@ public class MonthCardEndpoint{
 	@Autowired
 	private MonthlyCardService  monthCardsService;
 	
-	
+	@Autowired
+	private CardsService  cardsService;
 	
 	@RequestMapping(value = "/add", method = {RequestMethod.POST})
 	@ApiOperation("Add MonthlyCard")
 	public ResultObject<List<MonthlyCardDto>> addMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
-		return monthCardsService.save(monthlyCardDto);
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		// type ve thang
+		int cardType = 2;
+		boolean resultCheck = cardsService.checkCardAndCardType(monthlyCardDto.getCardCode(),cardType );
+		if(resultCheck) {
+			// check card used on monthlyCard
+			MonthlyCardDto monthlyCardDtoSource = monthCardsService.findByCardCode(monthlyCardDto.getCardCode());
+			if(monthlyCardDtoSource == null) {
+				resultObject =  monthCardsService.save(monthlyCardDto);
+			}
+		}else {
+			resultObject = null;
+		}
+		return resultObject;
 	}
 	
 	@RequestMapping(value = "/update", method = {RequestMethod.PUT})

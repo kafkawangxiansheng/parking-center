@@ -19,6 +19,7 @@ public class URLConstants {
 	
 	public static final String URL_ADD_CARD = MAIN_DOMAIN + "/cards/add";
 	public static final String URL_GET_CARD_BY_ID = MAIN_DOMAIN + "/cards/getById/?cardId=::cardId";
+	public static final String URL_GET_LIST_BY_CODE_AND_VEHICLE_CARD_TYPE = MAIN_DOMAIN + "/card/getCodeAndVehicleCardType?code=::code&cardType=::cardType";
 	
 	public static final String URL_GET_ALL_COMPANIES = MAIN_DOMAIN + "/company";
 	public static final String URL_GET_LIST_COMPANIES = MAIN_DOMAIN + "/company/listAllCompanies";
@@ -44,7 +45,6 @@ public class URLConstants {
 	public static final String URL_GET_MONTHLY_CARD_BY_ID = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardById?id=::id";
 	public static final String URL_POST_ADD_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/add";
 	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
-	public static final String URL_GET_MONTHLY_CARD_BY_CARD_CODE = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardByCardCode?cardCode=::cardCode";
 	
 	public static final String URL_GET_ALL_DISCARD = MAIN_DOMAIN + "/cards/disabledCard/?disable=::disable";
 }

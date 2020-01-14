@@ -19,6 +19,9 @@ public interface MonthlyCardService {
     ResultObject<List<MonthlyCardDto>> findAll();
     
     ResultObject<List<MonthlyCardDto>> findById(Long id);
+    
+    MonthlyCardDto findByCardCode(String cardCode);
+    
 
 }
  

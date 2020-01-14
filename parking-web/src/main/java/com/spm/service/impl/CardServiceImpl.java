@@ -71,4 +71,5 @@ public class CardServiceImpl implements CardService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+
 }

@@ -12,5 +12,5 @@ public interface VehicleService {
 	ResultObject<List<VehicleDto>> addVehicle(VehicleDto vehicleDto);
 	VehicleDto getVehicleById(Long vehicleId);
 	void deleteVehicle(Long vehicleId);
-
+	ResultObject<List<VehicleDto>> getListAllVehicle();
 }

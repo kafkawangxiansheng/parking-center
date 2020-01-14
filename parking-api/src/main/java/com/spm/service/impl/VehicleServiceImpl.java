@@ -97,4 +97,12 @@ public class VehicleServiceImpl implements VehicleService{
 		vehicleRepository.deleteById(vehicleId);
 	}
 
+	@Override
+	public ResultObject<List<VehicleDto>> getListAll() {
+		List<VehicleEntity> entities = vehicleRepository.findAll();
+		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
+		resultObject.setData(this.map(entities));
+		return resultObject;
+	}
+
 }

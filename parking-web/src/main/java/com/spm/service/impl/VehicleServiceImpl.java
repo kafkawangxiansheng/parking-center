@@ -67,5 +67,14 @@ public class VehicleServiceImpl implements VehicleService{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public ResultObject<List<VehicleDto>> getListAllVehicle() {
+		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
+		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_LIST_ALL_VEHICLE;
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
 	
 }

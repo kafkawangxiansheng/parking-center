@@ -62,5 +62,12 @@ public class VehicleEndpoint {
 	public void delete(@PathVariable("id") Long vehicleId) {
 		vehicleService.delete(vehicleId);
 	}
+	
+	@RequestMapping(value="getListAll", method = {RequestMethod.GET})
+	@ApiOperation("Get VehicleId")
+	public @ResponseBody ResultObject<List<VehicleDto>> getListAll() {
+		return vehicleService.getListAll();
+	}
+	
 
 }

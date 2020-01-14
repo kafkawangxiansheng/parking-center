@@ -106,4 +106,16 @@ public class CardsServiceImpl implements CardsService {
 		resultObject.setData(this.map(entities));
 		return resultObject;
 	}
+
+
+	@Override
+	public boolean checkCardAndCardType(String code, int cardType) {
+		CardsEntity cardEntity = cardRepository.findByCodeAndVehicleCardType(code, cardType);
+		if(cardEntity != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }

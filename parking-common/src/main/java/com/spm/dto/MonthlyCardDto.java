@@ -6,7 +6,9 @@ public class MonthlyCardDto {
 	
 	private Long id;
 	
-	private long cardId;
+	private CardsDto card;
+	
+	private String cardCode;
 	
 	private String cardNumber;
 	
@@ -24,7 +26,7 @@ public class MonthlyCardDto {
 	
 	private long parkingFee;
 	
-	private long vehicleId;
+	private VehicleDto vehicle;
 	
 	private long startDate;
 	
@@ -38,11 +40,11 @@ public class MonthlyCardDto {
 	
 	private long adminId;
 	
-	private long companyId;
+	private CompanyDto companyDto;
 	
 	private Long areaId;
 	
-	private Long projectId;
+	private ProjectsDto project;
 	
 	private String startDateString;
 	
@@ -56,12 +58,12 @@ public class MonthlyCardDto {
 		this.id = id;
 	}
 
-	public long getCardId() {
-		return cardId;
+	public CardsDto getCard() {
+		return card;
 	}
 
-	public void setCardId(long cardId) {
-		this.cardId = cardId;
+	public void setCard(CardsDto card) {
+		this.card = card;
 	}
 
 	public String getCardNumber() {
@@ -128,12 +130,12 @@ public class MonthlyCardDto {
 		this.parkingFee = parkingFee;
 	}
 
-	public long getVehicleId() {
-		return vehicleId;
+	public VehicleDto getVehicle() {
+		return vehicle;
 	}
 
-	public void setVehicleId(long vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setVehicle(VehicleDto vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public long getStartDate() {
@@ -184,12 +186,12 @@ public class MonthlyCardDto {
 		this.adminId = adminId;
 	}
 
-	public long getCompanyId() {
-		return companyId;
+	public CompanyDto getCompanyDto() {
+		return companyDto;
 	}
 
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
+	public void setCompanyDto(CompanyDto companyDto) {
+		this.companyDto = companyDto;
 	}
 
 	public Long getAreaId() {
@@ -200,12 +202,12 @@ public class MonthlyCardDto {
 		this.areaId = areaId;
 	}
 
-	public Long getProjectId() {
-		return projectId;
+	public ProjectsDto getProject() {
+		return project;
 	}
 
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+	public void setProject(ProjectsDto project) {
+		this.project = project;
 	}
 
 	public String getStartDateString() {
@@ -223,5 +225,13 @@ public class MonthlyCardDto {
 	public void setEndDateString(String endDateString) {
 		this.endDateString = endDateString;
 	}
-	
+
+	public String getCardCode() {
+		return cardCode;
+	}
+
+	public void setCardCode(String cardCode) {
+		this.cardCode = cardCode;
+	}
+
 }

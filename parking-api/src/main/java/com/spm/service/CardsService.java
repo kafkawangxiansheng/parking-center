@@ -22,6 +22,8 @@ public interface CardsService {
     ResultObject<List<CardsDto>> findById(Long cardId);
     
     ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm);
+    
+    boolean checkCardAndCardType(String code, int cardType);
 
 }
  

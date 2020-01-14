@@ -1,6 +1,5 @@
 package com.spm.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,10 +21,12 @@ import com.spm.dto.CompanyDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ProjectsDto;
 import com.spm.dto.ResultObject;
+import com.spm.dto.VehicleDto;
 import com.spm.exception.UnauthorizedException;
 import com.spm.service.CompanyService;
 import com.spm.service.MonthlyCradService;
 import com.spm.service.ProjectService;
+import com.spm.service.VehicleService;
 
 @Controller
 @RequestMapping(path = "/monthlyCard")
@@ -33,6 +34,9 @@ public class MonthlyCardController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private VehicleService vehicleService;
 	
 	@Autowired
 	private MonthlyCradService monthlyCradService;
@@ -80,7 +84,9 @@ public class MonthlyCardController {
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
 		model.addAttribute("listCompany", companyMap.getData());
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProject", projectMap.getData());	
+		model.addAttribute("listProject", projectMap.getData());
+		ResultObject<List<VehicleDto>> vehicleMap = vehicleService.getListAllVehicle();
+		model.addAttribute("listVehicle", vehicleMap.getData());
 		return "addMonthlyCardForm";
 	}
 	
@@ -105,7 +111,6 @@ public class MonthlyCardController {
 	
 	@RequestMapping(value = "/add", method= {RequestMethod.POST,RequestMethod.PUT})
 	public  String doAddMonthlyCard(Model model, @Valid @ModelAttribute("monthlyCardDto") MonthlyCardDto monthlyCardDto) throws UnauthorizedException, ParseException{
-		
 		long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
 		long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
 		monthlyCardDto.setStartDate(startDateLong);

@@ -10,4 +10,5 @@ import com.spm.entity.MonthlyCardEntity;
 
 public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity, Long> {
 
+	MonthlyCardEntity findByCardCode(String cardCode);
 }

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +20,13 @@ public class MonthlyCardEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="card_id")
-	private long cardId;
+	@ManyToOne
+	@JoinColumn(name="card_id")
+	private CardsEntity card;
+	
+	@ManyToOne
+	@JoinColumn(name="vehicle_id")
+	private VehicleEntity vehicle;
 	
 	@Column(name="car_number")
 	private String cardNumber;
@@ -45,9 +52,6 @@ public class MonthlyCardEntity {
 	@Column(name="parking_fee")
 	private long parkingFee;
 	
-	@Column(name="vehicle_id")
-	private long vehicleId;
-	
 	@Column(name="start_date")
 	private long startDate;
 	
@@ -66,14 +70,16 @@ public class MonthlyCardEntity {
 	@Column(name="admin_id")
 	private long adminId;
 	
-	@Column(name="company_id")
-	private long companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private CompanyEntity companyDto;
 	
 	@Column(name="area_id")
 	private Long areaId;
 	
-	@Column(name="project_id")
-	private Long projectId;
+	@ManyToOne
+	@JoinColumn(name="project_id")
+	private ProjectsEntity project;
 
 	public Long getId() {
 		return id;
@@ -83,12 +89,20 @@ public class MonthlyCardEntity {
 		this.id = id;
 	}
 
-	public long getCardId() {
-		return cardId;
+	public CardsEntity getCard() {
+		return card;
 	}
 
-	public void setCardId(long cardId) {
-		this.cardId = cardId;
+	public void setCard(CardsEntity card) {
+		this.card = card;
+	}
+
+	public VehicleEntity getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(VehicleEntity vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public String getCardNumber() {
@@ -155,14 +169,6 @@ public class MonthlyCardEntity {
 		this.parkingFee = parkingFee;
 	}
 
-	public long getVehicleId() {
-		return vehicleId;
-	}
-
-	public void setVehicleId(long vehicleId) {
-		this.vehicleId = vehicleId;
-	}
-
 	public long getStartDate() {
 		return startDate;
 	}
@@ -211,12 +217,12 @@ public class MonthlyCardEntity {
 		this.adminId = adminId;
 	}
 
-	public long getCompanyId() {
-		return companyId;
+	public CompanyEntity getCompanyDto() {
+		return companyDto;
 	}
 
-	public void setCompanyId(long companyId) {
-		this.companyId = companyId;
+	public void setCompanyDto(CompanyEntity companyDto) {
+		this.companyDto = companyDto;
 	}
 
 	public Long getAreaId() {
@@ -227,13 +233,12 @@ public class MonthlyCardEntity {
 		this.areaId = areaId;
 	}
 
-	public Long getProjectId() {
-		return projectId;
+	public ProjectsEntity getProject() {
+		return project;
 	}
 
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+	public void setProject(ProjectsEntity project) {
+		this.project = project;
 	}
-	
-	
+
 }
