@@ -60,6 +60,8 @@ public class InOutController {
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setHourFrom(hourFrom);
 		orderSearchForm.setMinFrom(minFrom);
+		orderSearchForm.setCardStt(cardStt);
+		orderSearchForm.setCarNumber(carNumber);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
 			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
 			orderSearchForm.setHourFrom("00");
@@ -143,6 +145,8 @@ public class InOutController {
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setHourFrom(hourFrom);
 		orderSearchForm.setMinFrom(minFrom);
+		orderSearchForm.setCardStt(cardStt);
+		orderSearchForm.setCarNumber(carNumber);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
 			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
 			orderSearchForm.setHourFrom("00");
