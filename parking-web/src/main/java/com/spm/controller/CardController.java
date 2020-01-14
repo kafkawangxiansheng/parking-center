@@ -76,7 +76,13 @@ public class CardController {
 			}
 		}
 		
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
+		vehicleSearchForm.setProjectId(projects.get(0));
+		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
+		
 		model.addAttribute("cards", result.getData());
+		model.addAttribute("vehicles", vehicles.getData());
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("maxPage", result.getTotalPages());
 		model.addAttribute("currentPage", page+1);
@@ -104,9 +110,15 @@ public class CardController {
 	}
 	
 	@RequestMapping (value="editCard/{cardId}", method = { RequestMethod.GET})
-	public String editCard(Model model, @PathVariable("cardId")Long cardId) throws UnauthorizedException{
+	public String editCard(Model model, HttpServletRequest request, @PathVariable("cardId")Long cardId) throws UnauthorizedException{
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
+		vehicleSearchForm.setProjectId(projects.get(0));
+		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
 		CardsDto result = cardService.getCardById(cardId);
+		
 		model.addAttribute("editCard", result);
+		model.addAttribute("vehicles", vehicles.getData());
 		return "editCardPage";
 	}
 	
@@ -119,6 +131,12 @@ public class CardController {
 		ResultObject<List<CardsDto>> result = cardService.getAllDisabledCard(cardSearchForm);
 		model.addAttribute("disabledCards", result.getData());
 		return "activeCardPage";
+	}
+	
+	@RequestMapping(value="/activeCard/{id}", method= {RequestMethod.GET})
+	public String activeCard(Model model, @PathVariable("id") int cardId) throws UnauthorizedException{
+		cardService.activeCard(cardId);
+		return "redirect:/cards/active-card";
 	}
 	
 }

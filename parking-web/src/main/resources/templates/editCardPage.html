@@ -8,9 +8,9 @@
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
 <style>
-	header .item5 {
-		background: black;
-	}
+header .item5 {
+	background: black;
+}
 </style>
 </head>
 
@@ -25,6 +25,24 @@
 		</div>
 	</header>
 	<div id="main">
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/cards/vehicle">Tạo loại xe</a></li>
+							<li class="nav-item"><a class="nav-link" href="/cards"
+								style="color: #000; background: #fff;">Danh sách thẻ xe</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/cards/active-card">Kích hoạt thẻ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -37,7 +55,7 @@
 											chủ</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Quản lý thẻ xe</span>
+								<li><a href="#"> <span>Danh sách thẻ xe</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
 								<li><a href="#"> <span>Chỉnh sửa</span>
@@ -53,23 +71,21 @@
 									<div class="form-body">
 										<form id="formCardsData" th:action="@{/cards/addNewCard}"
 											th:object="${editCard}" method="POST">
-											<input type="hidden"
-													th:field="*{id}" class="form-control" id="id">
+											<input type="hidden" th:field="*{id}" class="form-control"
+												id="id">
 											<div class="form-group text">
-												<label for="stt">STT*</label> <input type="text"
+												<label for="stt">Mã số thẻ*</label> <input type="text"
 													th:field="*{stt}" class="form-control" id="stt">
 											</div>
 											<div class="form-group text">
-												<label for="code">Mã thẻ</label> <input type="text"
+												<label for="code">Mã chip</label> <input type="text"
 													th:field="*{code}" class="form-control" id="code">
 											</div>
 											<div class="form-group">
-												<label for="vehicle_id">Tên loại xe</label> 
-												<select th:field="*{vehicleId}" class="form-control">
-													<option value="1">Xe đạp điện</option>
-													<option value="2">Xe oto</option>
-													<option value="3">Xe máy</option>
-													<option value="3">Xe tay ga</option>
+												<label for="">Tên loại xe</label> <select name="vehicleId"
+													class="form-control" id="">
+													<option th:each="vehicle : ${vehicles}"
+														th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
 												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">

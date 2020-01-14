@@ -118,4 +118,12 @@ public class CardsServiceImpl implements CardsService {
 		}
 	}
 
+	@Override
+	public void activebyId(int cardId) {
+		CardsEntity entity = cardRepository.findById(Long.valueOf(cardId)).get();
+		entity.setDisable(0);
+		entity.setUpdated(entity.getUpdated()+1);
+		cardRepository.save(entity);
+	}
+
 }

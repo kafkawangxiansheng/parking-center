@@ -49,13 +49,13 @@ header .item5 {
 					<div class="content-wrapper">
 						<section
 							class="content-header d-flex justify-content-between align-items-center">
-							<h1 class="m-0">Quản lý thẻ xe</h1>
+							<h1 class="m-0">Danh sách thẻ xe</h1>
 							<ul class="breadcrump d-flex flex-row p-0 m-0">
 								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
 											chủ</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Quản lý thẻ xe</span>
+								<li><a href="#"> <span>Danh sách thẻ xe</span>
 								</a></li>
 							</ul>
 						</section>
@@ -68,34 +68,22 @@ header .item5 {
 									<form th:action="@{/cards}" th:object="${cardSearchForm}"
 										method="GET">
 										<div class="form-group text col-lg-3 float-left">
-											<label for="option1">Mã thẻ</label> <input type="text"
+											<label for="option1">Mã chip</label> <input type="text"
 												th:field="*{code}" class="form-control" id="code">
 										</div>
 										<div class="form-group text col-lg-3 float-left">
-											<label for="option1">STT</label> <input type="text"
+											<label for="option1">Mã số thẻ</label> <input type="text"
 												th:field="*{stt}" class="form-control" id="stt">
 										</div>
 										<div class="form-group col-lg-3 float-left">
 											<label for="">Tên loại xe</label> <select name="vehicleId"
-												class="form-control" id="">
-												<option value="">Chọn loại xe</option>
-												<option value="1">Xe đạp điện</option>
-												<option value="2">Xe oto</option>
-												<option value="3">Xe máy</option>
-												<option value="3">Xe tay ga</option>
-											</select>
+													class="form-control" id="">
+													<option value="">Tất cả</option>
+													<option th:each="vehicle : ${vehicles}"
+														th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
+												</select>
 										</div>
 										<div class="form-group col-lg-3 float-left">
-											<label for="">Giới hạn</label> <select class="form-control"
-												id="">
-												<option>10</option>
-												<option>20</option>
-												<option>50</option>
-												<option>80</option>
-												<option>100</option>
-											</select>
-										</div>
-										<div class="form-group">
 											<button type="submit" class="btn btn-primary">Tìm
 												kiếm</button>
 										</div>
@@ -107,8 +95,8 @@ header .item5 {
 									<thead>
 										<tr>
 											<th scope="col" style="width: 50px;">ID</th>
-											<th scope="col">Mã thẻ</th>
-											<th scope="col">STT</th>
+											<th scope="col">Mã chip</th>
+											<th scope="col">Mã số thẻ</th>
 											<th scope="col">Tên loại xe</th>
 											<th scope="col" style="width: 100px;">Chỉnh sửa</th>
 										</tr>

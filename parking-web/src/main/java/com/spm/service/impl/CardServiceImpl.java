@@ -72,4 +72,11 @@ public class CardServiceImpl implements CardService{
 		return resultFromApi;
 	}
 
+	@Override
+	public void activeCard(int cardId) {
+		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
+		String finalURL = URLConstants.URL_ACTIVE_CARD.replace("::cardId", String.valueOf(cardId));
+		restUtils.get(finalURL);
+	}
+
 }

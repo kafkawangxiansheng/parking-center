@@ -121,7 +121,7 @@ header .item5 {
 											<td th:text="${{disabledCard.vehicleId}}"></td>
 											<td width="15%">
 												<div style="padding-right: 10px; float: left;">
-													<a th:href="aaa"
+													<a th:href="@{/cards/activeCard/{id}/(id=${disabledCard.id})}"
 														onclick="return confirm('Bạn muốn kích hoạt lại thẻ này?');">
 														<button class="btn-info">Kích hoạt</button>
 													</a>
@@ -130,12 +130,6 @@ header .item5 {
 										</tr>
 									</tbody>
 								</table>
-								<div class="form-group button-group d-flex flex-row">
-									<div class="form-group">
-										<input type="submit" value="Kích hoạt thẻ"
-											class="btn btn-success" style="font-size: 14px;">
-									</div>
-								</div>
 							</div>
 						</section>
 					</div>

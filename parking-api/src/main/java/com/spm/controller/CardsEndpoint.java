@@ -81,4 +81,10 @@ public class CardsEndpoint {
 		return cardsService.findAllDisabledCard(cardSearchForm);
 	}
 	
+	@RequestMapping(value="/activeCard", method = { RequestMethod.GET })
+	@ApiOperation("Active Card")
+	public void activeCardById(@RequestParam(name="cardId") int cardId) {
+		cardsService.activebyId(cardId);
+	}
+	
 }
