@@ -33,9 +33,9 @@ header .item5 {
 							class="nav nav-submenu align-items-center d-flex justify-content-center"
 							style="height: 50px;">
 							<li class="nav-item" style="border-left: 2px solid #fff;"><a
-								class="nav-link" href="/cards">Quản lý thẻ xe</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/cards/vehicle">Quản lý loại xe</a></li>
+								class="nav-link" href="/cards/vehicle">Tạo loại xe</a></li>
+							<li class="nav-item"><a class="nav-link" href="/cards">Danh
+									sách thẻ xe</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="/cards/active-card" style="color: #000; background: #fff;">Kích
 									hoạt thẻ</a></li>
@@ -106,14 +106,11 @@ header .item5 {
 								<table class="table table-hover" id="inOutTable">
 									<thead>
 										<tr>
-											<th class="checkbox-item"><input type="checkbox"
-												onclick="checkAll('items[]', this.checked ? 1 : 0)">
-											</th>
 											<th scope="col">ID</th>
 											<th scope="col">Mã thẻ</th>
 											<th scope="col">STT</th>
 											<th scope="col">Tên loại xe</th>
-											<th scope="col" style="width: 100px;">Kích hoạt thẻ</th>
+											<th scope="col" style="width: 100px;">Kích hoạt</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -124,7 +121,7 @@ header .item5 {
 											<td th:text="${{disabledCard.vehicleId}}"></td>
 											<td width="15%">
 												<div style="padding-right: 10px; float: left;">
-													<a th:href="@{/cards/editVehicle/{id}/(id=${vehicle.id})}"
+													<a th:href="aaa"
 														onclick="return confirm('Bạn muốn kích hoạt lại thẻ này?');">
 														<button class="btn-info">Kích hoạt</button>
 													</a>

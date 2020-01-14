@@ -8,9 +8,9 @@
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
 <style>
-	header .item5 {
-		background: black;
-	}
+header .item5 {
+	background: black;
+}
 </style>
 </head>
 
@@ -25,6 +25,24 @@
 		</div>
 	</header>
 	<div id="main">
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/cards/vehicle">Tạo loại xe</a></li>
+							<li class="nav-item"><a class="nav-link" href="/cards"
+								style="color: #000; background: #fff;">Danh sách thẻ xe</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/cards/active-card">Kích hoạt thẻ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -64,10 +82,11 @@
 											<div class="form-group">
 												<label for="">Tên loại xe</label> <select name="vehicleId"
 													class="form-control" id="">
-													<option value="1">Xe đạp điện</option>
-													<option value="2">Xe oto</option>
+													<option value="">Chọn loại xe</option>
+													<option th:each="vehicle : ${vehicles}" th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
+													<!-- <option value="2">Xe oto</option>
 													<option value="3">Xe máy</option>
-													<option value="3">Xe tay ga</option>
+													<option value="3">Xe tay ga</option> -->
 												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">

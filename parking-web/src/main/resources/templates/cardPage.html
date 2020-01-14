@@ -8,9 +8,9 @@
 <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
 <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
 <style>
-	header .item5 {
-		background: black;
-	}
+header .item5 {
+	background: black;
+}
 </style>
 </head>
 
@@ -25,25 +25,24 @@
 		</div>
 	</header>
 	<div id="main">
-	<div class="header-submenu position-relative">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-                            style="height: 50px;">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/cards/vehicle">Tạo Loại Xe</a>
-                            </li><li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="/cards" style="color: #000; background: #fff;"
-                                >Danh Sách Thẻ Xe</a>
-                            </li>
-                            <li class="nav-item"> <a class="nav-link" href="/cards/active-card">Kích Hoạt Thẻ</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="header-submenu position-relative">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<ul
+							class="nav nav-submenu align-items-center d-flex justify-content-center"
+							style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;"><a
+								class="nav-link" href="/cards/vehicle">Tạo loại xe</a></li>
+							<li class="nav-item"><a class="nav-link" href="/cards"
+								style="color: #000; background: #fff;">Danh sách thẻ xe</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/cards/active-card">Kích hoạt thẻ</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -120,7 +119,8 @@
 											<td th:text="${{card.code}}"></td>
 											<td th:text="${{card.stt}}"></td>
 											<td th:text="${{card.vehicleId}}"></td>
-											<td><a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh sửa</a></td>
+											<td><a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh
+													sửa</a></td>
 										</tr>
 									</tbody>
 								</table>

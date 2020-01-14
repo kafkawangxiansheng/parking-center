@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spm.common.util.constant.SessionConstants;
 import com.spm.constants.PagingConstants;
 import com.spm.dto.CardsDto;
 import com.spm.dto.ResultObject;
+import com.spm.dto.VehicleDto;
 import com.spm.exception.UnauthorizedException;
 import com.spm.search.form.CardSearchForm;
+import com.spm.search.form.VehicleSearchForm;
 import com.spm.service.CardService;
+import com.spm.service.VehicleService;
 
 @Controller
 @RequestMapping(path = "/cards")
@@ -29,6 +33,9 @@ public class CardController {
 
 	@Autowired
 	CardService cardService;
+	
+	@Autowired
+	VehicleService vehicleService;
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String index(
@@ -78,8 +85,15 @@ public class CardController {
 	}
 	
 	@RequestMapping (value="addNewCard", method = { RequestMethod.GET})
-	public String showAddNewCardPage(Model model)throws UnauthorizedException{
+	public String showAddNewCardPage(Model model, HttpServletRequest request)throws UnauthorizedException{
+		
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
+		vehicleSearchForm.setProjectId(projects.get(0));
+		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
+		
 		model.addAttribute("addCard", new CardsDto());
+		model.addAttribute("vehicles", vehicles.getData());
 		return "addNewCardPage";
 	}
 	
