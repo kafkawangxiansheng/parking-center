@@ -13,4 +13,5 @@ public interface CardService {
 	ResultObject<List<CardsDto>> addCard(CardsDto cardsDto);
 	CardsDto getCardById(Long cardId);
 	ResultObject<List<CardsDto>> getAllDisabledCard(CardSearchForm cardSearchForm);
+	void activeCard(int cardId);
 }

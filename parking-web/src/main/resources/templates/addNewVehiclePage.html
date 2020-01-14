@@ -56,7 +56,7 @@ header .item5 {
 											chủ</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Quản lý loại xe</span>
+								<li><a href="#"> <span>Tạo loại xe</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
 								<li><a href="#"> <span>Thêm mới</span>
@@ -74,7 +74,8 @@ header .item5 {
 											th:object="${addVehicle}" method="POST">
 											<div class="form-group text">
 												<label for="name">Tên loại xe*</label> <input type="text"
-													th:field="*{name}" class="form-control" id="name" required="required">
+													th:field="*{name}" class="form-control" id="name"
+													required="required">
 											</div>
 											<div class="form-group text">
 												<label for="code">Ký hiệu</label> <input type="text"
@@ -86,22 +87,23 @@ header .item5 {
 													id="monthlyCost">
 											</div>
 											<div class="form-group">
-												<label for="type">Loại xe</label> 
-												<select th:field="*{type}" class="form-control" id="type">
+												<label for="type">Loại xe</label> <select th:field="*{type}"
+													class="form-control" id="type">
 													<option value="1">Xe máy</option>
 													<option value="2">Xe oto</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<label for="cardType">Loại vé</label> 
-												<select th:field="*{cardType}" class="form-control" id="cardType">
+												<label for="cardType">Loại vé</label> <select
+													th:field="*{cardType}" class="form-control" id="cardType">
 													<option value="1">Vé thường</option>
 													<option value="2">Vé tháng</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<label for="projectId">Dự án</label>
-												<input type="text" class="form-control" th:field="*{project.id}" readonly="readonly">
+												<label for="projectId">Dự án</label> <input type="text"
+													class="form-control" th:field="*{project.id}"
+													readonly="readonly">
 											</div>
 											<div class="form-group button-group d-flex flex-row">
 												<div class="form-group">

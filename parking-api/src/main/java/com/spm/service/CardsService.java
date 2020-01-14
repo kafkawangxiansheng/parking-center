@@ -24,6 +24,8 @@ public interface CardsService {
     ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm);
     
     boolean checkCardAndCardType(String code, int cardType);
+    
+    void activebyId(int cardId);
 
 }
  

@@ -47,4 +47,5 @@ public class URLConstants {
 	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
 	
 	public static final String URL_GET_ALL_DISCARD = MAIN_DOMAIN + "/cards/disabledCard/?disable=::disable";
+	public static final String URL_ACTIVE_CARD = MAIN_DOMAIN + "/cards/activeCard/?cardId=::cardId";
 }

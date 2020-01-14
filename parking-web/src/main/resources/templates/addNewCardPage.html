@@ -55,7 +55,7 @@ header .item5 {
 											chủ</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Quản lý thẻ xe</span>
+								<li><a href="#"> <span>Danh sách thẻ xe</span>
 								</a></li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
 								<li><a href="#"> <span>Thêm mới</span>
@@ -72,21 +72,18 @@ header .item5 {
 										<form id="formCardsData" th:action="@{/cards/addNewCard}"
 											th:object="${addCard}" method="POST">
 											<div class="form-group text">
-												<label for="stt">STT*</label> <input type="text"
+												<label for="stt" required="required">Mã số thẻ*</label> <input type="text"
 													th:field="*{stt}" class="form-control" id="stt">
 											</div>
 											<div class="form-group text">
-												<label for="code">Mã thẻ</label> <input type="text"
+												<label for="code" required="required">Mã chip</label> <input type="text"
 													th:field="*{code}" class="form-control" id="code">
 											</div>
 											<div class="form-group">
 												<label for="">Tên loại xe</label> <select name="vehicleId"
 													class="form-control" id="">
-													<option value="">Chọn loại xe</option>
-													<option th:each="vehicle : ${vehicles}" th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
-													<!-- <option value="2">Xe oto</option>
-													<option value="3">Xe máy</option>
-													<option value="3">Xe tay ga</option> -->
+													<option th:each="vehicle : ${vehicles}"
+														th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
 												</select>
 											</div>
 											<div class="form-group button-group d-flex flex-row">
