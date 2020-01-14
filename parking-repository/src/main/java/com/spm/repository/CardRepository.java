@@ -29,5 +29,5 @@ public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 	@Query(value = "SELECT c.* FROM cards as c INNER JOIN vehicles as v on c.vehicle_id = v.id AND v.card_type = :cardType AND c.code = :code",
 			nativeQuery = true
 		)
-	CardsEntity findByCodeAndVehicleCardType(String code, int cardType);
+	CardsEntity findByCodeAndVehicleCardType(@Param(value = "code") String code, @Param(value = "cardType") int cardType);
 }
