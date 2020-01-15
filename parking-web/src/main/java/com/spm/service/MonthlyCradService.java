@@ -14,4 +14,6 @@ public interface MonthlyCradService {
 	
 	void deleteMonthlyCard(Long id);
 	
+	boolean updateMonthlyCard(MonthlyCardDto monthlyCardDto);
+	
 }

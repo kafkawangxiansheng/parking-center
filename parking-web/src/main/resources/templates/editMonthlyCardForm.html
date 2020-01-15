@@ -83,7 +83,7 @@
                                 <div class="box-body p-2">
                                     <div class="form-body">
                                         <form id="formMonthlyCardsData" 
-                                        th:action="@{/monthlyCard/add}" th:object="${monthlyCardDto}" method="POST">
+                                        th:action="@{/monthlyCard/update}" th:object="${monthlyCardDto}" method="POST">
                                         	<div class="form-group text">
 								                <label for="option1">ID</label>
 								                <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">

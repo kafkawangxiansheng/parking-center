@@ -57,7 +57,6 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		}else {
 			return false;
 		}
-		
 	}
 	
 	@Override
@@ -71,4 +70,28 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public boolean updateMonthlyCard(MonthlyCardDto monthlyCardDto) {
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(monthlyCardDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_POST_UPDATE_MONTHLY_CARD, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }

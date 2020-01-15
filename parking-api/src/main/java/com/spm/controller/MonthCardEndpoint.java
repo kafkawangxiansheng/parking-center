@@ -41,12 +41,13 @@ public class MonthCardEndpoint{
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 		// type ve thang
 		int cardType = 2;
-		CardsDto cardsDto =  cardsService.checkCardAndCardType(monthlyCardDto.getCardcode(),cardType );
+		CardsDto cardsDto =  checkCard(monthlyCardDto.getCardcode(), cardType);
 		if(cardsDto != null ) {
 			// check card used on monthlyCard
 			MonthlyCardEntity monthlyCardEntity = monthCardsService.findByCardCode(monthlyCardDto.getCardcode());
 			if(monthlyCardEntity == null) {
 				monthlyCardDto.setCard(cardsDto);
+				monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
 				resultObject =  monthCardsService.save(monthlyCardDto);
 			}else {
 				resultObject = null;
@@ -57,10 +58,34 @@ public class MonthCardEndpoint{
 		return resultObject;
 	}
 	
-	@RequestMapping(value = "/update", method = {RequestMethod.PUT})
-	@ApiOperation("Update monthly card")
-	public void updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
-		monthCardsService.save(monthlyCardDto);
+	@RequestMapping(value = "/update", method = {RequestMethod.POST})
+	@ApiOperation("Update MonthlyCard")
+	public ResultObject<List<MonthlyCardDto>> updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		
+		MonthlyCardDto monthlyCardDtoSource = monthCardsService.findById(monthlyCardDto.getId()).getData().get(0);
+		if(monthlyCardDtoSource.getCard().getCode().equals(monthlyCardDto.getCardcode())) {
+			monthlyCardDto.setCard(monthlyCardDtoSource.getCard());
+			resultObject =  monthCardsService.save(monthlyCardDto);
+		}else {
+			// type ve thang
+			int cardType = 2;
+			CardsDto cardsDto =  checkCard(monthlyCardDto.getCardcode(), cardType);
+			if(cardsDto != null ) {
+				// check card used on monthlyCard
+				MonthlyCardEntity monthlyCardEntity = monthCardsService.findByCardCode(monthlyCardDto.getCardcode());
+				if(monthlyCardEntity == null) {
+					monthlyCardDto.setCard(cardsDto);
+					monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
+					resultObject =  monthCardsService.save(monthlyCardDto);
+				}else {
+					resultObject = null;
+				}
+			}else {
+				resultObject = null;
+			}
+		}
+		return resultObject;
 	}
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})
@@ -79,6 +104,13 @@ public class MonthCardEndpoint{
 	@ApiOperation("This method support us can delete the specific monthCard by id")
 	public void delete(@PathVariable("id") Long id) {
 		monthCardsService.delete(id);
+	}
+	
+	@RequestMapping(path="/checkCard", method = {RequestMethod.GET})
+	@ApiOperation("input : string code in Cards, int cardType int Vehicles,  return :  cardsDto")
+	public CardsDto checkCard(@RequestParam(name="cardcode") String code, @RequestParam(name="cardType") int cardType ) {
+		CardsDto cardsDto =  cardsService.checkCardAndCardType(code,cardType );
+		return cardsDto;
 	}
 	
 }

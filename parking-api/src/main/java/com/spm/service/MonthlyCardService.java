@@ -22,5 +22,6 @@ public interface MonthlyCardService {
     ResultObject<List<MonthlyCardDto>> findById(Long id);
     
     MonthlyCardEntity findByCardCode(String cardCode);
+    
 }
  
