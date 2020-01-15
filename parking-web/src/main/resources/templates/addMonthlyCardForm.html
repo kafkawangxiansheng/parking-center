@@ -80,29 +80,33 @@
                                 <div class="box-header d-flex" style="padding: 10px;">
                                     <i class="fas fa-pen-square" style="font-size: 18px;"></i>
                                 </div>
+                                
+                                <div th:if="${errorMessage}" th:utext="${errorMessage}"
+         							style="color:red;font-style:italic;"></div>
+         							
                                 <div class="box-body p-2">
                                     <div class="form-body">
                                         <form id="formMonthlyCardsData"
                                         th:action="@{/monthlyCard/add}" th:object="${monthlyCardDto}" method="POST">
                                             <div class="form-group text">
                                                 <label >Mã thẻ</label>
-                                                <input type="text" required="required" th:field="*{cardCode}" class="form-control"
+                                                <input type="text" required="required" th:field="*{cardcode}" class="form-control"
 													id="cardCode">
                                             </div>
                                             <div class="form-group text">
                                                 <label>Biển số</label>
                                                 <input type="text" required="required" th:field="*{cardNumber}" class="form-control"
-													id="cardNumber">
+													id="card-number">
                                             </div>
                                             <div class="form-group text">
                                                 <label >Tên KH</label>
                                                 <input type="text" required="required" th:field="*{customerName}" class="form-control"
-													id="customer_name">
+													id="customerName">
                                             </div>
                                             <div class="form-group text">
                                                 <label >CMND</label>
                                                <input type="text" required="required" th:field="*{idNumber}" class="form-control"
-													id="id_number">
+													id="idNumber">
                                             </div>
                                             <div class="form-group text">
                                                 <label >Email</label>
@@ -147,13 +151,6 @@
                                                 <label >Admin Cấp Thẻ</label>
                                                  <select th:field="*{adminId}" class="form-control">
 												    <option th:each="i : ${listAdmin}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Loại Vé</label>
-                                                <select th:field="*{vehicle.id}" class="form-control">
-													<option th:each="i : ${listVehicle}" th:value="${i.id}"
-														th:text="${i.name}"></option>
 												</select>
                                             </div>
                                             <div class="form-group text">

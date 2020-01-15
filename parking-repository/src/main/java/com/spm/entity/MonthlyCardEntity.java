@@ -22,9 +22,8 @@ public class MonthlyCardEntity {
 	@JoinColumn(name="card_id")
 	private CardsEntity card;
 	
-	@ManyToOne
-	@JoinColumn(name="vehicle_id")
-	private VehicleEntity vehicle;
+	@Column(name="vehicle_id")
+	private Long vehicleId;
 	
 	@Column(name="car_number")
 	private String cardNumber;
@@ -93,14 +92,6 @@ public class MonthlyCardEntity {
 
 	public void setCard(CardsEntity card) {
 		this.card = card;
-	}
-
-	public VehicleEntity getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(VehicleEntity vehicle) {
-		this.vehicle = vehicle;
 	}
 
 	public String getCardNumber() {
@@ -237,6 +228,14 @@ public class MonthlyCardEntity {
 
 	public void setProject(ProjectsEntity project) {
 		this.project = project;
+	}
+
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 }

@@ -37,7 +37,7 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 	}
 
 	@Override
-	public MonthlyCardDto addMonthlyCard(MonthlyCardDto monthlyCardDto) {
+	public boolean addMonthlyCard(MonthlyCardDto monthlyCardDto) {
 		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
 		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
 		Gson gson = new Gson();
@@ -51,8 +51,13 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
-		return resultFromApi.getData().get(0);
+		}
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 	@Override

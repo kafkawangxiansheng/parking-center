@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.spm.dto.CardsDto;
 import com.spm.dto.ResultObject;
+import com.spm.entity.CardsEntity;
 import com.spm.search.form.CardSearchForm;
 
 /**
@@ -23,7 +24,7 @@ public interface CardsService {
     
     ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm);
     
-    boolean checkCardAndCardType(String code, int cardType);
+    CardsDto checkCardAndCardType(String code, int cardType);
     
     void activebyId(int cardId);
 
