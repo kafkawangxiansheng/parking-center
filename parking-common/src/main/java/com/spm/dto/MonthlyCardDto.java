@@ -47,6 +47,8 @@ public class MonthlyCardDto {
 	private String startDateString;
 	
 	private String endDateString;
+	
+	private long lastSync;
 
 	public Long getId() {
 		return id;
@@ -232,4 +234,13 @@ public class MonthlyCardDto {
 		this.cardCode = cardCode;
 	}
 
+	public long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(long lastSync) {
+		this.lastSync = lastSync;
+	}
+
+	
 }

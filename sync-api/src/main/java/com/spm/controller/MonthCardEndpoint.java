@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,12 @@ public class MonthCardEndpoint{
 	@ApiOperation("Add new monthly card")
 	public void batchinsert(@RequestBody List<MonthlyCardDto> monthlyCardDtos) {
 		monthCardsService.save(monthlyCardDtos);
+	}
+	
+	@RequestMapping(value = "/batchsyncs", method = { RequestMethod.GET })
+	@ApiOperation("sync all card")
+	public @ResponseBody List<MonthlyCardDto> batchsyncs(@RequestParam(name="projectId") Long projectId) {
+		return  monthCardsService.syncAllByProjectId(projectId);
 	}
 	
 	@RequestMapping(value = "/update", method = {RequestMethod.PUT})

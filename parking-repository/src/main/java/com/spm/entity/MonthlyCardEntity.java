@@ -79,6 +79,10 @@ public class MonthlyCardEntity {
 	@JoinColumn(name="project_id")
 	private ProjectsEntity project;
 
+	@Column(name="last_sync")
+	private Long lastSync;
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -238,5 +242,15 @@ public class MonthlyCardEntity {
 	public void setProject(ProjectsEntity project) {
 		this.project = project;
 	}
+
+	public Long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(Long lastSync) {
+		this.lastSync = lastSync;
+	}
+	
+	
 
 }
