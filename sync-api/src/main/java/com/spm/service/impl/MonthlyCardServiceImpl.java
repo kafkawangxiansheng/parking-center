@@ -1,6 +1,7 @@
 package com.spm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -85,10 +86,27 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	@Override
 	public List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos) {
 		List<MonthlyCardEntity> monthlyCardsEntities = reMap(monthlyCardDtos);
-		
+		monthlyCardsEntities.forEach(entity ->  {
+			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(Calendar.getInstance().getTimeInMillis());
+		});
 		monthlyCardsEntities = monthlyCardRepository.saveAll(monthlyCardsEntities);
 		monthlyCardDtos = map(monthlyCardsEntities);
 		return monthlyCardDtos;
+	}
+	
+	@Override
+	public List<MonthlyCardDto> syncAllByProjectId(long projectId) {
+		List<MonthlyCardEntity> entities = monthlyCardRepository.syncAllByProjectId(projectId);
+		//update all entities with last_sync and updated to current time
+		List<MonthlyCardDto> dtos = this.map(entities);
+		entities.forEach(entity ->  {
+			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(Calendar.getInstance().getTimeInMillis());
+		});
+		monthlyCardRepository.saveAll(entities);
+		
+		return dtos;
 	}
 
 }

@@ -47,6 +47,7 @@ public class MonthlyCardDto {
 	private String endDateString;
 	
 	private Long vehicleId;
+	private long lastSync;
 
 	public Long getId() {
 		return id;
@@ -231,5 +232,13 @@ public class MonthlyCardDto {
 	public void setVehicleId(Long vehicleId) {
 		this.vehicleId = vehicleId;
 	}
+	public long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(long lastSync) {
+		this.lastSync = lastSync;
+	}
+
 	
 }

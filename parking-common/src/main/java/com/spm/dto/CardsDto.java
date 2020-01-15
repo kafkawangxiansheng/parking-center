@@ -26,6 +26,8 @@ public class CardsDto {
 	
 	private Long projectId;
 
+	private Long lastSync;
+	
 	public Long getId() {
 		return id;
 	}
@@ -121,5 +123,14 @@ public class CardsDto {
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+
+	public Long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(Long lastSync) {
+		this.lastSync = lastSync;
+	}
+	
 	
 }

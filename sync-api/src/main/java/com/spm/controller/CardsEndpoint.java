@@ -38,6 +38,14 @@ public class CardsEndpoint {
 	public void batchinsert(@RequestBody List<CardsDto> cardDtos) {
 		cardsService.save(cardDtos);
 	}
+	
+	@RequestMapping(value = "/batchsyncs", method = { RequestMethod.GET })
+	@ApiOperation("sync all card")
+	public @ResponseBody List<CardsDto> batchsyncs(@RequestParam(name="projectId") Long projectId) {
+		return  cardsService.syncAllByProjectId(projectId);
+	}
+	
+	
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT })
 	@ApiOperation("Update existing card")
 	public void updateExistingCard(@RequestBody CardsDto cardDto) {

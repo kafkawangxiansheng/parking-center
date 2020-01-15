@@ -16,6 +16,8 @@ public interface MonthlyCardService {
     void delete(MonthlyCardDto monthlyCardDto);
     
     List<MonthlyCardDto> findAll();
+    
+    List<MonthlyCardDto> syncAllByProjectId(long projectId);
 
 }
  
