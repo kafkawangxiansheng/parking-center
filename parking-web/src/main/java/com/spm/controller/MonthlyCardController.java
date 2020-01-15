@@ -97,6 +97,7 @@ public class MonthlyCardController {
 		//  convert long date to string date
 		String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
 		String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
+		monthlyCardDto.setCardcode(monthlyCardDto.getCard().getCode());
 		
 		monthlyCardDto.setStartDateString(startDateString);
 		monthlyCardDto.setEndDateString(endDateString);
@@ -115,8 +116,25 @@ public class MonthlyCardController {
 		long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
 		monthlyCardDto.setStartDate(startDateLong);
 		monthlyCardDto.setEndDate(endDateLong);
-		monthlyCradService.addMonthlyCard(monthlyCardDto);
-		return "redirect:/monthlyCard";
+		boolean addSuccess = monthlyCradService.addMonthlyCard(monthlyCardDto);
+		if(addSuccess) {
+			return "redirect:/monthlyCard";
+		}else {
+			String error = "Thẻ đã sử dụng hoặc chưa kích hoạt mã trên hệ thống!";
+			model.addAttribute("errorMessage",error );
+			
+			String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
+			String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
+			monthlyCardDto.setStartDateString(startDateString);
+			monthlyCardDto.setEndDateString(endDateString);
+			
+			model.addAttribute("monthlyCardDto", monthlyCardDto);
+			ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
+			model.addAttribute("listCompany", companyMap.getData());
+			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
+			model.addAttribute("listProject", projectMap.getData());
+			return "addMonthlyCardForm";
+		}
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})

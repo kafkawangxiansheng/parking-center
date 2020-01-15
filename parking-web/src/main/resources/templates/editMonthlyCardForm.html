@@ -90,23 +90,23 @@
 								            </div>
                                             <div class="form-group text">
                                                 <label >Mã thẻ</label>
-                                                <input type="text" required="required" th:field="*{cardId}" class="form-control"
-													id="card_id">
+                                                <input type="text" required="required" th:field="*{cardcode}" class="form-control"
+													id="cardCode">
                                             </div>
                                             <div class="form-group text">
                                                 <label>Biển số</label>
                                                 <input type="text" required="required" th:field="*{cardNumber}" class="form-control"
-													id="cardNumber">
+													id="card-number">
                                             </div>
                                             <div class="form-group text">
                                                 <label >Tên KH</label>
                                                 <input type="text" required="required" th:field="*{customerName}" class="form-control"
-													id="customer_name">
+													id="customerName">
                                             </div>
                                             <div class="form-group text">
                                                 <label >CMND</label>
                                                <input type="text" required="required" th:field="*{idNumber}" class="form-control"
-													id="id_number">
+													id="idNumber">
                                             </div>
                                             <div class="form-group text">
                                                 <label >Email</label>
@@ -131,13 +131,13 @@
                                             
                                             <div class="form-group">
                                                 <label >Công Ty Thầu</label>
-												<select th:field="*{companyId}" class="form-control">
+												<select th:field="*{companyDto.id}" class="form-control">
 												    <option th:each="i : ${listCompany}" th:value="${i.id}" th:text="${i.name}"></option>
 												</select>
                                             </div>
                                              <div class="form-group">
                                                 <label >Dự Án Thầu</label>
-                                                 <select th:field="*{projectId}" class="form-control">
+                                                 <select th:field="*{project.id}" class="form-control">
 												    <option th:each="i : ${listProject}" th:value="${i.id}" th:text="${i.name}"></option>
 												</select>
                                             </div>
@@ -151,13 +151,6 @@
                                                 <label >Admin Cấp Thẻ</label>
                                                  <select th:field="*{adminId}" class="form-control">
 												    <option th:each="i : ${listAdmin}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Loại Vé</label>
-                                                <select th:field="*{vehicleId}" class="form-control">
-													<option th:each="i : ${listVehicle}" th:value="${i.id}"
-														th:text="${i.name}"></option>
 												</select>
                                             </div>
                                             <div class="form-group text">
@@ -179,8 +172,6 @@
                                                 <label >Ngày đăng ký</label>
                                                 <input type="text" required="required" th:field="*{startDateString}" class="form-control  datepickerInOut"
 													id="start_date">
-												<!-- <input type="text" required="required" th:value="${startDateString}?${#dates.format(startDateString, 'dd-MM-yyyy')}:''" class="form-control  datepickerInOut"
-												id="start_date"  placeholder="dd-mm-yyyy"> -->
                                             </div>
                                             <div class="form-group text">
                                                 <label >Ngày hết hạn</label>

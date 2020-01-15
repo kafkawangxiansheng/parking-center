@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spm.dto.CardsDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
+import com.spm.entity.MonthlyCardEntity;
 import com.spm.service.CardsService;
 import com.spm.service.MonthlyCardService;
 
@@ -39,12 +41,15 @@ public class MonthCardEndpoint{
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 		// type ve thang
 		int cardType = 2;
-		boolean resultCheck = cardsService.checkCardAndCardType(monthlyCardDto.getCardCode(),cardType );
-		if(resultCheck) {
+		CardsDto cardsDto =  cardsService.checkCardAndCardType(monthlyCardDto.getCardcode(),cardType );
+		if(cardsDto != null ) {
 			// check card used on monthlyCard
-			MonthlyCardDto monthlyCardDtoSource = monthCardsService.findByCardCode(monthlyCardDto.getCardCode());
-			if(monthlyCardDtoSource == null) {
+			MonthlyCardEntity monthlyCardEntity = monthCardsService.findByCardCode(monthlyCardDto.getCardcode());
+			if(monthlyCardEntity == null) {
+				monthlyCardDto.setCard(cardsDto);
 				resultObject =  monthCardsService.save(monthlyCardDto);
+			}else {
+				resultObject = null;
 			}
 		}else {
 			resultObject = null;

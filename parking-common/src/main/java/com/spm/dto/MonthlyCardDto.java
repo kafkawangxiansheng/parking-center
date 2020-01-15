@@ -6,7 +6,7 @@ public class MonthlyCardDto {
 	
 	private CardsDto card;
 	
-	private String cardCode;
+	private String cardcode;
 	
 	private String cardNumber;
 	
@@ -23,8 +23,6 @@ public class MonthlyCardDto {
 	private  String brand;
 	
 	private long parkingFee;
-	
-	private VehicleDto vehicle;
 	
 	private long startDate;
 	
@@ -48,6 +46,7 @@ public class MonthlyCardDto {
 	
 	private String endDateString;
 	
+	private Long vehicleId;
 	private long lastSync;
 
 	public Long getId() {
@@ -128,14 +127,6 @@ public class MonthlyCardDto {
 
 	public void setParkingFee(long parkingFee) {
 		this.parkingFee = parkingFee;
-	}
-
-	public VehicleDto getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(VehicleDto vehicle) {
-		this.vehicle = vehicle;
 	}
 
 	public long getStartDate() {
@@ -226,14 +217,21 @@ public class MonthlyCardDto {
 		this.endDateString = endDateString;
 	}
 
-	public String getCardCode() {
-		return cardCode;
+	public String getCardcode() {
+		return cardcode;
 	}
 
-	public void setCardCode(String cardCode) {
-		this.cardCode = cardCode;
+	public void setCardcode(String cardcode) {
+		this.cardcode = cardcode;
 	}
 
+	public Long getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
+	}
 	public long getLastSync() {
 		return lastSync;
 	}

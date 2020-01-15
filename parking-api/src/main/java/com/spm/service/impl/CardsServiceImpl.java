@@ -114,12 +114,14 @@ public class CardsServiceImpl implements CardsService {
 
 
 	@Override
-	public boolean checkCardAndCardType(String code, int cardType) {
-		CardsEntity cardEntity = cardRepository.findByCodeAndVehicleCardType(code, cardType);
-		if(cardEntity != null) {
-			return true;
+	public CardsDto checkCardAndCardType(String code, int cardType) {
+		CardsEntity entity =  cardRepository.findByCodeAndVehicleCardType(code, cardType);
+		CardsDto cardsDto = new CardsDto();
+		if(entity != null) {
+			mapper.map(entity, cardsDto);
+			return cardsDto;
 		}else {
-			return false;
+			return null;
 		}
 	}
 

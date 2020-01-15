@@ -10,7 +10,7 @@ public interface MonthlyCradService {
 	
 	MonthlyCardDto getMonthlyCardById(Long monthlyCardId);
 	
-	MonthlyCardDto addMonthlyCard(MonthlyCardDto monthlyCardDto);
+	boolean addMonthlyCard(MonthlyCardDto monthlyCardDto);
 	
 	void deleteMonthlyCard(Long id);
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
+import com.spm.entity.MonthlyCardEntity;
 
 /**
  * Created by Vincent 23/05/2018
@@ -20,8 +21,6 @@ public interface MonthlyCardService {
     
     ResultObject<List<MonthlyCardDto>> findById(Long id);
     
-    MonthlyCardDto findByCardCode(String cardCode);
-    
-
+    MonthlyCardEntity findByCardCode(String cardCode);
 }
  
