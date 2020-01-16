@@ -50,12 +50,13 @@
 							class="content-header d-flex justify-content-between align-items-center">
 							<h1 class="m-0">Tra cứu vé tháng</h1>
 							<ul class="breadcrump d-flex flex-row p-0 m-0">
-								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
-											chủ</span>
-								</a></li>
+								<li>
+									<a href="#"> <i class="fas fa-home"></i> <span>Trang chủ</span></a>
+								</li>
 								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Tra cứu vé tháng</span>
-								</a></li>
+								<li>
+									<a href="#"> <span>Tra cứu vé tháng</span></a>
+								</li>
 							</ul>
 						</section>
 						<section class="content">
@@ -280,6 +281,11 @@
                                 <div class="col-lg-12 float-right">Tổng cộng: <span th:text="${totalRows}"></span></div>
 							</div>
 							<div class="box box-result">
+								<div class="form-group button-group d-flex flex-row">
+                                    <div class="form-group">
+                                        <button onclick="return exportExcel('/in-out-monthly-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
+                                    </div>
+                                </div>
 								<table class="table" id="inOutTable">
                                     <thead>
                                         <tr>
@@ -316,8 +322,7 @@
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <button onclick="return exportExcel('/in-out-monthly-logs');" id="exportButton" class="btn btn-primary"
-                                            style="font-size: 14px;">Xuất file Excel</button>
+                                        <button onclick="return exportExcel('/in-out-monthly-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
                                     </div>
                                 </div>
                                 <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">

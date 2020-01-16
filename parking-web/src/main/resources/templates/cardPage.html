@@ -62,35 +62,47 @@ header .item5 {
 						<section class="content">
 							<div class="box box-search d-flex flex-column"
 								style="border-top-color: #CEA052;">
-								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm
-									kiếm</h5>
+								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
 								<div>
 									<form th:action="@{/cards}" th:object="${cardSearchForm}"
 										method="GET">
 										<div class="form-group text col-lg-3 float-left">
-											<label for="option1">Mã chip</label> <input type="text"
-												th:field="*{code}" class="form-control" id="code">
+											<label for="option1">Mã chip</label> <input type="text" th:field="*{code}" class="form-control" id="code">
 										</div>
 										<div class="form-group text col-lg-3 float-left">
-											<label for="option1">Mã số thẻ</label> <input type="text"
-												th:field="*{stt}" class="form-control" id="stt">
+											<label for="option1">Mã số thẻ</label> <input type="text" th:field="*{stt}" class="form-control" id="stt">
 										</div>
 										<div class="form-group col-lg-3 float-left">
-											<label for="">Tên loại xe</label> <select name="vehicleId"
-													class="form-control" id="">
-													<option value="">Tất cả</option>
-													<option th:each="vehicle : ${vehicles}"
-														th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
-												</select>
+											<label for="">Tên loại xe</label> 
+											<select name="vehicleId" class="form-control" id="">
+												<option value="">Tất cả</option>
+												<option th:each="vehicle : ${vehicles}" th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
+											</select>
 										</div>
 										<div class="form-group col-lg-3 float-left">
-											<button type="submit" class="btn btn-primary">Tìm
-												kiếm</button>
+											<button type="submit" class="btn btn-primary">Tìm kiếm</button>
 										</div>
 									</form>
 								</div>
 							</div>
 							<div class="box box-result">
+								<div class="form-group button-group d-flex flex-row">
+									<div class="form-group">
+										<a href="/cards/addNewCard"> <input type="submit"
+											value="Thêm mới" class="btn btn-success"
+											style="font-size: 14px; margin-right: 20px;">
+										</a>
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Import danh sách thẻ"
+											class="btn btn-primary"
+											style="font-size: 14px; margin-right: 20px;">
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Export danh sách thẻ"
+											class="btn btn-info" style="font-size: 14px;">
+									</div>
+								</div>
 								<table class="table table-hover" id="inOutTable">
 									<thead>
 										<tr>

@@ -29,9 +29,7 @@
                         <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
                             style="height: 50px;">
                             <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="/in-out-logs"
-                                    style="color: #000; background: #fff;">Tra cứu vào
-                                    ra</a>
+                                <a class="nav-link" href="/in-out-logs" style="color: #000; background: #fff;">Tra cứu vào ra</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/in-out-monthly-logs">Tra cứu vé tháng</a>
@@ -286,6 +284,11 @@
                                 <div class="col-lg-12 float-right">Tổng cộng: <span th:text="${totalRows}"></span></div>
                             </div>
                             <div class="box box-result">
+                            	<div class="form-group button-group d-flex flex-row">
+                                    <div class="form-group">
+                                        <button onclick="return exportExcel('/in-out-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
+                                    </div>
+                                </div>
                                 <table class="table" id="inOutTable">
                                     <thead>
                                         <tr>
@@ -322,8 +325,7 @@
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
-                                        <button onclick="return exportExcel('/in-out-logs');" id="exportButton" class="btn btn-primary"
-                                            style="font-size: 14px;">Xuất file Excel</button>
+                                        <button onclick="return exportExcel('/in-out-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
                                     </div>
                                 </div>
                                 <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
