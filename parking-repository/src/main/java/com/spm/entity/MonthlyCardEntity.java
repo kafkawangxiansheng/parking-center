@@ -18,15 +18,14 @@ public class MonthlyCardEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="card_id")
-	private CardsEntity card;
+	@Column(name="card_code")
+	private String cardCode;
 	
 	@Column(name="vehicle_id")
 	private Long vehicleId;
 	
 	@Column(name="car_number")
-	private String cardNumber;
+	private String carNumber;
 	
 	@Column(name="customer_name")
 	private String customerName;
@@ -90,20 +89,20 @@ public class MonthlyCardEntity {
 		this.id = id;
 	}
 
-	public CardsEntity getCard() {
-		return card;
+	public String getCardCode() {
+		return cardCode;
 	}
 
-	public void setCard(CardsEntity card) {
-		this.card = card;
+	public void setCardCode(String cardCode) {
+		this.cardCode = cardCode;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public String getCarNumber() {
+		return carNumber;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCarNumber(String carNumber) {
+		this.carNumber = carNumber;
 	}
 
 	public String getCustomerName() {

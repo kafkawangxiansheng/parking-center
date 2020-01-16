@@ -97,8 +97,6 @@ public class MonthlyCardController {
 		//  convert long date to string date
 		String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
 		String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
-		monthlyCardDto.setCardcode(monthlyCardDto.getCard().getCode());
-		
 		monthlyCardDto.setStartDateString(startDateString);
 		monthlyCardDto.setEndDateString(endDateString);
 		

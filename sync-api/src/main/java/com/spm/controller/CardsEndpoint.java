@@ -36,6 +36,12 @@ public class CardsEndpoint {
 	@RequestMapping(value = "/batchinsert", method = { RequestMethod.POST })
 	@ApiOperation("Add new card")
 	public void batchinsert(@RequestBody List<CardsDto> cardDtos) {
+		cardDtos.forEach(cardDto -> {
+			CardsDto existingCard  = cardsService.findByCardCode(cardDto.getCode());
+			if(existingCard != null) {
+				cardDto.setId(existingCard.getId());
+			}
+		});
 		cardsService.save(cardDtos);
 	}
 	

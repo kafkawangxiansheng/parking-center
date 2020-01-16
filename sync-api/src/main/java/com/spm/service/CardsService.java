@@ -17,6 +17,8 @@ public interface CardsService {
     
     CardsDto findById(Long cardId);
     
+    CardsDto  findByCardCode(String cardCode);
+    
     List<CardsDto> syncAllByProjectId(long projectId);
 
 }

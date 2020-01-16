@@ -18,4 +18,6 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 	
 	@Query(value = "SELECT * FROM monthly_cards where  project_id = :projectId AND last_sync < updated", nativeQuery = true)
 	List<MonthlyCardEntity> syncAllByProjectId(@Param(value = "projectId") Long projectId);
+	
 }
+

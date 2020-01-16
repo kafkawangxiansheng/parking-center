@@ -38,6 +38,12 @@ public class MonthCardEndpoint{
 	@RequestMapping(value = "/batchinsert", method = {RequestMethod.POST})
 	@ApiOperation("Add new monthly card")
 	public void batchinsert(@RequestBody List<MonthlyCardDto> monthlyCardDtos) {
+		monthlyCardDtos.forEach(card -> {
+			MonthlyCardDto existingCard = monthCardsService.findByCardCode(card.getCardCode());
+			if(existingCard != null) {
+				card.setId(existingCard.getId());
+			}
+		});
 		monthCardsService.save(monthlyCardDtos);
 	}
 	

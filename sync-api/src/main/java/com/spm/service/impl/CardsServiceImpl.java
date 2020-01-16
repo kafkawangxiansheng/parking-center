@@ -96,6 +96,18 @@ public class CardsServiceImpl implements CardsService {
 	}
 	
 	@Override
+	public CardsDto findByCardCode(String cardCode) {
+		CardsEntity entity = cardRepository.findByCode(cardCode);
+		if(entity == null) {
+			return null;
+		}
+		CardsDto cardsDto = new CardsDto();
+		mapper.map(entity, cardsDto);
+		return cardsDto;
+	}
+
+	
+	@Override
 	public List<CardsDto> syncAllByProjectId(long projectId) {
 		List<CardsEntity> entities = cardRepository.syncAllByProjectId(projectId);
 		//update all entities with last_sync and updated to current time
