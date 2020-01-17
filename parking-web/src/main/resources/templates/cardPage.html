@@ -106,20 +106,21 @@
 											<td th:text="${{card.code}}"></td>
 											<td th:text="${{card.stt}}"></td>
 											<td th:text="${{card.vehicleId}}"></td>
-											<td><a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh sửa</a></td>
+											<td>
+												<a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh sửa</a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
 								<div class="form-group button-group d-flex flex-row">
 									<div class="form-group">
-										<a href="/cards/addNewCard"> <input type="submit"
-											value="Thêm mới" class="btn btn-success"
+										<a href="/cards/addNewCard"> 
+											<input type="submit" value="Thêm mới" class="btn btn-success"
 											style="font-size: 14px; margin-right: 20px;">
 										</a>
 									</div>
 									<div class="form-group">
-										<input type="submit" value="Import danh sách thẻ"
-											class="btn btn-primary"
+										<input type="submit" value="Import danh sách thẻ" class="btn btn-primary"
 											style="font-size: 14px; margin-right: 20px;">
 									</div>
 									<table class="table table-hover" id="inOutTable">
@@ -173,8 +174,9 @@
 												</li>
 												<li th:if="${p != currentPage}" class='page-item'>
 													<a class="page-link" th:onclick="'paging('+ *{p} +')'"> 
-													<th:block th:text="${p}"></th:block>
-												</a></li>
+														<th:block th:text="${p}"></th:block>
+													</a>
+												</li>
 											</th:block>
 											<li th:if="${currentPage != maxPage}" class='page-item'>
 												<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">Trang cuối </a>

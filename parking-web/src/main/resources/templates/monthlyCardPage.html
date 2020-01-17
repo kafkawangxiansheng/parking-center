@@ -184,22 +184,17 @@
 											<td th:text="${{monthlyCard.email}}"></td>
 											<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yy')}"></td>
 											<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yy')}"></td>
-											
 											<td width="13%">
 												<div style="padding-right: 10px; float: left;">
-													<a
-														th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
+													<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
 														<button class="btn-info">Edit</button>
 													</a>
 												</div>
 												<div>
-													<a
-														th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
+													<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
 														<button class="btn-warning">Delete</button>
 													</a>
-												</div> <!-- <a th:href="@{/project/edit-project/{id}(id=${project.id})}" >Edit</a>
-												| 
-												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a> -->
+												</div> 
 											</td>
 										</tr>
                                     </tbody>
@@ -226,7 +221,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>
 </body>
