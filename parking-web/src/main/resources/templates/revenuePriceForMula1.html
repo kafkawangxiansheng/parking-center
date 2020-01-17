@@ -1,162 +1,152 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Parking Management</title>
-<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-<style>
-	header .item4 {
-		background: black;
-	}
-</style>
-</head>
-
-<body>
-	<header th:insert="~{fragments/mainTemplate :: main-header}"
-		class="main-header flex-column">
-		<div class="header-submenu position-relative">
-			<div th:insert="~{fragments/mainTemplate :: navi-header}"
-				class="container"></div>
-		</div>
-	</header>
-	<div id="main">
-		<div class="header-submenu position-relative">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+		<style>
+		header .item4 {
+			background: black;
+		}
+		</style>
+	</head>
+	
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: navi-header}" class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="header-submenu position-relative">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<ul class="nav nav-submenu align-items-center d-flex justify-content-center" style="height: 50px;">
+							<li class="nav-item" style="border-left: 2px solid #fff;">
+								<a class="nav-link" href="/revenue">Thống kê doanh thu</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/revenue/priceformula1"
+								style="color: #000; background: #fff;">CT TT theo công văn</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/revenue/priceformula2">CT TT lũy tiến</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/revenue/priceformula3">CT tổng hợp</a>
+							</li>
+						</ul>
+					</div>
+					</div>
+				</div>
+			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<ul
-							class="nav nav-submenu align-items-center d-flex justify-content-center"
-							style="height: 50px;">
-							<li class="nav-item" style="border-left: 2px solid #fff;"><a
-								class="nav-link" href="/revenue">Thống kê doanh thu</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/revenue/priceformula1"
-								style="color: #000; background: #fff;">CT TT theo công văn</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/revenue/priceformula2">CT TT lũy tiến</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/revenue/priceformula3">CT tổng hợp</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="content-wrapper">
-						<section
-							class="content-header d-flex justify-content-between align-items-center">
-							<h1 class="m-0">CT TT theo công văn</h1>
-							<ul class="breadcrump d-flex flex-row p-0 m-0">
-								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
-											chủ</span>
-								</a></li>
-								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>CT TT theo công văn</span>
-								</a></li>
-							</ul>
-						</section>
-						<section class="content">
-							<div class="box box-update d-flex flex-column">
-								<div class="box-header d-flex" style="padding: 10px;">
-									<i class="fas fa-pen-square" style="font-size: 18px;"></i>
-								</div>
-								<div class="box-body p-2">
-									<div class="form-body">
-										<form action="" class="d-flex flex-column">
-											<div class="form-group d-flex flex-row align-items-center">
-												<label for="night_start" class="m-0">Tính đêm bắt
-													đầu từ:</label> <input type="number" min="0" max="23"
-													name="night_start" class="form-control mx-1">h <label
-													for="night_end" class="m-0 ml-4">Đến:</label> <input
-													type="number" min="0" max="23" name="night_end"
-													class="form-control mx-1">h
-											</div>
-											<div class="form-group d-flex flex-row align-items-center">
-												<label for="time_day_night" class="m-0">Khoảng giao
-													ngày + đêm:</label> <input type="number" min="0" max="23"
-													name="time_day_night" class="form-control mx-1">h
-											</div>
-											<div class="d-flex flex-row">
-												<div class="col-sm-6 pl-0">
-													<div class="form-group d-flex flex-row align-items-center">
-														<label for="vehicle_id" class="m-0">Tên loại xe:</label> <select
-															name="vehicle_id" class="form-control ml-1"
-															id="vehicleType" style="width: auto;">
-															<option value="7" selected="selected">Xe tải
-																thường</option>
-															<option value="5">Xe con thường</option>
-															<option value="3">Xe tay ga thường</option>
-															<option value="1">Xe số thường</option>
-														</select>
+						<div class="content-wrapper">
+							<section class="content-header d-flex justify-content-between align-items-center">
+								<h1 class="m-0">CT TT theo công văn</h1>
+								<ul class="breadcrump d-flex flex-row p-0 m-0">
+									<li>
+										<a href="#"> 
+											<i class="fas fa-home"></i> 
+											<span>Trang chủ</span>
+										</a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#"> <span>CT TT theo công văn</span></a>
+									</li>
+								</ul>
+							</section>
+							<section class="content">
+								<div class="box box-update d-flex flex-column">
+									<div class="box-header d-flex" style="padding: 10px;">
+										<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+									</div>
+									<div class="box-body p-2">
+										<div class="form-body">
+											<form action="" class="d-flex flex-column">
+												<div class="form-group d-flex flex-row align-items-center">
+													<label for="night_start" class="m-0">Tính đêm bắt đầu từ:</label> 
+														<input type="number" min="0" max="23" name="night_start" class="form-control mx-1">h 
+														<label for="night_end" class="m-0 ml-4">Đến:</label> 
+														<input type="number" min="0" max="23" name="night_end" class="form-control mx-1">h
+												</div>
+												<div class="form-group d-flex flex-row align-items-center">
+													<label for="time_day_night" class="m-0">Khoảng giao ngày + đêm:</label> 
+													<input type="number" min="0" max="23" name="time_day_night" class="form-control mx-1">h
+												</div>
+												<div class="d-flex flex-row">
+													<div class="col-sm-6 pl-0">
+														<div class="form-group d-flex flex-row align-items-center">
+															<label for="vehicle_id" class="m-0">Tên loại xe:</label> 
+															<select name="vehicle_id" class="form-control ml-1" id="vehicleType" style="width: auto;">
+																<option value="7" selected="selected">Xe tải thường</option>
+																<option value="5">Xe con thường</option>
+																<option value="3">Xe tay ga thường</option>
+																<option value="1">Xe số thường</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group form-inline">
+															<label for="normal_price" style="width: 100px;">Giá thường:</label> 
+															<input type="text" value="" name="normal_price" class="form-control txtMoney">
+														</div>
+														<div class="form-group form-inline">
+															<label for="night_price" style="width: 100px;">Giá đêm:</label> 
+															<input type="text" value="" name="night_price" class="form-control txtMoney">
+														</div>
+														<div class="form-group form-inline">
+															<label for="day_night_price" style="width: 100px;">Ngày + đêm:</label> 
+															<input type="text" value="" name="day_night_price" class="form-control txtMoney">
+														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-md-8 offset-md-4">
 													<div class="form-group form-inline">
-														<label for="normal_price" style="width: 100px;">Giá
-															thường:</label> <input type="text" value="" name="normal_price"
-															class="form-control txtMoney">
-													</div>
-													<div class="form-group form-inline">
-														<label for="night_price" style="width: 100px;">Giá
-															đêm:</label> <input type="text" value="" name="night_price"
-															class="form-control txtMoney">
-													</div>
-													<div class="form-group form-inline">
-														<label for="day_night_price" style="width: 100px;">Ngày
-															+ đêm:</label> <input type="text" value="" name="day_night_price"
-															class="form-control txtMoney">
+														<label for="over_minute">Bé hơn:</label> 
+														<input type="number" value="" min="1" max="60" name="over_minute" class="form-control mx-1"> 
+														<label for="over_minute_price" style="margin-right: 60px;">Phút</label>
+														<input type="text" value="" name="over_minute_price" class="form-control txtMoney">
 													</div>
 												</div>
-											</div>
-											<div class="col-md-8 offset-md-4">
+												<label for="">Vé tháng giới hạn giờ</label>
 												<div class="form-group form-inline">
-													<label for="over_minute">Bé hơn:</label> <input
-														type="number" value="" min="1" max="60" name="over_minute"
-														class="form-control mx-1"> <label
-														for="over_minute_price" style="margin-right: 60px;">Phút</label>
-													<input type="text" value="" name="over_minute_price"
-														class="form-control txtMoney">
+													<label for="monthly_card_time">Chu kỳ:</label> 
+													<input type="number" value="" min="0" max="23" name="monthly_card_time" class="form-control mx-1">h 
+													<label for="monthly_card_time_price" style="margin-left: 30px; margin-right: 5px;">Giá</label> 
+													<input type="text" value="" name="monthly_card_time_price" class="form-control txtMoney">
 												</div>
-											</div>
-											<label for="">Vé tháng giới hạn giờ</label>
-											<div class="form-group form-inline">
-												<label for="monthly_card_time">Chu kỳ:</label> <input
-													type="number" value="" min="0" max="23"
-													name="monthly_card_time" class="form-control mx-1">
-												h <label for="monthly_card_time_price"
-													style="margin-left: 30px; margin-right: 5px;">Giá</label> <input
-													type="text" value="" name="monthly_card_time_price"
-													class="form-control txtMoney">
-											</div>
-											<div class="form-group button-group d-flex flex-row">
-												<div class="form-group" style="margin-right: 20px;">
-													<input type="submit" value="Lưu" class="btn btn-primary"
-														style="padding: 4px 12px;">
+												<div class="form-group button-group d-flex flex-row">
+													<div class="form-group" style="margin-right: 20px;">
+														<input type="submit" value="Lưu" class="btn btn-primary" style="padding: 4px 12px;">
+													</div>
+													<div class="form-group">
+														<input type="submit" value="Quay lại" class="btn" style="padding: 4px 12px;" onclick="return back();">
+													</div>
+													<div class="cls"></div>
 												</div>
-												<div class="form-group">
-													<input type="submit" value="Quay lại" class="btn"
-														style="padding: 4px 12px;" onclick="return back();">
-												</div>
-												<div class="cls"></div>
-											</div>
-										</form>
+											</form>
+										</div>
 									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<footer th:insert="~{fragments/mainTemplate :: footer}"
-		class="main-footer d-flex justify-content-between"> </footer>
-	<script src="/js/report.js"></script>
-</body>
+		<footer th:insert="~{fragments/mainTemplate :: footer}"
+			class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/report.js"></script>
+	</body>
 
 </html>

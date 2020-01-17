@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Parking Management</title>
-<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-<style>
-header .item5 {
-	background: black;
-}
-</style>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+		<style>
+		header .item5 {
+			background: black;
+		}
+		</style>
+	</head>
 
-<body>
-	<header th:insert="~{fragments/mainTemplate :: main-header}"
-		class="main-header flex-column">
-		<div class="header-submenu position-relative">
-			<div th:insert="~{fragments/mainTemplate :: sub-header}"
-				class="container"></div>
-			<div th:insert="~{fragments/mainTemplate :: navi-header}"
-				class="container"></div>
-		</div>
-	</header>
-	<div id="main">
-		<div class="header-submenu position-relative">
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: sub-header}" class="container"></div>
+				<div th:insert="~{fragments/mainTemplate :: navi-header}" class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="header-submenu position-relative">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<ul class="nav nav-submenu align-items-center d-flex justify-content-center" style="height: 50px;">
+								<li class="nav-item" style="border-left: 2px solid #fff;">
+									<a class="nav-link" href="/cards/vehicle">Tạo loại xe</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/cards" style="color: #000; background: #fff;">Danh sách thẻ xe</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="/cards/active-card">Kích hoạt thẻ</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<ul
-							class="nav nav-submenu align-items-center d-flex justify-content-center"
-							style="height: 50px;">
-							<li class="nav-item" style="border-left: 2px solid #fff;"><a
-								class="nav-link" href="/cards/vehicle">Tạo loại xe</a></li>
-							<li class="nav-item"><a class="nav-link" href="/cards"
-								style="color: #000; background: #fff;">Danh sách thẻ xe</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/cards/active-card">Kích hoạt thẻ</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="content-wrapper">
-						<section
-							class="content-header d-flex justify-content-between align-items-center">
-							<h1 class="m-0">Thêm mới</h1>
-							<ul class="breadcrump d-flex flex-row p-0 m-0">
-								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
-											chủ</span>
-								</a></li>
-								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Danh sách thẻ xe</span>
-								</a></li>
-								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Thêm mới</span>
-								</a></li>
-							</ul>
-						</section>
-						<section class="content">
-							<div class="box box-update d-flex flex-column">
-								<div class="box-header d-flex" style="padding: 10px;">
-									<i class="fas fa-pen-square" style="font-size: 18px;"></i>
-								</div>
-								<div class="box-body p-2">
-									<div class="form-body">
-										<form id="formCardsData" th:action="@{/cards/addNewCard}"
-											th:object="${addCard}" method="POST">
-											<div class="form-group text">
-												<label for="stt" required="required">Mã số thẻ*</label> <input type="text"
-													th:field="*{stt}" class="form-control" id="stt">
-											</div>
-											<div class="form-group text">
-												<label for="code" required="required">Mã chip</label> <input type="text"
-													th:field="*{code}" class="form-control" id="code">
-											</div>
-											<div class="form-group">
-												<label for="">Tên loại xe</label> <select name="vehicleId"
-													class="form-control" id="">
-													<option th:each="vehicle : ${vehicles}"
-														th:value="${{vehicle.id}}" th:text="${{vehicle.name}}"></option>
-												</select>
-											</div>
-											<div class="form-group button-group d-flex flex-row">
-												<div class="form-group">
-													<button type="submit" class="btn btn-primary"
-														style="font-size: 14px; margin-right: 20px;">Lưu</button>
+						<div class="content-wrapper">
+							<section class="content-header d-flex justify-content-between align-items-center">
+								<h1 class="m-0">Thêm mới</h1>
+								<ul class="breadcrump d-flex flex-row p-0 m-0">
+									<li>
+										<a href="#"> 
+											<i class="fas fa-home"></i> 
+											<span>Trang chủ</span>
+										</a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#"> <span>Danh sách thẻ xe</span> </a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#"> <span>Thêm mới</span></a>
+									</li>
+								</ul>
+							</section>
+							<section class="content">
+								<div class="box box-update d-flex flex-column">
+									<div class="box-header d-flex" style="padding: 10px;">
+										<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+									</div>
+									<div class="box-body p-2">
+										<div class="form-body">
+											<form id="formCardsData" th:action="@{/cards/addNewCard}" th:object="${addCard}" method="POST">
+												<div class="form-group text">
+													<label for="stt" required="required">Mã số thẻ*</label> 
+													<input type="text" th:field="*{stt}" class="form-control" id="stt">
+												</div>
+												<div class="form-group text">
+													<label for="code" required="required">Mã chip</label>
+													<input type="text" th:field="*{code}" class="form-control" id="code">
 												</div>
 												<div class="form-group">
-													<button id="cancel" data-direction="reverse" type="submit"
-														class="btn btn-secondary" style="font-size: 14px;">Quay
-														lại</button>
+													<label for="">Tên loại xe</label> 
+													<select name="vehicleId" class="form-control" id="">
+														<option th:each="vehicle : ${vehicles}"
+															th:value="${{vehicle.id}}" th:text="${{vehicle.name}}">
+														</option>
+													</select>
 												</div>
-											</div>
-										</form>
+												<div class="form-group button-group d-flex flex-row">
+													<div class="form-group">
+														<button type="submit" class="btn btn-primary" style="font-size: 14px; margin-right: 20px;">Lưu</button>
+													</div>
+													<div class="form-group">
+														<button id="cancel" data-direction="reverse" 
+															type="submit" class="btn btn-secondary" style="font-size: 14px;">Quay lại</button>
+													</div>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<footer th:insert="~{fragments/mainTemplate :: footer}"
-		class="main-footer d-flex justify-content-between"> </footer>
-	<script src="/js/orders.js"></script>
-</body>
+		<footer th:insert="~{fragments/mainTemplate :: footer}"
+			class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/orders.js"></script>
+	</body>
 
 </html>

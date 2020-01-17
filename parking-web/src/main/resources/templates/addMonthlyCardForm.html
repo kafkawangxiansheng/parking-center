@@ -1,201 +1,177 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Parking Management</title>
-    <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-    <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+	</head>
 
-<body>
-    <header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
-    	<div class="header-submenu position-relative">
-    		<div th:insert="~{fragments/mainTemplate :: sub-header}"  class="container"></div>
-    		<div th:insert="~{fragments/mainTemplate :: navi-header}"  class="container"></div>
-    	</div>
-    </header>
-    <div id="main">
-	    <div class="header-submenu position-relative">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col">
-	                    <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-	                        style="height: 50px;">
-	                        <li class="nav-item" style="border-left: 2px solid #fff;">
-	                            <a class="nav-link" href="/monthlyCard/viewlog">Xem nhật ký vé tháng</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlyCard"
-	                                style="color: #000; background: #fff;">Thông tin vé tháng</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlyCard/renewal">Gia hạn - thông tin hết hạn</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlyCard/disablelist">Mất thẻ / Đổi mã thẻ</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link" href="/monthlyCard/active">Kích hoạt thẻ tháng</a>
-	                        </li>
-	                    </ul>
-	                </div>
-	            </div>
-	        </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="content-wrapper">
-                        <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Thêm mới</h1>
-                            <ul class="breadcrump d-flex flex-row p-0 m-0">
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-home"></i>
-                                        <span>Trang chủ</span>
-                                    </a>
-                                </li>
-                                <li class="li-between">
-                                    <i class="fas fa-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Thông tin vé tháng</span>
-                                    </a>
-                                </li>
-                                <li class="li-between">
-                                    <i class="fas fa-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Thêm mới</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-                        <section class="content">
-                            <div class="box box-update d-flex flex-column">
-                                <div class="box-header d-flex" style="padding: 10px;">
-                                    <i class="fas fa-pen-square" style="font-size: 18px;"></i>
-                                </div>
-                                
-                                <div th:if="${errorMessage}" th:utext="${errorMessage}"
-         							style="color:red;font-style:italic;"></div>
-         							
-                                <div class="box-body p-2">
-                                    <div class="form-body">
-                                        <form id="formMonthlyCardsData"
-                                        th:action="@{/monthlyCard/add}" th:object="${monthlyCardDto}" method="POST">
-                                            <div class="form-group text">
-                                                <label >Mã Chip</label>
-                                                <input type="text" required="required" th:field="*{cardcode}" class="form-control"
-													id="cardCode">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label>Biển số</label>
-                                                <input type="text" required="required" th:field="*{cardNumber}" class="form-control"
-													id="card-number">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Tên KH</label>
-                                                <input type="text" required="required" th:field="*{customerName}" class="form-control"
-													id="customerName">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >CMND</label>
-                                               <input type="text" required="required" th:field="*{idNumber}" class="form-control"
-													id="idNumber">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Email</label>
-                                                <input type="text" required="required" th:field="*{email}" class="form-control"
-													id="email">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Công ty</label>
-                                                <input type="text" required="required" th:field="*{company}" class="form-control"
-													id="company">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Nhãn hiệu</label>
-                                                <input type="text" required="required" th:field="*{brand}" class="form-control"
-													id="brand">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Địa chỉ</label>
-                                                <input type="text" required="required" th:field="*{address}" class="form-control"
-													id="address">
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label >Công Ty Thầu</label>
-												<select th:field="*{companyDto.id}" class="form-control">
-												    <option th:each="i : ${listCompany}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                             <div class="form-group">
-                                                <label >Dự Án Thầu</label>
-                                                 <select th:field="*{project.id}" class="form-control">
-												    <option th:each="i : ${listProject}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Khu Vực</label>
-                                                 <select th:field="*{areaId}" class="form-control">
-												    <option th:each="i : ${listArea}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label >Admin Cấp Thẻ</label>
-                                                 <select th:field="*{adminId}" class="form-control">
-												    <option th:each="i : ${listAdmin}" th:value="${i.id}" th:text="${i.name}"></option>
-												</select>
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Phí đậu xe</label>
-                                                 <input type="text" required="required" th:field="*{parkingFee}" class="form-control"
-													id="parking_fee">
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label for="">Tên loại xe</label>
-                                                <select class="form-control" id="position" th:field="*{position}">
-													<option value="XE_DAP">Xe đạp</option>
-													<option value="XE_DAP_DIEN">Xe đạp điện</option>
-													<option value="XE_MAY">Xe máy</option>
-													<option value="XE_OTO">Xe Ôtô</option>
-													<option value="XE_TAY_GA">Xe tay ga</option>
-												</select>
-                                            </div> -->
-                                            <div class="form-group text">
-                                                <label >Ngày đăng ký</label>
-                                                <input type="text" required="required" th:field="*{startDateString}" class="form-control  datepickerInOut"
-													id="start_date">
-                                            </div>
-                                            <div class="form-group text">
-                                                <label >Ngày hết hạn</label>
-                                                <input type="text" required="required" th:field="*{endDateString}" class="form-control  datepickerInOut"
-													id="end_date">
-                                            </div>
-                                            <div class="form-group button-group d-flex flex-row">
-								                <div class="form-group">
-								                    <input type="submit" value="Lưu" class="btn btn-success"
-								                        style="font-size: 14px;">
-								                </div>
-								            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
-    <script src="/js/orders.js"></script>
-</body>
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}"
+			class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: sub-header}"
+					class="container"></div>
+				<div th:insert="~{fragments/mainTemplate :: navi-header}"
+					class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="header-submenu position-relative">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<ul class="nav nav-submenu align-items-center d-flex justify-content-center" style="height: 50px;">
+								<li class="nav-item" style="border-left: 2px solid #fff;">
+									<a class="nav-link" href="/monthlyCard/viewlog">Xem nhật ký vé tháng</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="/monthlyCard"
+									style="color: #000; background: #fff;">Thông tin vé tháng</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="/monthlyCard/renewal">Gia hạn - thông tin hết hạn</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="/monthlyCard/disablelist">Mất thẻ / Đổi mã thẻ</a></li>
+								<li class="nav-item">
+									<a class="nav-link" href="/monthlyCard/active">Kích hoạt thẻ tháng</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="content-wrapper">
+							<section
+								class="content-header d-flex justify-content-between align-items-center">
+								<h1 class="m-0">Thêm mới</h1>
+								<ul class="breadcrump d-flex flex-row p-0 m-0">
+									<li>
+										<a href="#">
+											<i class="fas fa-home"></i> 
+											<span>Trang chủ</span>
+										</a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#">
+											<span>Thông tin vé tháng</span>
+										</a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#">
+											<span>Thêm mới</span>
+										</a>
+									</li>
+								</ul>
+							</section>
+							<section class="content">
+								<div class="box box-update d-flex flex-column">
+									<div class="box-header d-flex" style="padding: 10px;">
+										<i class="fas fa-pen-square" style="font-size: 18px;"></i>
+									</div>
+									<div th:if="${errorMessage}" th:utext="${errorMessage}" style="color: red; font-style: italic;"></div>
+									<div class="box-body p-2">
+										<div class="form-body">
+											<form id="formMonthlyCardsData" th:action="@{/monthlyCard/add}" th:object="${monthlyCardDto}" method="POST">
+												<div class="form-group text">
+													<label>Mã Chip</label>
+													<input type="text" required="required" th:field="*{cardcode}" class="form-control" id="cardCode">
+												</div>
+												<div class="form-group text">
+													<label>Biển số</label>
+													<input type="text" required="required" th:field="*{cardNumber}" class="form-control" id="card-number">
+												</div>
+												<div class="form-group text">
+													<label>Tên KH</label> 
+													<input type="text" required="required" th:field="*{customerName}" class="form-control" id="customerName">
+												</div>
+												<div class="form-group text">
+													<label>CMND</label> 
+													<input type="text" required="required" th:field="*{idNumber}" class="form-control" id="idNumber">
+												</div>
+												<div class="form-group text">
+													<label>Email</label> 
+													<input type="text" required="required" th:field="*{email}" class="form-control" id="email">
+												</div>
+												<div class="form-group text">
+													<label>Công ty</label> 
+													<input type="text" required="required" th:field="*{company}" class="form-control" id="company">
+												</div>
+												<div class="form-group text">
+													<label>Nhãn hiệu</label> 
+													<input type="text" required="required" th:field="*{brand}" class="form-control" id="brand">
+												</div>
+												<div class="form-group text">
+													<label>Địa chỉ</label> 
+													<input type="text" required="required" th:field="*{address}" class="form-control" id="address">
+												</div>
+												<div class="form-group">
+													<label>Công Ty Thầu</label>
+													 <select th:field="*{companyDto.id}" class="form-control">
+														<option th:each="i : ${listCompany}" th:value="${i.id}"
+															th:text="${i.name}"></option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Dự Án Thầu</label>
+													<select th:field="*{project.id}" class="form-control">
+														<option th:each="i : ${listProject}" th:value="${i.id}"
+															th:text="${i.name}"></option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Khu Vực</label> 
+													<select th:field="*{areaId}" class="form-control">
+														<option th:each="i : ${listArea}" th:value="${i.id}"
+															th:text="${i.name}"></option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Admin Cấp Thẻ</label> 
+													<select th:field="*{adminId}" class="form-control">
+														<option th:each="i : ${listAdmin}" th:value="${i.id}"
+															th:text="${i.name}"></option>
+													</select>
+												</div>
+												<div class="form-group text">
+													<label>Phí đậu xe</label>
+													<input type="text" required="required" th:field="*{parkingFee}" class="form-control" id="parking_fee">
+												</div>
+												<div class="form-group text">
+													<label>Ngày đăng ký</label> 
+													<input type="text" required="required" th:field="*{startDateString}" class="form-control  datepickerInOut" id="start_date">
+												</div>
+												<div class="form-group text">
+													<label>Ngày hết hạn</label>
+													<input type="text" required="required" th:field="*{endDateString}" class="form-control  datepickerInOut" id="end_date">
+												</div>
+												<div class="form-group button-group d-flex flex-row">
+													<div class="form-group">
+														<input type="submit" value="Lưu" class="btn btn-success" style="font-size: 14px;">
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:insert="~{fragments/mainTemplate :: footer}"
+			class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/orders.js"></script>
+	</body>
 
 </html>

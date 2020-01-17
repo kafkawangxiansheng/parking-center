@@ -1,161 +1,161 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Parking Management</title>
-<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-<style>
-	header .item2 {
-		background: black;
-	}
-</style>
-</head>
-
-<body>
-	<header th:insert="~{fragments/mainTemplate :: main-header}"
-		class="main-header flex-column">
-		<div class="header-submenu position-relative">
-			<div th:insert="~{fragments/mainTemplate :: sub-header}"
-				class="container"></div>
-			<div th:insert="~{fragments/mainTemplate :: navi-header}"
-				class="container"></div>
-		</div>
-	</header>
-	<div id="main">
-		<div class="header-submenu position-relative">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+		<style>
+			header .item2 {
+				background: black;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: sub-header}" class="container"></div>
+				<div th:insert="~{fragments/mainTemplate :: navi-header}" class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="header-submenu position-relative">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<ul class="nav nav-submenu align-items-center d-flex justify-content-center" style="height: 50px;">
+								<li class="nav-item" style="border-left: 2px solid #fff;">
+									<a class="nav-link" href="/employees">Thông tin nhân sự</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/employees/viewLog" style="color: #000; background: #fff;">Dò bảng chấm công</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/employees/type">Thông tin chức vụ</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<ul
-							class="nav nav-submenu align-items-center d-flex justify-content-center"
-							style="height: 50px;">
-							<li class="nav-item" style="border-left: 2px solid #fff;"><a
-								class="nav-link" href="/employees">Thông tin nhân sự</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/employees/viewLog"
-								style="color: #000; background: #fff;">Dò bảng chấm công</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="/employees/type">Thông tin chức vụ</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="content-wrapper">
-						<section
-							class="content-header d-flex justify-content-between align-items-center">
-							<h1 class="m-0">Dò bảng chấm công</h1>
-							<ul class="breadcrump d-flex flex-row p-0 m-0">
-								<li><a href="#"> <i class="fas fa-home"></i> <span>Trang
-											chủ</span>
-								</a></li>
-								<li class="li-between"><i class="fas fa-angle-right"></i></li>
-								<li><a href="#"> <span>Dò bảng chấm công</span>
-								</a></li>
-							</ul>
-						</section>
-						<section class="content">
-							<div class="box box-search d-flex flex-column"
-								style="border-top-color: #CEA052;">
-								<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm
-									kiếm</h5>
-								<div class="panel">
-									<form>
-										<div class="form-group text">
-											<label for="option1">Họ tên</label> <input type="text"
-												name="option1" class="form-control" id="option1">
-										</div>
-										<div class="form-group text">
-											<label for="option1">Một ngày</label> <input type="text"
-												name="option1" class="form-control" id="option1">
-										</div>
-										<div class="form-group">
-											<label for="">Nhiều ngày</label>
-											<div class="dateFromToInputs d-flex justify-content-between">
-												<div class="form-group text">
-													<input type="text" class="form-control" value="">
-												</div>
-												<span
-													class="form_from_to_separator d-flex align-items-center">〜</span>
-												<div class="form-group text">
-													<input type="text" class="form-control" value="">
+						<div class="content-wrapper">
+							<section class="content-header d-flex justify-content-between align-items-center">
+								<h1 class="m-0">Dò bảng chấm công</h1>
+								<ul class="breadcrump d-flex flex-row p-0 m-0">
+									<li>
+										<a href="#"> 
+											<i class="fas fa-home"></i> 
+											<span>Trang Chủ</span>
+										</a>
+									</li>
+									<li class="li-between">
+										<i class="fas fa-angle-right"></i>
+									</li>
+									<li>
+										<a href="#"> <span>Dò bảng chấm công</span></a>
+									</li>
+								</ul>
+							</section>
+							<section class="content">
+								<div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
+									<h5 class="accordion" style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
+									<div class="panel">
+										<form>
+											<div class="form-group text">
+												<label for="option1">Họ tên</label> 
+												<input type="text" name="option1" class="form-control" id="option1">
+											</div>
+											<div class="form-group text">
+												<label for="option1">Một ngày</label> 
+												<input type="text" name="option1" class="form-control" id="option1">
+											</div>
+											<div class="form-group">
+												<label for="">Nhiều ngày</label>
+												<div class="dateFromToInputs d-flex justify-content-between">
+													<div class="form-group text">
+														<input type="text" class="form-control" value="">
+													</div>
+													<span class="form_from_to_separator d-flex align-items-center">〜</span>
+													<div class="form-group text">
+														<input type="text" class="form-control" value="">
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label for="">Giới hạn</label> <select class="form-control"
-												id="">
-												<option>10</option>
-												<option>20</option>
-												<option>50</option>
-												<option>80</option>
-												<option>100</option>
-											</select>
-										</div>
-										<div class="form-group">
-											<button type="submit" class="btn btn-primary">Tìm
-												kiếm</button>
-										</div>
-									</form>
-								</div>
-							</div>
-							<div class="box box-result">
-								<table class="table" id="inOutTable">
-									<thead>
-										<tr>
-											<th scope="col">ID</th>
-											<th scope="col">Nhân viên</th>
-											<th scope="col">Thời gian đăng nhập</th>
-											<th scope="col">Thời gian đăng xuất</th>
-											<th scope="col">Máy tính</th>
-											<th scope="col">Số giờ</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-								<div class="form-group button-group d-flex flex-row">
-									<div class="form-group">
-										<input type="submit" value="Xuất file Excel"
-											class="btn btn-primary" style="font-size: 14px;">
+											<div class="form-group">
+												<label for="">Giới hạn</label> 
+												<select class="form-control" id="">
+													<option>10</option>
+													<option>20</option>
+													<option>50</option>
+													<option>80</option>
+													<option>100</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+											</div>
+										</form>
 									</div>
 								</div>
-								<div class="dataTables_paginate paging_bootstrap d-flex"
-									style="min-height: 80px;">
-									<ul class="pagination my-4">
-										<li class="page-item active" aria-current="page"><span
-											class="page-link"> 1 <span class="sr-only">(current)</span>
-										</span></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">4</a></li>
-										<li class="page-item"><a class="page-link" href="#">5</a></li>
-										<li class="page-item"><a class="page-link" href="#">6</a></li>
-										<li class="page-item"><a class="page-link" href="#">7</a></li>
-										<li class="page-item"><a class="page-link" href="#">8</a></li>
-										<li class="page-item"><a class="page-link" href="#">9</a></li>
-										<li class="page-item"><a class="page-link" href="#">10</a></li>
-										<li class="page-item"><a class="page-link" href="#"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</ul>
+								<div class="box box-result">
+									<table class="table" id="inOutTable">
+										<thead>
+											<tr>
+												<th scope="col">ID</th>
+												<th scope="col">Nhân viên</th>
+												<th scope="col">Thời gian đăng nhập</th>
+												<th scope="col">Thời gian đăng xuất</th>
+												<th scope="col">Máy tính</th>
+												<th scope="col">Số giờ</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+									<div class="form-group button-group d-flex flex-row">
+										<div class="form-group">
+											<input type="submit" value="Xuất file Excel" class="btn btn-primary" style="font-size: 14px;">
+										</div>
+									</div>
+									<div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
+										<ul class="pagination my-4">
+											<li class="page-item active" aria-current="page">
+												<span class="page-link"> 1 
+													<span class="sr-only">(current)</span>
+												</span>
+											</li>
+											<li class="page-item"><a class="page-link" href="#">2</a></li>
+											<li class="page-item"><a class="page-link" href="#">3</a></li>
+											<li class="page-item"><a class="page-link" href="#">4</a></li>
+											<li class="page-item"><a class="page-link" href="#">5</a></li>
+											<li class="page-item"><a class="page-link" href="#">6</a></li>
+											<li class="page-item"><a class="page-link" href="#">7</a></li>
+											<li class="page-item"><a class="page-link" href="#">8</a></li>
+											<li class="page-item"><a class="page-link" href="#">9</a></li>
+											<li class="page-item"><a class="page-link" href="#">10</a></li>
+											<li class="page-item">
+												<a class="page-link" href="#" aria-label="Next"> 
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<footer th:insert="~{fragments/mainTemplate :: footer}"
-		class="main-footer d-flex justify-content-between"> </footer>
-	<script src="/js/orders.js"></script>
-</body>
+		<footer th:insert="~{fragments/mainTemplate :: footer}"
+			class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/orders.js"></script>
+	</body>
 
 </html>

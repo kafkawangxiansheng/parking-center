@@ -1,120 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Parking Management</title>
-<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-<style>
-	header .item9 {
-		background: black;
-	}
-</style>
-</head>
-
-<body>
-	<header th:insert="~{fragments/mainTemplate :: main-header}"
-		class="main-header flex-column">
-		<div class="header-submenu position-relative">
-			<div th:insert="~{fragments/mainTemplate :: sub-header}"
-				class="container"></div>
-			<div th:insert="~{fragments/mainTemplate :: navi-header}"
-				class="container"></div>
-		</div>
-	</header>
-	<div id="main">
-	<div class="header-submenu position-relative">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="content-wrapper">
-                        <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Cập nhật tài khoản</h1>
-                            <ul class="breadcrump d-flex flex-row p-0 m-0">
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-home"></i>
-                                        <span>Trang chủ</span>
-                                    </a>
-                                </li>
-                                <li class="li-between">
-                                    <i class="fas fa-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Cập nhật tài khoản</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-                        <section class="content">
-                            <div class="box box-update d-flex flex-column">
-                                <div class="box-header d-flex" style="padding: 10px;">
-                                    <i class="fas fa-pen-square" style="font-size: 18px;"></i>
-                                </div>
-                                <div class="box-body p-2">
-                                    <div class="form-body">
-                                        <form action="" class="d-flex flex-column">
-                                            <div class="form-group">
-                                                <label for="">Họ tên*</label>
-                                                <input type="text" class="form-control" id="" placeholder="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Tài khoản*</label>
-                                                <input type="text" class="form-control" id="" placeholder="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Mật khẩu*</label>
-                                                <input type="text" class="form-control" id="" placeholder="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Chức vụ</label>
-                                                <select class="form-control" id="">
-                                                    <option>Admin</option>
-                                                    <option>Ca trưởng</option>
-                                                    <option>Nhân viên</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Giới tính</label>
-                                                <select class="form-control" id="">
-                                                    <option>Nam</option>
-                                                    <option>Nữ</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group button-group d-flex flex-row">
-                                                <div class="form-group" style="margin-right: 20px;">
-                                                    <input type="submit" value="Lưu" class="btn btn-primary"
-                                                        style="padding: 4px 12px;">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="submit" value="Quay lại" class="btn"
-                                                        style="padding: 4px 12px;" onclick="return back();">
-                                                </div>
-                                                <div class="cls"></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-	<footer th:insert="~{fragments/mainTemplate :: footer}"
-		class="main-footer d-flex justify-content-between"> </footer>
-	<script src="/js/orders.js"></script>
-</body>
+	<html xmlns:th="http://www.thymeleaf.org">
+		<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+		<style>
+			header .item9 {
+				background: black;
+			}
+		</style>
+	</head>
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: sub-header}" class="container"></div>
+				<div th:insert="~{fragments/mainTemplate :: navi-header}" class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="header-submenu position-relative">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col">
+	                    </div>
+	                </div>
+	            </div>
+		  	</div>
+			<div class="container">
+	            <div class="row">
+	                <div class="col">
+	                    <div class="content-wrapper">
+	                        <section class="content-header d-flex justify-content-between align-items-center">
+	                            <h1 class="m-0">Cập nhật tài khoản</h1>
+	                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+	                                <li>
+	                                    <a href="#">
+	                                        <i class="fas fa-home"></i>
+	                                        <span>Trang chủ</span>
+	                                    </a>
+	                                </li>
+	                                <li class="li-between">
+	                                    <i class="fas fa-angle-right"></i>
+	                                </li>
+	                                <li>
+	                                    <a href="#"><span>Cập nhật tài khoản</span></a>
+	                                </li>
+	                            </ul>
+	                        </section>
+	                        <section class="content">
+	                            <div class="box box-update d-flex flex-column">
+	                                <div class="box-header d-flex" style="padding: 10px;">
+	                                    <i class="fas fa-pen-square" style="font-size: 18px;"></i>
+	                                </div>
+	                                <div class="box-body p-2">
+	                                    <div class="form-body">
+	                                        <form action="" class="d-flex flex-column">
+	                                            <div class="form-group">
+	                                                <label for="">Họ tên*</label>
+	                                                <input type="text" class="form-control" id="" placeholder="">
+	                                            </div>
+	                                            <div class="form-group">
+	                                                <label for="">Tài khoản*</label>
+	                                                <input type="text" class="form-control" id="" placeholder="">
+	                                            </div>
+	                                            <div class="form-group">
+	                                                <label for="">Mật khẩu*</label>
+	                                                <input type="text" class="form-control" id="" placeholder="">
+	                                            </div>
+	                                            <div class="form-group">
+	                                                <label for="">Chức vụ</label>
+	                                                <select class="form-control" id="">
+	                                                    <option>Admin</option>
+	                                                    <option>Ca trưởng</option>
+	                                                    <option>Nhân viên</option>
+	                                                </select>
+	                                            </div>
+	                                            <div class="form-group">
+	                                                <label for="">Giới tính</label>
+	                                                <select class="form-control" id="">
+	                                                    <option>Nam</option>
+	                                                    <option>Nữ</option>
+	                                                </select>
+	                                            </div>
+	                                            <div class="form-group button-group d-flex flex-row">
+	                                                <div class="form-group" style="margin-right: 20px;">
+	                                                    <input type="submit" value="Lưu" class="btn btn-primary"
+	                                                        style="padding: 4px 12px;">
+	                                                </div>
+	                                                <div class="form-group">
+	                                                    <input type="submit" value="Quay lại" class="btn"
+	                                                        style="padding: 4px 12px;" onclick="return back();">
+	                                                </div>
+	                                                <div class="cls"></div>
+	                                            </div>
+	                                        </form>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </section>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		<footer th:insert="~{fragments/mainTemplate :: footer}"
+			class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/orders.js"></script>
+	</body>
 
 </html>

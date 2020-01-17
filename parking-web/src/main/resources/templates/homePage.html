@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Parking Management</title>
-<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-<style>
-	header .item1 {
-		background: black;
-	}
-</style>
-</head>
-
-<body>
-	<header th:insert="~{fragments/mainTemplate :: main-header}"
-		class="main-header flex-column">
-		<div class="header-submenu position-relative">
-			<div th:insert="~{fragments/mainTemplate :: sub-header}"
-				class="container"></div>
-			<div th:insert="~{fragments/mainTemplate :: navi-header}"
-				class="container"></div>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Parking Management</title>
+		<th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+		<th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+		<style>
+			header .item1 {
+				background: black;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+			<div class="header-submenu position-relative">
+				<div th:insert="~{fragments/mainTemplate :: sub-header}" class="container"></div>
+				<div th:insert="~{fragments/mainTemplate :: navi-header}" class="container"></div>
+			</div>
+		</header>
+		<div id="main">
+			<div class="container">
+	            <div class="row">
+	                <div class="col">
+	                    <div class="content-wrapper" style="padding: 15px;">
+	                        <h3>Parking Management</h3>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
 		</div>
-	</header>
-	<div id="main">
-		<div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="content-wrapper" style="padding: 15px;">
-                        <h3>Parking Management</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-	</div>
-	<footer th:insert="~{fragments/mainTemplate :: footer}"
-		class="main-footer d-flex justify-content-between"> </footer>
-	<script src="/js/orders.js"></script>
-</body>
+		<footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
+		<script src="/js/orders.js"></script>
+	</body>
 
 </html>

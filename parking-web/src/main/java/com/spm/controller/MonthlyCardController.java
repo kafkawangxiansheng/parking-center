@@ -127,12 +127,7 @@ public class MonthlyCardController {
 			String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
 			monthlyCardDto.setStartDateString(startDateString);
 			monthlyCardDto.setEndDateString(endDateString);
-			
-			model.addAttribute("monthlyCardDto", monthlyCardDto);
-			ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-			model.addAttribute("listCompany", companyMap.getData());
-			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-			model.addAttribute("listProject", projectMap.getData());
+			model = refeshSelectForm(model);
 			return "addMonthlyCardForm";
 		}
 	}
@@ -154,12 +149,7 @@ public class MonthlyCardController {
 			String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
 			monthlyCardDto.setStartDateString(startDateString);
 			monthlyCardDto.setEndDateString(endDateString);
-			
-			model.addAttribute("monthlyCardDto", monthlyCardDto);
-			ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-			model.addAttribute("listCompany", companyMap.getData());
-			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-			model.addAttribute("listProject", projectMap.getData());
+			model = refeshSelectForm(model);
 			return "addMonthlyCardForm";
 		}
 	}
@@ -168,6 +158,14 @@ public class MonthlyCardController {
 	public  String deleteMonthlyCard(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
 		monthlyCradService.deleteMonthlyCard(id);
 		return "redirect:/monthlyCard";
+	}
+	
+	public  Model refeshSelectForm(Model model) throws UnauthorizedException{
+		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
+		model.addAttribute("listCompany", companyMap.getData());
+		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
+		model.addAttribute("listProject", projectMap.getData());
+		return model;
 	}
 	
 }

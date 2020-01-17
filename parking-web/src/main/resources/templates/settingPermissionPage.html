@@ -1,245 +1,215 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Parking Management</title>
-    <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
-    <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
-    <style>
-		header .item7 {
-			background: black;
-		}
-	</style>
-</head>
-
-<body>
-    <header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
-    	<div class="header-submenu position-relative">
-    		<div th:insert="~{fragments/mainTemplate :: sub-header}"  class="container"></div>
-    		<div th:insert="~{fragments/mainTemplate :: navi-header}"  class="container"></div>
-    	</div>
-    </header>
-    <div id="main">
-	    <div class="header-submenu position-relative">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center"
-                            style="height: 50px;">
-                            <li class="nav-item" style="border-left: 2px solid #fff;">
-                                <a class="nav-link" href="/setting/display">Cấu hình hiển thị</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/setting/order">Quản lý thu tiền xe</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/setting/permission"
-                                style="color: #000; background: #fff;">Phân quyền truy cập</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/setting/systemlog">Nhật ký hệ thống</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="content-wrapper">
-                        <section class="content-header d-flex justify-content-between align-items-center">
-                            <h1 class="m-0">Phân quyền truy cập</h1>
-                            <ul class="breadcrump d-flex flex-row p-0 m-0">
-                                <li>
-                                    <a href="#">
-                                        <i class="fas fa-home"></i>
-                                        <span>Trang chủ</span>
-                                    </a>
-                                </li>
-                                <li class="li-between">
-                                    <i class="fas fa-angle-right"></i>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span>Phân quyền truy cập</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-                        <section class="content">
-                            <div class="box box-update d-flex flex-column">
-                                <div class="box-header d-flex" style="padding: 10px;">
-                                    <i class="fas fa-pen-square" style="font-size: 18px;"></i>
-                                </div>
-                                <div class="box-body p-2">
-                                    <div class="form-body">
-                                        <form action="" class="d-flex flex-column">
-                                            <div class="form-group">
-                                                <label for="" style="font-weight: 700;">Chức vụ</label>
-                                                <select class="form-control" id="">
-                                                    <option>Ca trưởng</option>
-                                                    <option>Quản lý</option>
-                                                    <option>Nhân viên</option>
-                                                    <option>Admin</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý nhân sự
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-1">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Thông tin nhân sự
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Dò bảng chấm công
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Thông tin chức vụ
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý doanh thu
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-2">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Thống kê doanh thu
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        CT TT theo công văn
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        CT TT lũy tiến
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        CT tổng hợp
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý thẻ xe - loại xe
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-3">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Quản lý thẻ xe
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Quản lý loại xe
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Kích hoạt thẻ
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý vé tháng
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-4">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Xem nhật ký vé tháng
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Thông tin vé tháng
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Gia hạn - thông tin hết hạn
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Mất thẻ / Đổi mã thẻ
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Kích hoạt thẻ tháng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý hệ thống
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-5">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Cấu hình hiển thị
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Quản lý thu tiền xe
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Phân quyền truy cập
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Nhật ký hệ thống
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkbox">
-                                                <label for="">
-                                                    <input type="checkbox">
-                                                    Quản lý xe ra vào
-                                                </label>
-                                                <div class="subCheckbox subCheckbox-6">
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Tra cứu vào ra
-                                                    </label>
-                                                    <label for="">
-                                                        <input type="checkbox">
-                                                        Tra cứu vé tháng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="form-group button-group d-flex flex-row">
-                                        <div class="form-group" style="margin-right: 20px;">
-                                            <input type="submit" value="Lưu" class="btn btn-primary"
-                                                style="padding: 4px 12px;">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" value="Quay lại" class="btn" style="padding: 4px 12px;"
-                                                onclick="return back();">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                         </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
-    <script src="/js/orders.js"></script>
-</body>
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <title>Parking Management</title>
+	    <th:block th:insert="~{fragments/mainTemplate :: link}"></th:block>
+	    <th:block th:insert="~{fragments/mainTemplate :: script}"></th:block>
+	    <style>
+			header .item7 {
+				background: black;
+			}
+		</style>
+	</head>
+	
+	<body>
+	    <header th:insert="~{fragments/mainTemplate :: main-header}" class="main-header flex-column">
+	    	<div class="header-submenu position-relative">
+	    		<div th:insert="~{fragments/mainTemplate :: sub-header}"  class="container"></div>
+	    		<div th:insert="~{fragments/mainTemplate :: navi-header}"  class="container"></div>
+	    	</div>
+	    </header>
+	    <div id="main">
+		    <div class="header-submenu position-relative">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col">
+	                        <ul class="nav nav-submenu align-items-center d-flex justify-content-center" style="height: 50px;">
+	                            <li class="nav-item" style="border-left: 2px solid #fff;">
+	                                <a class="nav-link" href="/setting/display">Cấu hình hiển thị</a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a class="nav-link" href="/setting/order">Quản lý thu tiền xe</a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a class="nav-link" href="/setting/permission"
+	                                	style="color: #000; background: #fff;">Phân quyền truy cập</a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a class="nav-link" href="/setting/systemlog">Nhật ký hệ thống</a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="container">
+	            <div class="row">
+	                <div class="col">
+	                    <div class="content-wrapper">
+	                        <section class="content-header d-flex justify-content-between align-items-center">
+	                            <h1 class="m-0">Phân quyền truy cập</h1>
+	                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+	                                <li>
+	                                    <a href="#">
+	                                        <i class="fas fa-home"></i>
+	                                        <span>Trang chủ</span>
+	                                    </a>
+	                                </li>
+	                                <li class="li-between">
+	                                    <i class="fas fa-angle-right"></i>
+	                                </li>
+	                                <li>
+	                                    <a href="#">
+	                                        <span>Phân quyền truy cập</span>
+	                                    </a>
+	                                </li>
+	                            </ul>
+	                        </section>
+	                        <section class="content">
+	                            <div class="box box-update d-flex flex-column">
+	                                <div class="box-header d-flex" style="padding: 10px;">
+	                                    <i class="fas fa-pen-square" style="font-size: 18px;"></i>
+	                                </div>
+	                                <div class="box-body p-2">
+	                                    <div class="form-body">
+	                                        <form action="" class="d-flex flex-column">
+	                                            <div class="form-group">
+	                                                <label for="" style="font-weight: 700;">Chức vụ</label>
+	                                                <select class="form-control" id="">
+	                                                    <option>Ca trưởng</option>
+	                                                    <option>Quản lý</option>
+	                                                    <option>Nhân viên</option>
+	                                                    <option>Admin</option>
+	                                                </select>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for=""> 
+	                                                	<input type="checkbox" value="Quản lý nhân sự">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-1">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Thông tin nhân sự">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Dò bảng chấm công">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Thông tin chức vụ">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for="">
+	                                                    <input type="checkbox" value="Quản lý doanh thu">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-2">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value=" Thống kê doanh thu">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="CT TT theo công văn">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="CT TT lũy tiến">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="CT tổng hợp">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for="">
+	                                                    <input type="checkbox" value="Quản lý thẻ xe - loại xe">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-3">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Quản lý thẻ xe">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Quản lý loại xe">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Kích hoạt thẻ">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for="">
+	                                                    <input type="checkbox" value="Quản lý vé tháng">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-4">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Xem nhật ký vé tháng">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Thông tin vé tháng">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Gia hạn - thông tin hết hạn">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Mất thẻ / Đổi mã thẻ">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Kích hoạt thẻ tháng">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for="">
+	                                                    <input type="checkbox" value="Quản lý hệ thống">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-5">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Cấu hình hiển thị">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Quản lý thu tiền xe">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Phân quyền truy cập">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Nhật ký hệ thống">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                            <div class="form-group checkbox">
+	                                                <label for="">
+	                                                    <input type="checkbox" value="Quản lý xe ra vào">
+	                                                </label>
+	                                                <div class="subCheckbox subCheckbox-6">
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Tra cứu vào ra">
+	                                                    </label>
+	                                                    <label for="">
+	                                                        <input type="checkbox" value="Tra cứu vé tháng">
+	                                                    </label>
+	                                                </div>
+	                                            </div>
+	                                        </form>
+	                                    </div>
+	                                    <div class="form-group button-group d-flex flex-row">
+	                                        <div class="form-group" style="margin-right: 20px;">
+	                                            <input type="submit" value="Lưu" class="btn btn-primary" style="padding: 4px 12px;">
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <input type="submit" value="Quay lại" class="btn" style="padding: 4px 12px;" onclick="return back();">
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                         </section>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
+	    <script src="/js/orders.js"></script>
+	</body>
 
 </html>
