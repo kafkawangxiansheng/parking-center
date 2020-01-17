@@ -4,11 +4,9 @@ public class MonthlyCardDto {
 	
 	private Long id;
 	
-	private CardsDto card;
+	private String cardCode;
 	
-	private String cardcode;
-	
-	private String cardNumber;
+	private String carNumber;
 	
 	private String customerName;
 	
@@ -57,20 +55,13 @@ public class MonthlyCardDto {
 		this.id = id;
 	}
 
-	public CardsDto getCard() {
-		return card;
+	
+	public String getCarNumber() {
+		return carNumber;
 	}
 
-	public void setCard(CardsDto card) {
-		this.card = card;
-	}
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCarNumber(String carNumber) {
+		this.carNumber = carNumber;
 	}
 
 	public String getCustomerName() {
@@ -217,12 +208,12 @@ public class MonthlyCardDto {
 		this.endDateString = endDateString;
 	}
 
-	public String getCardcode() {
-		return cardcode;
+	public String getCardCode() {
+		return cardCode;
 	}
 
-	public void setCardcode(String cardcode) {
-		this.cardcode = cardcode;
+	public void setCardCode(String cardCode) {
+		this.cardCode = cardCode;
 	}
 
 	public Long getVehicleId() {

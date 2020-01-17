@@ -7,11 +7,11 @@ public class MonthlyCardDto {
 	@JsonProperty("id")
 	private Long id;
 	
-	@JsonProperty("card_id")
-	private long cardId;
+	@JsonProperty("card_code")
+	private String cardCode;
 	
 	@JsonProperty("car_number")
-	private String cardNumber;
+	private String carNumber;
 	
 	@JsonProperty("customer_name")
 	private String customerName;
@@ -72,20 +72,20 @@ public class MonthlyCardDto {
 		this.id = id;
 	}
 
-	public long getCardId() {
-		return cardId;
+	public String getCardCode() {
+		return cardCode;
 	}
 
-	public void setCardId(long cardId) {
-		this.cardId = cardId;
+	public void setCardCode(String cardCode) {
+		this.cardCode = cardCode;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public String getCarNumber() {
+		return carNumber;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCarNumber(String carNumber) {
+		this.carNumber = carNumber;
 	}
 
 	public String getCustomerName() {

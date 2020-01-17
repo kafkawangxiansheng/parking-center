@@ -11,6 +11,8 @@ public interface MonthlyCardService {
 
     MonthlyCardDto save(MonthlyCardDto monthlyCardDto);
     
+    MonthlyCardDto findByCardCode(String cardCode);
+    
     List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos);
 
     void delete(MonthlyCardDto monthlyCardDto);

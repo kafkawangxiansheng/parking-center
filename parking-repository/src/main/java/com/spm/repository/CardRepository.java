@@ -30,4 +30,6 @@ public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 	
 	@Query(value = "SELECT * FROM cards where  project_id = :projectId AND last_sync < updated", nativeQuery = true)
 	List<CardsEntity> syncAllByProjectId(@Param(value = "projectId") Long projectId);
+	
+	CardsEntity findByCode(String cardCode);
 }

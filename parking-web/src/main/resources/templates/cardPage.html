@@ -90,22 +90,37 @@
 										</form>
 									</div>
 								</div>
-								<div class="box box-result">
-									<div class="form-group button-group d-flex flex-row">
-										<div class="form-group">
-											<a href="/cards/addNewCard"> 
-												<input value="Thêm mới" class="btn btn-success"
-													type="submit" style="font-size: 14px; margin-right: 20px;">
-											</a>
-										</div>
-										<div class="form-group">
-											<input type="submit" value="Import danh sách thẻ"
-												class="btn btn-primary" style="font-size: 14px; margin-right: 20px;">
-										</div>
-										<div class="form-group">
-											<input type="submit" value="Export danh sách thẻ"
-												class="btn btn-info" style="font-size: 14px;">
-										</div>
+								<table class="table table-hover" id="inOutTable">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 50px;">ID</th>
+											<th scope="col">Mã chip</th>
+											<th scope="col">Mã số thẻ</th>
+											<th scope="col">Tên loại xe</th>
+											<th scope="col" style="width: 100px;">Chỉnh sửa</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="card : ${cards}">
+											<td th:text="${{card.id}}"></td>
+											<td th:text="${{card.code}}"></td>
+											<td th:text="${{card.stt}}"></td>
+											<td th:text="${{card.vehicleId}}"></td>
+											<td><a th:href="@{/cards/editCard/{id}/(id=${card.id})}">Chỉnh sửa</a></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="form-group button-group d-flex flex-row">
+									<div class="form-group">
+										<a href="/cards/addNewCard"> <input type="submit"
+											value="Thêm mới" class="btn btn-success"
+											style="font-size: 14px; margin-right: 20px;">
+										</a>
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Import danh sách thẻ"
+											class="btn btn-primary"
+											style="font-size: 14px; margin-right: 20px;">
 									</div>
 									<table class="table table-hover" id="inOutTable">
 										<thead>

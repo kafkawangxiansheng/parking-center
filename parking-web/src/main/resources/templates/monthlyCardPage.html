@@ -134,9 +134,101 @@
 	                </div>
 	            </div>
 	        </div>
-	    </div>
-	    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
-	    <script src="/js/orders.js"></script>
-	</body>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="content-wrapper">
+                        <section class="content-header d-flex justify-content-between align-items-center">
+                            <h1 class="m-0">Thông tin vé tháng</h1>
+                            <ul class="breadcrump d-flex flex-row p-0 m-0">
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-home"></i>
+                                        <span>Trang chủ</span>
+                                    </a>
+                                </li>
+                                <li class="li-between">
+                                    <i class="fas fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span>Thông tin vé tháng</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="content">
+                            <div class="box box-result">
+                                <table class="table table-hover" id="inOutTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="width: 50px;">ID</th>
+                                            <th scope="col">Mã Id Thẻ</th>
+                                            <th scope="col">Biển số</th>
+                                            <th scope="col">Tên KH</th>
+                                            <th scope="col">CMND</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Ngày đăng ký</th>
+                                            <th scope="col">Ngày hết hạn</th>
+                                            <th scope="col" style="width: 100px;">Chỉnh sửa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr th:each="monthlyCard : ${listMonthlycard}">
+											<td th:text="${{monthlyCard.id}}"></td>
+											<td th:text="${{monthlyCard.cardCode}}"></td>
+											<td th:text="${{monthlyCard.carNumber}}"></td>
+											<td th:text="${{monthlyCard.customerName}}"></td>
+											<td th:text="${{monthlyCard.idNumber}}"></td>
+											<td th:text="${{monthlyCard.email}}"></td>
+											<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yy')}"></td>
+											<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yy')}"></td>
+											
+											<td width="13%">
+												<div style="padding-right: 10px; float: left;">
+													<a
+														th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
+														<button class="btn-info">Edit</button>
+													</a>
+												</div>
+												<div>
+													<a
+														th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
+														<button class="btn-warning">Delete</button>
+													</a>
+												</div> <!-- <a th:href="@{/project/edit-project/{id}(id=${project.id})}" >Edit</a>
+												| 
+												<a th:href="@{/project/delete-project/{id}(id=${project.id})}">Delete</a> -->
+											</td>
+										</tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group button-group d-flex flex-row">
+                                    <div class="form-group">
+                                        <a href="/monthlyCard/add">
+                                            <input type="submit" value="Thêm mới" class="btn btn-success"
+                                                style="font-size: 14px; margin-right: 20px;">
+                                        </a>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Import danh sách thẻ" class="btn btn-primary"
+                                            style="font-size: 14px; margin-right: 20px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Export danh sách thẻ" class="btn btn-info"
+                                            style="font-size: 14px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
+    <script src="/js/orders.js"></script>
+</body>
 
 </html>
