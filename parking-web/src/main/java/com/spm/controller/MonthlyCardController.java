@@ -2,6 +2,7 @@ package com.spm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,20 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.common.util.DateUtil;
+import com.spm.constants.PagingConstants;
 import com.spm.dto.CompanyDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ProjectsDto;
 import com.spm.dto.ResultObject;
 import com.spm.dto.VehicleDto;
 import com.spm.exception.UnauthorizedException;
+import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.service.CompanyService;
 import com.spm.service.MonthlyCradService;
 import com.spm.service.ProjectService;
@@ -43,12 +49,49 @@ public class MonthlyCardController {
 	
 	@Autowired
 	private CompanyService companyService;
-
+	
 	//index == monthlycardPage
 	@RequestMapping(value = "", method = { RequestMethod.GET })
-	public String index(Model model, HttpServletRequest request) throws UnauthorizedException {
-		ResultObject<List<MonthlyCardDto>> monthlyCardMap = monthlyCradService.getAllMonthlyCard();
-		model.addAttribute("listMonthlycard",monthlyCardMap.getData());
+	public String index(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "cardCode", required = false) String cardCode,
+			@RequestParam(name = "statusDate", required = false, defaultValue = "0") Integer statusDate,
+			@RequestParam(name = "vehicleId", required = false) String vehicleId,
+			@RequestParam(name = "numberEndDate", required = false) String numberEndDate,
+			Model model, HttpServletRequest request) throws UnauthorizedException {
+		
+		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		monthlyCradSearchForm.setCardCode(cardCode);
+		monthlyCradSearchForm.setVehicleId(vehicleId);
+		monthlyCradSearchForm.setStatusDate(statusDate);
+		monthlyCradSearchForm.setNumberEndDate(numberEndDate);
+		
+		if(page > 0) {
+			page = page - 1;
+		}
+		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+		ResultObject<List<MonthlyCardDto>> result = monthlyCradService.getAllMonthlyCard(monthlyCradSearchForm,pageable );
+		
+		List<Integer>  totalPages = new ArrayList<Integer>();
+		if( page <= 5) {
+			for(int p = 1; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > 10) {
+					break;
+				}
+			}
+		} else {
+			for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > (page + 5)) {
+					break;
+				}
+			}
+		}
+		
+		ResultObject<List<VehicleDto>> listAllVehicle = vehicleService.getListAllVehicle();
+		model.addAttribute("listMonthlycard",result.getData());
+		model.addAttribute("vehicles",listAllVehicle.getData());
+		model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
 		return "monthlyCardPage";
 	}
 	
@@ -158,6 +201,7 @@ public class MonthlyCardController {
 		return "redirect:/monthlyCard";
 	}
 	
+	//refeshSelectForm
 	public  Model refeshSelectForm(Model model) throws UnauthorizedException{
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
 		model.addAttribute("listCompany", companyMap.getData());

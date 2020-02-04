@@ -8,12 +8,15 @@ import javax.annotation.PostConstruct;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.entity.MonthlyCardEntity;
 import com.spm.repository.MonthlyCardRepository;
+import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.service.MonthlyCardService;
 
 /**
@@ -113,5 +116,21 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	@Override
 	public MonthlyCardEntity findByCardCode(String cardCode) {
 		return monthlyCardRepository.findByCardCode(cardCode);
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> search(Pageable pageable,
+			MonthlyCradSearchForm monthlyCradSearchForm) {
+		
+		Page<MonthlyCardEntity> entities = monthlyCardRepository.search(
+				monthlyCradSearchForm.getCardCode(), 
+				monthlyCradSearchForm.getVehicleId()
+				, pageable);
+		
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		resultObject.setData(this.map(entities.getContent()));
+		resultObject.setTotalPages(entities.getTotalPages());
+		resultObject.setTotalRows(entities.getTotalElements());
+		return resultObject;
 	}
 }
