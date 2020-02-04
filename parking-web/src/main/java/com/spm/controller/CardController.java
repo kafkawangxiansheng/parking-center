@@ -123,10 +123,13 @@ public class CardController {
 	}
 	
 	@RequestMapping(value="active-card", method = { RequestMethod.GET})
-	public String getAllDisabledCard(Model model, HttpServletRequest request) throws UnauthorizedException {
-		String disable = "1";
+	public String getAllDisabledCard(
+			@RequestParam(name = "disable", required = false, defaultValue = "1") String disable,
+			@RequestParam(name = "code", required = false) String code,
+			Model model, HttpServletRequest request) throws UnauthorizedException {
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		cardSearchForm.setDisable(disable);
+		cardSearchForm.setCode(code);
 		model.addAttribute("cardSearchForm", cardSearchForm);
 		ResultObject<List<CardsDto>> result = cardService.getAllDisabledCard(cardSearchForm);
 		model.addAttribute("disabledCards", result.getData());

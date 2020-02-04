@@ -73,10 +73,14 @@ public class CardsEndpoint {
 	@RequestMapping(value="/disabledCard", method = {RequestMethod.GET})
 	@ApiOperation("Show Disabled Card")
 	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(
-			@RequestParam(name = "disable", required = false) String disable) {
+			@RequestParam(name = "disable", required = false, defaultValue="1") String disable,
+			@RequestParam(name = "code", required = false) String code) {
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		if(disable != null && !disable.isEmpty()) {
 			cardSearchForm.setDisable(disable);
+		}
+		if(code != null && !code.isEmpty()) {
+			cardSearchForm.setCode(code);
 		}
 		return cardsService.findAllDisabledCard(cardSearchForm);
 	}
