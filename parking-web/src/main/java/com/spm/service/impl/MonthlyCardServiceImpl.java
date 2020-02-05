@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.entity.StringEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
+import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.service.MonthlyCradService;
 
 @Service
@@ -92,6 +94,23 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCradSearchForm monthlyCradSearchForm,
+			Pageable pageable) {
+		
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_ALL_MONTHLY_CARD_SEARCH.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
+		finalURL = finalURL.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()!= 0 ? monthlyCradSearchForm.getStatusDate():0));
+		finalURL = finalURL.replaceAll("::vehicleId", monthlyCradSearchForm.getVehicleId()!= null ? monthlyCradSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::numberEndDate", monthlyCradSearchForm.getNumberEndDate()!= null ? monthlyCradSearchForm.getNumberEndDate():"");
+		
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+		
 	}
 	
 }

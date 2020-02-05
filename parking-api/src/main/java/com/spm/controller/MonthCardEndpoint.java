@@ -3,6 +3,8 @@ package com.spm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spm.constants.PagingConstants;
 import com.spm.dto.CardsDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.entity.MonthlyCardEntity;
+import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.service.CardsService;
 import com.spm.service.MonthlyCardService;
 
@@ -105,5 +109,34 @@ public class MonthCardEndpoint {
 		CardsDto cardsDto = cardsService.checkCardAndCardType(code, cardType);
 		return cardsDto;
 	}
-
+	
+	@RequestMapping(value = "search", method = { RequestMethod.GET })
+	@ApiOperation("Get all MonthlyCards by form search")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAllBySearch(
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "cardCode", required = false) String cardCode,
+			@RequestParam(name = "statusDate", required = false) int statusDate,
+			@RequestParam(name = "vehicleId", required = false) String vehicleId,
+			@RequestParam(name = "numberEndDate", required = false) String numberEndDate) {
+		
+		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+		
+		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		if(cardCode != null && !cardCode.isEmpty() && cardCode != "all") {
+			monthlyCradSearchForm.setCardCode(cardCode);
+		}
+		if(vehicleId != null && !vehicleId.isEmpty()) {
+			monthlyCradSearchForm.setVehicleId(vehicleId);
+		}
+		if(numberEndDate != null && !numberEndDate.isEmpty()) {
+			monthlyCradSearchForm.setNumberEndDate(numberEndDate);
+		}
+		//TODO:  search by status date
+		// 0: all , 1: conhan, 2: hethan
+		
+		return monthCardsService.search(paging, monthlyCradSearchForm);
+	}
+	
 }
+
+

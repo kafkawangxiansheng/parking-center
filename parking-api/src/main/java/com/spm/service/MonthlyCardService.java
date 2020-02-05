@@ -2,9 +2,12 @@ package com.spm.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.entity.MonthlyCardEntity;
+import com.spm.search.form.MonthlyCradSearchForm;
 
 /**
  * Created by Vincent 23/05/2018
@@ -22,6 +25,8 @@ public interface MonthlyCardService {
     ResultObject<List<MonthlyCardDto>> findById(Long id);
     
     MonthlyCardEntity findByCardCode(String cardCode);
+    
+    ResultObject<List<MonthlyCardDto>> search(Pageable pageable, MonthlyCradSearchForm  monthlyCradSearchForm);
     
 }
  
