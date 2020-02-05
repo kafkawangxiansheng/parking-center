@@ -102,12 +102,35 @@ public class MonthlyCardController {
 		model.addAttribute("monthlycards","");
 		return "monthlyCardViewLogPage";
 	}
-	
+	// renewal
 	@RequestMapping(value = "renewal", method = { RequestMethod.GET })
-	public String monthlyCardRenewal(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
+	public String monthlyCardRenewal(
+			Model model, HttpServletRequest request) throws UnauthorizedException {
+		
+		model.addAttribute("monthlyCradSearchForm",new MonthlyCradSearchForm());
 		return "monthlyCardRenewalPage";
 	}
+	// renewalSearch
+		@RequestMapping(value = "renewalSearch", method = { RequestMethod.GET })
+		public String monthlyCardRenewalSearch(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+				@RequestParam(name = "cardCode", required = false) String cardCode,
+				@RequestParam(name = "statusDate", required = false, defaultValue = "0") Integer statusDate,
+				@RequestParam(name = "vehicleId", required = false) String vehicleId,
+				@RequestParam(name = "numberEndDate", required = false, defaultValue = "0") Integer numberEndDate,
+				@RequestParam(name = "customerName", required = false) String customerName,
+				Model model, HttpServletRequest request) throws UnauthorizedException {
+			
+			MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+			monthlyCradSearchForm.setCardCode(cardCode);
+			monthlyCradSearchForm.setCustomerName(customerName);
+			
+			ResultObject<List<MonthlyCardDto>> result = monthlyCradService.getRenewal(monthlyCradSearchForm);
+			
+			model.addAttribute("listMonthlycard",result.getData());
+			model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
+			return "monthlyCardRenewalPage";
+		}
+	
 	
 	@RequestMapping(value = "disablelist", method = { RequestMethod.GET })
 	public String monthlyCardDisablelist(Model model, HttpServletRequest request) throws UnauthorizedException {

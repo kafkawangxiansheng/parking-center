@@ -142,6 +142,25 @@ public class MonthCardEndpoint {
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
 	
+	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
+	@ApiOperation("Get all MonthlyCards by form search")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
+			@RequestParam(name = "cardCode", required = false) String cardCode,
+			@RequestParam(name = "customerName", required = false) String customerName) {
+		
+		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		if(cardCode != null && !cardCode.isEmpty()) {
+			monthlyCradSearchForm.setCardCode(cardCode);
+		}
+		if(customerName != null && !customerName.isEmpty()) {
+			monthlyCradSearchForm.setCustomerName(customerName);
+		}
+		
+		return monthCardsService.renewalSearch(monthlyCradSearchForm);
+	}
+	
+	
+	
 }
 
 

@@ -21,4 +21,7 @@ public interface MonthlyCradService {
 	
 	boolean updateMonthlyCard(MonthlyCardDto monthlyCardDto);
 	
+	ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCradSearchForm monthlyCradSearchForm);
+	
+	
 }

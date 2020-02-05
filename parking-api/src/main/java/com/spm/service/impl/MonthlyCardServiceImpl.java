@@ -136,4 +136,15 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		resultObject.setTotalRows(entities.getTotalElements());
 		return resultObject;
 	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> renewalSearch(MonthlyCradSearchForm monthlyCradSearchForm) {
+		List<MonthlyCardEntity> entities = monthlyCardRepository.renewalSearch(
+				monthlyCradSearchForm.getCardCode(), 
+				monthlyCradSearchForm.getCustomerName());
+		
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		resultObject.setData(this.map(entities));
+		return resultObject;
+	}
 }

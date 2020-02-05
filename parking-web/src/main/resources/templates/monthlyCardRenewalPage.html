@@ -73,24 +73,63 @@
 	                        </section>
 	                        <section class="content">
 	                            <div class="box box-result">
+	                            <div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
+										<h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
+										<form th:action="@{/monthlyCard/renewalSearch}" th:object="${monthlyCradSearchForm}" method="GET">
+											<div>
+												<div class="form-group text col-lg-3 float-left">
+													<label>Mã chip</label> 
+													<input type="text" th:field="*{cardCode}" class="form-control" id="code">
+												</div>
+											</div>
+											<div class="form-group text col-lg-3 float-left">
+												<label>Tên Khách Hàng</label> 
+												<input type="text" th:field="*{customerName}" class="form-control" id="customer_name">
+											</div>
+											<div style="float: right;  margin: 30px 10px 10px 0;">
+												<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+											</div>
+										</form>
+									</div>
 	                                <table class="table table-hover" id="inOutTable">
 	                                    <thead>
 	                                        <tr>
-	                                            <th class="checkbox-item"><input type="checkbox"></th>
 	                                            <th scope="col" style="width: 50px;">ID</th>
-	                                            <th scope="col">Mã thẻ</th>
-	                                            <th scope="col">Số ngày</th>
+	                                            <th scope="col">Mã Chip</th>
 	                                            <th scope="col">Biển số</th>
 	                                            <th scope="col">Tên KH</th>
 	                                            <th scope="col">CMND</th>
 	                                            <th scope="col">Email</th>
-	                                            <th scope="col">Tên loại xe</th>
 	                                            <th scope="col">Ngày đăng ký</th>
 	                                            <th scope="col">Ngày hết hạn</th>
+	                                            <th scope="col">Trạng Thái</th>
 	                                            <th scope="col" style="width: 100px;">Chỉnh sửa</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
+	                                    	<tr th:each="monthlyCard : ${listMonthlycard}">
+												<td th:text="${{monthlyCard.id}}"></td>
+												<td th:text="${{monthlyCard.cardCode}}"></td>
+												<td th:text="${{monthlyCard.carNumber}}"></td>
+												<td th:text="${{monthlyCard.customerName}}"></td>
+												<td th:text="${{monthlyCard.idNumber}}"></td>
+												<td th:text="${{monthlyCard.email}}"></td>
+												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
+												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
+												<td width="13%">
+													<div style="padding-right: 10px; float: left;">
+														<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
+															<button class="btn-info">Edit</button>
+														</a>
+													</div>
+													<div>
+														<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
+															<button class="btn-warning">Delete</button>
+														</a>
+													</div> 
+												</td>
+											</tr>
 	                                    </tbody>
 	                                </table>
 	                                <div class="form-group button-group d-flex flex-row">

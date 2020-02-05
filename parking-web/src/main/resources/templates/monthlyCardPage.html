@@ -151,8 +151,8 @@
 												<td th:text="${{monthlyCard.customerName}}"></td>
 												<td th:text="${{monthlyCard.idNumber}}"></td>
 												<td th:text="${{monthlyCard.email}}"></td>
-												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yy')}"></td>
-												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yy')}"></td>
+												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
 												<td width="13%">
 													<div style="padding-right: 10px; float: left;">

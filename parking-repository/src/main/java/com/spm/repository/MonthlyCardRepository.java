@@ -31,5 +31,13 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 //			@Param(value = "vehicleId") int statusDate,
 //			@Param(value = "numberEndDate") int numberEndDate,
 			Pageable pageable);
+	
+	@Query(value = "SELECT * FROM monthly_cards WHERE  "
+			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name = :customerName)", nativeQuery = true)
+	List<MonthlyCardEntity> renewalSearch(
+			@Param(value = "cardCode") String cardCode,
+			@Param(value = "customerName") String customerName);
+	
+	
 }
 
