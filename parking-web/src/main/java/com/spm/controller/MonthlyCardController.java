@@ -56,7 +56,8 @@ public class MonthlyCardController {
 			@RequestParam(name = "cardCode", required = false) String cardCode,
 			@RequestParam(name = "statusDate", required = false, defaultValue = "0") Integer statusDate,
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
-			@RequestParam(name = "numberEndDate", required = false) String numberEndDate,
+			@RequestParam(name = "numberEndDate", required = false, defaultValue = "0") Integer numberEndDate,
+			@RequestParam(name = "customerName", required = false) String customerName,
 			Model model, HttpServletRequest request) throws UnauthorizedException {
 		
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
@@ -64,6 +65,7 @@ public class MonthlyCardController {
 		monthlyCradSearchForm.setVehicleId(vehicleId);
 		monthlyCradSearchForm.setStatusDate(statusDate);
 		monthlyCradSearchForm.setNumberEndDate(numberEndDate);
+		monthlyCradSearchForm.setCustomerName(customerName);
 		
 		if(page > 0) {
 			page = page - 1;

@@ -103,6 +103,10 @@
 													<input type="text" th:field="*{numberEndDate}" class="form-control" id="numberEndDate">
 												</div>
 											</div>
+											<div class="form-group text col-lg-3 float-left">
+												<label>Tên Khách Hàng</label> 
+												<input type="text" th:field="*{customerName}" class="form-control" id="customer_name">
+											</div>
 											<div style="float: right;  margin: 0 10px 10px 0;">
 												<button type="submit" class="btn btn-primary">Tìm kiếm</button>
 											</div>
@@ -135,6 +139,7 @@
 	                                            <th scope="col">Email</th>
 	                                            <th scope="col">Ngày đăng ký</th>
 	                                            <th scope="col">Ngày hết hạn</th>
+	                                            <th scope="col">Trạng Thái</th>
 	                                            <th scope="col" style="width: 100px;">Chỉnh sửa</th>
 	                                        </tr>
 	                                    </thead>
@@ -148,6 +153,7 @@
 												<td th:text="${{monthlyCard.email}}"></td>
 												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yy')}"></td>
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yy')}"></td>
+												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
 												<td width="13%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">

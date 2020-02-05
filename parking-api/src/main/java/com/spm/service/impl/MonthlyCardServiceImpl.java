@@ -124,8 +124,11 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		
 		Page<MonthlyCardEntity> entities = monthlyCardRepository.search(
 				monthlyCradSearchForm.getCardCode(), 
-				monthlyCradSearchForm.getVehicleId()
-				, pageable);
+				monthlyCradSearchForm.getVehicleId(),
+				monthlyCradSearchForm.getCustomerName(),
+//				monthlyCradSearchForm.getStatusDate(),
+//				monthlyCradSearchForm.getNumberEndDate(),
+				pageable);
 		
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities.getContent()));
