@@ -70,6 +70,9 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	@Override
 	public MonthlyCardDto findByCardCode(String cardCode) {
 		MonthlyCardEntity entity = monthlyCardRepository.findByCardCode(cardCode);
+		if(entity ==  null)  {
+			return null;
+		}
 		MonthlyCardDto monthlyCardDto = new MonthlyCardDto();
 		mapper.map(entity, monthlyCardDto);
 		return monthlyCardDto;
