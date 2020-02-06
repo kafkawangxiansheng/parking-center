@@ -22,11 +22,22 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 	List<MonthlyCardEntity> syncAllByProjectId(@Param(value = "projectId") Long projectId);
 	
 	@Query(value = "SELECT * FROM monthly_cards WHERE  "
-			+ "(:cardCode is null OR card_code = :cardCode) AND (:vehicleId is null OR vehicle_id = :vehicleId)", nativeQuery = true)
+			+ "(:cardCode is null OR card_code = :cardCode) AND (:vehicleId is null OR vehicle_id = :vehicleId)"
+			+ "AND (:customerName is null OR customer_name = :customerName)", nativeQuery = true)
 	Page<MonthlyCardEntity> search(
 			@Param(value = "cardCode") String cardCode,
 			@Param(value = "vehicleId") String vehicleId,
-//			@Param(value = "numberEndDate") String numberEndDate,
+			@Param(value = "customerName") String customerName,
+//			@Param(value = "vehicleId") int statusDate,
+//			@Param(value = "numberEndDate") int numberEndDate,
 			Pageable pageable);
+	
+	@Query(value = "SELECT * FROM monthly_cards WHERE  "
+			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name = :customerName)", nativeQuery = true)
+	List<MonthlyCardEntity> renewalSearch(
+			@Param(value = "cardCode") String cardCode,
+			@Param(value = "customerName") String customerName);
+	
+	
 }
 

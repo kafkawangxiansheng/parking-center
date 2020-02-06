@@ -5,7 +5,8 @@ public class MonthlyCradSearchForm {
 	private String cardCode;
 	private String vehicleId;
 	private int statusDate;
-	private String numberEndDate;
+	private int numberEndDate;
+	private String customerName;
 	
 	public String getCardCode() {
 		return cardCode;
@@ -19,20 +20,23 @@ public class MonthlyCradSearchForm {
 	public void setVehicleId(String vehicleId) {
 		this.vehicleId = vehicleId;
 	}
-	public int isStatusDate() {
+	public int getStatusDate() {
 		return statusDate;
 	}
 	public void setStatusDate(int statusDate) {
 		this.statusDate = statusDate;
 	}
-	public String getNumberEndDate() {
+	public int getNumberEndDate() {
 		return numberEndDate;
 	}
-	public void setNumberEndDate(String numberEndDate) {
+	public void setNumberEndDate(int numberEndDate) {
 		this.numberEndDate = numberEndDate;
 	}
-	public int getStatusDate() {
-		return statusDate;
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 	
 }

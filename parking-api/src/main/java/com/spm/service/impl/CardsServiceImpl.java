@@ -106,7 +106,7 @@ public class CardsServiceImpl implements CardsService {
 	
 	@Override
 	public ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm){
-		List<CardsEntity> entities = cardRepository.findAllByCodeAndDisable(cardSearchForm.getCode(), Integer.valueOf(cardSearchForm.getDisable()));
+		List<CardsEntity> entities = cardRepository.searchDisable(cardSearchForm.getCode(), cardSearchForm.getDisable());
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;

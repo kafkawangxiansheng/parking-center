@@ -28,5 +28,9 @@ public interface MonthlyCardService {
     
     ResultObject<List<MonthlyCardDto>> search(Pageable pageable, MonthlyCradSearchForm  monthlyCradSearchForm);
     
+    ResultObject<List<MonthlyCardDto>> renewalSearch(MonthlyCradSearchForm  monthlyCradSearchForm);
+    
+    
+    
 }
  

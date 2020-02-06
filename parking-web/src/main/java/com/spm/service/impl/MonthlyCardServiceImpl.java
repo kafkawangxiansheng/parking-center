@@ -105,12 +105,26 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		String finalURL = URLConstants.URL_GET_ALL_MONTHLY_CARD_SEARCH.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
 		finalURL = finalURL.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
 		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()!= 0 ? monthlyCradSearchForm.getStatusDate():0));
-		finalURL = finalURL.replaceAll("::vehicleId", monthlyCradSearchForm.getVehicleId()!= null ? monthlyCradSearchForm.getVehicleId():"");
-		finalURL = finalURL.replaceAll("::numberEndDate", monthlyCradSearchForm.getNumberEndDate()!= null ? monthlyCradSearchForm.getNumberEndDate():"");
-		
+		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
+		finalURL = finalURL.replaceAll("::customerName", monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : "");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 		
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCradSearchForm monthlyCradSearchForm) {
+		
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_MONTHLY_CARD_RENEWAL_SEARCH.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()!= 0 ? monthlyCradSearchForm.getStatusDate():0));
+		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
+		finalURL = finalURL.replaceAll("::customerName", monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : "");
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
 	}
 	
 }

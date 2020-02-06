@@ -117,25 +117,49 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "cardCode", required = false) String cardCode,
 			@RequestParam(name = "statusDate", required = false) int statusDate,
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
-			@RequestParam(name = "numberEndDate", required = false) String numberEndDate) {
+			@RequestParam(name = "numberEndDate", required = false) int numberEndDate,
+			@RequestParam(name = "customerName", required = false) String customerName) {
 		
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
-		if(cardCode != null && !cardCode.isEmpty() && cardCode != "all") {
+		if(cardCode != null && !cardCode.isEmpty()) {
 			monthlyCradSearchForm.setCardCode(cardCode);
 		}
 		if(vehicleId != null && !vehicleId.isEmpty()) {
 			monthlyCradSearchForm.setVehicleId(vehicleId);
 		}
-		if(numberEndDate != null && !numberEndDate.isEmpty()) {
+		if(numberEndDate != 0 ) {
 			monthlyCradSearchForm.setNumberEndDate(numberEndDate);
 		}
-		//TODO:  search by status date
-		// 0: all , 1: conhan, 2: hethan
+		if(statusDate != 0) {
+			monthlyCradSearchForm.setStatusDate(statusDate);
+		}
+		if(customerName != null && !customerName.isEmpty()) {
+			monthlyCradSearchForm.setCustomerName(customerName);
+		}
 		
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
+	
+	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
+	@ApiOperation("Get all MonthlyCards by form search")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
+			@RequestParam(name = "cardCode", required = false) String cardCode,
+			@RequestParam(name = "customerName", required = false) String customerName) {
+		
+		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		if(cardCode != null && !cardCode.isEmpty()) {
+			monthlyCradSearchForm.setCardCode(cardCode);
+		}
+		if(customerName != null && !customerName.isEmpty()) {
+			monthlyCradSearchForm.setCustomerName(customerName);
+		}
+		
+		return monthCardsService.renewalSearch(monthlyCradSearchForm);
+	}
+	
+	
 	
 }
 
