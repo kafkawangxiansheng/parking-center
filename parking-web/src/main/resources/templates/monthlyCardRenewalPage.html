@@ -91,6 +91,7 @@
 											</div>
 										</form>
 									</div>
+									
 	                                <table class="table table-hover" id="inOutTable">
 	                                    <thead>
 	                                        <tr>
@@ -119,15 +120,31 @@
 												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
 												<td width="13%">
 													<div style="padding-right: 10px; float: left;">
-														<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
-															<button class="btn-info">Edit</button>
+														<!-- <a th:href="@{/monthlyCard/renewal/{id}(id=${monthlyCard.id})}"> -->
+														<a data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${monthlyCard.id}"><span class="glyphicon glyphicon-trash"></span>
+															<button class="btn-info">Gia Hạn</button>
 														</a>
 													</div>
-													<div>
-														<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
-															<button class="btn-warning">Delete</button>
-														</a>
-													</div> 
+													<!-- <div class="modal modal-warning fade in" th:id="modal-warning+${monthlyCard.id}" >
+													    <div class="modal-dialog">
+													        <div class="modal-content">
+													        	<form id="formMonthlyCardsData" th:action="@{/monthlyCard/add}" th:object="${monthlyCard}" method="POST">
+														            <div class="modal-header">
+														                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													                    <span aria-hidden="true">×</span></button>
+														            </div>
+														            <div class="form-group text">
+																		<label>Phí đậu xe</label>
+																		<input type="text" required="required" name="monthlyCard.id" class="form-control" id="parking_fee">
+																	</div>
+														            <div class="modal-footer">
+														                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+														                <a type="button" class="btn btn-outline" th:href="@{/user/delete/{id}(id=${user.id})}"><i class="fa fa-check"></i>&nbsp;Yes</a>
+														            </div>
+														    	</form>
+													        </div>
+													    </div>
+													</div> -->
 												</td>
 											</tr>
 	                                    </tbody>
@@ -152,6 +169,28 @@
 	                </div>
 	            </div>
 	        </div>
+	    </div>
+	    <div class="myForm">
+	    	<form id="formMonthlyCardsData"  th:action="@{/monthlyCard/update}" th:object="${monthlyCardDto}" method="POST">
+            	<div class="form-group text">
+		            <label for="option1">ID</label>
+		            <input required="required" readonly="readonly" th:field="*{id}" class="form-control" id="id">
+		        </div>
+                
+                 <div class="form-group text">
+                     <label >Ngày đăng ký</label>
+                     <input type="text" required="required" th:field="*{startDateString}" class="form-control  datepickerInOut" id="start_date">
+                 </div>
+                 <div class="form-group text">
+                 	<label >Ngày hết hạn</label>
+                    <input type="text" required="required" th:field="*{endDateString}" class="form-control  datepickerInOut" id="end_date">
+                 </div>
+                 <div class="form-group button-group d-flex flex-row">
+            		<div class="form-group">
+                		<input type="submit" value="Lưu" class="btn btn-success" style="font-size: 14px;">
+     				</div>
+				</div>
+        	</form>
 	    </div>
 	    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
 	    <script src="/js/orders.js"></script>

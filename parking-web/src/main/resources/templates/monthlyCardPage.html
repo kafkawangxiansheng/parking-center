@@ -144,7 +144,7 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                    	<tr th:each="monthlyCard : ${listMonthlycard}">
+	                                    	<tr th:each="monthlyCard : ${listMonthlycard.data}">
 												<td th:text="${{monthlyCard.id}}"></td>
 												<td th:text="${{monthlyCard.cardCode}}"></td>
 												<td th:text="${{monthlyCard.carNumber}}"></td>
@@ -169,6 +169,14 @@
 											</tr>
 	                                    </tbody>
 	                                </table>
+	                                <hr/>
+	                                <ul class="nav nav-pills" style="padding : 0 0 10px 10px;">
+	                               		<li class="nav-item" 
+	                               			th:each="i : ${#numbers.sequence(0,listMonthlycard.totalPages - 1 )}">
+	                               			<a th:href="@{/monthlyCard/(page=${i})}" th:text="${i}" class="nav-link"
+	                               			th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+	                               		</li>
+	                                </ul>
 	                                <div class="form-group button-group d-flex flex-row">
 	                                    <div class="form-group">
 	                                        <a href="/monthlyCard/add">
