@@ -89,7 +89,7 @@
 												<td th:text="${{vehicle.code}}"></td>
 												<td th:text="${{vehicle.monthlyCost}}"></td>
 												<td th:text="${{vehicle.type}}"></td>
-												<td th:text="${{vehicle.cardType}}"></td>
+												<td th:text="${{vehicle.cardType == 1 ? 'Thường' : 'Vé Tháng'}}"></td>
 												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/cards/editVehicle/{id}/(id=${vehicle.id})}">

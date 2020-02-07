@@ -89,13 +89,10 @@
 												</div>
 												<div class="form-group">
 													<label for="type">Loại xe</label> 
-													<select th:field="*{type}" class="form-control" id="type">
-														<option value="1">Xe máy</option>
-														<option value="2">Xe oto</option>
-													</select>
+													<input type="text" th:field="*{type}" class="form-control" id="type">
 												</div>
 												<div class="form-group">
-													<label for="cardType">Loại vé</label> 
+													<label for="cardType">Loại vé</label>
 													<select th:field="*{cardType}" class="form-control" id="cardType">
 														<option value="1">Vé thường</option>
 														<option value="2">Vé tháng</option>
