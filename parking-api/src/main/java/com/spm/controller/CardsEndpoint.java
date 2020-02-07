@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spm.constants.PagingConstants;
 import com.spm.dto.CardsDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.CardSearchForm;
@@ -50,7 +51,7 @@ public class CardsEndpoint {
 			@RequestParam(name = "code", required = false) String code,
 			@RequestParam(name = "stt", required = false) String stt,
 			@RequestParam(name = "vehicleId", required = false) String vehicleId) {
-		Pageable paging = PageRequest.of(page, 100);
+		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		if(code != null && !code.isEmpty()) {
 			cardSearchForm.setCode(code);
