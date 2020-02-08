@@ -147,4 +147,5 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		resultObject.setData(this.map(entities));
 		return resultObject;
 	}
+
 }

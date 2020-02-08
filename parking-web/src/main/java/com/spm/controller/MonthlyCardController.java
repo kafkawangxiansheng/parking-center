@@ -207,7 +207,7 @@ public class MonthlyCardController {
 			monthlyCardDto.setStartDateString(startDateString);
 			monthlyCardDto.setEndDateString(endDateString);
 			model = refeshSelectForm(model);
-			return "addMonthlyCardForm";
+			return "editMonthlyCardForm";
 		}
 	}
 	

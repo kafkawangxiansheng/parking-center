@@ -75,7 +75,12 @@ public class MonthCardEndpoint {
 				monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
 				resultObject = monthCardsService.save(monthlyCardDto);
 			} else {
-				resultObject = null;
+				
+				if(monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+					resultObject = monthCardsService.save(monthlyCardDto);
+				}else {
+					resultObject = null;
+				}
 			}
 		} else {
 			resultObject = null;
