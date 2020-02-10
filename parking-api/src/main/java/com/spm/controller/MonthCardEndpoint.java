@@ -77,6 +77,7 @@ public class MonthCardEndpoint {
 			} else {
 				
 				if(monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+					monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
 					resultObject = monthCardsService.save(monthlyCardDto);
 				}else {
 					resultObject = null;
@@ -123,7 +124,8 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "statusDate", required = false) int statusDate,
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
 			@RequestParam(name = "numberEndDate", required = false) int numberEndDate,
-			@RequestParam(name = "customerName", required = false) String customerName) {
+			@RequestParam(name = "customerName", required = false) String customerName,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		
@@ -142,6 +144,9 @@ public class MonthCardEndpoint {
 		}
 		if(customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
+		}
+		if(projectId != 0 ) {
+			monthlyCradSearchForm.setProjectId(projectId);
 		}
 		
 		return monthCardsService.search(paging, monthlyCradSearchForm);

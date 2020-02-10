@@ -128,6 +128,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 				monthlyCradSearchForm.getCustomerName(),
 //				monthlyCradSearchForm.getStatusDate(),
 //				monthlyCradSearchForm.getNumberEndDate(),
+				monthlyCradSearchForm.getProjectId(),
 				pageable);
 		
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();

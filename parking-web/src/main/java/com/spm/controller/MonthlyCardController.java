@@ -2,6 +2,7 @@ package com.spm.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spm.common.util.DateUtil;
+import com.spm.common.util.constant.SessionConstants;
 import com.spm.constants.PagingConstants;
 import com.spm.dto.CompanyDto;
 import com.spm.dto.MonthlyCardDto;
@@ -49,6 +51,11 @@ public class MonthlyCardController {
 	@Autowired
 	private CompanyService companyService;
 	
+	public String getProjectId(HttpServletRequest request) {
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		return projects.get(0);
+	}
+	
 	//index == monthlycardPage
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String index(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -65,18 +72,39 @@ public class MonthlyCardController {
 		monthlyCradSearchForm.setStatusDate(statusDate);
 		monthlyCradSearchForm.setNumberEndDate(numberEndDate);
 		monthlyCradSearchForm.setCustomerName(customerName);
-		
+		monthlyCradSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
 		if(page > 0) {
 			page = page - 1;
 		}
 		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		ResultObject<List<MonthlyCardDto>> result = monthlyCradService.getAllMonthlyCard(monthlyCradSearchForm,pageable );
 		
+		List<Integer>  totalPages = new ArrayList<Integer>();
+		if( page <= 5) {
+			for(int p = 1; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > 10) {
+					break;
+				}
+			}
+		} else {
+			for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
+				totalPages.add(p);
+				if(p  > (page + 5)) {
+					break;
+				}
+			}
+		}
+		
 		ResultObject<List<VehicleDto>> listAllVehicle = vehicleService.getListAllVehicle();
 		model.addAttribute("listMonthlycard",result);
 		model.addAttribute("vehicles",listAllVehicle.getData());
 		model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
-		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalRows", result.getTotalRows());
+		model.addAttribute("maxPage", result.getTotalPages());
+		model.addAttribute("currentPage", page+1);
+		model.addAttribute("currentDate", new Date().getTime());
 		return "monthlyCardPage";
 	}
 	

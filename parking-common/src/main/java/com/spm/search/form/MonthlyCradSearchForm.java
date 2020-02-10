@@ -7,6 +7,7 @@ public class MonthlyCradSearchForm {
 	private int statusDate;
 	private int numberEndDate;
 	private String customerName;
+	private long projectId;
 	
 	public String getCardCode() {
 		return cardCode;
@@ -38,5 +39,12 @@ public class MonthlyCradSearchForm {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	public long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
+	}
+	
 	
 }

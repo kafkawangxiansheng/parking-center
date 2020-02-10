@@ -113,7 +113,7 @@
 										</form>
 									</div>
 		                            <div class="form-group button-group flex-row">
-                                    	<div class="form-group" style="float: left; margin-left: 5px;">
+                                    	<div class="form-group" style="float: left; margin-left: 10px;">
 	                                        <a href="/monthlyCard/add">
 	                                            <input type="submit" value="Thêm mới" class="btn btn-success"
 	                                                style="font-size: 14px; margin-right: 20px; margin-top: 15px;">
@@ -153,16 +153,16 @@
 												<td th:text="${{monthlyCard.email}}"></td>
 												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
-												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
-												<td width="13%">
+												<td th:text="${{monthlyCard.endDate > currentDate } ? 'Còn Hạn' : 'Hết Hạn' }"></td>
+												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
-															<button class="btn-info">Edit</button>
+															<button class="btn-info">Chỉnh Sửa</button>
 														</a>
 													</div>
 													<div>
 														<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
-															<button class="btn-warning">Delete</button>
+															<button class="btn-warning">Xoá</button>
 														</a>
 													</div> 
 												</td>
@@ -170,18 +170,33 @@
 	                                    </tbody>
 	                                </table>
 	                                <hr/>
-	                                <ul class="nav nav-pills" style="padding : 0 0 10px 10px;">
-	                               		<li class="nav-item" 
-	                               			th:each="i : ${#numbers.sequence(0,listMonthlycard.totalPages - 1 )}">
-	                               			<a th:href="@{/monthlyCard(page=${i})}" th:text="${i}" class="nav-link"
-	                               			th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
-	                               		</li>
-	                                </ul>
+	                                <div style="min-height: 52px;padding-left: 10px;">
+	                                    <ul class="pagination my-4">
+	                                    	<li th:if="${currentPage > 5}" class='page-item'>
+	                                    		<a class="page-link" th:onclick="'paging(1)'">Trang đầu</a>
+	                                    	</li>
+	                                    	<th:block th:each="p : ${totalPages}">
+	                                    		 <li th:if="${p == currentPage}" class='page-item active'>
+	                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+	                                    		 		<th:block  th:text="${p}"></th:block>
+	                                    		 	</a>
+	                                    		 </li>
+	                                    		 <li th:if="${p != currentPage}" class='page-item'>
+	                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+	                                    		 		<th:block  th:text="${p}"></th:block>
+	                                    		 	</a>
+	                                    		 </li>
+	                                    	</th:block>
+	            							<li  th:if="${currentPage != maxPage}" class='page-item'>
+	                                    		<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">Trang cuối</a>
+	                                    	</li>
+	                                    </ul>
+	                                </div>
 	                                <div class="form-group button-group d-flex flex-row">
 	                                    <div class="form-group">
 	                                        <a href="/monthlyCard/add">
 	                                            <input type="submit" value="Thêm mới" class="btn btn-success"
-	                                                style="font-size: 14px; margin-right: 20px; margin-left: 5px;">
+	                                                style="font-size: 14px; margin-right: 20px; margin-left: 10px;">
 	                                        </a>
 	                                    </div>
 	                                    <div class="form-group">
@@ -202,6 +217,7 @@
         </div>
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>
+    <script src="/js/pagging.js"></script>
 </body>
 
 </html>
