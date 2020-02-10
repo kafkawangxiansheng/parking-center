@@ -73,12 +73,13 @@
 									<div class="box-header d-flex" style="padding: 10px;">
 										<i class="fas fa-pen-square" style="font-size: 18px;"></i>
 									</div>
+									<div th:if="${errorMessage}" th:utext="${errorMessage}" style="color: red; font-style: italic; padding-left: 10px;"></div>
 									<div class="box-body p-2">
 										<div class="form-body">
 											<form id="formVehicleData" th:action="@{/cards/addNewVehicle}" th:object="${addVehicle}" method="POST">
 												<div class="form-group text">
-													<label for="name">Tên loại xe*</label> 
-													<input type="text" th:field="*{name}" class="form-control" id="name" required="required">
+													<label for="name">Tên loại xe (*)</label> 
+													<input type="text" th:field="*{name}" class="form-control" id="name" required="required" >
 												</div>
 												<div class="form-group text">
 													<label for="code">Ký hiệu</label> 
@@ -89,8 +90,8 @@
 													<input type="text" th:field="*{monthlyCost}" class="form-control" id="monthlyCost">
 												</div>
 												<div class="form-group">
-													<label for="type">Loại xe</label> 
-													<input type="text" th:field="*{type}" class="form-control" id="type">
+													<label for="type">Loại xe (*)</label> 
+													<input type="text" th:field="*{type}" class="form-control" id="type" placeholder="">
 												</div>
 												<div class="form-group">
 													<label for="cardType">Loại vé</label>

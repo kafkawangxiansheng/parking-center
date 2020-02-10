@@ -9,8 +9,14 @@ import com.spm.search.form.VehicleSearchForm;
 public interface VehicleService {
 	
 	ResultObject<List<VehicleDto>> getAllVehicle(VehicleSearchForm vehicleSearchForm);
-	ResultObject<List<VehicleDto>> addVehicle(VehicleDto vehicleDto);
+	
+	boolean addVehicle(VehicleDto vehicleDto);
+	
+	boolean updateVehicle(VehicleDto vehicleDto);
+	
 	VehicleDto getVehicleById(Long vehicleId);
+	
 	void deleteVehicle(Long vehicleId);
+	
 	ResultObject<List<VehicleDto>> getListAllVehicle();
 }

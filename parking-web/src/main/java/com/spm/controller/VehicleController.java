@@ -27,12 +27,18 @@ public class VehicleController {
 	@Autowired
 	VehicleService vehicleService;
 	
+	public String getProjectId(HttpServletRequest request) {
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		return projects.get(0);
+	}
+	
 	@RequestMapping(value="vehicle", method = { RequestMethod.GET })
 	public String index(Model model, HttpServletRequest request) throws UnauthorizedException {
+		VehicleSearchForm vehicleSearchForm  = new VehicleSearchForm(); 
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
-		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(projects.get(0));
+		String projectId = getProjectId(request);
+		
+		vehicleSearchForm.setProjectId(projectId);
 		model.addAttribute("vehicleSearchForm", vehicleSearchForm);
 		ResultObject<List<VehicleDto>> result = vehicleService.getAllVehicle(vehicleSearchForm);
 		model.addAttribute("vehicles", result.getData());
@@ -42,32 +48,54 @@ public class VehicleController {
 	@RequestMapping(value="addNewVehicle", method = { RequestMethod.GET })
 	public String showAddNewVehicle(Model model, HttpServletRequest request) {
 		
+		String projectId = getProjectId(request);
+		
 		VehicleDto vehicle = new VehicleDto();
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		ProjectsDto project = new ProjectsDto();
-		project.setId(Long.valueOf(projects.get(0)));
+		project.setId(Long.valueOf(projectId));
 		vehicle.setProject(project);
 		model.addAttribute("addVehicle", vehicle);
-		return "addNewVehiclePage";
+		return "addNewVehicleForm";
 	}
 	
 	@RequestMapping(value="addNewVehicle", method = { RequestMethod.POST })
 	public String addVehicle(Model model, @ModelAttribute("addVehicle") VehicleDto vehicleDto) throws UnauthorizedException {
-		vehicleService.addVehicle(vehicleDto);
-		return "redirect:/cards/vehicle";
+		
+		
+		boolean addSuccess = vehicleService.addVehicle(vehicleDto);
+		if(addSuccess) {
+			return "redirect:/cards/vehicle";
+		}else {
+			String error = "Loại Xe đã tồn tại, vui lòng nhập Loại Xe khác!";
+			model.addAttribute("errorMessage",error );
+			
+			return "addNewVehicleForm";
+		}
 	}
 	
 	@RequestMapping (value="editVehicle/{vehicleId}", method = { RequestMethod.GET})
 	public String editVehicle(Model model, @PathVariable("vehicleId")Long vehicleId) throws UnauthorizedException{
 		VehicleDto result = vehicleService.getVehicleById(vehicleId);
 		model.addAttribute("editVehicle", result);
-		return "editVehiclePage";
+		return "editVehicleForm";
 	}
 	
 	@RequestMapping(value = "deleteVehicle/{id}", method= {RequestMethod.GET})
 	public  String deleteVehicle(Model model, @PathVariable("id") Long vehicleId) throws UnauthorizedException{
 		vehicleService.deleteVehicle(vehicleId);
 		return "redirect:/cards/vehicle";
+	}
+	
+	@RequestMapping(value="updateVehicle", method = { RequestMethod.POST })
+	public String updateVehicle(Model model, @ModelAttribute("editVehicle") VehicleDto vehicleDto) throws UnauthorizedException {
+		boolean addSuccess = vehicleService.updateVehicle(vehicleDto);
+		if(addSuccess) {
+			return "redirect:/cards/vehicle";
+		}else {
+			String error = "Loại Xe đã tồn tại, vui lòng nhập Loại Xe khác!";
+			model.addAttribute("errorMessage",error );
+			return "editVehicleForm";
+		}
 	}
 
 }

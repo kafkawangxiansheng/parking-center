@@ -1,6 +1,7 @@
 package com.spm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -64,20 +65,32 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 	
 	@Override
-	public VehicleDto save(VehicleDto vehicleDto) {
+	public ResultObject<List<VehicleDto>> save(VehicleDto vehicleDto) {
+		ResultObject<List<VehicleDto>> resultObj = new ResultObject<>();
+		List<VehicleDto> listObject = new ArrayList<>();
+		
+		boolean checkType = checkType(vehicleDto.getType());
+		if(checkType) {
+			return null;
+		}else {
 		VehicleEntity entity = new VehicleEntity();
 		mapper.map(vehicleDto, entity);
+		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 		entity = vehicleRepository.save(entity);
 		mapper.map(entity, vehicleDto);
-		return vehicleDto;
+		listObject.add(vehicleDto);
+		resultObj.setData(listObject);
+		return resultObj;
+		}
 	}
 	
 	@Override
-	public List<VehicleDto> save(List<VehicleDto> vehicleDtos) {
+	public ResultObject<List<VehicleDto>> save(List<VehicleDto> vehicleDtos) {
+		ResultObject<List<VehicleDto>> resultObj = new ResultObject<>();
 		List<VehicleEntity> vehicleEntities = reMap(vehicleDtos);
 		vehicleEntities = vehicleRepository.saveAll(vehicleEntities);
-		vehicleDtos = map(vehicleEntities);
-		return vehicleDtos;
+		resultObj.setData(map(vehicleEntities));
+		return resultObj;
 	}
 	
 	@Override
@@ -103,6 +116,35 @@ public class VehicleServiceImpl implements VehicleService{
 		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;
+	}
+	
+	public boolean checkType(int type) {
+		VehicleEntity entites = vehicleRepository.findByType(type);
+		if(entites == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	@Override
+	public ResultObject<List<VehicleDto>> update(VehicleDto vehicleDto) {
+		ResultObject<List<VehicleDto>> resultObj = new ResultObject<>();
+		List<VehicleDto> listObject = new ArrayList<>();
+		
+		VehicleEntity newEntity = new VehicleEntity();
+		VehicleDto newVehicleDto = new VehicleDto();
+		VehicleEntity entites = vehicleRepository.findById(vehicleDto.getId()).get();
+		if(entites.getType() == vehicleDto.getType()) {
+			mapper.map(vehicleDto, newEntity);
+			newEntity = vehicleRepository.save(newEntity);
+			mapper.map(newEntity,newVehicleDto);
+			listObject.add(vehicleDto);
+			resultObj.setData(listObject);
+			return resultObj;
+		}else {
+			return save(vehicleDto);
+		}
 	}
 
 }

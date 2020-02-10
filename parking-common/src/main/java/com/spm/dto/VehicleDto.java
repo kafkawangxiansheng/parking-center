@@ -10,11 +10,15 @@ public class VehicleDto {
 	
 	private long monthlyCost;
 	
-	private long type;
+	private int type;
 	
-	private long cardType;
+	private int cardType;
 	
 	private ProjectsDto project;
+	
+	private long updated;
+	
+	private boolean disable;
 
 	public Long getId() {
 		return id;
@@ -48,19 +52,19 @@ public class VehicleDto {
 		this.monthlyCost = monthlyCost;
 	}
 
-	public long getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public long getCardType() {
+	public int getCardType() {
 		return cardType;
 	}
 
-	public void setCardType(long cardType) {
+	public void setCardType(int cardType) {
 		this.cardType = cardType;
 	}
 
@@ -70,6 +74,22 @@ public class VehicleDto {
 
 	public void setProject(ProjectsDto project) {
 		this.project = project;
+	}
+
+	public long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(long updated) {
+		this.updated = updated;
+	}
+
+	public boolean isDisable() {
+		return disable;
+	}
+
+	public void setDisable(boolean disable) {
+		this.disable = disable;
 	}
 	
 }

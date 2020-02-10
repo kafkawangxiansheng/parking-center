@@ -8,12 +8,18 @@ import com.spm.search.form.VehicleSearchForm;
 
 public interface VehicleService {
 	
-	VehicleDto save(VehicleDto vehicleDto);
-	List<VehicleDto> save(List<VehicleDto> vehicleDtos);
+	ResultObject<List<VehicleDto>> save(VehicleDto vehicleDto);
+	
+	ResultObject<List<VehicleDto>> save(List<VehicleDto> vehicleDtos);
+	
 	ResultObject<List<VehicleDto>> findAll(VehicleSearchForm vehicleSearchForm);
+	
 	ResultObject<List<VehicleDto>> findById(Long vehicleId);
+	
 	void delete(Long vehicleId);
+	
 	ResultObject<List<VehicleDto>> getListAll();
 	
-
+	ResultObject<List<VehicleDto>> update(VehicleDto vehicleDto);
+	
 }
