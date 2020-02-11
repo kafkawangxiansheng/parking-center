@@ -23,5 +23,5 @@ public interface MonthlyCradService {
 	
 	ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCradSearchForm monthlyCradSearchForm , Pageable pageable);
 	
-	
+	boolean revewalMonthlyCardUpdate(MonthlyCardDto monthlyCardDto);
 }

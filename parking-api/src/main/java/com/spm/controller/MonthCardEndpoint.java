@@ -175,15 +175,23 @@ public class MonthCardEndpoint {
 		return monthCardsService.renewalSearch(paging, monthlyCradSearchForm);
 	}
 	
-	@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
-	@ApiOperation("Get one MonthlyCards for renewal")
-	public @ResponseBody ResultObject<List<MonthlyCardDto>> findOne(
-			@RequestParam(name = "id", required = false) long id) {
+	// renewal 
+		@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
+		@ApiOperation("Get one MonthlyCards for renewal")
+		public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
+				@RequestParam(name = "id", required = false) long id) {
+			
+			return monthCardsService.renewalFindOne(id);
+		}
+	// renewal update
+			@RequestMapping(value = "revewal/update", method = { RequestMethod.POST })
+			@ApiOperation("Get one MonthlyCards for renewal update")
+			public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(
+					@RequestBody MonthlyCardDto monthlyCardDto) {
+				
+				return monthCardsService.renewalUpdate(monthlyCardDto);
+			}
 		
-		return monthCardsService.renewalFindOne(id);
-	}
-	
-	
 	
 }
 

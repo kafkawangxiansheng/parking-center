@@ -166,4 +166,20 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		return resultObject;
 	}
 
+	@Override
+	public ResultObject<List<MonthlyCardDto>> renewalUpdate(MonthlyCardDto monthlyCardDto) {
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		List<MonthlyCardDto> listObject = new ArrayList<MonthlyCardDto>();
+		MonthlyCardDto dto = new MonthlyCardDto();
+		
+		MonthlyCardEntity entities = monthlyCardRepository.findById(monthlyCardDto.getId()).get();
+		entities.setStartDate(monthlyCardDto.getStartDate());
+		entities.setEndDate(monthlyCardDto.getEndDate());
+		monthlyCardRepository.save(entities);
+		mapper.map(entities, dto );
+		listObject.add(dto);
+		resultObject.setData(listObject);
+		return resultObject;
+	}
+
 }

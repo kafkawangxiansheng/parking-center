@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spm.common.util.DateUtil;
 import com.spm.common.util.constant.SessionConstants;
@@ -114,13 +115,6 @@ public class MonthlyCardController {
 		return "monthlyCardViewLogPage";
 	}
 	
-	// renewaltMonthlyCard
-	@RequestMapping(value = "renewal/{id}", method= {RequestMethod.GET})
-	public  String renewaltMonthlyCard(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
-		MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
-		return "monthlyCardRenewalForm";
-		
-	}
 	// renewal
 		@RequestMapping(value = "renewal", method = { RequestMethod.GET })
 		public String monthlyCardRenewalSearch(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -166,7 +160,25 @@ public class MonthlyCardController {
 			return "monthlyCardRenewalPage";
 		}
 	
-	
+		// renewaltMonthlyCard findOne
+		@RequestMapping(value = "renewal/findOne/{id}", method= {RequestMethod.GET})
+		@ResponseBody
+		public  MonthlyCardDto monthlyCardRenwalFindOne(@PathVariable("id")Long id) throws UnauthorizedException{
+			MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
+			return monthlyCardDto;
+		}
+		
+		// renewaltMonthlyCard update
+		@RequestMapping(value = "renewal/update")
+		public  String monthlyCardRenwalUpdate(MonthlyCardDto monthlyCardDto ) throws UnauthorizedException, ParseException{
+			long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
+			long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
+			monthlyCardDto.setStartDate(startDateLong);
+			monthlyCardDto.setEndDate(endDateLong);
+			boolean addSuccess = monthlyCradService.revewalMonthlyCardUpdate(monthlyCardDto);
+			return "redirect:/monthlyCard/renewal";
+		}
+				
 	@RequestMapping(value = "disablelist", method = { RequestMethod.GET })
 	public String monthlyCardDisablelist(Model model, HttpServletRequest request) throws UnauthorizedException {
 		model.addAttribute("monthlycards","");

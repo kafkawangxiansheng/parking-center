@@ -119,7 +119,7 @@
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
 												<td width="13%">
-													<a class="btn btn-primary eBtn"> Gia Hạn</a>
+													<a th:href="@{renewal/findOne/{id}(id=${monthlyCard.id})}" class="btn btn-primary eBtn"> Gia Hạn</a>
 													
 												</td>
 											</tr>
@@ -170,7 +170,7 @@
 	        </div>
 	    </div>
 	    <div class="myForm">
-	    	<form>
+	    	<form th:action="@{/monthlyCard/renewal/update}" method="POST">
 				<div class="modal fade" id="renewalMonthlyCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
@@ -181,10 +181,26 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
+				      	<div class="form-group">
+				            <label for="cardCode" class="col-form-label">ID:</label>
+				            <input type="text" class="form-control" readonly="readonly"  id="id" name="id" value=""/>
+				          </div>
 				          <div class="form-group">
 				            <label for="cardCode" class="col-form-label">Mã Chíp:</label>
 				            <input type="text" class="form-control" id="cardCode" name="cardCode" value=""/>
 				          </div>
+				          <div class="form-group text">
+                             <label >Tên KH</label>
+                             <input type="text" required="required" class="form-control" id="customerName" name="customerName" value="">
+                       	  </div>
+                       	  <div class="form-group text">
+                               <label >Ngày đăng ký Lại (*)</label>
+                               <input type="text" required="required" class="form-control  datepickerInOut" id="startDateString" name="startDateString" value="">
+                           </div>
+                           <div class="form-group text">
+                               <label >Ngày hết hạn Tiếp Theo (*)</label>
+                               <input type="text" required="required" class="form-control  datepickerInOut" id="endDateString" name="endDateString" value="">
+                           </div>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -129,5 +129,28 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+
+	@Override
+	public boolean revewalMonthlyCardUpdate(MonthlyCardDto monthlyCardDto) {
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(monthlyCardDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_POST_RENEWAL_MONTHLY_CARD_UPDATE, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }

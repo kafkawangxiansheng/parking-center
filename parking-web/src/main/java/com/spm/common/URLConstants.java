@@ -54,6 +54,7 @@ public class URLConstants {
 	public static final String URL_GET_MONTHLY_CARD_RENEWAL_SEARCH = MAIN_DOMAIN + "/monthlyCard/renewal/search?page=::page&cardCode=::cardCode&statusDate=::statusDate&vehicleId=::vehicleId&numberEndDate=::numberEndDate&customerName=::customerName&projectId=::projectId";
 	public static final String URL_GET_MONTHLY_CARD_BY_ID = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardById?id=::id";
 	public static final String URL_POST_ADD_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/add";
+	public static final String URL_POST_RENEWAL_MONTHLY_CARD_UPDATE = MAIN_DOMAIN + "/monthlyCard/revewal/update";
 	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
 	public static final String URL_POST_UPDATE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/update";
 	
