@@ -37,10 +37,13 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 			Pageable pageable);
 	
 	@Query(value = "SELECT * FROM monthly_cards WHERE  "
-			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name = :customerName)", nativeQuery = true)
+			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name = :customerName) AND (end_date < :currentDate) AND (project_id = :projectId)", nativeQuery = true)
 	List<MonthlyCardEntity> renewalSearch(
 			@Param(value = "cardCode") String cardCode,
-			@Param(value = "customerName") String customerName);
+			@Param(value = "customerName") String customerName,
+			@Param(value = "currentDate") long currentDate,
+			@Param(value = "projectId") long projectId,
+			Pageable pageable );
 	
 }
 

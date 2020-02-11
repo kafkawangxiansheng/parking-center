@@ -155,18 +155,32 @@ public class MonthCardEndpoint {
 	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "cardCode", required = false) String cardCode,
-			@RequestParam(name = "customerName", required = false) String customerName) {
+			@RequestParam(name = "customerName", required = false) String customerName,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+		
 		if(cardCode != null && !cardCode.isEmpty()) {
 			monthlyCradSearchForm.setCardCode(cardCode);
 		}
 		if(customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
+		if(projectId != 0 ) {
+			monthlyCradSearchForm.setProjectId(projectId);
+		}
+		return monthCardsService.renewalSearch(paging, monthlyCradSearchForm);
+	}
+	
+	@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
+	@ApiOperation("Get one MonthlyCards for renewal")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> findOne(
+			@RequestParam(name = "id", required = false) long id) {
 		
-		return monthCardsService.renewalSearch(monthlyCradSearchForm);
+		return monthCardsService.renewalFindOne(id);
 	}
 	
 	

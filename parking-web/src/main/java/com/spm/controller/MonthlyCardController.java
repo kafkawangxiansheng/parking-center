@@ -113,14 +113,7 @@ public class MonthlyCardController {
 		model.addAttribute("monthlycards","");
 		return "monthlyCardViewLogPage";
 	}
-	// renewal
-	@RequestMapping(value = "renewal", method = { RequestMethod.GET })
-	public String monthlyCardRenewal(
-			Model model, HttpServletRequest request) throws UnauthorizedException {
-		
-		model.addAttribute("monthlyCradSearchForm",new MonthlyCradSearchForm());
-		return "monthlyCardRenewalPage";
-	}
+	
 	// renewaltMonthlyCard
 	@RequestMapping(value = "renewal/{id}", method= {RequestMethod.GET})
 	public  String renewaltMonthlyCard(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
@@ -128,25 +121,48 @@ public class MonthlyCardController {
 		return "monthlyCardRenewalForm";
 		
 	}
-	// renewalSearch
-		@RequestMapping(value = "renewalSearch", method = { RequestMethod.GET })
+	// renewal
+		@RequestMapping(value = "renewal", method = { RequestMethod.GET })
 		public String monthlyCardRenewalSearch(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 				@RequestParam(name = "cardCode", required = false) String cardCode,
-//				@RequestParam(name = "statusDate", required = false, defaultValue = "0") Integer statusDate,
-//				@RequestParam(name = "vehicleId", required = false) String vehicleId,
-//				@RequestParam(name = "numberEndDate", required = false, defaultValue = "0") Integer numberEndDate,
 				@RequestParam(name = "customerName", required = false) String customerName,
 				Model model, HttpServletRequest request) throws UnauthorizedException {
 			
 			ResultObject<List<MonthlyCardDto>> result = new ResultObject<List<MonthlyCardDto>>();
 			MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
-			if(!cardCode.isEmpty() || !customerName.isEmpty()) {
+			if(page > 0) {
+				page = page - 1;
+			}
+			Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+			List<Integer>  totalPages = new ArrayList<Integer>();
 				monthlyCradSearchForm.setCardCode(cardCode);
 				monthlyCradSearchForm.setCustomerName(customerName);
-				result = monthlyCradService.getRenewal(monthlyCradSearchForm);
-			}
+				monthlyCradSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
+				result = monthlyCradService.getRenewal(monthlyCradSearchForm, pageable);
+				
+				if( page <= 5) {
+					for(int p = 1; p <= result.getTotalPages(); p ++) {
+						totalPages.add(p);
+						if(p  > 10) {
+							break;
+						}
+					}
+				} else {
+					for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
+						totalPages.add(p);
+						if(p  > (page + 5)) {
+							break;
+						}
+					}
+				}
+			
 			model.addAttribute("listMonthlycard",result.getData());
 			model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
+			model.addAttribute("totalPages", totalPages);
+			model.addAttribute("totalRows", result.getTotalRows());
+			model.addAttribute("maxPage", result.getTotalPages());
+			model.addAttribute("currentPage", page+1);
+			model.addAttribute("currentDate", new Date().getTime());
 			return "monthlyCardRenewalPage";
 		}
 	

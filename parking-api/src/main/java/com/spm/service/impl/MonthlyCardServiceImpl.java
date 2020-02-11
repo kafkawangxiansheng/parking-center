@@ -2,6 +2,7 @@ package com.spm.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -139,13 +140,29 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	}
 
 	@Override
-	public ResultObject<List<MonthlyCardDto>> renewalSearch(MonthlyCradSearchForm monthlyCradSearchForm) {
+	public ResultObject<List<MonthlyCardDto>> renewalSearch(Pageable pageable,MonthlyCradSearchForm monthlyCradSearchForm) {
+		Date currentDate = new Date();
 		List<MonthlyCardEntity> entities = monthlyCardRepository.renewalSearch(
 				monthlyCradSearchForm.getCardCode(), 
-				monthlyCradSearchForm.getCustomerName());
+				monthlyCradSearchForm.getCustomerName(),
+				currentDate.getTime(),
+				monthlyCradSearchForm.getProjectId(),
+				pageable);
 		
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
+		return resultObject;
+	}
+
+	@Override
+	public ResultObject<List<MonthlyCardDto>> renewalFindOne(long id) {
+		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
+		List<MonthlyCardDto> listObject = new ArrayList<MonthlyCardDto>();
+		MonthlyCardDto dto = new MonthlyCardDto();
+		MonthlyCardEntity entities = monthlyCardRepository.findById(id).get();
+		mapper.map(entities, dto );
+		listObject.add(dto);
+		resultObject.setData(listObject);
 		return resultObject;
 	}
 
