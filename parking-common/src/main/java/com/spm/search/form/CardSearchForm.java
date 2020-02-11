@@ -6,6 +6,7 @@ public class CardSearchForm {
 	private String stt;
 	private String vehicleId;
 	private String disable;
+	private long projectId; 
 	
 	public String getCode() {
 		return code;
@@ -31,5 +32,12 @@ public class CardSearchForm {
 	public void setDisable(String disable) {
 		this.disable = disable;
 	}
+	public long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
+	}
+	
 	
 }

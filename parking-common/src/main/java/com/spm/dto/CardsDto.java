@@ -28,6 +28,8 @@ public class CardsDto {
 
 	private Long lastSync;
 	
+	private boolean deleted;
+	
 	public Long getId() {
 		return id;
 	}
@@ -131,6 +133,13 @@ public class CardsDto {
 	public void setLastSync(Long lastSync) {
 		this.lastSync = lastSync;
 	}
-	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 	
 }

@@ -28,6 +28,7 @@ public class CardServiceImpl implements CardService{
 		finalURL = finalURL.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
 		finalURL = finalURL.replaceAll("::stt", cardSearchForm.getStt()!= null ? cardSearchForm.getStt():"");
 		finalURL = finalURL.replaceAll("::vehicleId", cardSearchForm.getVehicleId()!= null ? cardSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::projectId", String.valueOf(cardSearchForm.getProjectId() !=  0 ? cardSearchForm.getProjectId() : ""));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}

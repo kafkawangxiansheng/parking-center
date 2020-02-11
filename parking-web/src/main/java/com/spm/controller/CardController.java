@@ -36,6 +36,11 @@ public class CardController {
 	
 	@Autowired
 	VehicleService vehicleService;
+	
+	public String getProjectId(HttpServletRequest request) {
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		return projects.get(0);
+	}
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String index(
@@ -45,11 +50,12 @@ public class CardController {
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
 			Model model, HttpServletRequest request) throws UnauthorizedException {
 
+		
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		cardSearchForm.setCode(code);
 		cardSearchForm.setStt(stt);
 		cardSearchForm.setVehicleId(vehicleId);
-		
+		cardSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
 		model.addAttribute("cardSearchForm", cardSearchForm);
 		
 		if(page > 0) {
@@ -76,11 +82,10 @@ public class CardController {
 			}
 		}
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(projects.get(0));
-		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
+		vehicleSearchForm.setProjectId(getProjectId(request));
 		
+		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
 		model.addAttribute("cards", result.getData());
 		model.addAttribute("vehicles", vehicles.getData());
 		model.addAttribute("totalPages", totalPages);
@@ -93,9 +98,8 @@ public class CardController {
 	@RequestMapping (value="addNewCard", method = { RequestMethod.GET})
 	public String showAddNewCardPage(Model model, HttpServletRequest request)throws UnauthorizedException{
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(projects.get(0));
+		vehicleSearchForm.setProjectId(getProjectId(request));
 		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
 		
 		model.addAttribute("addCard", new CardsDto());
@@ -104,7 +108,8 @@ public class CardController {
 	}
 	
 	@RequestMapping (value="addNewCard", method= {RequestMethod.POST})
-	public String addCard(Model model, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
+	public String addCard(Model model,HttpServletRequest request, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
+		cardsDto.setProjectId(Long.parseLong(getProjectId(request)));
 		cardService.addCard(cardsDto);
 		return "redirect:/cards";
 	}

@@ -50,7 +50,8 @@ public class CardsEndpoint {
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
 			@RequestParam(name = "code", required = false) String code,
 			@RequestParam(name = "stt", required = false) String stt,
-			@RequestParam(name = "vehicleId", required = false) String vehicleId) {
+			@RequestParam(name = "vehicleId", required = false) String vehicleId,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		if(code != null && !code.isEmpty()) {
@@ -61,6 +62,9 @@ public class CardsEndpoint {
 		}
 		if(vehicleId != null && !vehicleId.isEmpty()) {
 			cardSearchForm.setVehicleId(vehicleId);
+		}
+		if(projectId != 0 ) {
+			cardSearchForm.setProjectId(projectId);
 		}
 		return cardsService.findAll(paging, cardSearchForm);
 	}

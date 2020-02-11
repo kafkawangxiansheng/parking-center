@@ -23,7 +23,7 @@ public class URLConstants {
 	public static final String URL_GET_LIST_BY_CODE_AND_VEHICLE_CARD_TYPE = MAIN_DOMAIN + "/card/getCodeAndVehicleCardType?code=::code&cardType=::cardType";
 	public static final String URL_GET_ALL_DISCARD = MAIN_DOMAIN + "/cards/disabledCard/?disable=::disable&code=::code";
 	public static final String URL_ACTIVE_CARD = MAIN_DOMAIN + "/cards/activeCard/?cardId=::cardId";
-	public static final String URL_GET_ALL_CARD = MAIN_DOMAIN + "/cards/?page=::page&code=::code&stt=::stt&vehicleId=::vehicleId";
+	public static final String URL_GET_ALL_CARD = MAIN_DOMAIN + "/cards/?page=::page&code=::code&stt=::stt&vehicleId=::vehicleId&projectId=::projectId";
 	
 	//company
 	public static final String URL_GET_ALL_COMPANIES = MAIN_DOMAIN + "/company";

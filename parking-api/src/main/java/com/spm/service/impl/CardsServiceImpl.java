@@ -74,7 +74,11 @@ public class CardsServiceImpl implements CardsService {
 
 	@Override
 	public ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm) {
-		Page<CardsEntity> entities = cardRepository.search(cardSearchForm.getCode(), cardSearchForm.getStt(), cardSearchForm.getVehicleId(), pageable);
+		Page<CardsEntity> entities = cardRepository.search(
+				cardSearchForm.getCode(), cardSearchForm.getStt(),
+				cardSearchForm.getVehicleId(),
+				cardSearchForm.getProjectId(),
+				pageable);
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities.getContent()));
 		resultObject.setTotalPages(entities.getTotalPages());
