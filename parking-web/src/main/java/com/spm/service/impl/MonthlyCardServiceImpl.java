@@ -125,7 +125,7 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
 		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
 		finalURL = finalURL.replaceAll("::customerName", monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : "");
-		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCradSearchForm.getProjectId() !=  0 ? monthlyCradSearchForm.getProjectId() : ""));
+		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCradSearchForm.getProjectId() !=  0 ? monthlyCradSearchForm.getProjectId() : "0"));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}

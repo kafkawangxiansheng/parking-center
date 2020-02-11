@@ -18,7 +18,9 @@ public class VehicleDto {
 	
 	private long updated;
 	
-	private boolean disable;
+	private boolean disabled;
+	
+	private boolean deleted;
 
 	public Long getId() {
 		return id;
@@ -84,12 +86,20 @@ public class VehicleDto {
 		this.updated = updated;
 	}
 
-	public boolean isDisable() {
-		return disable;
+	public boolean isDisabled() {
+		return disabled;
 	}
 
-	public void setDisable(boolean disable) {
-		this.disable = disable;
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }

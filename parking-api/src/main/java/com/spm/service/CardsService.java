@@ -13,7 +13,7 @@ import com.spm.search.form.CardSearchForm;
  */
 public interface CardsService {
 
-    CardsDto save(CardsDto cardsDto);
+	ResultObject<List<CardsDto>> addNewCard(CardsDto cardsDto);
     
     List<CardsDto> save(List<CardsDto> cardsDtos);
     

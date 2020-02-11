@@ -39,7 +39,7 @@ public interface CardRepository  extends JpaRepository<CardsEntity, Long> {
 			countQuery = "SELECT * from cards WHERE (:code is null OR code = :code) AND (:disable is null OR disable = :disable) order by updated DESC",
 			nativeQuery = true
 			)
-	List<CardsEntity> searchDisable(@Param(value = "code") String code, @Param(value = "disable") String disable);
+	List<CardsEntity> searchDisable(@Param(value = "code") String code, @Param(value = "disable") int disable);
 	
 	@Query(value = "SELECT c.* FROM cards as c INNER JOIN vehicles as v on c.vehicle_id = v.id AND v.card_type = :cardType AND c.code = :code", nativeQuery = true)
 	CardsEntity findByCodeAndVehicleCardType(@Param(value = "code") String code, @Param(value = "cardType") int cardType);

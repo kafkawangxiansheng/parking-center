@@ -17,6 +17,9 @@ import com.spm.entity.EmployeeEntity;
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 	
 	List<EmployeeEntity> findAllByProjectId(long projectId);
+	
+	List<EmployeeEntity> findAllByProjectIdAndDeleted(long projectId, boolean deleted);
+	
 
 	@Query(
 			value = "SELECT * from employees WHERE (:name is null OR name = :name) AND (:userName is null OR userName = :userName) AND (:pass is null OR pass = :pass) AND (:position is null OR position = :position) AND (:sex is null OR sex = :sex)",

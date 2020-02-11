@@ -11,7 +11,7 @@ import com.spm.search.form.CardSearchForm;
 public interface CardService {
 	ResultObject<List<CardsDto>> getAllCard(CardSearchForm cardSearchForm, Pageable pageable);
 	
-	ResultObject<List<CardsDto>> addCard(CardsDto cardsDto);
+	boolean addCard(CardsDto cardsDto);
 	
 	CardsDto getCardById(Long cardId);
 	

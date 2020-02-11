@@ -161,7 +161,7 @@
 														</a>
 													</div>
 													<div>
-														<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}">
+														<a th:href="@{/monthlyCard/delete/{id}(id=${monthlyCard.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa dữ liệu này?');">
 															<button class="btn-warning">Xoá</button>
 														</a>
 													</div> 

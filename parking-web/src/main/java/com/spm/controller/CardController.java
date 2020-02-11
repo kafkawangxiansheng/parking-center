@@ -104,14 +104,22 @@ public class CardController {
 		
 		model.addAttribute("addCard", new CardsDto());
 		model.addAttribute("vehicles", vehicles.getData());
-		return "addNewCardPage";
+		return "addNewCardForm";
 	}
 	
 	@RequestMapping (value="addNewCard", method= {RequestMethod.POST})
 	public String addCard(Model model,HttpServletRequest request, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
 		cardsDto.setProjectId(Long.parseLong(getProjectId(request)));
-		cardService.addCard(cardsDto);
-		return "redirect:/cards";
+		boolean result = cardService.addCard(cardsDto);
+		if(result) {
+			return "redirect:/cards";
+		}else {
+			String error = "Thẻ này đã được sử dụng!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<VehicleDto>> vehicles = vehicleService.getListAllVehicle();
+			model.addAttribute("vehicles", vehicles.getData());
+			return "addNewCardForm";
+		}
 	}
 	
 	@RequestMapping (value="editCard/{cardId}", method = { RequestMethod.GET})
@@ -128,12 +136,9 @@ public class CardController {
 	}
 	
 	@RequestMapping(value="active-card", method = { RequestMethod.GET})
-	public String getAllDisabledCard(
-			@RequestParam(name = "disable", required = false, defaultValue = "1") String disable,
-			@RequestParam(name = "code", required = false) String code,
+	public String getAllDisabledCard(@RequestParam(name = "code", required = false) String code,
 			Model model, HttpServletRequest request) throws UnauthorizedException {
 		CardSearchForm cardSearchForm = new CardSearchForm();
-		cardSearchForm.setDisable(disable);
 		cardSearchForm.setCode(code);
 		model.addAttribute("cardSearchForm", cardSearchForm);
 		ResultObject<List<CardsDto>> result = cardService.getAllDisabledCard(cardSearchForm);

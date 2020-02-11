@@ -30,8 +30,6 @@ public class MonthlyCardDto {
 	
 	private long updated;
 	
-	private int disable;
-	
 	private long adminId;
 	
 	private CompanyDto companyDto;
@@ -45,8 +43,14 @@ public class MonthlyCardDto {
 	private String endDateString;
 	
 	private Long vehicleId;
+	
 	private long lastSync;
 
+	private boolean disabled;
+
+	private boolean deleted;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -152,14 +156,6 @@ public class MonthlyCardDto {
 		this.updated = updated;
 	}
 
-	public int getDisable() {
-		return disable;
-	}
-
-	public void setDisable(int disable) {
-		this.disable = disable;
-	}
-
 	public long getAdminId() {
 		return adminId;
 	}
@@ -231,5 +227,20 @@ public class MonthlyCardDto {
 		this.lastSync = lastSync;
 	}
 
-	
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 }

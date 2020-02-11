@@ -98,7 +98,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public void delete(Long id) {
-		employeeRepository.deleteById(id);
+		EmployeeEntity entity = employeeRepository.findById(id).get();
+		entity.setDeleted(true);
+		employeeRepository.save(entity);
 	}
 
 
@@ -144,6 +146,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 		List<EmployeeEntity> listEntity = reMap(listEmployeeDto);
 		listEntity = employeeRepository.saveAll(listEntity);
 		resultObj.setData(map(listEntity));
+		return resultObj;
+	}
+
+	@Override
+	public ResultObject<List<EmployeeDto>> getAllByProjectId(Long projectId) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeEntity> listEntity = employeeRepository.findAllByProjectIdAndDeleted(projectId, false);
+		resultObj.setData(this.map(listEntity));
 		return resultObj;
 	}
 		

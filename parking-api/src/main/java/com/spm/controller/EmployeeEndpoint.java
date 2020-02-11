@@ -72,5 +72,12 @@ public class EmployeeEndpoint {
 	public void delete(@PathVariable("id") Long id) {
 		employeeService.delete(id);
 	}
+	
+	@RequestMapping(path="/getAllByProjectId", method = {RequestMethod.GET})
+	@ApiOperation("Get list Employee by id off Project")
+	public ResultObject<List<EmployeeDto>> getAllByprojectId(@RequestParam(name="projectId", required=false) long projectId) {
+		return employeeService.getAllByProjectId(projectId);
+	}
+	
 
 }

@@ -35,7 +35,7 @@ public class CardServiceImpl implements CardService{
 	}
 	
 	@Override
-	public ResultObject<List<CardsDto>> addCard(CardsDto cardsDto){
+	public boolean addCard(CardsDto cardsDto){
 		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
 		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
 		Gson gson = new Gson();
@@ -51,8 +51,11 @@ public class CardServiceImpl implements CardService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return resultFromApi;
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -68,9 +71,7 @@ public class CardServiceImpl implements CardService{
 	public ResultObject<List<CardsDto>> getAllDisabledCard(CardSearchForm cardSearchForm) {
 		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
 		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
-		String finalURL = URLConstants.URL_GET_ALL_DISCARD;
-		finalURL = finalURL.replaceAll("::disable", cardSearchForm.getDisable()!= null ? cardSearchForm.getDisable():"");
-		finalURL = finalURL.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
+		String finalURL = URLConstants.URL_GET_ALL_CARD_BY_DISABLE.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}

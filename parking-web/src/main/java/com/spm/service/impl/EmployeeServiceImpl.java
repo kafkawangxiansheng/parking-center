@@ -89,5 +89,25 @@ public class EmployeeServiceImpl implements EmployeeService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+
+	@Override
+	public ResultObject<List<EmployeeDto>> getAllByProjectId(EmployeeSearchForm employeeSearchForm, Pageable pageable) {
+		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
+		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_ALL_EMPLOYEE.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
+		finalURL = finalURL.replaceAll("::name", employeeSearchForm.getName()!= null ? employeeSearchForm.getName():"");
+		finalURL = finalURL.replaceAll("::position", employeeSearchForm.getPosition()!= null ? employeeSearchForm.getPosition():"");
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
+
+	@Override
+	public ResultObject<List<EmployeeDto>> getAllByProjectId(long projectId) {
+		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
+		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
+		String finalURL = URLConstants.URL_GET_ALL_BY_PROJECT_ID.replaceAll("::projectId", String.valueOf(projectId));
+		resultFromApi = restUtils.get(finalURL);
+		return resultFromApi;
+	}
 	
 }

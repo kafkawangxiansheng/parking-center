@@ -117,9 +117,9 @@
 												<td th:text="${{monthlyCard.email}}"></td>
 												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
-												<td th:text="${{monthlyCard.endDate > #temporals.day(date) ? 'Còn Hạn' : 'Hết Hạn'}}"></td>
+												<td th:text="${{monthlyCard.endDate > currentDate } ? 'Còn Hạn' : 'Hết Hạn' }"></td>
 												<td width="13%">
-													<a th:href="@{renewal/findOne/{id}(id=${monthlyCard.id})}" class="btn btn-primary eBtn"> Gia Hạn</a>
+													<a th:href="@{renewal/findOne/{id}(id=${monthlyCard.id})}" class="btn btn-info eBtn"> Gia Hạn</a>
 													
 												</td>
 											</tr>

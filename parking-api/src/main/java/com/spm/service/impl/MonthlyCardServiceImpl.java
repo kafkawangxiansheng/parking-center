@@ -89,9 +89,11 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		return resultObj;
 	}
 
-	@Override
-	public void delete(Long id) {
-		monthlyCardRepository.deleteById(id);
+		@Override
+		public void delete(Long id) {
+			MonthlyCardEntity entity = monthlyCardRepository.findById(id).get();
+			entity.setDeleted(true);
+			monthlyCardRepository.save(entity);
 	}
 
 	@Override

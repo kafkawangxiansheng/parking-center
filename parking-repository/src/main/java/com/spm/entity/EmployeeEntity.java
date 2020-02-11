@@ -57,6 +57,9 @@ public class EmployeeEntity {
 	
 	@Column(name="last_sync")
 	private Long lastSync;
+	
+	@Column(name="deleted")
+	private boolean deleted;
 
 	public Long getId() {
 		return id;
@@ -160,4 +163,12 @@ public class EmployeeEntity {
 		this.lastSync = lastSync;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 }

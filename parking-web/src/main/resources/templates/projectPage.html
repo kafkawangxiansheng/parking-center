@@ -84,15 +84,15 @@
 												<td th:text="${{project.name}}"></td>
 												<td th:text="${{project.company.name}}"></td>
 												<td th:text="${{project.address}}"></td>
-												<td width="13%">
+												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/project/edit-project/{id}(id=${project.id})}">
-															<button class="btn-info">Edit</button>
+															<button class="btn-info">Chỉnh Sửa</button>
 														</a>
 													</div>
 													<div>
-														<a th:href="@{/project/delete-project/{id}(id=${project.id})}">
-															<button class="btn-warning">Delete</button>
+														<a th:href="@{/project/delete-project/{id}(id=${project.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa dữ liệu này?');">
+															<button class="btn-warning">Xoá</button>
 														</a>
 													</div> 
 												</td>

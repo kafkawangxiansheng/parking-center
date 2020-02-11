@@ -40,10 +40,12 @@ public class VehicleEntity {
 	@Column(name="updated")
 	private Long updated;
 	
-	@Column(name="disable")
-	private boolean disable;
-	
+	@Column(name="disabled")
+	private boolean disabled;
 
+	@Column(name="deleted")
+	private boolean deleted;
+	
 	public Long getId() {
 		return id;
 	}
@@ -108,13 +110,20 @@ public class VehicleEntity {
 		this.updated = updated;
 	}
 
-	public boolean isDisable() {
-		return disable;
+	public boolean isDeleted() {
+		return deleted;
 	}
 
-	public void setDisable(boolean disable) {
-		this.disable = disable;
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 	
 }

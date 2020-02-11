@@ -58,7 +58,7 @@ public class VehicleServiceImpl implements VehicleService{
 	
 	@Override
 	public ResultObject<List<VehicleDto>> findAll(VehicleSearchForm vehicleSearchForm){
-		List<VehicleEntity> entities = vehicleRepository.findAllByProjectId(Long.valueOf(vehicleSearchForm.getProjectId()));
+		List<VehicleEntity> entities = vehicleRepository.findAllByProjectIdAndDeleted(Long.valueOf(vehicleSearchForm.getProjectId()), false);
 		ResultObject<List<VehicleDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;
@@ -106,8 +106,11 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 	
 	@Override
-	public void delete(Long vehicleId) {
-		vehicleRepository.deleteById(vehicleId);
+	public void delete(Long id) {
+		VehicleEntity entity = vehicleRepository.findById(id).get();
+		entity.setDeleted(true);
+		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+		vehicleRepository.save(entity);
 	}
 
 	@Override
@@ -137,6 +140,7 @@ public class VehicleServiceImpl implements VehicleService{
 		VehicleEntity entites = vehicleRepository.findById(vehicleDto.getId()).get();
 		if(entites.getType() == vehicleDto.getType()) {
 			mapper.map(vehicleDto, newEntity);
+			newEntity.setUpdated(Calendar.getInstance().getTimeInMillis());
 			newEntity = vehicleRepository.save(newEntity);
 			mapper.map(newEntity,newVehicleDto);
 			listObject.add(vehicleDto);

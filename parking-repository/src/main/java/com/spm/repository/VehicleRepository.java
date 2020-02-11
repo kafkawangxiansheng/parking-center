@@ -10,6 +10,8 @@ import com.spm.entity.VehicleEntity;
 @Repository
 public interface VehicleRepository extends JpaRepository<VehicleEntity, Long>{
 	
+	List<VehicleEntity> findAllByProjectIdAndDeleted(long projectId, boolean delete);
+	
 	List<VehicleEntity> findAllByProjectId(long projectId);
 	
 	VehicleEntity findByType(int type);

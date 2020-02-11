@@ -26,7 +26,7 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 	
 	@Query(value = "SELECT * FROM monthly_cards WHERE  "
 			+ "(:cardCode is null OR card_code = :cardCode) AND (:vehicleId is null OR vehicle_id = :vehicleId)"
-			+ "AND (:customerName is null OR customer_name = :customerName) AND (project_id = :projectId)", nativeQuery = true)
+			+ "AND (:customerName is null OR customer_name = :customerName) AND (project_id = :projectId) AND (deleted = 0)", nativeQuery = true)
 	Page<MonthlyCardEntity> search(
 			@Param(value = "cardCode") String cardCode,
 			@Param(value = "vehicleId") String vehicleId,

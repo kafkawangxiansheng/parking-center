@@ -35,14 +35,15 @@ public class CardsEndpoint {
 
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })
 	@ApiOperation("Add new card")
-	public void addNewCard(@RequestBody CardsDto cardDto) {
-		cardsService.save(cardDto);
+	public ResultObject<List<CardsDto>> addNewCard(@RequestBody CardsDto cardDto) {
+		return cardsService.addNewCard(cardDto);
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT })
 	@ApiOperation("Update existing card")
 	public void updateExistingCard(@RequestBody CardsDto cardDto) {
-		cardsService.save(cardDto);
+//		cardsService.save(cardDto);
+		cardsService.addNewCard(cardDto);
 	}
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
@@ -78,13 +79,8 @@ public class CardsEndpoint {
 	
 	@RequestMapping(value="/disabledCard", method = {RequestMethod.GET})
 	@ApiOperation("Show Disabled Card")
-	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(
-			@RequestParam(name = "disable", required = false, defaultValue="1") String disable,
-			@RequestParam(name = "code", required = false) String code) {
+	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(@RequestParam(name = "code", required = false) String code) {
 		CardSearchForm cardSearchForm = new CardSearchForm();
-		if(disable != null && !disable.isEmpty()) {
-			cardSearchForm.setDisable(disable);
-		}
 		if(code != null && !code.isEmpty()) {
 			cardSearchForm.setCode(code);
 		}
