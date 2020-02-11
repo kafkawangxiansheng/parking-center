@@ -147,4 +147,10 @@ public class CardController {
 		return "redirect:/cards/active-card";
 	}
 	
+	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})
+	public  String deleteMonthlyCard(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
+		cardService.deleteCard(id);
+		return "redirect:/cards";
+	}
+	
 }

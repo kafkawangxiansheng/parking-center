@@ -137,4 +137,11 @@ public class CardsServiceImpl implements CardsService {
 		cardRepository.save(entity);
 	}
 
+	@Override
+	public void delete(Long id) {
+		CardsEntity entity = cardRepository.findById(id).get();
+		entity.setDeleted(true);
+		cardRepository.save(entity);
+	}
+
 }

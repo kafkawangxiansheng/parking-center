@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.CardsDto;
+import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.CardSearchForm;
 import com.spm.service.CardService;
@@ -81,4 +82,15 @@ public class CardServiceImpl implements CardService{
 		restUtils.get(finalURL);
 	}
 
+	@Override
+	public void deleteCard(Long id) {
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		String finalURL = URLConstants.URL_DELETE_CARD.replace("::id", String.valueOf(id));
+		
+		try {
+			restUtils.delete(finalURL);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
