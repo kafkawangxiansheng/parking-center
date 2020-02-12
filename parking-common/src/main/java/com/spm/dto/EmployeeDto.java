@@ -27,6 +27,8 @@ public class EmployeeDto {
 	private Long updatedAt;
 	
 	private Long lastSync;
+	
+	private boolean deleted;
 
 	public Long getId() {
 		return id;
@@ -124,6 +126,12 @@ public class EmployeeDto {
 		this.lastSync = lastSync;
 	}
 
-	
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 
 }

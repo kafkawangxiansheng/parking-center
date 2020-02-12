@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,14 +35,15 @@ public class CardsEndpoint {
 
 	@RequestMapping(value = "/add", method = { RequestMethod.POST })
 	@ApiOperation("Add new card")
-	public void addNewCard(@RequestBody CardsDto cardDto) {
-		cardsService.save(cardDto);
+	public ResultObject<List<CardsDto>> addNewCard(@RequestBody CardsDto cardDto) {
+		return cardsService.addNewCard(cardDto);
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT })
 	@ApiOperation("Update existing card")
 	public void updateExistingCard(@RequestBody CardsDto cardDto) {
-		cardsService.save(cardDto);
+//		cardsService.save(cardDto);
+		cardsService.addNewCard(cardDto);
 	}
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
@@ -50,7 +52,8 @@ public class CardsEndpoint {
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
 			@RequestParam(name = "code", required = false) String code,
 			@RequestParam(name = "stt", required = false) String stt,
-			@RequestParam(name = "vehicleId", required = false) String vehicleId) {
+			@RequestParam(name = "vehicleId", required = false) String vehicleId,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		if(code != null && !code.isEmpty()) {
@@ -61,6 +64,9 @@ public class CardsEndpoint {
 		}
 		if(vehicleId != null && !vehicleId.isEmpty()) {
 			cardSearchForm.setVehicleId(vehicleId);
+		}
+		if(projectId != 0 ) {
+			cardSearchForm.setProjectId(projectId);
 		}
 		return cardsService.findAll(paging, cardSearchForm);
 	}
@@ -73,13 +79,8 @@ public class CardsEndpoint {
 	
 	@RequestMapping(value="/disabledCard", method = {RequestMethod.GET})
 	@ApiOperation("Show Disabled Card")
-	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(
-			@RequestParam(name = "disable", required = false, defaultValue="1") String disable,
-			@RequestParam(name = "code", required = false) String code) {
+	public @ResponseBody ResultObject<List<CardsDto>> getAllDisabledCard(@RequestParam(name = "code", required = false) String code) {
 		CardSearchForm cardSearchForm = new CardSearchForm();
-		if(disable != null && !disable.isEmpty()) {
-			cardSearchForm.setDisable(disable);
-		}
 		if(code != null && !code.isEmpty()) {
 			cardSearchForm.setCode(code);
 		}
@@ -90,6 +91,12 @@ public class CardsEndpoint {
 	@ApiOperation("Active Card")
 	public void activeCardById(@RequestParam(name="cardId") int cardId) {
 		cardsService.activebyId(cardId);
+	}
+	
+	@RequestMapping(path = "/delete/{id}", method = { RequestMethod.DELETE })
+	@ApiOperation("This method support us can delete the specific Card by id")
+	public void delete(@PathVariable("id") Long id) {
+		cardsService.delete(id);
 	}
 	
 }

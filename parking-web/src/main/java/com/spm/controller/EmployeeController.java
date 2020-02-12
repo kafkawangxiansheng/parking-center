@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spm.common.util.constant.SessionConstants;
 import com.spm.dto.EmployeeDto;
 import com.spm.dto.ProjectsDto;
 import com.spm.dto.ResultObject;
@@ -29,6 +30,11 @@ public class EmployeeController {
 	
 	@Autowired
 	ProjectService projectService;
+	
+	public String getProjectId(HttpServletRequest request) {
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		return projects.get(0);
+	}
 	
 //	@RequestMapping(value = "", method = { RequestMethod.GET })
 //	public String index(
@@ -80,7 +86,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "", method= {RequestMethod.GET})
 	public String index(Model model,  HttpServletRequest request) throws UnauthorizedException {
-		ResultObject<List<EmployeeDto>> projectsMap = employeeService.getAll();
+		ResultObject<List<EmployeeDto>> projectsMap = employeeService.getAllByProjectId(Long.parseLong(getProjectId(request)));
 		model.addAttribute("listEmployee", projectsMap.getData());
 		return "employeePage";
 	}
@@ -96,8 +102,17 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/addNewEmployee", method= {RequestMethod.POST,RequestMethod.PUT})
 	public  String doAddNewEmployee(Model model, @Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto) throws UnauthorizedException{
-		employeeService.addEmployee(employeeDto);
-		return "redirect:/employees";
+		boolean result = employeeService.addEmployee(employeeDto);
+		if(result) {
+			return "redirect:/employees";
+		}else {
+			String error = "Tên đăng nhập đã tồn tại!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
+			model.addAttribute("listProjectDto", projectMap.getData());	
+			return "addEmployeeForm";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/editEmployee/{id}", method= {RequestMethod.GET})
@@ -109,7 +124,7 @@ public class EmployeeController {
 		return "editEmployeeForm";
 	}
 	
-	@RequestMapping(value = "/deleteEmployee/{id}", method= {RequestMethod.GET})
+	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})
 	public  String deleteEmployee(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
 		employeeService.deleteEmployee(id);
 		return "redirect:/employees";

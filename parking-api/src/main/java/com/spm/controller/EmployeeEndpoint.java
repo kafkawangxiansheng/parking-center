@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spm.dto.EmployeeDto;
 import com.spm.dto.ResultObject;
+import com.spm.dto.UserDto;
 import com.spm.service.EmployeeService;
+import com.spm.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -72,5 +74,12 @@ public class EmployeeEndpoint {
 	public void delete(@PathVariable("id") Long id) {
 		employeeService.delete(id);
 	}
+	
+	@RequestMapping(path="/getAllByProjectId", method = {RequestMethod.GET})
+	@ApiOperation("Get list Employee by id off Project")
+	public ResultObject<List<EmployeeDto>> getAllByprojectId(@RequestParam(name="projectId", required=false) long projectId) {
+		return employeeService.getAllByProjectId(projectId);
+	}
+	
 
 }

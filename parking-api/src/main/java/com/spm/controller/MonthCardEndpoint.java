@@ -77,6 +77,7 @@ public class MonthCardEndpoint {
 			} else {
 				
 				if(monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+					monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
 					resultObject = monthCardsService.save(monthlyCardDto);
 				}else {
 					resultObject = null;
@@ -123,7 +124,8 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "statusDate", required = false) int statusDate,
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
 			@RequestParam(name = "numberEndDate", required = false) int numberEndDate,
-			@RequestParam(name = "customerName", required = false) String customerName) {
+			@RequestParam(name = "customerName", required = false) String customerName,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		
@@ -143,6 +145,9 @@ public class MonthCardEndpoint {
 		if(customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
+		if(projectId != 0 ) {
+			monthlyCradSearchForm.setProjectId(projectId);
+		}
 		
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
@@ -150,21 +155,43 @@ public class MonthCardEndpoint {
 	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "cardCode", required = false) String cardCode,
-			@RequestParam(name = "customerName", required = false) String customerName) {
+			@RequestParam(name = "customerName", required = false) String customerName,
+			@RequestParam(name = "projectId", required = false) long projectId) {
 		
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
+		
 		if(cardCode != null && !cardCode.isEmpty()) {
 			monthlyCradSearchForm.setCardCode(cardCode);
 		}
 		if(customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
-		
-		return monthCardsService.renewalSearch(monthlyCradSearchForm);
+		if(projectId != 0 ) {
+			monthlyCradSearchForm.setProjectId(projectId);
+		}
+		return monthCardsService.renewalSearch(paging, monthlyCradSearchForm);
 	}
 	
-	
+	// renewal 
+		@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
+		@ApiOperation("Get one MonthlyCards for renewal")
+		public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
+				@RequestParam(name = "id", required = false) long id) {
+			
+			return monthCardsService.renewalFindOne(id);
+		}
+	// renewal update
+			@RequestMapping(value = "revewal/update", method = { RequestMethod.POST })
+			@ApiOperation("Get one MonthlyCards for renewal update")
+			public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(
+					@RequestBody MonthlyCardDto monthlyCardDto) {
+				
+				return monthCardsService.renewalUpdate(monthlyCardDto);
+			}
+		
 	
 }
 

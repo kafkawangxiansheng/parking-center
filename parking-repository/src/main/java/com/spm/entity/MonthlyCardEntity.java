@@ -60,9 +60,6 @@ public class MonthlyCardEntity {
 	@Column(name="updated")
 	private long updated;
 	
-	@Column(name="disable")
-	private int disable;
-	
 	@Column(name="admin_id")
 	private long adminId;
 	
@@ -80,6 +77,11 @@ public class MonthlyCardEntity {
 	@Column(name="last_sync")
 	private Long lastSync;
 
+	@Column(name="disabled")
+	private boolean disabled;
+
+	@Column(name="deleted")
+	private boolean deleted;
 	
 	public Long getId() {
 		return id;
@@ -193,14 +195,6 @@ public class MonthlyCardEntity {
 		this.updated = updated;
 	}
 
-	public int getDisable() {
-		return disable;
-	}
-
-	public void setDisable(int disable) {
-		this.disable = disable;
-	}
-
 	public long getAdminId() {
 		return adminId;
 	}
@@ -247,7 +241,21 @@ public class MonthlyCardEntity {
 	public void setLastSync(Long lastSync) {
 		this.lastSync = lastSync;
 	}
-	
-	
 
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 }

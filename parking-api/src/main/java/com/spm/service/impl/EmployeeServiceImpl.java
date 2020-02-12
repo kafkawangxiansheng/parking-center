@@ -1,6 +1,7 @@
 package com.spm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 import com.spm.dto.EmployeeDto;
 import com.spm.dto.ResultObject;
 import com.spm.entity.EmployeeEntity;
+import com.spm.entity.UserEntity;
 import com.spm.repository.EmployeeRepository;
+import com.spm.repository.UserRepository;
 import com.spm.search.form.EmployeeSearchForm;
 import com.spm.service.EmployeeService;
 
@@ -32,6 +35,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	@Autowired
     private EmployeeRepository employeeRepository;
+	
+	@Autowired
+    private UserRepository userRepository;
      
     
 	private List<EmployeeDto> map(List<EmployeeEntity> source) {
@@ -98,7 +104,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public void delete(Long id) {
-		employeeRepository.deleteById(id);
+		EmployeeEntity entity = employeeRepository.findById(id).get();
+		entity.setDeleted(true);
+		employeeRepository.save(entity);
 	}
 
 
@@ -126,15 +134,34 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public ResultObject<List<EmployeeDto>> save(EmployeeDto employeeDto) {
-		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
-		List<EmployeeDto> listEmployee = new ArrayList<>();
-		EmployeeEntity entity = new EmployeeEntity();
-		mapper.map(employeeDto, entity);
-		entity = employeeRepository.save(entity);
-		mapper.map(entity, employeeDto);
-		listEmployee.add(employeeDto);
-		resultObj.setData(listEmployee);
-		return resultObj;
+		
+		boolean exist = checkUsername(employeeDto.getUsername());
+		if(exist == false) {
+			UserEntity userEntity = new UserEntity();
+			userEntity.setName(employeeDto.getName());
+			userEntity.setUsername(employeeDto.getUsername());
+			userEntity.setPassword(employeeDto.getPassword());
+			userEntity.setEnabled(true);
+			userEntity.setProjectId(employeeDto.getProject().getId());
+			userEntity.setUpdated(Calendar.getInstance().getTimeInMillis());
+			
+			ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+			List<EmployeeDto> listEmployee = new ArrayList<>();
+			EmployeeEntity entity = new EmployeeEntity();
+			mapper.map(employeeDto, entity);
+			entity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
+			
+			entity = employeeRepository.save(entity);
+			userRepository.save(userEntity);
+			
+			mapper.map(entity, employeeDto);
+			listEmployee.add(employeeDto);
+			resultObj.setData(listEmployee);
+			return resultObj;
+		}else {
+			return null;
+		}
+		
 	}
 
 
@@ -146,6 +173,22 @@ public class EmployeeServiceImpl implements EmployeeService{
 		resultObj.setData(map(listEntity));
 		return resultObj;
 	}
-		
+
+	@Override
+	public ResultObject<List<EmployeeDto>> getAllByProjectId(Long projectId) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeEntity> listEntity = employeeRepository.findAllByProjectIdAndDeleted(projectId, false);
+		resultObj.setData(this.map(listEntity));
+		return resultObj;
+	}
+	
+	public boolean checkUsername(String  username) {
+		EmployeeEntity entites = employeeRepository.findByUsername(username);
+		if(entites == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 }

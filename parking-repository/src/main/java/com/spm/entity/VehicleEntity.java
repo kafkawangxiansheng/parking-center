@@ -37,7 +37,15 @@ public class VehicleEntity {
 	@JoinColumn(name="project_id")
 	private ProjectsEntity project;
 	
+	@Column(name="updated")
+	private Long updated;
+	
+	@Column(name="disabled")
+	private boolean disabled;
 
+	@Column(name="deleted")
+	private boolean deleted;
+	
 	public Long getId() {
 		return id;
 	}
@@ -94,4 +102,28 @@ public class VehicleEntity {
 		this.project = project;
 	}
 
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+	
 }

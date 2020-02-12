@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.CardsDto;
+import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.CardSearchForm;
 import com.spm.service.CardService;
@@ -28,12 +29,13 @@ public class CardServiceImpl implements CardService{
 		finalURL = finalURL.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
 		finalURL = finalURL.replaceAll("::stt", cardSearchForm.getStt()!= null ? cardSearchForm.getStt():"");
 		finalURL = finalURL.replaceAll("::vehicleId", cardSearchForm.getVehicleId()!= null ? cardSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::projectId", String.valueOf(cardSearchForm.getProjectId() !=  0 ? cardSearchForm.getProjectId() : ""));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
 	
 	@Override
-	public ResultObject<List<CardsDto>> addCard(CardsDto cardsDto){
+	public boolean addCard(CardsDto cardsDto){
 		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
 		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
 		Gson gson = new Gson();
@@ -49,8 +51,11 @@ public class CardServiceImpl implements CardService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return resultFromApi;
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -66,9 +71,7 @@ public class CardServiceImpl implements CardService{
 	public ResultObject<List<CardsDto>> getAllDisabledCard(CardSearchForm cardSearchForm) {
 		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
 		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
-		String finalURL = URLConstants.URL_GET_ALL_DISCARD;
-		finalURL = finalURL.replaceAll("::disable", cardSearchForm.getDisable()!= null ? cardSearchForm.getDisable():"");
-		finalURL = finalURL.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
+		String finalURL = URLConstants.URL_GET_ALL_CARD_BY_DISABLE.replaceAll("::code", cardSearchForm.getCode()!= null ? cardSearchForm.getCode():"");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
@@ -80,4 +83,15 @@ public class CardServiceImpl implements CardService{
 		restUtils.get(finalURL);
 	}
 
+	@Override
+	public void deleteCard(Long id) {
+		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
+		String finalURL = URLConstants.URL_DELETE_CARD.replace("::id", String.valueOf(id));
+		
+		try {
+			restUtils.delete(finalURL);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

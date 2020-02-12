@@ -36,6 +36,11 @@ public class CardController {
 	
 	@Autowired
 	VehicleService vehicleService;
+	
+	public String getProjectId(HttpServletRequest request) {
+		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
+		return projects.get(0);
+	}
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })
 	public String index(
@@ -45,11 +50,12 @@ public class CardController {
 			@RequestParam(name = "vehicleId", required = false) String vehicleId,
 			Model model, HttpServletRequest request) throws UnauthorizedException {
 
+		
 		CardSearchForm cardSearchForm = new CardSearchForm();
 		cardSearchForm.setCode(code);
 		cardSearchForm.setStt(stt);
 		cardSearchForm.setVehicleId(vehicleId);
-		
+		cardSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
 		model.addAttribute("cardSearchForm", cardSearchForm);
 		
 		if(page > 0) {
@@ -76,11 +82,10 @@ public class CardController {
 			}
 		}
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(projects.get(0));
-		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
+		vehicleSearchForm.setProjectId(getProjectId(request));
 		
+		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
 		model.addAttribute("cards", result.getData());
 		model.addAttribute("vehicles", vehicles.getData());
 		model.addAttribute("totalPages", totalPages);
@@ -93,20 +98,28 @@ public class CardController {
 	@RequestMapping (value="addNewCard", method = { RequestMethod.GET})
 	public String showAddNewCardPage(Model model, HttpServletRequest request)throws UnauthorizedException{
 		
-		List<String> projects = (List<String>)request.getSession().getAttribute(SessionConstants.PROJECT_SESSION_NAME);
 		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(projects.get(0));
+		vehicleSearchForm.setProjectId(getProjectId(request));
 		ResultObject<List<VehicleDto>> vehicles = vehicleService.getAllVehicle(vehicleSearchForm);
 		
 		model.addAttribute("addCard", new CardsDto());
 		model.addAttribute("vehicles", vehicles.getData());
-		return "addNewCardPage";
+		return "addNewCardForm";
 	}
 	
 	@RequestMapping (value="addNewCard", method= {RequestMethod.POST})
-	public String addCard(Model model, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
-		cardService.addCard(cardsDto);
-		return "redirect:/cards";
+	public String addCard(Model model,HttpServletRequest request, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
+		cardsDto.setProjectId(Long.parseLong(getProjectId(request)));
+		boolean result = cardService.addCard(cardsDto);
+		if(result) {
+			return "redirect:/cards";
+		}else {
+			String error = "Thẻ này đã được sử dụng!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<VehicleDto>> vehicles = vehicleService.getListAllVehicle();
+			model.addAttribute("vehicles", vehicles.getData());
+			return "addNewCardForm";
+		}
 	}
 	
 	@RequestMapping (value="editCard/{cardId}", method = { RequestMethod.GET})
@@ -123,12 +136,9 @@ public class CardController {
 	}
 	
 	@RequestMapping(value="active-card", method = { RequestMethod.GET})
-	public String getAllDisabledCard(
-			@RequestParam(name = "disable", required = false, defaultValue = "1") String disable,
-			@RequestParam(name = "code", required = false) String code,
+	public String getAllDisabledCard(@RequestParam(name = "code", required = false) String code,
 			Model model, HttpServletRequest request) throws UnauthorizedException {
 		CardSearchForm cardSearchForm = new CardSearchForm();
-		cardSearchForm.setDisable(disable);
 		cardSearchForm.setCode(code);
 		model.addAttribute("cardSearchForm", cardSearchForm);
 		ResultObject<List<CardsDto>> result = cardService.getAllDisabledCard(cardSearchForm);
@@ -140,6 +150,12 @@ public class CardController {
 	public String activeCard(Model model, @PathVariable("id") int cardId) throws UnauthorizedException{
 		cardService.activeCard(cardId);
 		return "redirect:/cards/active-card";
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})
+	public  String deleteMonthlyCard(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
+		cardService.deleteCard(id);
+		return "redirect:/cards";
 	}
 	
 }

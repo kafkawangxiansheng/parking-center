@@ -66,6 +66,7 @@
 									<div class="box-header d-flex" style="padding: 10px;">
 										<i class="fas fa-pen-square" style="font-size: 18px;"></i>
 									</div>
+									<div th:if="${errorMessage}" th:utext="${errorMessage}" style="color: red; font-style: italic; padding-left: 10px;"></div>
 									<div class="box-body p-2">
 										<div class="form-body">
 											<form th:action="@{/employees/addNewEmployee}" th:object="${employeeDto}" method="POST">

@@ -112,10 +112,15 @@
 												<td th:text="${{employee.password}}"></td>
 												<td th:text="${{employee.position}}"></td>
 												<td th:text="${{employee.gender?'Nam':'Nữ'}}"></td>
-												<td>
+												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/employees/editEmployee/{id}(id=${employee.id})}">
-															<button class="btn-info">Edit</button>
+															<button class="btn-info">Chỉnh Sửa</button>
+														</a>
+													</div>
+													<div>
+														<a th:href="@{/employees/delete/{id}/(id=${employee.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa dữ liệu này?');">
+															<button class="btn-warning">Xóa</button>
 														</a>
 													</div>
 												</td>

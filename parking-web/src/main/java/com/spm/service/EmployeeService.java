@@ -13,12 +13,16 @@ public interface EmployeeService {
 	
 	ResultObject<List<EmployeeDto>> getAll();
 	
+	ResultObject<List<EmployeeDto>> getAllByProjectId(EmployeeSearchForm employeeSearchForm, Pageable pageable);
+	
+	ResultObject<List<EmployeeDto>> getAllByProjectId(long projectId);
+	
 	EmployeeDto getEmployeeById(Long id);
 	
 	ResultObject<List<EmployeeDto>> getAllEmployeeByProjectId(long projectId);
 	
 	
-	EmployeeDto addEmployee(EmployeeDto employeeDto);
+	boolean addEmployee(EmployeeDto employeeDto);
 	
 	void deleteEmployee(Long id);
 	

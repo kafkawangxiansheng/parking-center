@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.spm.dto.CardsDto;
 import com.spm.dto.ResultObject;
-import com.spm.entity.CardsEntity;
 import com.spm.search.form.CardSearchForm;
 
 /**
@@ -14,7 +13,7 @@ import com.spm.search.form.CardSearchForm;
  */
 public interface CardsService {
 
-    CardsDto save(CardsDto cardsDto);
+	ResultObject<List<CardsDto>> addNewCard(CardsDto cardsDto);
     
     List<CardsDto> save(List<CardsDto> cardsDtos);
     
@@ -27,6 +26,8 @@ public interface CardsService {
     CardsDto checkCardAndCardType(String code, int cardType);
     
     void activebyId(int cardId);
+    
+    void delete(Long id);
 
 }
  

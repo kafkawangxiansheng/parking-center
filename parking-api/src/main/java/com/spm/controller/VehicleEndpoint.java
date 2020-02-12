@@ -41,14 +41,14 @@ public class VehicleEndpoint {
 	
 	@RequestMapping(value="/add", method = { RequestMethod.POST })
 	@ApiOperation("Add new vehicle")
-	public void addNewVehicle(@RequestBody VehicleDto vehicleDto) {
-		vehicleService.save(vehicleDto);
+	public ResultObject<List<VehicleDto>> addNewVehicle(@RequestBody VehicleDto vehicleDto) {
+		return vehicleService.save(vehicleDto);
 	}
 	
-	@RequestMapping(value="/update", method = { RequestMethod.PUT })
+	@RequestMapping(value="/update", method = { RequestMethod.POST })
 	@ApiOperation("Update existing vehicle")
-	public void updateExistingVehicle(@RequestBody VehicleDto vehicleDto) {
-		vehicleService.save(vehicleDto);
+	public ResultObject<List<VehicleDto>> updateExistingVehicle(@RequestBody VehicleDto vehicleDto) {
+		return vehicleService.update(vehicleDto);
 	}
 	
 	@RequestMapping(value="/getById", method = {RequestMethod.GET})

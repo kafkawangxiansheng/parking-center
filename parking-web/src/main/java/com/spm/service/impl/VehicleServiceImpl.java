@@ -30,7 +30,7 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 	
 	@Override
-	public ResultObject<List<VehicleDto>> addVehicle(VehicleDto vehicleDto) {
+	public boolean addVehicle(VehicleDto vehicleDto) {
 		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
 		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
 		Gson gson = new Gson();
@@ -45,7 +45,11 @@ public class VehicleServiceImpl implements VehicleService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return resultFromApi;
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -75,6 +79,29 @@ public class VehicleServiceImpl implements VehicleService{
 		String finalURL = URLConstants.URL_GET_LIST_ALL_VEHICLE;
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
+	}
+
+	@Override
+	public boolean updateVehicle(VehicleDto vehicleDto) {
+		RestUtils<VehicleDto> restUtils = new RestUtils<>(VehicleDto.class);
+		ResultObject<List<VehicleDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(vehicleDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_UPDATE_VEHICLE, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

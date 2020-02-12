@@ -13,4 +13,5 @@ public interface UserService {
 	List<UserRoleDto> getUserRolesByUserId(Long userId); 
 	
 	List<UserProjectDto> getUserProjectsByUserId(Long userId); 
+	
 }

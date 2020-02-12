@@ -29,6 +29,8 @@ public interface EmployeeService {
 	
 	ResultObject<List<EmployeeDto>> findById(Long Id);
 	
+	ResultObject<List<EmployeeDto>> getAllByProjectId(Long projectId);
+	
 	ResultObject<List<EmployeeDto>> save(EmployeeDto employeeDto);
     
 	ResultObject<List<EmployeeDto>> save(List<EmployeeDto> listEmployeeDto);

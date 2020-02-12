@@ -63,18 +63,32 @@ public class CardsServiceImpl implements CardsService {
 	}
 
 	@Override
-	public CardsDto save(CardsDto cardDto) {
-		CardsEntity entity = new CardsEntity();
-		mapper.map(cardDto, entity);
-		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
-		entity = cardRepository.save(entity);
-		mapper.map(entity, cardDto);
-		return cardDto;
+	public ResultObject<List<CardsDto>> addNewCard(CardsDto cardDto) {
+		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
+		List<CardsDto> listDto = new ArrayList<CardsDto>();
+		CardsEntity checkCardCode = cardRepository.findByCode(cardDto.getCode());
+		if(checkCardCode == null) {
+			CardsEntity entities = new CardsEntity();
+			mapper.map(cardDto, entities);
+			entities.setUpdated(Calendar.getInstance().getTimeInMillis());
+			cardRepository.save(entities);
+			mapper.map(entities, cardDto);
+			listDto.add(cardDto);
+			resultObject.setData(listDto);
+			return resultObject;
+		}else {
+			return null;
+		}
+		
 	}
 
 	@Override
 	public ResultObject<List<CardsDto>> findAll(Pageable pageable, CardSearchForm cardSearchForm) {
-		Page<CardsEntity> entities = cardRepository.search(cardSearchForm.getCode(), cardSearchForm.getStt(), cardSearchForm.getVehicleId(), pageable);
+		Page<CardsEntity> entities = cardRepository.search(
+				cardSearchForm.getCode(), cardSearchForm.getStt(),
+				cardSearchForm.getVehicleId(),
+				cardSearchForm.getProjectId(),
+				pageable);
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities.getContent()));
 		resultObject.setTotalPages(entities.getTotalPages());
@@ -106,7 +120,7 @@ public class CardsServiceImpl implements CardsService {
 	
 	@Override
 	public ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm){
-		List<CardsEntity> entities = cardRepository.searchDisable(cardSearchForm.getCode(), cardSearchForm.getDisable());
+		List<CardsEntity> entities = cardRepository.searchDisable(cardSearchForm.getCode(), 1);
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities));
 		return resultObject;
@@ -129,7 +143,16 @@ public class CardsServiceImpl implements CardsService {
 	public void activebyId(int cardId) {
 		CardsEntity entity = cardRepository.findById(Long.valueOf(cardId)).get();
 		entity.setDisable(0);
-		entity.setUpdated(entity.getUpdated()+1);
+//		entity.setUpdated(entity.getUpdated()+1);
+		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+		cardRepository.save(entity);
+	}
+
+	@Override
+	public void delete(Long id) {
+		CardsEntity entity = cardRepository.findById(id).get();
+		entity.setDeleted(true);
+		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 		cardRepository.save(entity);
 	}
 
