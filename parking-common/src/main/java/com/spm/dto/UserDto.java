@@ -11,6 +11,12 @@ public class UserDto {
 	private String password;
 
 	private boolean enabled;
+	
+	private Long projectId;
+	
+	private Long updated;
+	
+	private boolean deleted;
 
 	public Long getId() {
 		return id;
@@ -55,5 +61,29 @@ public class UserDto {
 	public int getColumnCount() {
         return getClass().getDeclaredFields().length;
     }
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 
 }

@@ -102,8 +102,17 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/addNewEmployee", method= {RequestMethod.POST,RequestMethod.PUT})
 	public  String doAddNewEmployee(Model model, @Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto) throws UnauthorizedException{
-		employeeService.addEmployee(employeeDto);
-		return "redirect:/employees";
+		boolean result = employeeService.addEmployee(employeeDto);
+		if(result) {
+			return "redirect:/employees";
+		}else {
+			String error = "Tên đăng nhập đã tồn tại!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
+			model.addAttribute("listProjectDto", projectMap.getData());	
+			return "addEmployeeForm";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/editEmployee/{id}", method= {RequestMethod.GET})

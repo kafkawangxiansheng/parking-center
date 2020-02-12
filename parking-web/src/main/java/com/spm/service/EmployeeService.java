@@ -22,7 +22,7 @@ public interface EmployeeService {
 	ResultObject<List<EmployeeDto>> getAllEmployeeByProjectId(long projectId);
 	
 	
-	EmployeeDto addEmployee(EmployeeDto employeeDto);
+	boolean addEmployee(EmployeeDto employeeDto);
 	
 	void deleteEmployee(Long id);
 	

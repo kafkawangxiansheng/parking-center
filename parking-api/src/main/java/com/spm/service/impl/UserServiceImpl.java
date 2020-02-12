@@ -115,6 +115,5 @@ public class UserServiceImpl implements UserService{
 	public List<UserProjectDto> getUserProjectsByUserId(Long userId) {
 		return this.mapUserProjectDtos(userProjectRepository.findByUserId(userId));
 	}
-	
-	
+
 }

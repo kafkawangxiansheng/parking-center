@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public EmployeeDto addEmployee(EmployeeDto employeeDto) {
+	public boolean addEmployee(EmployeeDto employeeDto) {
 		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
 		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
 		Gson gson = new Gson();
@@ -64,8 +64,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
-		return resultFromApi.getData().get(0);
+		}	
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

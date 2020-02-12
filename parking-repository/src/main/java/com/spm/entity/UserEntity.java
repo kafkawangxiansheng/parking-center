@@ -28,6 +28,15 @@ public class UserEntity {
 	@Column(name="enabled")
 	private boolean enabled;
 	
+	@Column(name="project_id")
+	private Long projectId;
+	
+	@Column(name="updated")
+	private Long updated;
+	
+	@Column(name="deleted")
+	private boolean deleted;
+	
 	
 	public Long getId() {
 		return id;
@@ -59,6 +68,23 @@ public class UserEntity {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+	public Long getUpdated() {
+		return updated;
+	}
+	public void setUpdated(Long updated) {
+		this.updated = updated;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
 	
 }
