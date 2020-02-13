@@ -128,14 +128,12 @@ public class CardsServiceImpl implements CardsService {
 
 
 	@Override
-	public CardsDto checkCardAndCardType(String code, int cardType) {
+	public boolean checkCardAndCardType(String code, int cardType) {
 		CardsEntity entity =  cardRepository.findByCodeAndVehicleCardType(code, cardType);
-		CardsDto cardsDto = new CardsDto();
 		if(entity != null) {
-			mapper.map(entity, cardsDto);
-			return cardsDto;
+			return true;
 		}else {
-			return null;
+			return false;
 		}
 	}
 
@@ -154,6 +152,49 @@ public class CardsServiceImpl implements CardsService {
 		entity.setDeleted(true);
 		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 		cardRepository.save(entity);
+	}
+
+	@Override
+	public CardsDto checkCardAndCardTypeAndProjectId(String code, int cardType, long projectId) {
+		CardsEntity entity =  cardRepository.findByCodeAndVehicleCardTypeAndProjectId(code, cardType, projectId);
+		if(entity != null) {
+			CardsDto cardDto = new CardsDto();
+			 mapper.map(entity,cardDto);
+			 return cardDto;
+		}else {
+			return null;
+		}
+	}
+
+	@Override
+	public ResultObject<List<CardsDto>> update(CardsDto cardDto) {
+		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
+		List<CardsDto> listDto = new ArrayList<CardsDto>();
+		CardsEntity cardsEntity = cardRepository.findById(cardDto.getId()).get();
+		if(cardsEntity.getCode().equals(cardDto.getCode())) {
+			CardsEntity entities = new CardsEntity();
+			mapper.map(cardDto, entities);
+			entities.setUpdated(Calendar.getInstance().getTimeInMillis());
+			cardRepository.save(entities);
+			mapper.map(entities, cardDto);
+			listDto.add(cardDto);
+			resultObject.setData(listDto);
+			return resultObject;
+		}else {
+			CardsEntity checkCardCode = cardRepository.findByCode(cardDto.getCode());
+			if(checkCardCode == null) {
+				CardsEntity entities = new CardsEntity();
+				mapper.map(cardDto, entities);
+				entities.setUpdated(Calendar.getInstance().getTimeInMillis());
+				cardRepository.save(entities);
+				mapper.map(entities, cardDto);
+				listDto.add(cardDto);
+				resultObject.setData(listDto);
+				return resultObject;
+			}else {
+				return null;
+			}
+		}
 	}
 
 }

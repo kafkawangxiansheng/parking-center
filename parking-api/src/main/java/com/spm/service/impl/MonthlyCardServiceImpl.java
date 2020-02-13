@@ -184,4 +184,8 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		return resultObject;
 	}
 
+	@Override
+	public MonthlyCardEntity getById(Long id) {
+		return monthlyCardRepository.findById(id).get();
+	}
 }

@@ -35,4 +35,6 @@ public interface EmployeeService {
     
 	ResultObject<List<EmployeeDto>> save(List<EmployeeDto> listEmployeeDto);
 	
+	ResultObject<List<EmployeeDto>> update(EmployeeDto employeeDto);
+	
 }

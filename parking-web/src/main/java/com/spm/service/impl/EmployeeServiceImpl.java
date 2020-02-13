@@ -113,5 +113,28 @@ public class EmployeeServiceImpl implements EmployeeService{
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
+
+	@Override
+	public boolean update(EmployeeDto employeeDto) {
+		RestUtils<EmployeeDto> restUtils = new RestUtils<>(EmployeeDto.class);
+		ResultObject<List<EmployeeDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(employeeDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_POST_UPDATE_EMPLOYEE, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }

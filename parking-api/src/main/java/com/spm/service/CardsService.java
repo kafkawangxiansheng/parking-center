@@ -23,11 +23,15 @@ public interface CardsService {
     
     ResultObject<List<CardsDto>> findAllDisabledCard(CardSearchForm cardSearchForm);
     
-    CardsDto checkCardAndCardType(String code, int cardType);
+    boolean checkCardAndCardType(String code, int cardType);
+    
+    CardsDto checkCardAndCardTypeAndProjectId(String code, int cardType, long projectId);
     
     void activebyId(int cardId);
     
     void delete(Long id);
+    
+    ResultObject<List<CardsDto>> update(CardsDto cardDto);
 
 }
  

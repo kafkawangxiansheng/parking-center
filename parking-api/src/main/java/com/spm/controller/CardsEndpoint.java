@@ -39,11 +39,11 @@ public class CardsEndpoint {
 		return cardsService.addNewCard(cardDto);
 	}
 
-	@RequestMapping(value = "/update", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/update", method = { RequestMethod.POST })
 	@ApiOperation("Update existing card")
-	public void updateExistingCard(@RequestBody CardsDto cardDto) {
+	public ResultObject<List<CardsDto>> updateExistingCard(@RequestBody CardsDto cardDto) {
 //		cardsService.save(cardDto);
-		cardsService.addNewCard(cardDto);
+		return cardsService.update(cardDto);
 	}
 
 	@RequestMapping(value = "", method = { RequestMethod.GET })

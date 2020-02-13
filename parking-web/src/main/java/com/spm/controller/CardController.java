@@ -132,7 +132,22 @@ public class CardController {
 		
 		model.addAttribute("editCard", result);
 		model.addAttribute("vehicles", vehicles.getData());
-		return "editCardPage";
+		return "editCardForm";
+	}
+	
+	@RequestMapping (value="updateCard", method= {RequestMethod.POST})
+	public String updateCard(Model model,HttpServletRequest request, @ModelAttribute("addCard") CardsDto cardsDto) throws UnauthorizedException{
+		cardsDto.setProjectId(Long.parseLong(getProjectId(request)));
+		boolean result = cardService.update(cardsDto);
+		if(result) {
+			return "redirect:/cards";
+		}else {
+			String error = "Thẻ này đã được sử dụng!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<VehicleDto>> vehicles = vehicleService.getListAllVehicle();
+			model.addAttribute("vehicles", vehicles.getData());
+			return "editCardForm";
+		}
 	}
 	
 	@RequestMapping(value="active-card", method = { RequestMethod.GET})

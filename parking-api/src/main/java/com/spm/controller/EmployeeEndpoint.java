@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spm.dto.EmployeeDto;
 import com.spm.dto.ResultObject;
-import com.spm.dto.UserDto;
 import com.spm.service.EmployeeService;
-import com.spm.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,10 +43,10 @@ public class EmployeeEndpoint {
 		return employeeService.save(employeeDto);
 	}
 	
-	@RequestMapping(value = "/addEmployee", method = {RequestMethod.PUT})
+	@RequestMapping(value = "/update", method = {RequestMethod.POST})
 	@ApiOperation("Update existing EmployeeDto")
 	public @ResponseBody ResultObject<List<EmployeeDto>> updateExistingEmployee(@RequestBody EmployeeDto employeeDto) {
-		return employeeService.save(employeeDto);
+		return employeeService.update(employeeDto);
 	}
 	
 	@RequestMapping(value = "", method = {RequestMethod.GET})

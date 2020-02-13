@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.spm.dto.EmployeeDto;
 import com.spm.dto.ResultObject;
+import com.spm.dto.UserDto;
 import com.spm.entity.EmployeeEntity;
 import com.spm.entity.UserEntity;
 import com.spm.repository.EmployeeRepository;
@@ -190,5 +191,62 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return true;
 		}
 	}
+
+	@Override
+	public ResultObject<List<EmployeeDto>> update(EmployeeDto employeeDto) {
+		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
+		List<EmployeeDto> listEmployee = new ArrayList<>();
+		EmployeeEntity employeeEntity = employeeRepository.findById(employeeDto.getId()).get();
+		if(employeeEntity.getUsername().equals(employeeDto.getUsername())) {
+			mapper.map(employeeDto, employeeEntity);
+			employeeEntity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
+			employeeRepository.save(employeeEntity);
+			
+			// update User
+			UserEntity userEntity = userRepository.findByUsername(employeeDto.getUsername());
+			UserDto newUserDto = convertToUserDto(employeeDto);
+			mapper.map(newUserDto, userEntity);
+			userRepository.save(userEntity);
+			
+			//return
+			mapper.map(employeeEntity, employeeDto);
+			listEmployee.add(employeeDto);
+			resultObj.setData(listEmployee);
+			return resultObj;
+		}else {
+			boolean exist = checkUsername(employeeDto.getUsername());
+			if(exist == false) {
+				
+				mapper.map(employeeDto, employeeEntity);
+				employeeEntity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
+				employeeRepository.save(employeeEntity);
+				
+				// update User
+				UserEntity userEntity = userRepository.findByUsername(employeeEntity.getUsername());
+				UserDto newUserDto = convertToUserDto(employeeDto);
+				mapper.map(newUserDto, userEntity);
+				userRepository.save(userEntity);
+				
+				//return
+				mapper.map(employeeEntity, employeeDto);
+				listEmployee.add(employeeDto);
+				resultObj.setData(listEmployee);
+				return resultObj;
+			}else {
+				return null;
+			}
+		}
+		
+	}
 	
+	public UserDto convertToUserDto(EmployeeDto employeeDto) {
+		UserDto userDto = new UserDto();
+		userDto.setName(employeeDto.getName());
+		userDto.setUsername(employeeDto.getUsername());
+		userDto.setPassword(employeeDto.getPassword());
+		userDto.setEnabled(true);
+		userDto.setProjectId(employeeDto.getProject().getId());
+		userDto.setUpdated(Calendar.getInstance().getTimeInMillis());
+		 return userDto;
+	}
 }

@@ -24,6 +24,8 @@ public interface EmployeeService {
 	
 	boolean addEmployee(EmployeeDto employeeDto);
 	
+	boolean update(EmployeeDto employeeDto);
+	
 	void deleteEmployee(Long id);
 	
 }

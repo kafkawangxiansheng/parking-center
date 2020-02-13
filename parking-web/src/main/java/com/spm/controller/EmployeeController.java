@@ -124,6 +124,21 @@ public class EmployeeController {
 		return "editEmployeeForm";
 	}
 	
+	@RequestMapping(value = "/update", method= {RequestMethod.POST})
+	public  String doUpate(Model model, @Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto) throws UnauthorizedException{
+		boolean result = employeeService.update(employeeDto);
+		if(result) {
+			return "redirect:/employees";
+		}else {
+			String error = "Tên đăng nhập đã tồn tại!";
+			model.addAttribute("errorMessage",error );
+			ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
+			model.addAttribute("listProjectDto", projectMap.getData());	
+			return "editEmployeeForm";
+		}
+		
+	}
+	
 	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})
 	public  String deleteEmployee(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
 		employeeService.deleteEmployee(id);

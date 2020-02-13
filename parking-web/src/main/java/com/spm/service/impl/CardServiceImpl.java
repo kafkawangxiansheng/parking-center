@@ -94,4 +94,28 @@ public class CardServiceImpl implements CardService{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public boolean update(CardsDto cardsDto) {
+		RestUtils<CardsDto> restUtils = new RestUtils<>(CardsDto.class);
+		ResultObject<List<CardsDto>> resultFromApi = new ResultObject<>();
+		Gson gson = new Gson();
+		
+		StringEntity stringEntity;
+		try {
+			stringEntity = new StringEntity(gson.toJson(cardsDto), "UTF-8");
+			resultFromApi = restUtils.postJSON(URLConstants.URL_ADD_UPDATE, stringEntity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(resultFromApi.getData() != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

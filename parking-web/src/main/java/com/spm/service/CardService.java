@@ -20,4 +20,7 @@ public interface CardService {
 	void activeCard(int cardId);
 	
 	void deleteCard(Long id);
+	
+	boolean update(CardsDto cardsDto);
+	
 }
