@@ -23,9 +23,8 @@ public class EmployeeEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="project_id")
-	private ProjectsEntity project;
+	@Column(name="project_id")
+	private Long projectId;
 	
 	@Column(name="name")
 	private String name;
@@ -67,14 +66,6 @@ public class EmployeeEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public ProjectsEntity getProject() {
-		return project;
-	}
-
-	public void setProject(ProjectsEntity project) {
-		this.project = project;
 	}
 
 	public String getName() {
@@ -169,6 +160,14 @@ public class EmployeeEntity {
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 	
 }

@@ -6,7 +6,7 @@ public class EmployeeDto {
 	
 	private Long id;
 	
-	private ProjectsDto project;
+	private Long projectId;
 	
 	private String name;
 	
@@ -36,14 +36,6 @@ public class EmployeeDto {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public ProjectsDto getProject() {
-		return project;
-	}
-
-	public void setProject(ProjectsDto project) {
-		this.project = project;
 	}
 
 	public String getName() {
@@ -134,4 +126,12 @@ public class EmployeeDto {
 		this.deleted = deleted;
 	}
 
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+	
 }

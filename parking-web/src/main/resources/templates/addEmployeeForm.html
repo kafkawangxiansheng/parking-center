@@ -112,7 +112,7 @@
 													        th:text=" 'Dự Án: ' + ${project.name} + ' -- Công Ty: ' + ${project.company.name} "></label>
 													  </li>
 													</ul> -->
-													<select th:field="*{project.id}" class="form-control">
+													<select th:field="*{projectId}" class="form-control">
 														<option th:each="i : ${listProjectDto}" 
 														th:value="${i.id}" th:text="${i.name}"></option>
 													</select>

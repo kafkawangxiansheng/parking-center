@@ -143,7 +143,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			userEntity.setUsername(employeeDto.getUsername());
 			userEntity.setPassword(employeeDto.getPassword());
 			userEntity.setEnabled(true);
-			userEntity.setProjectId(employeeDto.getProject().getId());
+			userEntity.setProjectId(employeeDto.getProjectId());
 			userEntity.setUpdated(Calendar.getInstance().getTimeInMillis());
 			
 			ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
@@ -202,11 +202,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 			employeeEntity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
 			employeeRepository.save(employeeEntity);
 			
-			// update User
-			UserEntity userEntity = userRepository.findByUsername(employeeDto.getUsername());
-			UserDto newUserDto = convertToUserDto(employeeDto);
-			mapper.map(newUserDto, userEntity);
-			userRepository.save(userEntity);
+//			// update User
+//			UserEntity userEntity = userRepository.findByUsername(employeeDto.getUsername());
+//			UserDto newUserDto = convertToUserDto(employeeDto);
+//			mapper.map(newUserDto, userEntity);
+//			userRepository.save(userEntity);
 			
 			//return
 			mapper.map(employeeEntity, employeeDto);
@@ -245,7 +245,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		userDto.setUsername(employeeDto.getUsername());
 		userDto.setPassword(employeeDto.getPassword());
 		userDto.setEnabled(true);
-		userDto.setProjectId(employeeDto.getProject().getId());
+		userDto.setProjectId(employeeDto.getProjectId());
 		userDto.setUpdated(Calendar.getInstance().getTimeInMillis());
 		 return userDto;
 	}
