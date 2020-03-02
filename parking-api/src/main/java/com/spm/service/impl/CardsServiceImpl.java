@@ -71,6 +71,8 @@ public class CardsServiceImpl implements CardsService {
 			CardsEntity entities = new CardsEntity();
 			mapper.map(cardDto, entities);
 			entities.setUpdated(Calendar.getInstance().getTimeInMillis());
+			entities.setCreated(Calendar.getInstance().getTimeInMillis());
+			entities.setLastSync(0L);
 			cardRepository.save(entities);
 			mapper.map(entities, cardDto);
 			listDto.add(cardDto);
@@ -100,6 +102,8 @@ public class CardsServiceImpl implements CardsService {
 		List<CardsEntity> cardsEntities = reMap(cardsDtos);
 		cardsEntities.forEach(entity ->  {
 			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+			entity.setCreated(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(0L);
 		});
 		cardsEntities = cardRepository.saveAll(cardsEntities);
 		cardsDtos = map(cardsEntities);

@@ -48,7 +48,9 @@ public class RevenueServiceImpl implements RevenueService {
 		List<RevenueDto> totalRevenues = new ArrayList<>();
 		
 		List<VehicleEntity> vehicles = vehicleRepository.findAllByProjectId(revenueSearchForm.getProjectId());
-		List<OrderEntity> orderEntities  = orderRepository.findAll(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		List<OrderEntity> orderEntitiesOut  = orderRepository.findAllVehicleOut(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		List<OrderEntity> orderEntitiesIn  = orderRepository.findAllVehicleIn(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
+		
 		RevenueDto normalRevenueTotalDto = new RevenueDto();
 		normalRevenueTotalDto.setLabel("___ Tổng cộng xe thường");
 		normalRevenueTotalDto.setCssClass("revenue-sub-total");
@@ -62,20 +64,27 @@ public class RevenueServiceImpl implements RevenueService {
 		for(VehicleEntity vehicle :  vehicles) {
 			RevenueDto revenueDto = new RevenueDto();
 			RevenueEntity revenueEntity = new RevenueEntity() ;
-			revenueEntity.setVehicleId(vehicle.getCardType());
-			orderEntities.forEach(order -> {
-				if(order.getVehicleId() == vehicle.getCardType())  {
-					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
+			revenueEntity.setVehicleId(vehicle.getType());
+			orderEntitiesOut.forEach(order -> {
+				if(order.getVehicleId() == vehicle.getType())  {
 					revenueEntity.setTotalCheckout(((order.getCheckoutTime()!=null && order.getCheckoutTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckout());
 					revenueEntity.setTotalPrice(revenueEntity.getTotalPrice() + order.getTotalPrice());
 				}
 			});
+			
+			orderEntitiesIn.forEach(order -> {
+				if(order.getVehicleId() == vehicle.getType())  {
+					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
+				}
+			});
+			
+			
 			if(revenueEntity != null) {
 				mapper.map(revenueEntity, revenueDto);
 			}
 			revenueDto.setLabel(vehicle.getName());
 			revenueDto.setExistingVerhicle(revenueDto.getTotalCheckin() - revenueDto.getTotalCheckout());
-			if(vehicle.getType() == 1)  {
+			if(vehicle.getCardType() == 1)  {
 				normalRevenues.add(revenueDto);
 				normalRevenueTotalDto.setTotalCheckin(normalRevenueTotalDto.getTotalCheckin() + revenueDto.getTotalCheckin());
 				normalRevenueTotalDto.setTotalCheckout(normalRevenueTotalDto.getTotalCheckout() + revenueDto.getTotalCheckout());

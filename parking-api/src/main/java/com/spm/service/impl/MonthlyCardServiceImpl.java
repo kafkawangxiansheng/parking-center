@@ -92,6 +92,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		@Override
 		public void delete(Long id) {
 			MonthlyCardEntity entity = monthlyCardRepository.findById(id).get();
+			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 			entity.setDeleted(true);
 			monthlyCardRepository.save(entity);
 	}
@@ -177,6 +178,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		MonthlyCardEntity entities = monthlyCardRepository.findById(monthlyCardDto.getId()).get();
 		entities.setStartDate(monthlyCardDto.getStartDate());
 		entities.setEndDate(monthlyCardDto.getEndDate());
+		entities.setUpdated(Calendar.getInstance().getTimeInMillis());
 		monthlyCardRepository.save(entities);
 		mapper.map(entities, dto );
 		listObject.add(dto);

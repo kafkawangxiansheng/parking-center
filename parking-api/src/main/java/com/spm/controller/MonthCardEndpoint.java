@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,16 @@ public class MonthCardEndpoint {
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 		// type ve thang
 		int cardType = 2;
-		
+
 		CardsDto cardsDto = checkCard(monthlyCardDto.getCardCode(), cardType, monthlyCardDto.getProject().getId());
 		if (cardsDto != null) {
 			// check card used on monthlyCard
 			MonthlyCardEntity monthlyCardEntity = monthCardsService.findByCardCode(monthlyCardDto.getCardCode());
 			if (monthlyCardEntity == null) {
 				monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
-				
+				monthlyCardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
+				monthlyCardDto.setCreated(Calendar.getInstance().getTimeInMillis());
+				monthlyCardDto.setLastSync(0);
 				resultObject = monthCardsService.save(monthlyCardDto);
 			} else {
 				resultObject = null;
@@ -67,11 +70,12 @@ public class MonthCardEndpoint {
 	@ApiOperation("Update MonthlyCard")
 	public ResultObject<List<MonthlyCardDto>> updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
-		
+
 		MonthlyCardEntity monthlyCardEntity = monthCardsService.getById(monthlyCardDto.getId());
-		if(monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+		if (monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+			monthlyCardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
 			resultObject = monthCardsService.save(monthlyCardDto);
-		}else {
+		} else {
 			// type ve thang
 			int cardType = 2;
 			CardsDto cardsDto = checkCard(monthlyCardDto.getCardCode(), cardType, monthlyCardDto.getProject().getId());
@@ -80,6 +84,7 @@ public class MonthCardEndpoint {
 				MonthlyCardEntity checkCardCode = monthCardsService.findByCardCode(monthlyCardDto.getCardCode());
 				if (checkCardCode == null) {
 					monthlyCardDto.setVehicleId(cardsDto.getVehicleId());
+					monthlyCardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
 					resultObject = monthCardsService.save(monthlyCardDto);
 				} else {
 					resultObject = null;
@@ -113,11 +118,10 @@ public class MonthCardEndpoint {
 	@RequestMapping(path = "/checkCard", method = { RequestMethod.GET })
 	@ApiOperation("input : string code in Cards, int cardType int Vehicles,  return :  cardsDto")
 	public CardsDto checkCard(@RequestParam(name = "cardcode") String code,
-			@RequestParam(name = "cardType") int cardType,
-			@RequestParam(name = "projectId") long projectId) {
+			@RequestParam(name = "cardType") int cardType, @RequestParam(name = "projectId") long projectId) {
 		return cardsService.checkCardAndCardTypeAndProjectId(code, cardType, projectId);
 	}
-	
+
 	@RequestMapping(value = "search", method = { RequestMethod.GET })
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAllBySearch(
@@ -128,32 +132,32 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "numberEndDate", required = false) int numberEndDate,
 			@RequestParam(name = "customerName", required = false) String customerName,
 			@RequestParam(name = "projectId", required = false) long projectId) {
-		
+
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
-		
+
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
-		if(cardCode != null && !cardCode.isEmpty()) {
+		if (cardCode != null && !cardCode.isEmpty()) {
 			monthlyCradSearchForm.setCardCode(cardCode);
 		}
-		if(vehicleId != null && !vehicleId.isEmpty()) {
+		if (vehicleId != null && !vehicleId.isEmpty()) {
 			monthlyCradSearchForm.setVehicleId(vehicleId);
 		}
-		if(numberEndDate != 0 ) {
+		if (numberEndDate != 0) {
 			monthlyCradSearchForm.setNumberEndDate(numberEndDate);
 		}
-		if(statusDate != 0) {
+		if (statusDate != 0) {
 			monthlyCradSearchForm.setStatusDate(statusDate);
 		}
-		if(customerName != null && !customerName.isEmpty()) {
+		if (customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
-		if(projectId != 0 ) {
+		if (projectId != 0) {
 			monthlyCradSearchForm.setProjectId(projectId);
 		}
-		
+
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
-	
+
 	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
@@ -161,40 +165,37 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "cardCode", required = false) String cardCode,
 			@RequestParam(name = "customerName", required = false) String customerName,
 			@RequestParam(name = "projectId", required = false) long projectId) {
-		
+
 		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
-		
-		if(cardCode != null && !cardCode.isEmpty()) {
+
+		if (cardCode != null && !cardCode.isEmpty()) {
 			monthlyCradSearchForm.setCardCode(cardCode);
 		}
-		if(customerName != null && !customerName.isEmpty()) {
+		if (customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
-		if(projectId != 0 ) {
+		if (projectId != 0) {
 			monthlyCradSearchForm.setProjectId(projectId);
 		}
 		return monthCardsService.renewalSearch(paging, monthlyCradSearchForm);
 	}
-	
-	// renewal 
-		@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
-		@ApiOperation("Get one MonthlyCards for renewal")
-		public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
-				@RequestParam(name = "id", required = false) long id) {
-			
-			return monthCardsService.renewalFindOne(id);
-		}
+
+	// renewal
+	@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
+	@ApiOperation("Get one MonthlyCards for renewal")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
+			@RequestParam(name = "id", required = false) long id) {
+
+		return monthCardsService.renewalFindOne(id);
+	}
+
 	// renewal update
-			@RequestMapping(value = "revewal/update", method = { RequestMethod.POST })
-			@ApiOperation("Get one MonthlyCards for renewal update")
-			public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(
-					@RequestBody MonthlyCardDto monthlyCardDto) {
-				
-				return monthCardsService.renewalUpdate(monthlyCardDto);
-			}
-		
-	
+	@RequestMapping(value = "revewal/update", method = { RequestMethod.POST })
+	@ApiOperation("Get one MonthlyCards for renewal update")
+	public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(@RequestBody MonthlyCardDto monthlyCardDto) {
+
+		return monthCardsService.renewalUpdate(monthlyCardDto);
+	}
+
 }
-
-

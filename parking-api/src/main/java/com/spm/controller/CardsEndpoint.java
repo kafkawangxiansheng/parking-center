@@ -42,7 +42,6 @@ public class CardsEndpoint {
 	@RequestMapping(value = "/update", method = { RequestMethod.POST })
 	@ApiOperation("Update existing card")
 	public ResultObject<List<CardsDto>> updateExistingCard(@RequestBody CardsDto cardDto) {
-//		cardsService.save(cardDto);
 		return cardsService.update(cardDto);
 	}
 

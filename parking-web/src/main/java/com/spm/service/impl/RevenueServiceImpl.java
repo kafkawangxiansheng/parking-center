@@ -22,7 +22,7 @@ public class RevenueServiceImpl implements RevenueService {
 		String finalURL = URLConstants.URL_GET_ALL_REVENUE.replace("::projectId", String.valueOf(revenueSearchForm.getProjectId()));
 		
 		String dateFromInLong = revenueSearchForm.getDateFrom()+" "+revenueSearchForm.getHourFrom()+":"+revenueSearchForm.getMinFrom()+":00";
-		String dateToInLong = revenueSearchForm.getDateTo()+" "+revenueSearchForm.getHourTo()+":"+revenueSearchForm.getMinTo()+":59";
+		String dateToInLong = revenueSearchForm.getDateTo()+" "+revenueSearchForm.getHourTo()+":"+revenueSearchForm.getMinTo()+":00";
 		
 		if(revenueSearchForm.getDateFrom() != null && !revenueSearchForm.getDateFrom().isEmpty()) {
 			try {

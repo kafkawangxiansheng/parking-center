@@ -37,4 +37,13 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 			@Param(value = "carNumber") String carNumber, @Param(value = "dateFrom") String dateFrom,
 			@Param(value = "dateTo") String dateTo, @Param(value="verhicleIds")int[] verhicleIds, Pageable pageable);
 
+	@Query(value = "SELECT * from orders  WHERE  project_id = :projectId AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (checkin_time >= :dateFrom AND checkin_time <= :dateTo) order by updated DESC", nativeQuery = true)
+	List<OrderEntity> findAllVehicleIn(@Param(value = "projectId") String projectId,
+			@Param(value = "adminCheckInId") String adminCheckInId, @Param(value = "dateFrom") String dateFrom,
+			@Param(value = "dateTo") String dateTo);
+	
+	@Query(value = "SELECT * from orders  WHERE  project_id = :projectId AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (checkout_time >= :dateFrom AND checkout_time <= :dateTo) order by updated DESC", nativeQuery = true)
+	List<OrderEntity> findAllVehicleOut(@Param(value = "projectId") String projectId,
+			@Param(value = "adminCheckInId") String adminCheckInId, @Param(value = "dateFrom") String dateFrom,
+			@Param(value = "dateTo") String dateTo);
 }
