@@ -9,6 +9,9 @@ public class CardsDto {
 	private String stt;
 
 	private long vehicleId;
+	
+	private String vehicleName;
+	
 
 	private long monthlyCardId;
 
@@ -141,5 +144,14 @@ public class CardsDto {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+
+	public String getVehicleName() {
+		return vehicleName;
+	}
+
+	public void setVehicleName(String vehicleName) {
+		this.vehicleName = vehicleName;
+	}
+	
 	
 }

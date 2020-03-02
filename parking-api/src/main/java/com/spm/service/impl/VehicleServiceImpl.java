@@ -16,12 +16,16 @@ import com.spm.entity.VehicleEntity;
 import com.spm.repository.VehicleRepository;
 import com.spm.search.form.VehicleSearchForm;
 import com.spm.service.VehicleService;
+import com.spm.service.cache.VehicleCache;
 
 @Service
 public class VehicleServiceImpl implements VehicleService{
 	
 	@Autowired
 	private VehicleRepository vehicleRepository;
+	
+	@Autowired
+	private VehicleCache vehicleCache;
 	
 	ModelMapper mapper;
 
@@ -54,6 +58,10 @@ public class VehicleServiceImpl implements VehicleService{
 	@PostConstruct
 	public void initialize() {
 		mapper = new ModelMapper();
+		List<VehicleEntity> vehicles = vehicleRepository.findAll();
+		vehicles.forEach(vehicle -> {
+			vehicleCache.put(vehicle.getProject().getId()+"_"+vehicle.getType(), vehicle.getName());
+		});
 	}
 	
 	@Override

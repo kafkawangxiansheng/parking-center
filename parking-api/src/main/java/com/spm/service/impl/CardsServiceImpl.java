@@ -18,6 +18,7 @@ import com.spm.entity.CardsEntity;
 import com.spm.repository.CardRepository;
 import com.spm.search.form.CardSearchForm;
 import com.spm.service.CardsService;
+import com.spm.service.cache.VehicleCache;
 
 /**
  * Created by Vincent on 02/10/2018
@@ -29,6 +30,9 @@ public class CardsServiceImpl implements CardsService {
 	@Autowired
 	private CardRepository cardRepository;
 
+	@Autowired
+	private VehicleCache vehicleCache;
+	
 	ModelMapper mapper;
 
 	private List<CardsDto> map(List<CardsEntity> source) {
@@ -93,6 +97,12 @@ public class CardsServiceImpl implements CardsService {
 				pageable);
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();
 		resultObject.setData(this.map(entities.getContent()));
+		if(resultObject.getData()  != null && resultObject.getData().size()>0) {
+			resultObject.getData().forEach(cardDto -> {
+				String key = cardDto.getProjectId()+"_"+cardDto.getVehicleId();
+				cardDto.setVehicleName(vehicleCache.get(key));
+			});
+		}
 		resultObject.setTotalPages(entities.getTotalPages());
 		return resultObject;
 	}
