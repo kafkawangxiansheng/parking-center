@@ -63,6 +63,8 @@ public class MonthlyCardDto {
 	
 	@JsonProperty("project_id")
 	private Long projectId;
+	
+	private boolean deleted;
 
 	public Long getId() {
 		return id;
@@ -223,5 +225,14 @@ public class MonthlyCardDto {
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
+
+	public boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 	
 }

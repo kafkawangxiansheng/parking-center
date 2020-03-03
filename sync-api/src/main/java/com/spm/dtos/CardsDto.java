@@ -40,6 +40,8 @@ public class CardsDto {
 	@JsonProperty("last_sync")
 	private Long lastSync;
 
+	private boolean deleted;
+	
 	public Long getId() {
 		return id;
 	}
@@ -142,6 +144,14 @@ public class CardsDto {
 
 	public void setLastSync(Long lastSync) {
 		this.lastSync = lastSync;
+	}
+
+	public boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

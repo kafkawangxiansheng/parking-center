@@ -81,6 +81,7 @@ public class CardsServiceImpl implements CardsService {
 		cardsEntities.forEach(entity ->  {
 			entity.setCreated(Calendar.getInstance().getTimeInMillis());
 			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(Calendar.getInstance().getTimeInMillis()-10);
 		});
 		cardsEntities = cardRepository.saveAll(cardsEntities);
 		cardsDtos = map(cardsEntities);

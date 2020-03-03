@@ -99,7 +99,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		List<MonthlyCardEntity> monthlyCardsEntities = reMap(monthlyCardDtos);
 		monthlyCardsEntities.forEach(entity ->  {
 			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
-			entity.setLastSync(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(Calendar.getInstance().getTimeInMillis()-10);
 		});
 		monthlyCardsEntities = monthlyCardRepository.saveAll(monthlyCardsEntities);
 		monthlyCardDtos = map(monthlyCardsEntities);
@@ -112,7 +112,6 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		//update all entities with last_sync and updated to current time
 		List<MonthlyCardDto> dtos = this.map(entities);
 		entities.forEach(entity ->  {
-			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 			entity.setLastSync(Calendar.getInstance().getTimeInMillis());
 		});
 		monthlyCardRepository.saveAll(entities);
