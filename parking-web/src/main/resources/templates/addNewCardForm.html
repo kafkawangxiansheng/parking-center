@@ -87,7 +87,7 @@
 													<label for="">Tên loại xe</label> 
 													<select name="vehicleId" class="form-control" id="">
 														<option th:each="vehicle : ${vehicles}"
-															th:value="${{vehicle.id}}" th:text="${{vehicle.name}}">
+															th:value="${{vehicle.type}}" th:text="${{vehicle.name}}">
 														</option>
 													</select>
 												</div>

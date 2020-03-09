@@ -77,7 +77,7 @@ public class VehicleServiceImpl implements VehicleService{
 		ResultObject<List<VehicleDto>> resultObj = new ResultObject<>();
 		List<VehicleDto> listObject = new ArrayList<>();
 		
-		boolean checkType = checkType(vehicleDto.getType());
+		boolean checkType = checkType(vehicleDto.getType(), vehicleDto.getProject().getId());
 		if(checkType) {
 			return null;
 		}else {
@@ -129,8 +129,8 @@ public class VehicleServiceImpl implements VehicleService{
 		return resultObject;
 	}
 	
-	public boolean checkType(int type) {
-		VehicleEntity entites = vehicleRepository.findByType(type);
+	public boolean checkType(int type,  long  projectId) {
+		VehicleEntity entites = vehicleRepository.findByTypeAndProjectId(type,projectId);
 		if(entites == null) {
 			return false;
 		}else {
