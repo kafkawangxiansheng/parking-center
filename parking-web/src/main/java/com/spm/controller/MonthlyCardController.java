@@ -194,19 +194,26 @@ public class MonthlyCardController {
 //	monthlyCard
 	
 	@RequestMapping(value = "add", method = { RequestMethod.GET })
-	public String showAddNewMonthlyCardPage(Model model) throws UnauthorizedException {
+	public String showAddNewMonthlyCardPage(Model model, HttpServletRequest request) throws UnauthorizedException {
 		model.addAttribute("monthlyCardDto", new MonthlyCardDto());
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
 		model.addAttribute("listCompany", companyMap.getData());
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProject", projectMap.getData());
+		List<ProjectsDto> selectedProject  = new ArrayList<>();
+		projectMap.getData().forEach(project -> {
+			if(getProjectId(request).equals(String.valueOf(project.getId()))){
+				selectedProject.add(project);
+				return;
+			}
+		});
+		model.addAttribute("listProject", selectedProject);
 		ResultObject<List<VehicleDto>> vehicleMap = vehicleService.getListAllVehicle();
 		model.addAttribute("listVehicle", vehicleMap.getData());
 		return "addMonthlyCardForm";
 	}
 	
 	@RequestMapping(value = "edit/{id}", method= {RequestMethod.GET})
-	public  String editMonthlyCard(Model model, @PathVariable("id")Long id) throws UnauthorizedException{
+	public  String editMonthlyCard(Model model, @PathVariable("id")Long id, HttpServletRequest request) throws UnauthorizedException{
 		MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
 		
 		//  convert long date to string date
@@ -219,7 +226,14 @@ public class MonthlyCardController {
 		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
 		model.addAttribute("listCompany", companyMap.getData());
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProject", projectMap.getData());
+		List<ProjectsDto> selectedProject  = new ArrayList<>();
+		projectMap.getData().forEach(project -> {
+			if(getProjectId(request).equals(String.valueOf(project.getId()))){
+				selectedProject.add(project);
+				return;
+			}
+		});
+		model.addAttribute("listProject", selectedProject);
 		return "editMonthlyCardForm";
 	}
 	
