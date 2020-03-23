@@ -78,10 +78,10 @@ public class MonthlyCardEntity {
 	private Long lastSync;
 
 	@Column(name="disabled")
-	private boolean disabled;
+	private int disabled;
 
 	@Column(name="deleted")
-	private boolean deleted;
+	private int deleted;
 	
 	public Long getId() {
 		return id;
@@ -242,19 +242,19 @@ public class MonthlyCardEntity {
 		this.lastSync = lastSync;
 	}
 
-	public boolean isDisabled() {
+	public int getDisabled() {
 		return disabled;
 	}
 
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(int disabled) {
 		this.disabled = disabled;
 	}
 
-	public boolean isDeleted() {
+	public int getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
 	

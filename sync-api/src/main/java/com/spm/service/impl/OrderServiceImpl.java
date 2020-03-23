@@ -84,8 +84,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDto findByOrderId(Long orderId) {
-		OrderEntity entities = parkingRepository.findByOrderId(orderId);
+	public OrderDto findByOrderIdAndProjectId(Long orderId, Long projectId) {
+		OrderEntity entities = parkingRepository.findByOrderIdAndProjectId(orderId, projectId);
 		if (entities == null) {
 			return null;
 		}

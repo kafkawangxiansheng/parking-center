@@ -1,6 +1,7 @@
 package com.spm.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -42,12 +43,33 @@ public class EmployeeServiceImpl implements EmployeeService{
 		});
 		return rtn;
 	}
+	
+	private List<EmployeeEntity> reMap(List<EmployeeDto> source) {
+
+		List<EmployeeEntity> rtn = new ArrayList<>();
+		source.stream().map((dto) -> {
+			EmployeeEntity entity = new EmployeeEntity();
+			mapper.map(dto,entity);
+			return entity;
+		}).forEachOrdered((entity) -> {
+			rtn.add(entity);
+		});
+		return rtn;
+	}
 
 
 	@Override
 	public EmployeeDto getById(long id) {
 		EmployeeDto dto = new EmployeeDto();
 		EmployeeEntity entity = employeeRepository.getOne(id);
+		mapper.map(entity, dto);
+		return dto;
+	}
+	
+	@Override
+	public EmployeeDto getByEmployeeCode(String employeeCode) {
+		EmployeeDto dto = new EmployeeDto();
+		EmployeeEntity entity = employeeRepository.findByEmployeeCode(employeeCode);
 		mapper.map(entity, dto);
 		return dto;
 	}
@@ -73,6 +95,28 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public void delete(long id) {
 		employeeRepository.deleteById(id);
+	}
+
+
+	@Override
+	public void save(List<EmployeeDto> employeeDtos) {
+		List<EmployeeEntity>  entities = this.reMap(employeeDtos);
+		employeeRepository.saveAll(entities);
+		
+	}
+	
+	@Override
+	public List<EmployeeDto> syncAllByProjectId(long projectId) {
+		List<EmployeeEntity> entities = employeeRepository.syncAllByProjectId(projectId);
+		//update all entities with last_sync and updated to current time
+		List<EmployeeDto> dtos = this.map(entities);
+		entities.forEach(entity ->  {
+			entity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
+			entity.setLastSync(Calendar.getInstance().getTimeInMillis());
+		});
+		employeeRepository.saveAll(entities);
+		
+		return dtos;
 	}
 		
 	

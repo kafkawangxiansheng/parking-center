@@ -77,10 +77,19 @@
 									<div class="box-body p-2">
 										<div class="form-body">
 											<form id="formVehicleData" th:action="@{/cards/addNewVehicle}" th:object="${addVehicle}" method="POST">
+												<div class="form-group">
+													<label for="type">Mã Loại xe (*)</label> 
+													<input type="text" th:field="*{vehicleId}" class="form-control" id="vehicleId"  required="required" placeholder="">
+												</div>
 												<div class="form-group text">
 													<label for="name">Tên loại xe (*)</label> 
 													<input type="text" th:field="*{name}" class="form-control" id="name" required="required" >
 												</div>
+												<div class="form-group text">
+													<label for="name">Nhóm xe (*)</label> 
+													<input type="text" th:field="*{vehicleType}" class="form-control" id="vehicleType" required="required" >
+												</div>
+												
 												<div class="form-group text">
 													<label for="code">Ký hiệu</label> 
 													<input type="text" th:field="*{code}" class="form-control" id="code">
@@ -89,10 +98,7 @@
 													<label for="monthlyCost">Tiền thu tháng</label> 
 													<input type="text" th:field="*{monthlyCost}" class="form-control" id="monthlyCost">
 												</div>
-												<div class="form-group">
-													<label for="type">Loại xe (*)</label> 
-													<input type="text" th:field="*{type}" class="form-control" id="type" placeholder="">
-												</div>
+												
 												<div class="form-group">
 													<label for="cardType">Loại vé</label>
 													<select th:field="*{cardType}" class="form-control" id="cardType">

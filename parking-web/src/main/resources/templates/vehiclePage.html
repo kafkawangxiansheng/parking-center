@@ -72,22 +72,24 @@
 										<thead>
 											<tr>
 												<th scope="col">ID</th>
+												<th scope="col">Mã Loại xe</th>
 												<th scope="col">Tên loại xe</th>
+												<th scope="col">Nhóm xe</th>
+												<th scope="col">Loại vé</th>
 												<th scope="col">Ký hiệu</th>
 												<th scope="col">Tiền thu tháng</th>
-												<th scope="col">Loại xe</th>
-												<th scope="col">Loại vé</th>
 												<th scope="col" style="width: 100px;">Chỉnh sửa</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="vehicle : ${vehicles}">
 												<td th:text="${{vehicle.id}}"></td>
+												<td th:text="${{vehicle.vehicleId}}"></td>
 												<td th:text="${{vehicle.name}}"></td>
+												<td th:text="${{vehicle.vehicleType == 1 ? 'Xe máy' : 'Ô tô'}}"></td>
+												<td th:text="${{vehicle.cardType == 1 ? 'Thường' : 'Vé Tháng'}}"></td>
 												<td th:text="${{vehicle.code}}"></td>
 												<td th:text="${{vehicle.monthlyCost}}"></td>
-												<td th:text="${{vehicle.type}}"></td>
-												<td th:text="${{vehicle.cardType == 1 ? 'Thường' : 'Vé Tháng'}}"></td>
 												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/cards/editVehicle/{id}/(id=${vehicle.id})}">

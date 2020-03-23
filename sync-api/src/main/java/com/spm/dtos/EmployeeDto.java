@@ -9,6 +9,9 @@ public class EmployeeDto {
 	@JsonProperty("id")
 	private Long id;
 	
+	@JsonProperty("employee_code")
+	private String employeeCode;
+	
 	@JsonProperty("project_id")
 	private long projectId;
 	
@@ -22,7 +25,7 @@ public class EmployeeDto {
 	private String tel;
 	
 	@JsonProperty("disabled")
-	private boolean disabled;
+	private int disabled;
 	
 	@JsonProperty("created_by")
 	private String createdBy;
@@ -44,6 +47,8 @@ public class EmployeeDto {
 	
 	@JsonProperty("sex")
 	private String sex;
+	
+	private int  deleted;
 
 	public Long getId() {
 		return id;
@@ -51,6 +56,14 @@ public class EmployeeDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
 	}
 
 	public long getProjectId() {
@@ -85,11 +98,8 @@ public class EmployeeDto {
 		this.tel = tel;
 	}
 
-	public boolean isDisabled() {
-		return disabled;
-	}
 
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(int disabled) {
 		this.disabled = disabled;
 	}
 
@@ -148,5 +158,19 @@ public class EmployeeDto {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
+	}
+
+	public int getDisabled() {
+		return disabled;
+	}
+	
+	
 	
 }

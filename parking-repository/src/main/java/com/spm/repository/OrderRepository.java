@@ -16,7 +16,7 @@ import com.spm.entity.OrderEntity;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-	OrderEntity findByOrderId(Long orderId);
+	OrderEntity findByOrderIdAndProjectId(Long orderId, Long projectId);
 
 	@Query(value = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId)  AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", 
 			countQuery = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", nativeQuery = true)

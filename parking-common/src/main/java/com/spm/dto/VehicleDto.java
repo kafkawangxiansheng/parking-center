@@ -10,7 +10,9 @@ public class VehicleDto {
 	
 	private long monthlyCost;
 	
-	private int type;
+	private int vehicleType;
+	
+	private int vehicleId;
 	
 	private int cardType;
 	
@@ -19,6 +21,8 @@ public class VehicleDto {
 	private long updated;
 	
 	private boolean disabled;
+	
+	private Long lastSync;
 	
 	private boolean deleted;
 
@@ -54,12 +58,21 @@ public class VehicleDto {
 		this.monthlyCost = monthlyCost;
 	}
 
-	public int getType() {
-		return type;
+
+	public int getVehicleType() {
+		return vehicleType;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setVehicleType(int vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	public int getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(int vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 	public int getCardType() {
@@ -92,6 +105,14 @@ public class VehicleDto {
 
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	public Long getLastSync() {
+		return lastSync;
+	}
+
+	public void setLastSync(Long lastSync) {
+		this.lastSync = lastSync;
 	}
 
 	public boolean isDeleted() {

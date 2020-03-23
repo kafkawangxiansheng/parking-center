@@ -42,19 +42,6 @@ public class UserServiceImpl implements UserService{
     private UserProjectRepository  userProjectRepository;
     
     
-	private List<UserDto> map(List<UserEntity> source) {
-
-		ArrayList<UserDto> rtn = new ArrayList<>();
-		source.stream().map((entity) -> {
-			UserDto dto = new UserDto();
-			mapper.map(entity, dto);
-			return dto;
-		}).forEachOrdered((dto) -> {
-			rtn.add(dto);
-		});
-		return rtn;
-	}
-	
 	private List<UserRoleDto> mapUserRoleDtos(List<UserRoleEntity> source) {
 
 		ArrayList<UserRoleDto> rtn = new ArrayList<>();
@@ -81,18 +68,6 @@ public class UserServiceImpl implements UserService{
 		return rtn;
 	}
 	
-	private List<UserEntity> reMap(List<UserDto> source) {
-
-		ArrayList<UserEntity> rtn = new ArrayList<>();
-		source.stream().map((dto) -> {
-			UserEntity entity = new UserEntity();
-			mapper.map(dto, entity);
-			return entity;
-		}).forEachOrdered((entity) -> {
-			rtn.add(entity);
-		});
-		return rtn;
-	}
 
 	@Override
 	public UserDto getUserByUsername(String username) {
@@ -107,8 +82,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<UserRoleDto> getUserRolesByUserId(Long userId) {
 		List<UserRoleEntity> entities = userRoleRepository.findByUserId(userId);
-		List<UserRoleDto> dtos = this.mapUserRoleDtos(entities);
-		return dtos;
+		return this.mapUserRoleDtos(entities);
 	}
 
 	@Override

@@ -50,10 +50,7 @@ public class RevenueServiceImpl implements RevenueService {
 		List<VehicleEntity> vehicles = vehicleRepository.findAllByProjectId(revenueSearchForm.getProjectId());
 		List<OrderEntity> orderEntitiesOut  = orderRepository.findAllVehicleOut(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
 		List<OrderEntity> orderEntitiesIn  = orderRepository.findAllVehicleIn(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), revenueSearchForm.getDateFrom(), revenueSearchForm.getDateTo());
-		
-		List<OrderEntity> orderEntitiesOutAll  = orderRepository.findAllVehicleOut(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), null, null);
-		List<OrderEntity> orderEntitiesInAll  = orderRepository.findAllVehicleIn(String.valueOf(revenueSearchForm.getProjectId()), revenueSearchForm.getEmployeeId(), null, null);
-		
+	
 		RevenueDto normalRevenueTotalDto = new RevenueDto();
 		normalRevenueTotalDto.setLabel("___ Tổng cộng xe thường");
 		normalRevenueTotalDto.setCssClass("revenue-sub-total");
@@ -67,16 +64,16 @@ public class RevenueServiceImpl implements RevenueService {
 		for(VehicleEntity vehicle :  vehicles) {
 			RevenueDto revenueDto = new RevenueDto();
 			RevenueEntity revenueEntity = new RevenueEntity() ;
-			revenueEntity.setVehicleId(vehicle.getType());
+			revenueEntity.setVehicleId(vehicle.getVehicleId());
 			orderEntitiesOut.forEach(order -> {
-				if(order.getVehicleId() == vehicle.getType())  {
+				if(order.getVehicleId() == vehicle.getVehicleId())  {
 					revenueEntity.setTotalCheckout(((order.getCheckoutTime()!=null && order.getCheckoutTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckout());
 					revenueEntity.setTotalPrice(revenueEntity.getTotalPrice() + order.getTotalPrice());
 				}
 			});
 			
 			orderEntitiesIn.forEach(order -> {
-				if(order.getVehicleId() == vehicle.getType())  {
+				if(order.getVehicleId() == vehicle.getVehicleId())  {
 					revenueEntity.setTotalCheckin(((order.getCheckinTime()!=null && order.getCheckinTime() > 0)? 1 : 0) + revenueEntity.getTotalCheckin());
 				}
 			});
@@ -86,7 +83,7 @@ public class RevenueServiceImpl implements RevenueService {
 				mapper.map(revenueEntity, revenueDto);
 			}
 			revenueDto.setLabel(vehicle.getName());
-			revenueDto.setExistingVerhicle(orderRepository.findAllVehicleExistingInParking(String.valueOf(revenueSearchForm.getProjectId()), vehicle.getType()).size());
+			revenueDto.setExistingVerhicle(orderRepository.findAllVehicleExistingInParking(String.valueOf(revenueSearchForm.getProjectId()), vehicle.getVehicleId()).size());
 			if(vehicle.getCardType() == 1)  {
 				normalRevenues.add(revenueDto);
 				normalRevenueTotalDto.setTotalCheckin(normalRevenueTotalDto.getTotalCheckin() + revenueDto.getTotalCheckin());

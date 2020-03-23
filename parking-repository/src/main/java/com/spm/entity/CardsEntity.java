@@ -53,7 +53,7 @@ public class CardsEntity {
 	private Long lastSync;
 	
 	@Column(name="deleted")
-	private boolean deleted;
+	private int deleted;
 	
 	public Long getId() {
 		return id;
@@ -159,11 +159,11 @@ public class CardsEntity {
 		this.lastSync = lastSync;
 	}
 
-	public boolean isDeleted() {
+	public int isDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
 	

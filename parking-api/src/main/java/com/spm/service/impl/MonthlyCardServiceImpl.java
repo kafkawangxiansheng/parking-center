@@ -93,7 +93,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		public void delete(Long id) {
 			MonthlyCardEntity entity = monthlyCardRepository.findById(id).get();
 			entity.setUpdated(Calendar.getInstance().getTimeInMillis());
-			entity.setDeleted(true);
+			entity.setDeleted(1);
 			monthlyCardRepository.save(entity);
 	}
 

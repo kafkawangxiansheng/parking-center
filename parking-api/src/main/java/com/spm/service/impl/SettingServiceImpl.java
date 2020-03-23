@@ -39,19 +39,6 @@ public class SettingServiceImpl implements SettingService {
 		return rtn;
 	}
 
-	private List<SettingEntity> reMap(List<SettingDto> source) {
-
-		ArrayList<SettingEntity> rtn = new ArrayList<>();
-		source.stream().map((dto) -> {
-			SettingEntity entity = new SettingEntity();
-			mapper.map(dto, entity);
-			return entity;
-		}).forEachOrdered((entity) -> {
-			rtn.add(entity);
-		});
-		return rtn;
-	}
-
 	@PostConstruct
 	public void initialize() {
 		mapper = new ModelMapper();

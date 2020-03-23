@@ -18,6 +18,9 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 	
 	List<EmployeeEntity> findAllByProjectId(long projectId);
 	
+	EmployeeEntity findByEmployeeCode(String employeeCode);
+	
+	
 	List<EmployeeEntity> findAllByProjectIdAndDeleted(long projectId, boolean deleted);
 	
 	@Query(
@@ -28,5 +31,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 	Page<EmployeeEntity> search(@Param(value = "name") String name, @Param(value = "position") String position, Pageable pageable);
 	
 	EmployeeEntity findByUsername(String username);
+	
+	@Query(value = "SELECT * FROM employees where  project_id = :projectId AND (last_sync < updated_at or last_sync is null)", nativeQuery = true)
+	List<EmployeeEntity> syncAllByProjectId(@Param(value = "projectId") Long projectId);
 	
 }

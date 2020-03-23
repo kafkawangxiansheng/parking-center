@@ -1,55 +1,43 @@
-package com.spm.entity;
+package com.spm.dtos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-@Table(name="vehicles")
-public class VehicleEntity {
+public class VehicleDto {
 	
-	@Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="name")
+	@JsonProperty("name")
 	private String name;
 	
-	@Column(name="code")
+	@JsonProperty("code")
 	private String code;
 	
-	@Column(name="monthly_cost")
+	@JsonProperty("monthly_cost")
 	private long monthlyCost;
 	
-	@Column(name="vehicle_type")
+	@JsonProperty("vehicel_type")
 	private int vehicleType;
 	
-	@Column(name="vehicle_id")
+	@JsonProperty("vehicel_id")
 	private int vehicleId;
 	
-	@Column(name="card_type")
+	@JsonProperty("card_type")
 	private int cardType;
 	
-	@ManyToOne
-	@JoinColumn(name="project_id")
-	private ProjectsEntity project;
+	@JsonIgnore
+	private ProjectsDto project;
 	
-	@Column(name="updated")
+	@JsonProperty("project_id")
+	private Long projectId;
+	
+	@JsonProperty("updated")
 	private Long updated;
 	
-	@Column(name="disabled")
+	@JsonProperty("disabled")
 	private int disabled;
 
-	@Column(name="last_sync")
-	private Long lastSync;
-	
-	@Column(name="deleted")
+	@JsonProperty("deleted")
 	private int deleted;
 	
 	public Long getId() {
@@ -83,6 +71,7 @@ public class VehicleEntity {
 	public void setMonthlyCost(long monthlyCost) {
 		this.monthlyCost = monthlyCost;
 	}
+
 	
 
 	public int getVehicleType() {
@@ -101,6 +90,8 @@ public class VehicleEntity {
 		this.vehicleId = vehicleId;
 	}
 
+	
+
 	public int getCardType() {
 		return cardType;
 	}
@@ -109,11 +100,23 @@ public class VehicleEntity {
 		this.cardType = cardType;
 	}
 
-	public ProjectsEntity getProject() {
+	
+	public Long getProjectId() {
+		if(project !=  null)  {
+			return project.getId();
+		}
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+
+	public ProjectsDto getProject() {
 		return project;
 	}
 
-	public void setProject(ProjectsEntity project) {
+	public void setProject(ProjectsDto project) {
 		this.project = project;
 	}
 
@@ -123,14 +126,6 @@ public class VehicleEntity {
 
 	public void setUpdated(Long updated) {
 		this.updated = updated;
-	}
-	
-	public Long getLastSync() {
-		return lastSync;
-	}
-
-	public void setLastSync(Long lastSync) {
-		this.lastSync = lastSync;
 	}
 
 	public int getDeleted() {

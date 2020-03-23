@@ -106,7 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public void delete(Long id) {
 		EmployeeEntity entity = employeeRepository.findById(id).get();
-		entity.setDeleted(true);
+		entity.setDeleted(1);
 		employeeRepository.save(entity);
 	}
 

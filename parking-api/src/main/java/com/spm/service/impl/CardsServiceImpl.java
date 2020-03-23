@@ -163,7 +163,7 @@ public class CardsServiceImpl implements CardsService {
 	@Override
 	public void delete(Long id) {
 		CardsEntity entity = cardRepository.findById(id).get();
-		entity.setDeleted(true);
+		entity.setDeleted(1);
 		entity.setUpdated(Calendar.getInstance().getTimeInMillis());
 		cardRepository.save(entity);
 	}

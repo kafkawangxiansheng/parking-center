@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +20,9 @@ public class EmployeeEntity {
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="employee_code")
+	private String employeeCode;
 	
 	@Column(name="project_id")
 	private Long projectId;
@@ -42,7 +43,7 @@ public class EmployeeEntity {
 	private String position;
 	
 	@Column(name="disabled")
-	private boolean disabled;
+	private int disabled;
 	
 	@Column(name="created_by")
 	private String createdBy;
@@ -58,7 +59,7 @@ public class EmployeeEntity {
 	private Long lastSync;
 	
 	@Column(name="deleted")
-	private boolean deleted;
+	private int deleted;
 
 	public Long getId() {
 		return id;
@@ -66,6 +67,14 @@ public class EmployeeEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
 	}
 
 	public String getName() {
@@ -108,11 +117,11 @@ public class EmployeeEntity {
 		this.position = position;
 	}
 
-	public boolean isDisabled() {
+	public int getDisabled() {
 		return disabled;
 	}
 
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(int disabled) {
 		this.disabled = disabled;
 	}
 
@@ -154,11 +163,11 @@ public class EmployeeEntity {
 		this.lastSync = lastSync;
 	}
 
-	public boolean isDeleted() {
+	public int getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
 

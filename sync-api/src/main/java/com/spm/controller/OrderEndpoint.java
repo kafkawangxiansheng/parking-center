@@ -3,6 +3,7 @@ package com.spm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,17 +29,17 @@ public class OrderEndpoint {
 	
 	
 	
-	@RequestMapping(value = "/batchinsert", method = {RequestMethod.POST})
+	@PostMapping(value = "/batchinsert")
 	@ApiOperation("Orders batch syncs")
 	public void batchSync(@RequestBody List<OrderDto> ordersDtos) {
 		for(OrderDto orderDto : ordersDtos) {
-			OrderDto existingDto = parkingService.findByOrderId(orderDto.getOrderId());
-			if(existingDto != null && (existingDto.getCheckoutTime() == null || existingDto.getCheckoutTime()==  0)) {
+			OrderDto existingDto = parkingService.findByOrderIdAndProjectId(orderDto.getOrderId(), orderDto.getProjectId());
+			if(existingDto != null) {
 				//just update existing record with new data
 				orderDto.setId(existingDto.getId());
 			}
-			parkingService.save(orderDto);
 		}
+		parkingService.save(ordersDtos);
 		
 	}
 	
