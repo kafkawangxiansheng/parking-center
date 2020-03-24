@@ -96,6 +96,7 @@
 										<thead>
 											<tr>
 												<th scope="col">ID</th>
+												<th scope="col">Mã nhân viên</th>
 												<th scope="col">Họ tên</th>
 												<th scope="col">Tài khoản</th>
 												<th scope="col">Mật khẩu</th>
@@ -107,11 +108,12 @@
 										<tbody>
 											<tr th:each="employee : ${listEmployee}">
 												<td th:text="${{employee.id}}"></td>
+												<td th:text="${{employee.employeeCode}}"></td>
 												<td th:text="${{employee.name}}"></td>
 												<td th:text="${{employee.username}}"></td>
 												<td th:text="${{employee.password}}"></td>
 												<td th:text="${{employee.position}}"></td>
-												<td th:text="${{employee.gender?'Nam':'Nữ'}}"></td>
+												<td th:text="${{employee.gender == 1?'Nam':'Nữ'}}"></td>
 												<td width="15%">
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/employees/editEmployee/{id}(id=${employee.id})}">

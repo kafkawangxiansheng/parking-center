@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,8 @@ public class EmployeeEndpoint {
 			if(existingEmployee != null) {
 				employeeDto.setId(existingEmployee.getId());
 			}
+			employeeDto.setCreatedAt(Calendar.getInstance().getTime());
+			employeeDto.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
 		});
 		employeeService.save(employeeDtos);
 	}

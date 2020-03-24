@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	public ResultObject<List<EmployeeDto>> findAllByProjectId(long projectId) {
-		List<EmployeeEntity> entities = employeeRepository.findAll();
+		List<EmployeeEntity> entities = employeeRepository.findAllByProjectId(projectId);
 		List<EmployeeDto> dtos = this.map(entities);
 		ResultObject<List<EmployeeDto>> result  = new ResultObject<>();
 		result.setData(dtos);
@@ -178,7 +178,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public ResultObject<List<EmployeeDto>> getAllByProjectId(Long projectId) {
 		ResultObject<List<EmployeeDto>> resultObj = new ResultObject<>();
-		List<EmployeeEntity> listEntity = employeeRepository.findAllByProjectIdAndDeleted(projectId, false);
+		List<EmployeeEntity> listEntity = employeeRepository.findAllByProjectIdAndDeleted(projectId, 0);
 		resultObj.setData(this.map(listEntity));
 		return resultObj;
 	}

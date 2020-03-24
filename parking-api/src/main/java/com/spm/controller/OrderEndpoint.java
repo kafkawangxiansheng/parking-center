@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @RestController
 @RequestMapping("/orders")
-@Api(value = "parking Endpoint", description = "The URL to handle parking endpoint")
+@Api(value = "parking Endpoint")
 public class OrderEndpoint {
 
 	@Autowired
@@ -34,11 +35,11 @@ public class OrderEndpoint {
 	
 	
 	
-	@RequestMapping(value = "/batchinsert", method = {RequestMethod.POST})
+	@PostMapping(value = "/batchinsert")
 	@ApiOperation("Orders batch syncs")
 	public void batchSync(@RequestBody List<OrderDto> ordersDtos) {
 		for(OrderDto orderDto : ordersDtos) {
-			OrderDto existingDto = orderService.findByOrderId(orderDto.getOrderId());
+			OrderDto existingDto = orderService.findByOrderIdAndProjectId(orderDto.getOrderId(), orderDto.getProjectId());
 			if(existingDto != null && (existingDto.getCheckoutTime() == null || existingDto.getCheckoutTime()==  0)) {
 				//just update existing record with new data
 				orderDto.setId(existingDto.getId());
@@ -48,7 +49,7 @@ public class OrderEndpoint {
 		
 	}
 	
-	@RequestMapping(value = "", method = {RequestMethod.GET})
+	@GetMapping(value = "")
 	@ApiOperation("Get all in/out logs")
 	public @ResponseBody ResultObject<List<OrderDto>> getAll(
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,
@@ -91,7 +92,7 @@ public class OrderEndpoint {
 		return orderService.findAll(paging, orderSearchForm);
 	}
 	
-	@RequestMapping(value = "/export", method = {RequestMethod.GET})
+	@GetMapping(value = "/export")
 	@ApiOperation("Export all in/out logs")
 	public @ResponseBody ResultObject<List<OrderDto>> export(
 			@RequestParam(name="page", required  =  false, defaultValue="0") int page,

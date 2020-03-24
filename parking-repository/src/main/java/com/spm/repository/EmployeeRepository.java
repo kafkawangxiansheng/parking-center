@@ -21,7 +21,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 	EmployeeEntity findByEmployeeCode(String employeeCode);
 	
 	
-	List<EmployeeEntity> findAllByProjectIdAndDeleted(long projectId, boolean deleted);
+	List<EmployeeEntity> findAllByProjectIdAndDeleted(long projectId, int deleted);
 	
 	@Query(
 			value = "SELECT * from employees WHERE (:name is null OR name = :name) AND (:userName is null OR userName = :userName) AND (:pass is null OR pass = :pass) AND (:position is null OR position = :position) AND (:sex is null OR sex = :sex)",

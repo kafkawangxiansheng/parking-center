@@ -34,7 +34,7 @@ public class EmployeeDto {
 	private Date createdAt;
 	
 	@JsonProperty("updated_at")
-	private Date updatedAt;
+	private Long updatedAt;
 	
 	@JsonProperty("user_name")
 	private String userName;
@@ -119,11 +119,11 @@ public class EmployeeDto {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Long getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Long updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

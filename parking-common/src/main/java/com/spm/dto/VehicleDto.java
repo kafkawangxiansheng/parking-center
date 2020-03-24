@@ -16,7 +16,7 @@ public class VehicleDto {
 	
 	private int cardType;
 	
-	private ProjectsDto project;
+	private Long projectId;
 	
 	private long updated;
 	
@@ -83,12 +83,12 @@ public class VehicleDto {
 		this.cardType = cardType;
 	}
 
-	public ProjectsDto getProject() {
-		return project;
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setProject(ProjectsDto project) {
-		this.project = project;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 	public long getUpdated() {

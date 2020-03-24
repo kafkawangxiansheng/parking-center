@@ -31,7 +31,7 @@ public class EmployeeEntity {
 	private String name;
 	
 	@Column(name="gender")
-	private boolean gender;
+	private int gender;
 	
 	@Column(name="username")
 	private String username;
@@ -85,11 +85,11 @@ public class EmployeeEntity {
 		this.name = name;
 	}
 
-	public boolean isGender() {
+	public int isGender() {
 		return gender;
 	}
 
-	public void setGender(boolean gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 

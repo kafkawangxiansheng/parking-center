@@ -62,6 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public EmployeeDto getById(long id) {
 		EmployeeDto dto = new EmployeeDto();
 		EmployeeEntity entity = employeeRepository.getOne(id);
+		if(entity == null) {
+			return null;
+		}
 		mapper.map(entity, dto);
 		return dto;
 	}
@@ -70,6 +73,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public EmployeeDto getByEmployeeCode(String employeeCode) {
 		EmployeeDto dto = new EmployeeDto();
 		EmployeeEntity entity = employeeRepository.findByEmployeeCode(employeeCode);
+		if(entity == null) {
+			return null;
+		}
 		mapper.map(entity, dto);
 		return dto;
 	}
@@ -88,6 +94,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void save(EmployeeDto employeeDto) {
 		EmployeeEntity entity = new EmployeeEntity();
 		mapper.map(employeeDto, entity);
+		entity.setCreatedAt(Calendar.getInstance().getTime());
+		entity.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
 		employeeRepository.save(entity);
 	}
 

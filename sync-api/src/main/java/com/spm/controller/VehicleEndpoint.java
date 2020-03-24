@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class VehicleEndpoint {
 			if(existingVehicle != null) {
 				vehicleDto.setId(existingVehicle.getId());
 			}
+			vehicleDto.setUpdated(Calendar.getInstance().getTimeInMillis());
 		});
 		vehicleService.save(vehicleDtos);
 	}

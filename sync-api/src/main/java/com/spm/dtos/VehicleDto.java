@@ -1,6 +1,5 @@
 package com.spm.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class VehicleDto {
@@ -24,9 +23,6 @@ public class VehicleDto {
 	
 	@JsonProperty("card_type")
 	private int cardType;
-	
-	@JsonIgnore
-	private ProjectsDto project;
 	
 	@JsonProperty("project_id")
 	private Long projectId;
@@ -102,22 +98,11 @@ public class VehicleDto {
 
 	
 	public Long getProjectId() {
-		if(project !=  null)  {
-			return project.getId();
-		}
 		return projectId;
 	}
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
-	}
-
-	public ProjectsDto getProject() {
-		return project;
-	}
-
-	public void setProject(ProjectsDto project) {
-		this.project = project;
 	}
 
 	public Long getUpdated() {

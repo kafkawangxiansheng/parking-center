@@ -60,7 +60,7 @@ public class VehicleServiceImpl implements VehicleService{
 		mapper = new ModelMapper();
 		List<VehicleEntity> vehicles = vehicleRepository.findAll();
 		vehicles.forEach(vehicle -> {
-			vehicleCache.put(vehicle.getProject().getId()+"_"+vehicle.getVehicleId(), vehicle.getName());
+			vehicleCache.put(vehicle.getProjectId()+"_"+vehicle.getVehicleId(), vehicle.getName());
 		});
 	}
 	
@@ -77,7 +77,7 @@ public class VehicleServiceImpl implements VehicleService{
 		ResultObject<List<VehicleDto>> resultObj = new ResultObject<>();
 		List<VehicleDto> listObject = new ArrayList<>();
 		
-		boolean checkType = checkType(vehicleDto.getVehicleId(), vehicleDto.getProject().getId());
+		boolean checkType = checkType(vehicleDto.getVehicleId(), vehicleDto.getProjectId());
 		if(checkType) {
 			return null;
 		}else {

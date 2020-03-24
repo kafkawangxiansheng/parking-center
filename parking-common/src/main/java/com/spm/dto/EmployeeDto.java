@@ -12,7 +12,7 @@ public class EmployeeDto {
 	
 	private String name;
 	
-	private boolean gender;
+	private int gender;
 	
 	private String username;
 	
@@ -20,7 +20,7 @@ public class EmployeeDto {
 	
 	private String position;
 	
-	private boolean disabled;
+	private int disabled;
 	
 	private String createdBy;
 	
@@ -30,7 +30,7 @@ public class EmployeeDto {
 	
 	private Long lastSync;
 	
-	private boolean deleted;
+	private int deleted;
 
 	public Long getId() {
 		return id;
@@ -56,11 +56,11 @@ public class EmployeeDto {
 		this.name = name;
 	}
 
-	public boolean isGender() {
+	public int getGender() {
 		return gender;
 	}
 
-	public void setGender(boolean gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 
@@ -88,11 +88,11 @@ public class EmployeeDto {
 		this.position = position;
 	}
 
-	public boolean isDisabled() {
+	public int isDisabled() {
 		return disabled;
 	}
 
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(int disabled) {
 		this.disabled = disabled;
 	}
 
@@ -128,11 +128,11 @@ public class EmployeeDto {
 		this.lastSync = lastSync;
 	}
 
-	public boolean isDeleted() {
+	public int isDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
 

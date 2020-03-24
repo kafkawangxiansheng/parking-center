@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,9 +34,8 @@ public class VehicleEntity {
 	@Column(name="card_type")
 	private int cardType;
 	
-	@ManyToOne
-	@JoinColumn(name="project_id")
-	private ProjectsEntity project;
+	@Column(name="project_id")
+	private Long projectId;
 	
 	@Column(name="updated")
 	private Long updated;
@@ -109,12 +106,12 @@ public class VehicleEntity {
 		this.cardType = cardType;
 	}
 
-	public ProjectsEntity getProject() {
-		return project;
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setProject(ProjectsEntity project) {
-		this.project = project;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 	public Long getUpdated() {

@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +42,7 @@ public class MonthCardEndpoint {
 	@Autowired
 	private CardsService cardsService;
 
-	@RequestMapping(value = "/add", method = { RequestMethod.POST })
+	@PostMapping(value = "/add")
 	@ApiOperation("Add MonthlyCard")
 	public ResultObject<List<MonthlyCardDto>> addMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
@@ -66,7 +68,7 @@ public class MonthCardEndpoint {
 		return resultObject;
 	}
 
-	@RequestMapping(value = "/update", method = { RequestMethod.POST })
+	@PostMapping(value = "/update")
 	@ApiOperation("Update MonthlyCard")
 	public ResultObject<List<MonthlyCardDto>> updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
@@ -97,32 +99,32 @@ public class MonthCardEndpoint {
 		return resultObject;
 	}
 
-	@RequestMapping(value = "", method = { RequestMethod.GET })
+	@GetMapping(value = "")
 	@ApiOperation("Get all MonthlyCards")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAll() {
 		return monthCardsService.findAll();
 	}
 
-	@RequestMapping(value = "getMonthlyCardById", method = { RequestMethod.GET })
+	@GetMapping(value = "getMonthlyCardById")
 	@ApiOperation("Get Monthly Card")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getMonthlyCardById(@RequestParam(name = "id") Long id) {
 		return monthCardsService.findById(id);
 	}
 
-	@RequestMapping(path = "/delete/{id}", method = { RequestMethod.DELETE })
+	@DeleteMapping(path = "/delete/{id}")
 	@ApiOperation("This method support us can delete the specific monthCard by id")
 	public void delete(@PathVariable("id") Long id) {
 		monthCardsService.delete(id);
 	}
 
-	@RequestMapping(path = "/checkCard", method = { RequestMethod.GET })
+	@GetMapping(path = "/checkCard")
 	@ApiOperation("input : string code in Cards, int cardType int Vehicles,  return :  cardsDto")
 	public CardsDto checkCard(@RequestParam(name = "cardcode") String code,
 			@RequestParam(name = "cardType") int cardType, @RequestParam(name = "projectId") long projectId) {
 		return cardsService.checkCardAndCardTypeAndProjectId(code, cardType, projectId);
 	}
 
-	@RequestMapping(value = "search", method = { RequestMethod.GET })
+	@GetMapping(value = "search")
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAllBySearch(
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -158,7 +160,7 @@ public class MonthCardEndpoint {
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
 
-	@RequestMapping(value = "renewal/search", method = { RequestMethod.GET })
+	@GetMapping(value = "renewal/search")
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -182,7 +184,7 @@ public class MonthCardEndpoint {
 	}
 
 	// renewal
-	@RequestMapping(value = "renewal/findOne", method = { RequestMethod.GET })
+	@GetMapping(value = "renewal/findOne")
 	@ApiOperation("Get one MonthlyCards for renewal")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
 			@RequestParam(name = "id", required = false) long id) {
@@ -191,7 +193,7 @@ public class MonthCardEndpoint {
 	}
 
 	// renewal update
-	@RequestMapping(value = "revewal/update", method = { RequestMethod.POST })
+	@PostMapping(value = "revewal/update")
 	@ApiOperation("Get one MonthlyCards for renewal update")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(@RequestBody MonthlyCardDto monthlyCardDto) {
 

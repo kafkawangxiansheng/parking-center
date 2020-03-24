@@ -19,7 +19,7 @@ public interface OrderService {
 
     void delete(OrderDto parkingDto);
     
-    OrderDto findByOrderId(Long orderId);
+    OrderDto findByOrderIdAndProjectId(Long orderId, Long projectId);
     
     ResultObject<List<OrderDto>> findAll(Pageable pageable, OrderSearchForm  orderSearchForm);
 
