@@ -37,7 +37,7 @@ public class EmployeeEndpoint {
 	}
 
 	@PutMapping(value = "/")
-	@ApiOperation("Update existing card")
+	@ApiOperation("Update existing employee")
 	public void updateExistingCard(@RequestBody EmployeeDto employeeDto) {
 		employeeService.save(employeeDto);
 	}

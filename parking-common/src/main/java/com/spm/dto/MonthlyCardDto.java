@@ -4,6 +4,10 @@ public class MonthlyCardDto {
 	
 	private Long id;
 	
+	private String cardStt;
+	
+	private int dateNumber;
+	
 	private String cardCode;
 	
 	private String carNumber;
@@ -44,6 +48,8 @@ public class MonthlyCardDto {
 	
 	private Long vehicleId;
 	
+	private String vehicleName;
+	
 	private long lastSync;
 
 	private boolean disabled;
@@ -59,7 +65,22 @@ public class MonthlyCardDto {
 		this.id = id;
 	}
 
+	public String getCardStt() {
+		return cardStt;
+	}
+
+	public void setCardStt(String cardStt) {
+		this.cardStt = cardStt;
+	}
 	
+	public int getDateNumber() {
+		return dateNumber;
+	}
+
+	public void setDateNumber(int dateNumber) {
+		this.dateNumber = dateNumber;
+	}
+
 	public String getCarNumber() {
 		return carNumber;
 	}
@@ -219,6 +240,15 @@ public class MonthlyCardDto {
 	public void setVehicleId(Long vehicleId) {
 		this.vehicleId = vehicleId;
 	}
+	
+	public String getVehicleName() {
+		return vehicleName;
+	}
+
+	public void setVehicleName(String vehicleName) {
+		this.vehicleName = vehicleName;
+	}
+
 	public long getLastSync() {
 		return lastSync;
 	}

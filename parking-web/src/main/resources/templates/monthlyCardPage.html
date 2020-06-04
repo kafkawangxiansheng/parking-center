@@ -86,16 +86,16 @@
 													<select th:field="*{vehicleId}" class="form-control" id="vehicleId">
 														<option value="all">Tất Cả</option>
 														<option th:each="vehicle : ${vehicles}"
-															th:value="${{vehicle.id}}" th:text="${{vehicle.name}}">
+															th:value="${{vehicle.vehicleId}}" th:text="${{vehicle.name}}">
 														</option>
 													</select>
 												</div>
 												<div class="form-group text col-lg-3 float-left">
 													<label>Trạng Thái Ngày Hạn</label> 
 													<select th:field="*{statusDate}" class="form-control" id="statusDate">
-														<option value="0">Tất Cả</option>
-														<option value="1">Còn Hạn</option>
-														<option value="2">Hết hạn</option>
+														<option value="-1">Tất Cả</option>
+														<option value="0">Còn Hạn</option>
+														<option value="1">Hết hạn</option>
 													</select>
 												</div>
 												<div class="form-group text col-lg-3 float-left">
@@ -132,11 +132,14 @@
 	                                    <thead>
 	                                        <tr>
 	                                            <th scope="col" style="width: 50px;">ID</th>
-	                                            <th scope="col">Mã Chip</th>
+	                                             <th scope="col">Số thẻ</th>
+	                                            <th scope="col">Mã chip</th>
+	                                            <th scope="col">Số ngày</th>
+	                                            <th scope="col">Loại xe</th>
 	                                            <th scope="col">Biển số</th>
 	                                            <th scope="col">Tên KH</th>
-	                                            <th scope="col">CMND</th>
-	                                            <th scope="col">Email</th>
+	                                            <th scope="col">Địa chỉ</th>
+	                                            <th scope="col">Tiền thu</th>
 	                                            <th scope="col">Ngày đăng ký</th>
 	                                            <th scope="col">Ngày hết hạn</th>
 	                                            <th scope="col">Trạng Thái</th>
@@ -146,11 +149,14 @@
 	                                    <tbody>
 	                                    	<tr th:each="monthlyCard : ${listMonthlycard.data}">
 												<td th:text="${{monthlyCard.id}}"></td>
+												<td th:text="${{monthlyCard.cardStt}}"></td>
 												<td th:text="${{monthlyCard.cardCode}}"></td>
+												<td th:text="${{monthlyCard.dateNumber}}"></td>
+												<td th:text="${{monthlyCard.vehicleName}}"></td>
 												<td th:text="${{monthlyCard.carNumber}}"></td>
 												<td th:text="${{monthlyCard.customerName}}"></td>
-												<td th:text="${{monthlyCard.idNumber}}"></td>
-												<td th:text="${{monthlyCard.email}}"></td>
+												<td th:text="${{monthlyCard.address}}"></td>
+												<td th:text="${{monthlyCard.parkingFee}}"></td>
 												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{monthlyCard.endDate > currentDate } ? 'Còn Hạn' : 'Hết Hạn' }"></td>

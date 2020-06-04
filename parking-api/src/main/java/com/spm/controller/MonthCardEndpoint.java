@@ -124,7 +124,7 @@ public class MonthCardEndpoint {
 		return cardsService.checkCardAndCardTypeAndProjectId(code, cardType, projectId);
 	}
 
-	@GetMapping(value = "search")
+	@GetMapping(value = "/search")
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getAllBySearch(
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -147,9 +147,8 @@ public class MonthCardEndpoint {
 		if (numberEndDate != 0) {
 			monthlyCradSearchForm.setNumberEndDate(numberEndDate);
 		}
-		if (statusDate != 0) {
-			monthlyCradSearchForm.setStatusDate(statusDate);
-		}
+		monthlyCradSearchForm.setStatusDate(statusDate);
+		
 		if (customerName != null && !customerName.isEmpty()) {
 			monthlyCradSearchForm.setCustomerName(customerName);
 		}
@@ -160,7 +159,7 @@ public class MonthCardEndpoint {
 		return monthCardsService.search(paging, monthlyCradSearchForm);
 	}
 
-	@GetMapping(value = "renewal/search")
+	@GetMapping(value = "/renewal/search")
 	@ApiOperation("Get all MonthlyCards by form search")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> getRenewalSearch(
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -184,7 +183,7 @@ public class MonthCardEndpoint {
 	}
 
 	// renewal
-	@GetMapping(value = "renewal/findOne")
+	@GetMapping(value = "/renewal/findOne")
 	@ApiOperation("Get one MonthlyCards for renewal")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> renewalFindOne(
 			@RequestParam(name = "id", required = false) long id) {
@@ -193,7 +192,7 @@ public class MonthCardEndpoint {
 	}
 
 	// renewal update
-	@PostMapping(value = "revewal/update")
+	@PostMapping(value = "/revewal/update")
 	@ApiOperation("Get one MonthlyCards for renewal update")
 	public @ResponseBody ResultObject<List<MonthlyCardDto>> revewalUpdate(@RequestBody MonthlyCardDto monthlyCardDto) {
 

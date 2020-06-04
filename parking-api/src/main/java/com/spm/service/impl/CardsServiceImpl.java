@@ -18,6 +18,7 @@ import com.spm.entity.CardsEntity;
 import com.spm.repository.CardRepository;
 import com.spm.search.form.CardSearchForm;
 import com.spm.service.CardsService;
+import com.spm.service.cache.CardCache;
 import com.spm.service.cache.VehicleCache;
 
 /**
@@ -32,6 +33,10 @@ public class CardsServiceImpl implements CardsService {
 
 	@Autowired
 	private VehicleCache vehicleCache;
+	
+	@Autowired
+	private CardCache cardCache;
+	
 	
 	ModelMapper mapper;
 
@@ -64,8 +69,13 @@ public class CardsServiceImpl implements CardsService {
 	@PostConstruct
 	public void initialize() {
 		mapper = new ModelMapper();
+		List<CardsEntity> cardEnties = cardRepository.findAll();
+		cardEnties.forEach(card -> {
+			cardCache.put(card.getCode(), card);
+		});
 	}
 
+	
 	@Override
 	public ResultObject<List<CardsDto>> addNewCard(CardsDto cardDto) {
 		ResultObject<List<CardsDto>> resultObject = new ResultObject<>();

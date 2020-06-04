@@ -2,6 +2,7 @@ package com.spm.service.impl;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
@@ -104,10 +105,10 @@ public class MonthlyCardServiceImpl implements MonthlyCradService{
 		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_GET_ALL_MONTHLY_CARD_SEARCH_BY_PROJECT_ID.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
 		finalURL = finalURL.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
-		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()!= 0 ? monthlyCradSearchForm.getStatusDate():0));
+		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()));
 		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
 		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
-		finalURL = finalURL.replaceAll("::customerName", monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : "");
+		finalURL = finalURL.replaceAll("::customerName", URLEncoder.encode(monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : ""));
 		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCradSearchForm.getProjectId() !=  0 ? monthlyCradSearchForm.getProjectId() : ""));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;

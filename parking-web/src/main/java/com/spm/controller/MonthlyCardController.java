@@ -31,6 +31,7 @@ import com.spm.dto.ResultObject;
 import com.spm.dto.VehicleDto;
 import com.spm.exception.UnauthorizedException;
 import com.spm.search.form.MonthlyCradSearchForm;
+import com.spm.search.form.VehicleSearchForm;
 import com.spm.service.CompanyService;
 import com.spm.service.MonthlyCradService;
 import com.spm.service.ProjectService;
@@ -97,7 +98,10 @@ public class MonthlyCardController {
 			}
 		}
 		
-		ResultObject<List<VehicleDto>> listAllVehicle = vehicleService.getListAllVehicle();
+		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
+		vehicleSearchForm.setProjectId(getProjectId(request));
+		
+		ResultObject<List<VehicleDto>> listAllVehicle = vehicleService.getAllVehicle(vehicleSearchForm);
 		model.addAttribute("listMonthlycard",result);
 		model.addAttribute("vehicles",listAllVehicle.getData());
 		model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);

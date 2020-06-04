@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
@@ -19,6 +20,8 @@ import com.spm.entity.MonthlyCardEntity;
 import com.spm.repository.MonthlyCardRepository;
 import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.service.MonthlyCardService;
+import com.spm.service.cache.CardCache;
+import com.spm.service.cache.VehicleCache;
 
 /**
  * Created by Vincent on 02/10/2018
@@ -30,6 +33,13 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	@Autowired
 	private MonthlyCardRepository monthlyCardRepository;
 
+	@Autowired
+	private CardCache cardCache;
+	
+	@Autowired
+	private VehicleCache vehicleCache;
+	
+	
 	ModelMapper mapper;
 
 	private List<MonthlyCardDto> map(List<MonthlyCardEntity> source) {
@@ -38,11 +48,21 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 		source.stream().map((entity) -> {
 			MonthlyCardDto dto = new MonthlyCardDto();
 			mapper.map(entity, dto);
+			dto.setCardStt(cardCache.get(dto.getCardCode()).getStt());
+			dto.setVehicleName(vehicleCache.get(dto.getProject().getId()+"_"+dto.getVehicleId()));
+			dto.setDateNumber(convertToNumberOfDays(dto.getEndDate()));
 			return dto;
 		}).forEachOrdered((dto) -> {
 			rtn.add(dto);
 		});
 		return rtn;
+	}
+	
+	private int convertToNumberOfDays(long dateInMiliSeconds) {
+		
+		long currentDate = Calendar.getInstance().getTimeInMillis();
+		
+		return (int)TimeUnit.DAYS.convert(dateInMiliSeconds - currentDate, TimeUnit.MILLISECONDS);
 	}
 	
 	private List<MonthlyCardEntity> reMap(List<MonthlyCardDto> source) {
@@ -130,8 +150,8 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 				monthlyCradSearchForm.getCardCode(), 
 				monthlyCradSearchForm.getVehicleId(),
 				monthlyCradSearchForm.getCustomerName(),
-//				monthlyCradSearchForm.getStatusDate(),
-//				monthlyCradSearchForm.getNumberEndDate(),
+				monthlyCradSearchForm.getStatusDate(),
+				Calendar.getInstance().getTimeInMillis(),
 				monthlyCradSearchForm.getProjectId(),
 				pageable);
 		
