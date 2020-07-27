@@ -1,7 +1,7 @@
 package com.spm.common;
 
 public class URLConstants {
-	private static final String  MAIN_DOMAIN = "http://127.0.0.1:1235";
+	private static final String  MAIN_DOMAIN = "http://localhost:1235";
 	public static final String URL_GET_ALL_IN_OUT = MAIN_DOMAIN + "/orders/?page=::page&employeeId=::employeeId&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
 	public static final String URL_EXPORT_ALL_IN_OUT = MAIN_DOMAIN + "/orders/export/?page=::page&employeeId=::employeeId&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
 	public static final String URL_GET_ALL_REVENUE = MAIN_DOMAIN + "/revenue/?projectId=::projectId&employeeId=::employeeId&dateFrom=::dateFrom&dateTo=::dateTo";
