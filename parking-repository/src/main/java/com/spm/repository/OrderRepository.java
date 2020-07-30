@@ -18,10 +18,11 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
 	OrderEntity findByOrderIdAndProjectId(Long orderId, Long projectId);
 
-	@Query(value = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId)  AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", 
-			countQuery = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", nativeQuery = true)
+	@Query(value = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (:adminCheckOutId is null OR admin_checkout_id = :adminCheckOutId)  AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", 
+			countQuery = "SELECT * from orders  WHERE  (project_id = :projectId) AND (:adminCheckInId is null OR admin_checkin_id = :adminCheckInId) AND (:adminCheckOutId is null OR admin_checkout_id = :adminCheckOutId) AND (:cardCode is null OR card_code = :cardCode)  AND  (:cardStt is null OR card_stt = :cardStt)  AND (:carNumber is null OR car_number like %:carNumber%) AND ((checkout_time >= :dateFrom AND checkout_time <= :dateTo) OR ((checkin_time >= :dateFrom AND checkin_time <= :dateTo) AND checkout_time = 0)) order by updated DESC", nativeQuery = true)
 	Page<OrderEntity> search(@Param(value = "projectId") String projectId,
 			@Param(value="adminCheckInId") String adminCheckInId,
+			@Param(value="adminCheckOutId") String adminCheckOutId,
 			@Param(value = "cardCode") String cardCode, @Param(value = "cardStt") String cardStt,
 			@Param(value = "carNumber") String carNumber, @Param(value = "dateFrom") String dateFrom,
 			@Param(value = "dateTo") String dateTo, Pageable pageable);

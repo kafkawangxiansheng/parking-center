@@ -279,7 +279,15 @@
 								<div class="box box-result">
 									<div class="form-group button-group flex-row">
 										<div class="form-group">
-											<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-top: 15px; margin-left: 5px;">Xuất file Excel</button>
+											<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-top: 15px; margin-left: 5px;">Xuất Excel tổng quát</button>
+											<div class="form-group float-float text-center">
+												<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-top: 15px; margin-left: 5px;">Xuất Excel chi tiết</button>
+												<div class="form-group">
+													<input type="radio" name="export-detail-type" value="all">Tất cả
+													<input type="radio" name="export-detail-type" value="month">Vé tháng
+													<input type="radio" name="export-detail-type" value="ticket">Vãng lai
+												</div>
+											</div>
 										</div>
 									</div>
 									<table class="table" id="inOutTable">
@@ -304,7 +312,15 @@
 									</table>
 									<div class="form-group button-group d-flex flex-row">
 										<div class="form-group">
-											<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-left: 5px;">Xuất file Excel</button>
+											<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-top: 15px; margin-left: 5px;">Xuất Excel tổng quát</button>
+											<div class="form-group float-float text-center">
+												<button onclick="return exportExcel('/revenue');" class="btn btn-primary" style="font-size: 14px; margin-top: 15px; margin-left: 5px;">Xuất Excel chi tiết</button>
+												<div class="form-group">
+													<input type="radio" name="export-detail-type" value="all">Tất cả
+													<input type="radio" name="export-detail-type" value="month">Vé tháng
+													<input type="radio" name="export-detail-type" value="ticket">Vãng lai
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>

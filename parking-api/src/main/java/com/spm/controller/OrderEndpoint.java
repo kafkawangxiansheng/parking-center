@@ -60,7 +60,8 @@ public class OrderEndpoint {
 			@RequestParam(name="dateTo", required  =  false) String dateTo,
 			@RequestParam(name="carNumber", required  =  false) String carNumber,
 			@RequestParam(name="isMonthlyCard", required  =  false, defaultValue="0") int isMonthlyCard,
-			@RequestParam(name="employeeId", required=false)String employeeId) {
+			@RequestParam(name="employeeId", required=false)String employeeId,
+			@RequestParam(name="employeeIdOut", required=false)String employeeIdOut) {
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		if(projectId != null && !projectId.isEmpty()) {
@@ -83,6 +84,9 @@ public class OrderEndpoint {
 		}
 		if(employeeId != null && !employeeId.isEmpty()) {
 			orderSearchForm.setEmployeeId(employeeId);
+		}
+		if(employeeIdOut != null && !employeeIdOut.isEmpty()) {
+			orderSearchForm.setEmployeeIdOut(employeeIdOut);
 		}
 		
 		orderSearchForm.setIsMonthlyCard(isMonthlyCard);

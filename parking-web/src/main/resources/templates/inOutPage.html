@@ -70,20 +70,27 @@
                                             <label for="option1">Biển số</label>
                                             <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
                                         </div>
-                                        <div class="form-group text col-lg-3 float-left">
+                                        <div class="form-group text col-lg-2 float-left">
                                             <label for="option1">Số thẻ</label>
                                             <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
                                         </div>
                                         <div class="form-group col-lg-3 float-left">
-											<label for="">Nhân viên</label>
+											<label for="">NV vào</label>
 											<div class="dateFromToInputs d-flex justify-content-between">
 												<select th:field="*{employeeId}" class="form-control">
-													<option value="">Chọn nhân viên</option>
+													<option value="">Tất cả</option>
+													<option th:each="employee : ${employees}" th:value="${{employee.employeeCode}}" th:text="${{employee.name}}"></option>
+												</select>
+											</div>
+											<label for="">NV ra</label>
+											<div class="dateFromToInputs d-flex justify-content-between">
+												<select th:field="*{employeeIdOut}" class="form-control">
+													<option value="">Tất cả </option>
 													<option th:each="employee : ${employees}" th:value="${{employee.id}}" th:text="${{employee.name}}"></option>
 												</select>
 											</div>
 										</div>
-                                        <div class="form-group col-lg-3 float-left">
+                                        <div class="form-group col-lg-4 float-left">
                                             <label for="">Nhiều ngày</label>
                                             <div class="dateFromToInputs d-flex justify-content-between">
                                                 <div class="form-group text">

@@ -41,6 +41,7 @@ public class InOutController {
 	public String index(
 			@RequestParam(name="page", required=false, defaultValue="0")int page,
 			@RequestParam(name="employeeId", required=false)String employeeId,
+			@RequestParam(name="employeeIdOut", required=false)String employeeIdOut,
 			@RequestParam(name="cardCode", required  =  false) String cardCode,
 			@RequestParam(name="cardStt", required  =  false) String cardStt,
 			@RequestParam(name="dateFrom", required  =  false) String dateFrom,
@@ -57,6 +58,7 @@ public class InOutController {
 		
 		OrderSearchForm orderSearchForm = new OrderSearchForm();
 		orderSearchForm.setEmployeeId(employeeId);
+		orderSearchForm.setEmployeeIdOut(employeeIdOut);
 		orderSearchForm.setDateFrom(dateFrom);
 		orderSearchForm.setHourFrom(hourFrom);
 		orderSearchForm.setMinFrom(minFrom);

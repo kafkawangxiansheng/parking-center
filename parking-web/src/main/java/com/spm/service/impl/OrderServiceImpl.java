@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 		finalURL = finalURL.replaceAll("::dateFrom", dateFromInLong != null ? dateFromInLong: "");
 		finalURL = finalURL.replaceAll("::dateTo",  dateToInLong!= null ? dateToInLong : "");
 		finalURL  =  finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
-		
+		finalURL  =  finalURL.replace("::employeeIdOut", orderSearhForm.getEmployeeIdOut()!= null ? orderSearhForm.getEmployeeIdOut() : "");
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
