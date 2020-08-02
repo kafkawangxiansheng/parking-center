@@ -1,5 +1,7 @@
 package com.spm.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.List;
 
@@ -39,16 +41,23 @@ public class OrderServiceImpl implements OrderService {
 		}
 		RestUtils<OrderDto> restUtils = new RestUtils<>(OrderDto.class);
 		ResultObject<List<OrderDto>> resultFromApi = new ResultObject<>();
-		String finalURL = URLConstants.URL_GET_ALL_IN_OUT.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
-		finalURL = finalURL.replaceAll("::cardCode", orderSearhForm.getCardCode()!= null ? orderSearhForm.getCardCode():"");
-		finalURL = finalURL.replaceAll("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
-		finalURL = finalURL.replaceAll("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
-		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
-		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
-		finalURL = finalURL.replaceAll("::dateFrom", dateFromInLong != null ? dateFromInLong: "");
-		finalURL = finalURL.replaceAll("::dateTo",  dateToInLong!= null ? dateToInLong : "");
-		finalURL  =  finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
+		String finalURL = URLConstants.URL_GET_ALL_IN_OUT.replace("::page", String.valueOf(pageable.getPageNumber()));
+		try {
+			finalURL = finalURL.replace("::cardCode", orderSearhForm.getCardCode()!= null ? URLEncoder.encode(orderSearhForm.getCardCode(), "UTF8"):"");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finalURL = finalURL.replace("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
+		finalURL = finalURL.replace("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
+		finalURL = finalURL.replace("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
+		finalURL = finalURL.replace("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
+		finalURL = finalURL.replace("::dateFrom", dateFromInLong != null ? dateFromInLong: "");
+		finalURL = finalURL.replace("::dateTo",  dateToInLong!= null ? dateToInLong : "");
 		finalURL  =  finalURL.replace("::employeeIdOut", orderSearhForm.getEmployeeIdOut()!= null ? orderSearhForm.getEmployeeIdOut() : "");
+		finalURL  =  finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
+		
+		
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}
@@ -74,15 +83,17 @@ public class OrderServiceImpl implements OrderService {
 		}
 		RestUtils<OrderDto> restUtils = new RestUtils<>(OrderDto.class);
 		ResultObject<List<OrderDto>> resultFromApi = new ResultObject<>();
-		String finalURL = URLConstants.URL_EXPORT_ALL_IN_OUT.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
-		finalURL = finalURL.replaceAll("::cardCode", orderSearhForm.getCardCode()!= null ? orderSearhForm.getCardCode():"");
-		finalURL = finalURL.replaceAll("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
-		finalURL = finalURL.replaceAll("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
-		finalURL = finalURL.replaceAll("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
-		finalURL = finalURL.replaceAll("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
-		finalURL = finalURL.replaceAll("::dateFrom", dateFormInLong != null ? dateFormInLong: "");
+		String finalURL = URLConstants.URL_EXPORT_ALL_IN_OUT.replace("::page", String.valueOf(pageable.getPageNumber()));
+		finalURL = finalURL.replace("::cardCode", orderSearhForm.getCardCode()!= null ? orderSearhForm.getCardCode():"");
+		finalURL = finalURL.replace("::isMonthlyCard", String.valueOf(orderSearhForm.getIsMonthlyCard()));
+		finalURL = finalURL.replace("::projectId", orderSearhForm.getProjectId()!= null ? orderSearhForm.getProjectId():"");
+		finalURL = finalURL.replace("::cardStt", orderSearhForm.getCardStt() != null ? orderSearhForm.getCardStt():"");
+		finalURL = finalURL.replace("::carNumber", orderSearhForm.getCarNumber() != null ? orderSearhForm.getCarNumber():"");
+		finalURL = finalURL.replace("::dateFrom", dateFormInLong != null ? dateFormInLong: "");
+		finalURL = finalURL.replace("::dateTo",  dateToInLong!= null ? dateToInLong : "");
 		finalURL = finalURL.replace("::employeeId", orderSearhForm.getEmployeeId()!= null ? orderSearhForm.getEmployeeId() : "");
-		finalURL = finalURL.replaceAll("::dateTo",  dateToInLong!= null ? dateToInLong : "");
+		finalURL  =  finalURL.replace("::employeeIdOut", orderSearhForm.getEmployeeIdOut()!= null ? orderSearhForm.getEmployeeIdOut() : "");
+		
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}

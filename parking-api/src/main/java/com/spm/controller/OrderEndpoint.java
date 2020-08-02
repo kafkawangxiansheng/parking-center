@@ -1,5 +1,7 @@
 package com.spm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +70,12 @@ public class OrderEndpoint {
 			orderSearchForm.setProjectId(projectId);
 		}
 		if(cardCode != null && !cardCode.isEmpty()) {
-			orderSearchForm.setCardCode(cardCode);
+			try {
+				orderSearchForm.setCardCode(URLDecoder.decode(cardCode, "UTF8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(cardStt != null && !cardStt.isEmpty()) {
 			orderSearchForm.setCardStt(cardStt);

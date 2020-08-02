@@ -23,3 +23,6 @@ footer{
 	background: #ce7907;
     font-weight: 600;
 }
+#inOutTable.table th {
+	min-width: 98px;
+}

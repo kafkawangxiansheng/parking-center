@@ -22,6 +22,8 @@ public interface OrderService {
     OrderDto findByOrderIdAndProjectId(Long orderId, Long projectId);
     
     ResultObject<List<OrderDto>> findAll(Pageable pageable, OrderSearchForm  orderSearchForm);
+    
+    ResultObject<List<OrderDto>> findAllVehicleExistingInParking(Pageable pageable, OrderSearchForm  orderSearchForm);
 
 }
  

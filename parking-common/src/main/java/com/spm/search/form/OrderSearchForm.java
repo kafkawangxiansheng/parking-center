@@ -7,7 +7,6 @@ public class OrderSearchForm {
 	
 	
 	private String cardCode;
-	
 	private String cardStt;
 	
 	private String dateFrom;
@@ -35,7 +34,7 @@ public class OrderSearchForm {
 	public void setCardCode(String cardCode) {
 		this.cardCode = cardCode;
 	}
-
+	
 	public String getCardStt() {
 		return cardStt;
 	}

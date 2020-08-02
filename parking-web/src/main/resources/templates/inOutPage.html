@@ -66,13 +66,19 @@
                                 <h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
                                 <div>
                                     <form th:action="@{/in-out-logs}" th:object="${orderSearchForm}" method="GET">
-                                        <div class="form-group text col-lg-3 float-left">
-                                            <label for="option1">Biển số</label>
-                                            <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
-                                        </div>
-                                        <div class="form-group text col-lg-2 float-left">
-                                            <label for="option1">Số thẻ</label>
-                                            <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
+                                    	<div class="form-group text col-lg-5 float-left">
+	                                        <div class="form-group text col-lg-7 float-left">
+	                                            <label for="option1">Biển số</label>
+	                                            <input type="text" th:field="*{carNumber}" class="form-control" id="carNumber">
+	                                        </div>
+	                                        <div class="form-group text col-lg-5 float-left">
+	                                            <label for="option1">Số thẻ</label>
+	                                            <input type="text" th:field="*{cardStt}" class="form-control" id=cartStt>
+	                                        </div>
+	                                        <div class="form-group text col-lg-12 float-left">
+	                                            <label for="option1">Quét thẻ</label>
+	                                            <input type="text" th:field="*{cardCode}" class="form-control" id="cardCode">
+	                                        </div>
                                         </div>
                                         <div class="form-group col-lg-3 float-left">
 											<label for="">NV vào</label>
@@ -290,45 +296,59 @@
                             	<div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
                                         <button onclick="return exportExcel('/in-out-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
+                                        <button onclick="javascript:alert('updating');" id="xetonButton" class="btn btn-primary" style="font-size: 14px;">Tìm xe tồn</button>
+                                        <button onclick="javascript:saveLostCard();" id="lostCardButton" class="btn btn-primary" style="font-size: 14px;">Lưu mất thẻ</button>
                                     </div>
                                 </div>
-                                <table class="table" id="inOutTable">
-                                    <thead>
+                                <table class="table table-responsive table-striped" id="inOutTable">
+                                    <thead class="thead-dark">
                                         <tr>
+                                        	<th scope="col"></th>
                                             <th scope="col">STT</th>
                                             <th scope="col">Số thẻ</th>
-                                            <th scope="col">Thời gian vào</th>
-                                            <th scope="col">Thời gian ra</th>
-                                            <th scope="col">Biển số ĐK</th>
-                                            <th scope="col">Biển số vào</th>
-                                            <th scope="col">Biển số ra</th>
-                                            <th scope="col">Người vào</th>
-                                            <th scope="col">Người ra</th>
-                                            <th scope="col">Tên loại xe</th>
+                                            <th scope="col">Mã chip</th>
+                                            <th scope="col">BS vào</th>
+                                            <th scope="col">BS ra</th>
+                                            <th scope="col">BS ĐK</th>
+                                            <th scope="col">Loại xe</th>
+                                            <th scope="col">TG vào</th>
+                                            <th scope="col">TG ra</th>
+                                            <th scope="col">Giá</th>
+                                            <th scope="col">NV vào</th>
+                                            <th scope="col">NV ra</th>
                                             <th scope="col">Mất thẻ</th>
-                                            <th scope="col">Giá tiền</th>
+                                            <th scope="col">Máy</th>
+                                            <th scope="col">Tài khoản</th>
+                                            <th scope="col">Ngày xử lý</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<tr th:each="order : ${orders}">
-											<td th:text="${{order.id}}"></td>
+                                    	<tr th:each="order,iter : ${orders}">
+                                    		<td><input type="checkbox" name="orderId" class="orderId" th:value="${{order.id}}"></td>
+											<td th:text="${{iter.index+1}}"></td>
 											<td th:text="${{order.cardStt}}"></td>
-											<td th:text="${{order.checkinTimeInFormat}}"></td>
-											<td th:text="${{order.checkoutTimeInFormat}}"></td>
-											<td th:text="${{order.carNumber}}"></td>
+											<td th:text="${{order.cardCode}}"></td>
 											<td th:text="${{order.carNumberIn}}"></td>
 											<td th:text="${{order.carNumberOut}}"></td>
+											<td th:text="${{order.carNumber}}"></td>
+											<td th:text="${{order.vehicleName}}"></td>
+											<td th:text="${{order.checkinTimeInFormat}}"></td>
+											<td th:text="${{order.checkoutTimeInFormat}}"></td>
+											<td th:text="${{#numbers.formatDecimal(order.totalPrice,0, 'COMMA', 0, 'POINT')}}"></td>
 											<td th:text="${{order.adminCheckinName}}"></td>
 											<td th:text="${{order.adminCheckoutName}}"></td>
-											<td th:text="${{order.vehicleName}}"></td>
 											<td th:text="${{order.isCardLost}}"></td>
-											<td th:text="${{#numbers.formatDecimal(order.totalPrice,0, 'COMMA', 0, 'POINT')}}"></td>
+											<td th:text="${{order.pcName}}"></td>
+											<td th:text="${{order.account}}"></td>
+											<td th:text="${{order.createdInformat}}"></td>
 										</tr>
                                     </tbody>
                                 </table>
                                 <div class="form-group button-group d-flex flex-row">
                                     <div class="form-group">
                                         <button onclick="return exportExcel('/in-out-logs');" id="exportButton" class="btn btn-primary" style="font-size: 14px;">Xuất file Excel</button>
+                                        <button onclick="javascript:alert('updating');" id="xetonButton" class="btn btn-primary" style="font-size: 14px;">Tìm xe tồn</button>
+                                        <button onclick="javascript:alert('updating');" id="lostCardButton" class="btn btn-primary" style="font-size: 14px;">Lưu mất thẻ</button>
                                     </div>
                                 </div>
                                 <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">

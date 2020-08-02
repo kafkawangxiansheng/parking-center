@@ -64,6 +64,7 @@ public class InOutController {
 		orderSearchForm.setMinFrom(minFrom);
 		orderSearchForm.setCardStt(cardStt);
 		orderSearchForm.setCarNumber(carNumber);
+		orderSearchForm.setCardCode(cardCode);
 		if(dateFrom ==  null || dateFrom.isEmpty()) {
 			orderSearchForm.setDateFrom(DateUtil.getCurrentDateString());
 			orderSearchForm.setHourFrom("00");
@@ -96,7 +97,7 @@ public class InOutController {
 		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		ResultObject<List<OrderDto>> result = orderService.getAllOrder(orderSearchForm,pageable);
 		
-		List<Integer>  totalPages = new ArrayList<Integer>();
+		List<Integer>  totalPages = new ArrayList<>();
 		if( page <= 5) {
 			for(int p = 1; p <= result.getTotalPages(); p ++) {
 				totalPages.add(p);
