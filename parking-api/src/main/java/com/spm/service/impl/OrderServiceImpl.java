@@ -138,4 +138,29 @@ public class OrderServiceImpl implements OrderService {
 		return resultObject;
 	}
 
+	@Override
+	public ResultObject<List<OrderDto>> findAllVehicleExistingInParking(Pageable pageable,
+			OrderSearchForm orderSearchForm) {
+		Page<OrderEntity> pageOfOrderEntities =  orderRepository.findAllVehicleExistingInParking(orderSearchForm.getProjectId(), pageable);
+		ResultObject<List<OrderDto>>  result  = new ResultObject<>();
+		result.setData(this.map(pageOfOrderEntities.getContent()));
+		result.setTotalPages(pageOfOrderEntities.getTotalPages());
+		result.setTotalRows(pageOfOrderEntities.getTotalElements());
+		return result;
+	}
+
+	@Override
+	public void saveLostCard(String ids) {
+		String[] idsStringArray = ids.split(",");
+		OrderEntity entity = null;
+		for(int index = 0; index < idsStringArray.length; index++) {
+			if(orderRepository.existsById(Long.valueOf(idsStringArray[index]))) {
+				entity =  orderRepository.getOne(Long.valueOf(idsStringArray[index]));
+				entity.setIsCardLost(1);
+				orderRepository.save(entity);
+			}
+			
+		}
+	}
+
 }

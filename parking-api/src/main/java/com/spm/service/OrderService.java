@@ -19,6 +19,8 @@ public interface OrderService {
 
     void delete(OrderDto parkingDto);
     
+    void saveLostCard(String ids);
+    
     OrderDto findByOrderIdAndProjectId(Long orderId, Long projectId);
     
     ResultObject<List<OrderDto>> findAll(Pageable pageable, OrderSearchForm  orderSearchForm);

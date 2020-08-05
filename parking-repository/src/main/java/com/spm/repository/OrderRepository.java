@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -50,5 +51,9 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 			@Param(value = "dateTo") String dateTo);
 	
 	@Query(value = "SELECT * from orders  WHERE  project_id = :projectId AND (checkout_time = 0 || checkout_time is null ) order by updated DESC", nativeQuery = true)
+	List<OrderEntity> findAllVehicleExistingInParking(@Param(value = "projectId") String projectId);
+	
+	@Query(value = "SELECT * from orders  WHERE  project_id = :projectId AND (checkout_time = 0 || checkout_time is null ) order by updated DESC", nativeQuery = true)
 	Page<OrderEntity> findAllVehicleExistingInParking(@Param(value = "projectId") String projectId, Pageable pageable);
+	
 }
