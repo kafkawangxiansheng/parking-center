@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.spm.common.util.constant.SessionConstants;
 import com.spm.constants.PagingConstants;
 import com.spm.dto.CompanyDto;
 import com.spm.dto.MonthlyCardDto;
+import com.spm.dto.MonthlyCardLogDto;
 import com.spm.dto.ProjectsDto;
 import com.spm.dto.ResultObject;
 import com.spm.dto.VehicleDto;
@@ -33,7 +35,8 @@ import com.spm.exception.UnauthorizedException;
 import com.spm.search.form.MonthlyCradSearchForm;
 import com.spm.search.form.VehicleSearchForm;
 import com.spm.service.CompanyService;
-import com.spm.service.MonthlyCradService;
+import com.spm.service.MonthlyCardLogService;
+import com.spm.service.MonthlyCardService;
 import com.spm.service.ProjectService;
 import com.spm.service.VehicleService;
 
@@ -48,7 +51,10 @@ public class MonthlyCardController {
 	private VehicleService vehicleService;
 	
 	@Autowired
-	private MonthlyCradService monthlyCradService;
+	private MonthlyCardService monthlyCardService;
+	
+	@Autowired
+	private MonthlyCardLogService monthlyCardLogService;
 	
 	@Autowired
 	private CompanyService companyService;
@@ -58,246 +64,19 @@ public class MonthlyCardController {
 		return projects.get(0);
 	}
 	
-	//index == monthlycardPage
-	@RequestMapping(value = "", method = { RequestMethod.GET })
-	public String index(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
-			@RequestParam(name = "cardCode", required = false) String cardCode,
-			@RequestParam(name = "statusDate", required = false, defaultValue = "0") Integer statusDate,
-			@RequestParam(name = "vehicleId", required = false) String vehicleId,
-			@RequestParam(name = "numberEndDate", required = false, defaultValue = "0") Integer numberEndDate,
-			@RequestParam(name = "customerName", required = false) String customerName,
-			Model model, HttpServletRequest request) throws UnauthorizedException {
+	@GetMapping(value = "viewlog")
+	public String monthlyCardViewlog(Model model, @RequestParam(name="page", defaultValue = "0",required = false)int page, HttpServletRequest request) {
 		
-		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
-		monthlyCradSearchForm.setCardCode(cardCode);
-		monthlyCradSearchForm.setVehicleId(vehicleId);
-		monthlyCradSearchForm.setStatusDate(statusDate);
-		monthlyCradSearchForm.setNumberEndDate(numberEndDate);
-		monthlyCradSearchForm.setCustomerName(customerName);
-		monthlyCradSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
-		if(page > 0) {
-			page = page - 1;
+		if(page >  0) {
+			page =  page - 1;
 		}
 		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
-		ResultObject<List<MonthlyCardDto>> result = monthlyCradService.getAllMonthlyCard(monthlyCradSearchForm,pageable );
 		
-		List<Integer>  totalPages = new ArrayList<Integer>();
-		if( page <= 5) {
-			for(int p = 1; p <= result.getTotalPages(); p ++) {
-				totalPages.add(p);
-				if(p  > 10) {
-					break;
-				}
-			}
-		} else {
-			for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
-				totalPages.add(p);
-				if(p  > (page + 5)) {
-					break;
-				}
-			}
-		}
+		ResultObject<List<MonthlyCardLogDto>>  logs = monthlyCardLogService.getAllMonthlyCardLog(Long.valueOf(getProjectId(request)), pageable);
+		model.addAttribute("logs",logs);
 		
-		VehicleSearchForm vehicleSearchForm = new VehicleSearchForm();
-		vehicleSearchForm.setProjectId(getProjectId(request));
-		
-		ResultObject<List<VehicleDto>> listAllVehicle = vehicleService.getAllVehicle(vehicleSearchForm);
-		model.addAttribute("listMonthlycard",result);
-		model.addAttribute("vehicles",listAllVehicle.getData());
-		model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("totalRows", result.getTotalRows());
-		model.addAttribute("maxPage", result.getTotalPages());
-		model.addAttribute("currentPage", page+1);
-		model.addAttribute("currentDate", new Date().getTime());
-		return "monthlyCardPage";
-	}
-	
-	@RequestMapping(value = "viewlog", method = { RequestMethod.GET })
-	public String monthlyCardViewlog(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
 		return "monthlyCardViewLogPage";
 	}
 	
-	// renewal
-		@RequestMapping(value = "renewal", method = { RequestMethod.GET })
-		public String monthlyCardRenewalSearch(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
-				@RequestParam(name = "cardCode", required = false) String cardCode,
-				@RequestParam(name = "customerName", required = false) String customerName,
-				Model model, HttpServletRequest request) throws UnauthorizedException {
-			
-			ResultObject<List<MonthlyCardDto>> result = new ResultObject<List<MonthlyCardDto>>();
-			MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
-			if(page > 0) {
-				page = page - 1;
-			}
-			Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
-			List<Integer>  totalPages = new ArrayList<Integer>();
-				monthlyCradSearchForm.setCardCode(cardCode);
-				monthlyCradSearchForm.setCustomerName(customerName);
-				monthlyCradSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
-				result = monthlyCradService.getRenewal(monthlyCradSearchForm, pageable);
-				
-				if( page <= 5) {
-					for(int p = 1; p <= result.getTotalPages(); p ++) {
-						totalPages.add(p);
-						if(p  > 10) {
-							break;
-						}
-					}
-				} else {
-					for(int p = page  -  5; p <= result.getTotalPages(); p ++) {
-						totalPages.add(p);
-						if(p  > (page + 5)) {
-							break;
-						}
-					}
-				}
-			
-			model.addAttribute("listMonthlycard",result.getData());
-			model.addAttribute("monthlyCradSearchForm",monthlyCradSearchForm);
-			model.addAttribute("totalPages", totalPages);
-			model.addAttribute("totalRows", result.getTotalRows());
-			model.addAttribute("maxPage", result.getTotalPages());
-			model.addAttribute("currentPage", page+1);
-			model.addAttribute("currentDate", new Date().getTime());
-			return "monthlyCardRenewalPage";
-		}
-	
-		// renewaltMonthlyCard findOne
-		@RequestMapping(value = "renewal/findOne/{id}", method= {RequestMethod.GET})
-		@ResponseBody
-		public  MonthlyCardDto monthlyCardRenwalFindOne(@PathVariable("id")Long id) throws UnauthorizedException{
-			MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
-			return monthlyCardDto;
-		}
-		
-		// renewaltMonthlyCard update
-		@RequestMapping(value = "renewal/update")
-		public  String monthlyCardRenwalUpdate(MonthlyCardDto monthlyCardDto ) throws UnauthorizedException, ParseException{
-			long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
-			long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
-			monthlyCardDto.setStartDate(startDateLong);
-			monthlyCardDto.setEndDate(endDateLong);
-			boolean addSuccess = monthlyCradService.revewalMonthlyCardUpdate(monthlyCardDto);
-			return "redirect:/monthlyCard/renewal";
-		}
-				
-	@RequestMapping(value = "disablelist", method = { RequestMethod.GET })
-	public String monthlyCardDisablelist(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
-		return "monthlyCardDisableListPage";
-	}
-	
-	@RequestMapping(value = "active", method = { RequestMethod.GET })
-	public String monthlyCardActive(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlycards","");
-		return "monthlyCardActivePage";
-	}
-	
-//	monthlyCard
-	
-	@RequestMapping(value = "add", method = { RequestMethod.GET })
-	public String showAddNewMonthlyCardPage(Model model, HttpServletRequest request) throws UnauthorizedException {
-		model.addAttribute("monthlyCardDto", new MonthlyCardDto());
-		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-		model.addAttribute("listCompany", companyMap.getData());
-		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		List<ProjectsDto> selectedProject  = new ArrayList<>();
-		projectMap.getData().forEach(project -> {
-			if(getProjectId(request).equals(String.valueOf(project.getId()))){
-				selectedProject.add(project);
-				return;
-			}
-		});
-		model.addAttribute("listProject", selectedProject);
-		ResultObject<List<VehicleDto>> vehicleMap = vehicleService.getListAllVehicle();
-		model.addAttribute("listVehicle", vehicleMap.getData());
-		return "addMonthlyCardForm";
-	}
-	
-	@RequestMapping(value = "edit/{id}", method= {RequestMethod.GET})
-	public  String editMonthlyCard(Model model, @PathVariable("id")Long id, HttpServletRequest request) throws UnauthorizedException{
-		MonthlyCardDto monthlyCardDto = monthlyCradService.getMonthlyCardById(id);
-		
-		//  convert long date to string date
-		String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
-		String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
-		monthlyCardDto.setStartDateString(startDateString);
-		monthlyCardDto.setEndDateString(endDateString);
-		
-		model.addAttribute("monthlyCardDto", monthlyCardDto);
-		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-		model.addAttribute("listCompany", companyMap.getData());
-		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		List<ProjectsDto> selectedProject  = new ArrayList<>();
-		projectMap.getData().forEach(project -> {
-			if(getProjectId(request).equals(String.valueOf(project.getId()))){
-				selectedProject.add(project);
-				return;
-			}
-		});
-		model.addAttribute("listProject", selectedProject);
-		return "editMonthlyCardForm";
-	}
-	
-	@RequestMapping(value = "/add", method= {RequestMethod.POST})
-	public  String doAddMonthlyCard(Model model, @Valid @ModelAttribute("monthlyCardDto") MonthlyCardDto monthlyCardDto) throws UnauthorizedException, ParseException{
-		long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
-		long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
-		monthlyCardDto.setStartDate(startDateLong);
-		monthlyCardDto.setEndDate(endDateLong);
-		boolean addSuccess = monthlyCradService.addMonthlyCard(monthlyCardDto);
-		if(addSuccess) {
-			return "redirect:/monthlyCard";
-		}else {
-			String error = "Thẻ đã sử dụng hoặc chưa kích hoạt mã trên hệ thống!";
-			model.addAttribute("errorMessage",error );
-			
-			String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
-			String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
-			monthlyCardDto.setStartDateString(startDateString);
-			monthlyCardDto.setEndDateString(endDateString);
-			model = refeshSelectForm(model);
-			return "addMonthlyCardForm";
-		}
-	}
-	
-	@RequestMapping(value = "/update", method= {RequestMethod.POST})
-	public  String doUpdateMonthlyCard(Model model, @Valid @ModelAttribute("monthlyCardDto") MonthlyCardDto monthlyCardDto) throws UnauthorizedException, ParseException{
-		long startDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getStartDateString());
-		long endDateLong = DateUtil.getParseStringDateToLong(monthlyCardDto.getEndDateString());
-		monthlyCardDto.setStartDate(startDateLong);
-		monthlyCardDto.setEndDate(endDateLong);
-		boolean addSuccess = monthlyCradService.updateMonthlyCard(monthlyCardDto);
-		if(addSuccess) {
-			return "redirect:/monthlyCard";
-		}else {
-			String error = "Thẻ đã sử dụng hoặc chưa kích hoạt mã trên hệ thống!";
-			model.addAttribute("errorMessage",error );
-			
-			String startDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getStartDate()));
-			String endDateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date(monthlyCardDto.getEndDate()));
-			monthlyCardDto.setStartDateString(startDateString);
-			monthlyCardDto.setEndDateString(endDateString);
-			model = refeshSelectForm(model);
-			return "editMonthlyCardForm";
-		}
-	}
-	
-	@RequestMapping(value = "/delete/{id}", method= {RequestMethod.GET})
-	public  String deleteMonthlyCard(Model model, @PathVariable("id") Long id) throws UnauthorizedException{
-		monthlyCradService.deleteMonthlyCard(id);
-		return "redirect:/monthlyCard";
-	}
-	
-	//refeshSelectForm
-	public  Model refeshSelectForm(Model model) throws UnauthorizedException{
-		ResultObject<List<CompanyDto>> companyMap = companyService.getListCompanies();
-		model.addAttribute("listCompany", companyMap.getData());
-		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
-		model.addAttribute("listProject", projectMap.getData());
-		return model;
-	}
 	
 }

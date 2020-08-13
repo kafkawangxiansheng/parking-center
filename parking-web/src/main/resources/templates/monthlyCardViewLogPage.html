@@ -93,6 +93,23 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
+	                                    	<tr th:each="log : ${logs.data}">
+												<td th:text="${{log.id}}"></td>
+												<td th:text="${{log.logTypeID}}"></td>
+												<td th:text="${{log.processDate}}"></td>
+												<td th:text="${{log.account}}"></td>
+												<td th:text="${{log.ticketMonthID}}"></td>
+												<td th:text="${{log.ticketMonthIdentify}}"></td>
+												<td th:text="${{log.digit}}"></td>
+												<td th:text="${{log.registrationDate}}"></td>
+												<td th:text="${{log.expirationDate}}"></td>
+												<td th:text="${{log.customerName}}"></td>
+												<td th:text="${{log.cmnd}}"></td>
+												<td th:text="${{log.email}}"></td>
+												<td th:text="${{log.address}}"></td>
+												<td th:text="${{log.idPart}}"></td>
+												<td th:text="${{log.carKind}}"></td>
+											</tr>
 	                                    </tbody>
 	                                </table>
 	                                <div class="form-group button-group d-flex flex-row">

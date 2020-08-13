@@ -65,4 +65,7 @@ public class URLConstants {
 	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
 	public static final String URL_POST_UPDATE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/update";
 	
+	//monthly card logs
+	public static final String URL_GET_ALL_MONTHLY_CARD_LOG = MAIN_DOMAIN + "/monthlyCardLog?page=::page&projectId=::projectId";
+	
 }

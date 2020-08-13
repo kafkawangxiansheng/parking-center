@@ -8,7 +8,7 @@ import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.MonthlyCradSearchForm;
 
-public interface MonthlyCradService {
+public interface MonthlyCardService {
 	ResultObject<List<MonthlyCardDto>> getAllMonthlyCard();
 	
 	ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCradSearchForm monthlyCradSearchForm, Pageable pageable);

@@ -16,10 +16,10 @@ import com.spm.common.URLConstants;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.MonthlyCradSearchForm;
-import com.spm.service.MonthlyCradService;
+import com.spm.service.MonthlyCardService;
 
 @Service
-public class MonthlyCardServiceImpl implements MonthlyCradService{
+public class MonthlyCardServiceImpl implements MonthlyCardService{
 
 	@Override
 	public ResultObject<List<MonthlyCardDto>> getAllMonthlyCard() {
