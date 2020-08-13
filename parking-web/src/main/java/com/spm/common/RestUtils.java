@@ -142,7 +142,9 @@ public class RestUtils<T> {
 		}
 		HttpResponse response = httpClient.execute(postRequest);
 		String entityStringResult = EntityUtils.toString(response.getEntity(), "UTF-8");
-		bindingDataForList(entityStringResult, result);
+		if(entityStringResult != null &&  !entityStringResult.isEmpty()) {
+			bindingDataForList(entityStringResult, result);
+		}
 		return result;
 	}
 	
@@ -278,6 +280,9 @@ public class RestUtils<T> {
 	}
 	
 	private void bindingDataForList(String dataString, ResultObject<List<T>> result) {
+		if(dataString == null) {
+			return;
+		}
 		JsonObject  datafromApi = JsonParser.parseString(dataString).getAsJsonObject();
 		JsonArray array = datafromApi.get("data").getAsJsonArray();
 		Gson gson = new Gson();

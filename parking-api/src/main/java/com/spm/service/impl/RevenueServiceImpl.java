@@ -83,7 +83,7 @@ public class RevenueServiceImpl implements RevenueService {
 				mapper.map(revenueEntity, revenueDto);
 			}
 			revenueDto.setLabel(vehicle.getName());
-			revenueDto.setExistingVerhicle(orderRepository.findAllVehicleExistingInParking(String.valueOf(revenueSearchForm.getProjectId()), vehicle.getVehicleId()).size());
+			revenueDto.setExistingVerhicle(orderRepository.findAllVehicleExistingInParking(String.valueOf(revenueSearchForm.getProjectId())).size());
 			if(vehicle.getCardType() == 1)  {
 				normalRevenues.add(revenueDto);
 				normalRevenueTotalDto.setTotalCheckin(normalRevenueTotalDto.getTotalCheckin() + revenueDto.getTotalCheckin());

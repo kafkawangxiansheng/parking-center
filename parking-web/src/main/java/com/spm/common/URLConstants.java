@@ -1,9 +1,11 @@
 package com.spm.common;
 
 public class URLConstants {
-	private static final String  MAIN_DOMAIN = "http://127.0.0.1:1235";
-	public static final String URL_GET_ALL_IN_OUT = MAIN_DOMAIN + "/orders/?page=::page&employeeId=::employeeId&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
-	public static final String URL_EXPORT_ALL_IN_OUT = MAIN_DOMAIN + "/orders/export/?page=::page&employeeId=::employeeId&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
+	private static final String  MAIN_DOMAIN = "http://localhost:1235";
+	public static final String URL_GET_ALL_IN_OUT = MAIN_DOMAIN + "/orders/?page=::page&employeeId=::employeeId&employeeIdOut=::employeeIdOut&cardChip=::cardChip&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
+	public static final String URL_EXPORT_ALL_IN_OUT = MAIN_DOMAIN + "/orders/export/?page=::page&employeeId=::employeeId&employeeIdOut=::employeeIdOut&cardChip=::cardChip&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
+	public static final String URL_GET_EXISTING_IN_PART = MAIN_DOMAIN + "/orders/existing-in-part/?page=::page&projectId=::projectId";
+	public static final String URL_SAVE_LOST_CARD = MAIN_DOMAIN + "/orders/save-lost-card/?ids=::ids";
 	public static final String URL_GET_ALL_REVENUE = MAIN_DOMAIN + "/revenue/?projectId=::projectId&employeeId=::employeeId&dateFrom=::dateFrom&dateTo=::dateTo";
 	
 	public static final String URL_GET_ACCESS_TOKEN = MAIN_DOMAIN + "/oauth/token";

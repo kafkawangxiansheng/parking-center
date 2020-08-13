@@ -250,6 +250,15 @@ public class OrderDto {
 		return created;
 	}
 
+	public String getCreatedInformat() {
+		if(created == null || created == 0) {
+			return null;
+		}
+		Date date = new Date(created);
+	    Format format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	    return format.format(date);
+	}
+	
 	public void setCreated(Long created) {
 		this.created = created;
 	}
