@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DatabaseConfiguration {
     @Value("${spring.datasource.url:jdbc:mysql://localhost:3306/spm_parking?useUnicode=true&amp;characterEncoding=utf-8}")
     private String url;
-    @Value("${spring.datasource.username:root}")
+    @Value("${spring.datasource.username:kisspatent}")
     private String username;
-    @Value("${spring.datasource.password:root}")
+    @Value("${spring.datasource.password:Vincentcao@2011}")
     private String password;
 
     @Bean
