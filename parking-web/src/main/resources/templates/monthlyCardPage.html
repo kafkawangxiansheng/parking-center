@@ -128,11 +128,11 @@
 	                                            style="font-size: 14px;  margin-top: 15px;">
 	                                    </div>
 	                                </div>
-	                                <table class="table table-hover" id="inOutTable">
-	                                    <thead>
+	                                <table class="table table-responsive table-striped" id="inOutTable">
+	                                    <thead class="thead-dark">
 	                                        <tr>
-	                                            <th scope="col" style="width: 50px;">ID</th>
-	                                             <th scope="col">Số thẻ</th>
+	                                            <th scope="col">STT</th>
+	                                            <th scope="col">Số thẻ</th>
 	                                            <th scope="col">Mã chip</th>
 	                                            <th scope="col">Số ngày</th>
 	                                            <th scope="col">Loại xe</th>
@@ -147,8 +147,8 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                    	<tr th:each="monthlyCard : ${listMonthlycard.data}">
-												<td th:text="${{monthlyCard.id}}"></td>
+	                                    	<tr th:each="monthlyCard,iter : ${listMonthlycard.data}">
+												<td th:text="${{iter.index+1}}"></td>
 												<td th:text="${{monthlyCard.cardStt}}"></td>
 												<td th:text="${{monthlyCard.cardCode}}"></td>
 												<td th:text="${{monthlyCard.dateNumber}}"></td>
@@ -160,10 +160,10 @@
 												<td th:text="${#dates.format({monthlyCard.startDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${#dates.format({monthlyCard.endDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{monthlyCard.endDate > currentDate } ? 'Còn Hạn' : 'Hết Hạn' }"></td>
-												<td width="15%">
+												<td>
 													<div style="padding-right: 10px; float: left;">
 														<a th:href="@{/monthlyCard/edit/{id}(id=${monthlyCard.id})}">
-															<button class="btn-info">Chỉnh Sửa</button>
+															<button class="btn-info">Sửa</button>
 														</a>
 													</div>
 													<div>

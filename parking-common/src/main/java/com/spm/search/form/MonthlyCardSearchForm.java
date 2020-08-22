@@ -1,6 +1,6 @@
 package com.spm.search.form;
 
-public class MonthlyCradSearchForm {
+public class MonthlyCardSearchForm {
 	
 	private String cardCode;
 	private String vehicleId;

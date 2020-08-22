@@ -1,7 +1,5 @@
 package com.spm.dto;
 
-import java.util.Date;
-
 public class MonthlyCardLogDto {
 	
 	private Long id;
@@ -10,7 +8,7 @@ public class MonthlyCardLogDto {
 	
 	private int logTypeID;
 	
-	private Date processDate;
+	private Long processDate;
 	
 	private String ticketMonthID;
 	
@@ -32,9 +30,9 @@ public class MonthlyCardLogDto {
 	
 	private String idPart;
 	
-	private Date registrationDate;
+	private Long registrationDate;
 	
-	private Date expirationDate;
+	private Long expirationDate;
 	
 	private String note;
 	
@@ -46,7 +44,7 @@ public class MonthlyCardLogDto {
 	
 	private String images;
 	
-	private Date dayUnlimit;
+	private Long dayUnlimit;
 
 	public Long getId() {
 		return id;
@@ -72,11 +70,11 @@ public class MonthlyCardLogDto {
 		this.logTypeID = logTypeID;
 	}
 
-	public Date getProcessDate() {
+	public Long getProcessDate() {
 		return processDate;
 	}
 
-	public void setProcessDate(Date processDate) {
+	public void setProcessDate(Long processDate) {
 		this.processDate = processDate;
 	}
 
@@ -160,19 +158,19 @@ public class MonthlyCardLogDto {
 		this.idPart = idPart;
 	}
 
-	public Date getRegistrationDate() {
+	public Long getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(Long registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
-	public Date getExpirationDate() {
+	public Long getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(Long expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 
@@ -216,11 +214,11 @@ public class MonthlyCardLogDto {
 		this.images = images;
 	}
 
-	public Date getDayUnlimit() {
+	public Long getDayUnlimit() {
 		return dayUnlimit;
 	}
 
-	public void setDayUnlimit(Date dayUnlimit) {
+	public void setDayUnlimit(Long dayUnlimit) {
 		this.dayUnlimit = dayUnlimit;
 	}
 	

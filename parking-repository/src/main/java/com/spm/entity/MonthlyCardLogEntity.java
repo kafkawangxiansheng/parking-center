@@ -1,7 +1,5 @@
 package com.spm.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +23,7 @@ public class MonthlyCardLogEntity {
 	private int logTypeID;
 	
 	@Column(name="process_date")
-	private Date processDate;
+	private Long processDate;
 	
 	@Column(name="ticket_month_id")
 	private String ticketMonthID;
@@ -58,10 +56,10 @@ public class MonthlyCardLogEntity {
 	private String idPart;
 	
 	@Column(name="registration_date")
-	private Date registrationDate;
+	private Long registrationDate;
 	
 	@Column(name="expiration_date")
-	private Date expirationDate;
+	private Long expirationDate;
 	
 	@Column(name="note")
 	private String note;
@@ -79,7 +77,7 @@ public class MonthlyCardLogEntity {
 	private String images;
 	
 	@Column(name="day_unlimit")
-	private Date dayUnlimit;
+	private Long dayUnlimit;
 
 	public Long getId() {
 		return id;
@@ -105,11 +103,11 @@ public class MonthlyCardLogEntity {
 		this.logTypeID = logTypeID;
 	}
 
-	public Date getProcessDate() {
+	public Long getProcessDate() {
 		return processDate;
 	}
 
-	public void setProcessDate(Date processDate) {
+	public void setProcessDate(Long processDate) {
 		this.processDate = processDate;
 	}
 
@@ -193,19 +191,19 @@ public class MonthlyCardLogEntity {
 		this.idPart = idPart;
 	}
 
-	public Date getRegistrationDate() {
+	public Long getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(Long registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
-	public Date getExpirationDate() {
+	public Long getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(Long expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 
@@ -249,11 +247,11 @@ public class MonthlyCardLogEntity {
 		this.images = images;
 	}
 
-	public Date getDayUnlimit() {
+	public Long getDayUnlimit() {
 		return dayUnlimit;
 	}
 
-	public void setDayUnlimit(Date dayUnlimit) {
+	public void setDayUnlimit(Long dayUnlimit) {
 		this.dayUnlimit = dayUnlimit;
 	}
 	

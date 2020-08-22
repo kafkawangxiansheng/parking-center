@@ -21,7 +21,7 @@ import com.spm.dto.CardsDto;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
 import com.spm.entity.MonthlyCardEntity;
-import com.spm.search.form.MonthlyCradSearchForm;
+import com.spm.search.form.MonthlyCardSearchForm;
 import com.spm.service.CardsService;
 import com.spm.service.MonthlyCardService;
 
@@ -76,7 +76,7 @@ public class MonthCardEndpoint {
 		MonthlyCardEntity monthlyCardEntity = monthCardsService.getById(monthlyCardDto.getId());
 		if (monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
 			monthlyCardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
-			resultObject = monthCardsService.save(monthlyCardDto);
+			resultObject = monthCardsService.update(monthlyCardDto);
 		} else {
 			// type ve thang
 			int cardType = 2;
@@ -111,10 +111,10 @@ public class MonthCardEndpoint {
 		return monthCardsService.findById(id);
 	}
 
-	@DeleteMapping(path = "/delete/{id}")
+	@DeleteMapping(path = "/delete/{id}/{username}/")
 	@ApiOperation("This method support us can delete the specific monthCard by id")
-	public void delete(@PathVariable("id") Long id) {
-		monthCardsService.delete(id);
+	public void delete(@PathVariable("id") Long id, @PathVariable("username") String username) {
+		monthCardsService.delete(id, username);
 	}
 
 	@GetMapping(path = "/checkCard")
@@ -137,26 +137,26 @@ public class MonthCardEndpoint {
 
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 
-		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		MonthlyCardSearchForm monthlyCardSearchForm = new MonthlyCardSearchForm();
 		if (cardCode != null && !cardCode.isEmpty()) {
-			monthlyCradSearchForm.setCardCode(cardCode);
+			monthlyCardSearchForm.setCardCode(cardCode);
 		}
 		if (vehicleId != null && !vehicleId.isEmpty()) {
-			monthlyCradSearchForm.setVehicleId(vehicleId);
+			monthlyCardSearchForm.setVehicleId(vehicleId);
 		}
 		if (numberEndDate != 0) {
-			monthlyCradSearchForm.setNumberEndDate(numberEndDate);
+			monthlyCardSearchForm.setNumberEndDate(numberEndDate);
 		}
-		monthlyCradSearchForm.setStatusDate(statusDate);
+		monthlyCardSearchForm.setStatusDate(statusDate);
 		
 		if (customerName != null && !customerName.isEmpty()) {
-			monthlyCradSearchForm.setCustomerName(customerName);
+			monthlyCardSearchForm.setCustomerName(customerName);
 		}
 		if (projectId != 0) {
-			monthlyCradSearchForm.setProjectId(projectId);
+			monthlyCardSearchForm.setProjectId(projectId);
 		}
 
-		return monthCardsService.search(paging, monthlyCradSearchForm);
+		return monthCardsService.search(paging, monthlyCardSearchForm);
 	}
 
 	@GetMapping(value = "/renewal/search")
@@ -167,19 +167,19 @@ public class MonthCardEndpoint {
 			@RequestParam(name = "customerName", required = false) String customerName,
 			@RequestParam(name = "projectId", required = false) long projectId) {
 
-		MonthlyCradSearchForm monthlyCradSearchForm = new MonthlyCradSearchForm();
+		MonthlyCardSearchForm monthlyCardSearchForm = new MonthlyCardSearchForm();
 		Pageable paging = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 
 		if (cardCode != null && !cardCode.isEmpty()) {
-			monthlyCradSearchForm.setCardCode(cardCode);
+			monthlyCardSearchForm.setCardCode(cardCode);
 		}
 		if (customerName != null && !customerName.isEmpty()) {
-			monthlyCradSearchForm.setCustomerName(customerName);
+			monthlyCardSearchForm.setCustomerName(customerName);
 		}
 		if (projectId != 0) {
-			monthlyCradSearchForm.setProjectId(projectId);
+			monthlyCardSearchForm.setProjectId(projectId);
 		}
-		return monthCardsService.renewalSearch(paging, monthlyCradSearchForm);
+		return monthCardsService.renewalSearch(paging, monthlyCardSearchForm);
 	}
 
 	// renewal

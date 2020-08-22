@@ -36,6 +36,8 @@ public class MonthlyCardDto {
 	
 	private long adminId;
 	
+	private String username;
+	
 	private CompanyDto companyDto;
 	
 	private Long areaId;
@@ -271,6 +273,14 @@ public class MonthlyCardDto {
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

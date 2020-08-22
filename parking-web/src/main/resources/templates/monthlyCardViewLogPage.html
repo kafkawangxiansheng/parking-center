@@ -72,8 +72,8 @@
 	                        </section>
 	                        <section class="content">
 	                            <div class="box box-result">
-	                                <table class="table table-hover" id="revenueIndexTable">
-	                                    <thead>
+	                                <table class="table table-responsive table-striped" id="revenueIndexTable">
+	                                    <thead class="thead-dark">
 	                                        <tr>
 	                                            <th scope="col">ID</th>
 	                                            <th scope="col">Thao tác</th>
@@ -93,16 +93,16 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                    	<tr th:each="log : ${logs.data}">
-												<td th:text="${{log.id}}"></td>
-												<td th:text="${{log.logTypeID}}"></td>
-												<td th:text="${{log.processDate}}"></td>
+	                                    	<tr th:each="log,iter : ${logs.data}">
+												<td th:text="${{iter.index+1}}"></td>
+												<td th:text="${{log.note}}"></td>
+												<td th:text="${#dates.format({log.processDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{log.account}}"></td>
 												<td th:text="${{log.ticketMonthID}}"></td>
 												<td th:text="${{log.ticketMonthIdentify}}"></td>
 												<td th:text="${{log.digit}}"></td>
-												<td th:text="${{log.registrationDate}}"></td>
-												<td th:text="${{log.expirationDate}}"></td>
+												<td th:text="${#dates.format({log.registrationDate}, 'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format({log.expirationDate}, 'dd-MM-yyyy')}"></td>
 												<td th:text="${{log.customerName}}"></td>
 												<td th:text="${{log.cmnd}}"></td>
 												<td th:text="${{log.email}}"></td>

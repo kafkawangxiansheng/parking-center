@@ -11,10 +11,15 @@ public interface MonthlyCardService {
 
     MonthlyCardDto save(MonthlyCardDto monthlyCardDto);
     
+    MonthlyCardDto update(MonthlyCardDto monthlyCardDto);
+    
     MonthlyCardDto findByCardCode(String cardCode);
     
     List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos);
 
+    List<MonthlyCardDto> update(List<MonthlyCardDto> monthlyCardDtos);
+
+    
     void delete(MonthlyCardDto monthlyCardDto);
     
     List<MonthlyCardDto> findAll();

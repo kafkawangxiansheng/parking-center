@@ -15,7 +15,7 @@ import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
-import com.spm.search.form.MonthlyCradSearchForm;
+import com.spm.search.form.MonthlyCardSearchForm;
 import com.spm.service.MonthlyCardService;
 
 @Service
@@ -63,10 +63,10 @@ public class MonthlyCardServiceImpl implements MonthlyCardService{
 	}
 	
 	@Override
-	public void deleteMonthlyCard(Long id) {
+	public void deleteMonthlyCard(Long id, String username) {
 		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
 		String finalURL = URLConstants.URL_DELETE_MONTHLY_CARD.replace("::id", String.valueOf(id));
-		
+		finalURL = finalURL.replace("::username",username);
 		try {
 			restUtils.delete(finalURL);
 		} catch (IOException e) {
@@ -98,35 +98,35 @@ public class MonthlyCardServiceImpl implements MonthlyCardService{
 	}
 
 	@Override
-	public ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCradSearchForm monthlyCradSearchForm,
+	public ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCardSearchForm monthlyCardSearchForm,
 			Pageable pageable) {
 		
 		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
 		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_GET_ALL_MONTHLY_CARD_SEARCH_BY_PROJECT_ID.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
-		finalURL = finalURL.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
-		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()));
-		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
-		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
-		finalURL = finalURL.replaceAll("::customerName", URLEncoder.encode(monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : ""));
-		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCradSearchForm.getProjectId() !=  0 ? monthlyCradSearchForm.getProjectId() : ""));
+		finalURL = finalURL.replaceAll("::cardCode", monthlyCardSearchForm.getCardCode()!= null ? monthlyCardSearchForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCardSearchForm.getStatusDate()));
+		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCardSearchForm.getVehicleId()!= null && !monthlyCardSearchForm.getVehicleId().equals("all")) ? monthlyCardSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCardSearchForm.getNumberEndDate()!= 0 ? monthlyCardSearchForm.getNumberEndDate():0));
+		finalURL = finalURL.replaceAll("::customerName", URLEncoder.encode(monthlyCardSearchForm.getCustomerName() !=  null ? monthlyCardSearchForm.getCustomerName() : ""));
+		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCardSearchForm.getProjectId() !=  0 ? monthlyCardSearchForm.getProjectId() : ""));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 		
 	}
 
 	@Override
-	public ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCradSearchForm monthlyCradSearchForm, Pageable pageable) {
+	public ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCardSearchForm monthlyCardSearchForm, Pageable pageable) {
 		
 		RestUtils<MonthlyCardDto> restUtils = new RestUtils<>(MonthlyCardDto.class);
 		ResultObject<List<MonthlyCardDto>> resultFromApi = new ResultObject<>();
 		String finalURL = URLConstants.URL_GET_MONTHLY_CARD_RENEWAL_SEARCH.replaceAll("::page", String.valueOf(pageable.getPageNumber()));
-		finalURL = finalURL.replaceAll("::cardCode", monthlyCradSearchForm.getCardCode()!= null ? monthlyCradSearchForm.getCardCode():"");
-		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCradSearchForm.getStatusDate()!= 0 ? monthlyCradSearchForm.getStatusDate():0));
-		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCradSearchForm.getVehicleId()!= null && !monthlyCradSearchForm.getVehicleId().equals("all")) ? monthlyCradSearchForm.getVehicleId():"");
-		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCradSearchForm.getNumberEndDate()!= 0 ? monthlyCradSearchForm.getNumberEndDate():0));
-		finalURL = finalURL.replaceAll("::customerName", monthlyCradSearchForm.getCustomerName() !=  null ? monthlyCradSearchForm.getCustomerName() : "");
-		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCradSearchForm.getProjectId() !=  0 ? monthlyCradSearchForm.getProjectId() : "0"));
+		finalURL = finalURL.replaceAll("::cardCode", monthlyCardSearchForm.getCardCode()!= null ? monthlyCardSearchForm.getCardCode():"");
+		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCardSearchForm.getStatusDate()!= 0 ? monthlyCardSearchForm.getStatusDate():0));
+		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCardSearchForm.getVehicleId()!= null && !monthlyCardSearchForm.getVehicleId().equals("all")) ? monthlyCardSearchForm.getVehicleId():"");
+		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCardSearchForm.getNumberEndDate()!= 0 ? monthlyCardSearchForm.getNumberEndDate():0));
+		finalURL = finalURL.replaceAll("::customerName", monthlyCardSearchForm.getCustomerName() !=  null ? monthlyCardSearchForm.getCustomerName() : "");
+		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCardSearchForm.getProjectId() !=  0 ? monthlyCardSearchForm.getProjectId() : "0"));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
 	}

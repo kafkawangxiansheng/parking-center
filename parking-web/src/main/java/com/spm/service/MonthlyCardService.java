@@ -6,22 +6,22 @@ import org.springframework.data.domain.Pageable;
 
 import com.spm.dto.MonthlyCardDto;
 import com.spm.dto.ResultObject;
-import com.spm.search.form.MonthlyCradSearchForm;
+import com.spm.search.form.MonthlyCardSearchForm;
 
 public interface MonthlyCardService {
 	ResultObject<List<MonthlyCardDto>> getAllMonthlyCard();
 	
-	ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCradSearchForm monthlyCradSearchForm, Pageable pageable);
+	ResultObject<List<MonthlyCardDto>> getAllMonthlyCard(MonthlyCardSearchForm monthlyCardSearchForm, Pageable pageable);
 	
 	MonthlyCardDto getMonthlyCardById(Long monthlyCardId);
 	
 	boolean addMonthlyCard(MonthlyCardDto monthlyCardDto);
 	
-	void deleteMonthlyCard(Long id);
+	void deleteMonthlyCard(Long id, String username);
 	
 	boolean updateMonthlyCard(MonthlyCardDto monthlyCardDto);
 	
-	ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCradSearchForm monthlyCradSearchForm , Pageable pageable);
+	ResultObject<List<MonthlyCardDto>> getRenewal(MonthlyCardSearchForm monthlyCardSearchForm , Pageable pageable);
 	
 	boolean revewalMonthlyCardUpdate(MonthlyCardDto monthlyCardDto);
 }

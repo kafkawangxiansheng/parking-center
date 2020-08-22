@@ -1,7 +1,7 @@
 package com.spm.common;
 
 public class URLConstants {
-	private static final String  MAIN_DOMAIN = "http://localhost:1235";
+	private static final String  MAIN_DOMAIN = "http://127.0.0.1:1235";
 	public static final String URL_GET_ALL_IN_OUT = MAIN_DOMAIN + "/orders/?page=::page&employeeId=::employeeId&employeeIdOut=::employeeIdOut&cardChip=::cardChip&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
 	public static final String URL_EXPORT_ALL_IN_OUT = MAIN_DOMAIN + "/orders/export/?page=::page&employeeId=::employeeId&employeeIdOut=::employeeIdOut&cardChip=::cardChip&isMonthlyCard=::isMonthlyCard&projectId=::projectId&cardCode=::cardCode&cardStt=::cardStt&carNumber=::carNumber&dateFrom=::dateFrom&dateTo=::dateTo";
 	public static final String URL_GET_EXISTING_IN_PART = MAIN_DOMAIN + "/orders/existing-in-part/?page=::page&projectId=::projectId";
@@ -62,7 +62,7 @@ public class URLConstants {
 	public static final String URL_GET_MONTHLY_CARD_BY_ID = MAIN_DOMAIN + "/monthlyCard/getMonthlyCardById?id=::id";
 	public static final String URL_POST_ADD_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/add";
 	public static final String URL_POST_RENEWAL_MONTHLY_CARD_UPDATE = MAIN_DOMAIN + "/monthlyCard/revewal/update";
-	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id";
+	public static final String URL_DELETE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/delete/::id/::username/";
 	public static final String URL_POST_UPDATE_MONTHLY_CARD = MAIN_DOMAIN + "/monthlyCard/update";
 	
 	//monthly card logs
