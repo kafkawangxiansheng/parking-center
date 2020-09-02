@@ -21,6 +21,8 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 
 	MonthlyCardEntity findByCardCode(String cardCode);
 	
+	MonthlyCardEntity findByCardCodeAndCarNumber(String cardCode, String carNumber);
+	
 	@Query(value = "SELECT * FROM monthly_cards where  project_id = :projectId AND last_sync < updated", nativeQuery = true)
 	List<MonthlyCardEntity> syncAllByProjectId(@Param(value = "projectId") Long projectId);
 	
@@ -39,8 +41,8 @@ public interface MonthlyCardRepository  extends JpaRepository<MonthlyCardEntity,
 			Pageable pageable);
 	
 	@Query(value = "SELECT * FROM monthly_cards WHERE  "
-			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name = :customerName) AND (end_date < :currentDate) AND (project_id = :projectId)", nativeQuery = true)
-	List<MonthlyCardEntity> renewalSearch(
+			+ "(:cardCode is null OR card_code = :cardCode) AND (:customerName is null OR customer_name like %:customerName%) AND (end_date < :currentDate) AND (project_id = :projectId)", nativeQuery = true)
+	Page<MonthlyCardEntity> renewalSearch(
 			@Param(value = "cardCode") String cardCode,
 			@Param(value = "customerName") String customerName,
 			@Param(value = "currentDate") long currentDate,

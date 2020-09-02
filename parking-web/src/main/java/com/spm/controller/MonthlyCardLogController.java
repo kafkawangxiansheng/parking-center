@@ -1,5 +1,6 @@
 package com.spm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,29 @@ public class MonthlyCardLogController {
 		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		
 		ResultObject<List<MonthlyCardLogDto>>  logs = monthlyCardLogService.getAllMonthlyCardLog(Long.valueOf(getProjectId(request)), pageable);
+		
+		List<Integer> totalPages = new ArrayList<>();
+		if (page <= 5) {
+			for (int p = 1; p <= logs.getTotalPages(); p++) {
+				totalPages.add(p);
+				if (p > 10) {
+					break;
+				}
+			}
+		} else {
+			for (int p = page - 5; p <= logs.getTotalPages(); p++) {
+				totalPages.add(p);
+				if (p > (page + 5)) {
+					break;
+				}
+			}
+		}
+		
 		model.addAttribute("logs",logs);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("totalRows", logs.getTotalRows());
+		model.addAttribute("maxPage", logs.getTotalPages());
+		model.addAttribute("currentPage", page + 1);
 		
 		return "monthlyCardViewLogPage";
 	}

@@ -75,12 +75,10 @@
 	                            <div class="box box-result">
 	                            <div class="box box-search d-flex flex-column" style="border-top-color: #CEA052;">
 										<h5 style="border-bottom: 1px solid #f4f4f4;">Tìm kiếm</h5>
-										<form th:action="@{/monthlyCard/renewal}" th:object="${monthlyCradSearchForm}" method="GET">
-											<div>
-												<div class="form-group text col-lg-3 float-left">
-													<label>Mã chip</label> 
-													<input type="text" th:field="*{cardCode}" class="form-control" id="code">
-												</div>
+										<form th:action="@{/monthlyCard/renewal}" th:object="${monthlyCardSearchForm}" method="GET">
+											<div class="form-group text col-lg-3 float-left">
+												<label>Mã chip</label> 
+												<input type="text" th:field="*{cardCode}" class="form-control" id="code">
 											</div>
 											<div class="form-group text col-lg-3 float-left">
 												<label>Tên Khách Hàng</label> 
@@ -126,7 +124,7 @@
 	                                    </tbody>
 	                                </table>
 	                                <hr/>
-	                                <div style="min-height: 52px;padding-left: 10px;">
+	                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
 	                                    <ul class="pagination my-4">
 	                                    	<li th:if="${currentPage > 5}" class='page-item'>
 	                                    		<a class="page-link" th:onclick="'paging(1)'">Trang đầu</a>

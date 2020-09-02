@@ -14,6 +14,7 @@ public interface MonthlyCardService {
     MonthlyCardDto update(MonthlyCardDto monthlyCardDto);
     
     MonthlyCardDto findByCardCode(String cardCode);
+    MonthlyCardDto findByCardCodeAndCarNumber(String cardCode, String carNumber);
     
     List<MonthlyCardDto> save(List<MonthlyCardDto> monthlyCardDtos);
 

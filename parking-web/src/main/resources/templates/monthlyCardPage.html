@@ -123,14 +123,18 @@
 	                                        <input type="submit" value="Import danh sách thẻ" class="btn btn-primary"
 	                                            style="font-size: 14px; margin-right: 20px;  margin-top: 15px;">
 	                                    </div>
-	                                    <div class="form-group">
+	                                    <div class="form-group" style="float: left;">
 	                                        <input type="submit" value="Export danh sách thẻ" class="btn btn-info"
-	                                            style="font-size: 14px;  margin-top: 15px;">
+	                                            style="font-size: 14px; margin-right: 20px; margin-top: 15px;">
 	                                    </div>
+	                                    <div class="form-group"  style="float: right; margin-right: 10px;">
+	                                    	<button onclick="javascript:lockMonthlyCard();" id="lockMonthlyCardButton" class="btn btn-danger" style="font-size: 14px;  margin-top: 15px;">Khóa thẻ</button>
+	                                	</div>
 	                                </div>
 	                                <table class="table table-responsive table-striped" id="inOutTable">
 	                                    <thead class="thead-dark">
 	                                        <tr>
+	                                        	<th scope="col"></th>
 	                                            <th scope="col">STT</th>
 	                                            <th scope="col">Số thẻ</th>
 	                                            <th scope="col">Mã chip</th>
@@ -148,6 +152,7 @@
 	                                    </thead>
 	                                    <tbody>
 	                                    	<tr th:each="monthlyCard,iter : ${listMonthlycard.data}">
+	                                    		<td><input type="checkbox" name="cardId" class="cardId" th:value="${{monthlyCard.id}}"></td>
 												<td th:text="${{iter.index+1}}"></td>
 												<td th:text="${{monthlyCard.cardStt}}"></td>
 												<td th:text="${{monthlyCard.cardCode}}"></td>
@@ -176,7 +181,7 @@
 	                                    </tbody>
 	                                </table>
 	                                <hr/>
-	                                <div style="min-height: 52px;padding-left: 10px;">
+	                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
 	                                    <ul class="pagination my-4">
 	                                    	<li th:if="${currentPage > 5}" class='page-item'>
 	                                    		<a class="page-link" th:onclick="'paging(1)'">Trang đầu</a>
@@ -223,6 +228,7 @@
         </div>
     <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
     <script src="/js/orders.js"></script>
+    <script src="/js/monthlyCard.js"></script>
     <script src="/js/pagging.js"></script>
 </body>
 

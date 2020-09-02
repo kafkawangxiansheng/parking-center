@@ -119,18 +119,24 @@
 	                                </div>
 	                                <div class="dataTables_paginate paging_bootstrap d-flex" style="min-height: 80px;">
 	                                    <ul class="pagination my-4">
-	                                        <li class="page-item active" aria-current="page">
-	                                            <span class="page-link">
-	                                                1
-	                                                <span class="sr-only">(current)</span>
-	                                            </span>
-	                                        </li>
-	                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-	                                        <li class="page-item">
-	                                            <a class="page-link" href="#" aria-label="Next">
-	                                                <span aria-hidden="true">&raquo;</span>
-	                                            </a>
-	                                        </li>
+	                                    	<li th:if="${currentPage > 5}" class='page-item'>
+	                                    		<a class="page-link" th:onclick="'paging(1)'">Trang đầu</a>
+	                                    	</li>
+	                                    	<th:block th:each="p : ${totalPages}">
+	                                    		 <li th:if="${p == currentPage}" class='page-item active'>
+	                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+	                                    		 		<th:block  th:text="${p}"></th:block>
+	                                    		 	</a>
+	                                    		 </li>
+	                                    		 <li th:if="${p != currentPage}" class='page-item'>
+	                                    		 	<a class="page-link" th:onclick="'paging('+ *{p} +')'">
+	                                    		 		<th:block  th:text="${p}"></th:block>
+	                                    		 	</a>
+	                                    		 </li>
+	                                    	</th:block>
+	            							<li  th:if="${currentPage != maxPage}" class='page-item'>
+	                                    		<a class="page-link" th:onclick="'paging('+ ${maxPage} +')'">Trang cuối</a>
+	                                    	</li>
 	                                    </ul>
 	                                </div>
 	                            </div>
@@ -142,6 +148,7 @@
 	    </div>
 	    <footer th:insert="~{fragments/mainTemplate :: footer}" class="main-footer d-flex justify-content-between"> </footer>
 	    <script src="/js/orders.js"></script>
+	    <script src="/js/pagging.js"></script>
 	</body>
 
 </html>

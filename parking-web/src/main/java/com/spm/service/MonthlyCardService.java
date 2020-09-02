@@ -18,6 +18,8 @@ public interface MonthlyCardService {
 	boolean addMonthlyCard(MonthlyCardDto monthlyCardDto);
 	
 	void deleteMonthlyCard(Long id, String username);
+
+	void lockCard(String ids, String username);
 	
 	boolean updateMonthlyCard(MonthlyCardDto monthlyCardDto);
 	

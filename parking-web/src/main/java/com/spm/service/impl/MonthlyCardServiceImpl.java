@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.spm.common.RestUtils;
 import com.spm.common.URLConstants;
 import com.spm.dto.MonthlyCardDto;
+import com.spm.dto.OrderDto;
 import com.spm.dto.ResultObject;
 import com.spm.search.form.MonthlyCardSearchForm;
 import com.spm.service.MonthlyCardService;
@@ -125,7 +126,7 @@ public class MonthlyCardServiceImpl implements MonthlyCardService{
 		finalURL = finalURL.replaceAll("::statusDate", String.valueOf(monthlyCardSearchForm.getStatusDate()!= 0 ? monthlyCardSearchForm.getStatusDate():0));
 		finalURL = finalURL.replaceAll("::vehicleId", (monthlyCardSearchForm.getVehicleId()!= null && !monthlyCardSearchForm.getVehicleId().equals("all")) ? monthlyCardSearchForm.getVehicleId():"");
 		finalURL = finalURL.replaceAll("::numberEndDate", String.valueOf(monthlyCardSearchForm.getNumberEndDate()!= 0 ? monthlyCardSearchForm.getNumberEndDate():0));
-		finalURL = finalURL.replaceAll("::customerName", monthlyCardSearchForm.getCustomerName() !=  null ? monthlyCardSearchForm.getCustomerName() : "");
+		finalURL = finalURL.replaceAll("::customerName", URLEncoder.encode(monthlyCardSearchForm.getCustomerName() !=  null ? monthlyCardSearchForm.getCustomerName() : ""));
 		finalURL = finalURL.replaceAll("::projectId", String.valueOf(monthlyCardSearchForm.getProjectId() !=  0 ? monthlyCardSearchForm.getProjectId() : "0"));
 		resultFromApi = restUtils.get(finalURL);
 		return resultFromApi;
@@ -152,6 +153,19 @@ public class MonthlyCardServiceImpl implements MonthlyCardService{
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public void lockCard(String ids, String username) {
+		RestUtils<OrderDto> restUtils = new RestUtils<>(OrderDto.class);
+		String finalURL = URLConstants.URL_LOCK_MONTHLY_CARD.replace("::ids", ids);
+		finalURL = finalURL.replace("::username", username);
+		try {
+			restUtils.post(finalURL, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

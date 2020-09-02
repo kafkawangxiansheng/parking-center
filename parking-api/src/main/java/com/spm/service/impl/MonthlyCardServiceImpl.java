@@ -2,7 +2,6 @@ package com.spm.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -207,13 +206,15 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	@Override
 	public ResultObject<List<MonthlyCardDto>> renewalSearch(Pageable pageable,
 			MonthlyCardSearchForm monthlyCardSearchForm) {
-		Date currentDate = new Date();
-		List<MonthlyCardEntity> entities = monthlyCardRepository.renewalSearch(monthlyCardSearchForm.getCardCode(),
-				monthlyCardSearchForm.getCustomerName(), currentDate.getTime(), monthlyCardSearchForm.getProjectId(),
+		
+		Page<MonthlyCardEntity> entities = monthlyCardRepository.renewalSearch(monthlyCardSearchForm.getCardCode(),
+				monthlyCardSearchForm.getCustomerName(), Calendar.getInstance().getTimeInMillis(), monthlyCardSearchForm.getProjectId(),
 				pageable);
 
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
-		resultObject.setData(this.map(entities));
+		resultObject.setData(this.map(entities.getContent()));
+		resultObject.setTotalPages(entities.getTotalPages());
+		resultObject.setTotalRows(entities.getTotalElements());
 		return resultObject;
 	}
 
@@ -247,8 +248,11 @@ public class MonthlyCardServiceImpl implements MonthlyCardService {
 	}
 
 	@Override
-	public MonthlyCardEntity getById(Long id) {
-		return monthlyCardRepository.findById(id).get();
+	public MonthlyCardDto getById(Long id) {
+		MonthlyCardEntity entity = monthlyCardRepository.findById(id).get();
+		MonthlyCardDto dto = new MonthlyCardDto();
+		mapper.map(entity, dto);
+		return dto;
 	}
 
 	private void insertMonthlyLog(MonthlyCardDto monthlyCardDto, LogType logType) {

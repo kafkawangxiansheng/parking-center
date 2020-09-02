@@ -39,7 +39,7 @@ public interface MonthlyCardService {
     
     ResultObject<List<MonthlyCardDto>> renewalUpdate(MonthlyCardDto monthlyCardDto);
     
-    MonthlyCardEntity getById(Long id);
+    MonthlyCardDto getById(Long id);
     
     
 }

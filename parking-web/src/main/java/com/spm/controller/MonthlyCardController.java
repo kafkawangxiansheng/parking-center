@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -93,9 +94,6 @@ public class MonthlyCardController {
 		monthlyCardSearchForm.setProjectId(Long.parseLong(getProjectId(request)));
 		if (page > 0) {
 			page = page - 1;
-			if (page > 0) {
-				page = page - 1;
-			}
 		}
 		Pageable pageable = PageRequest.of(page, PagingConstants.ROWS_PER_PAGE);
 		ResultObject<List<MonthlyCardDto>> result = monthlyCardService.getAllMonthlyCard(monthlyCardSearchForm, pageable);
@@ -136,7 +134,7 @@ public class MonthlyCardController {
 
 	}
 
-	@GetMapping(value = "renewal")
+	@GetMapping(value = "/renewal")
 	public String monthlyCardRenewalSearch(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "cardCode", required = false) String cardCode,
 			@RequestParam(name = "customerName", required = false) String customerName, Model model,
@@ -317,6 +315,14 @@ public class MonthlyCardController {
 		ResultObject<List<ProjectsDto>> projectMap = projectService.getAllProjects();
 		model.addAttribute("listProject", projectMap.getData());
 		return model;
+	}
+	
+	@RequestMapping(value = "/lock-card/", method = {RequestMethod.POST,RequestMethod.GET})
+	public @ResponseBody void saveLostCard(@RequestParam(name = "ids", required = false) String ids, Model model,
+			HttpServletRequest request) {
+
+		monthlyCardService.lockCard(ids, getCurentUsername());
+
 	}
 
 }

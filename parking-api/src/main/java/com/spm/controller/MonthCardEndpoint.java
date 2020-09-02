@@ -73,8 +73,7 @@ public class MonthCardEndpoint {
 	public ResultObject<List<MonthlyCardDto>> updateMonthlyCard(@RequestBody MonthlyCardDto monthlyCardDto) {
 		ResultObject<List<MonthlyCardDto>> resultObject = new ResultObject<>();
 
-		MonthlyCardEntity monthlyCardEntity = monthCardsService.getById(monthlyCardDto.getId());
-		if (monthlyCardEntity.getCardCode().equals(monthlyCardDto.getCardCode())) {
+		if (monthlyCardDto.getCardCode().equals(monthlyCardDto.getCardCode())) {
 			monthlyCardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
 			resultObject = monthCardsService.update(monthlyCardDto);
 		} else {
@@ -115,6 +114,21 @@ public class MonthCardEndpoint {
 	@ApiOperation("This method support us can delete the specific monthCard by id")
 	public void delete(@PathVariable("id") Long id, @PathVariable("username") String username) {
 		monthCardsService.delete(id, username);
+	}
+	
+	@PostMapping(path = "/lock-card/{username}/")
+	@ApiOperation("This method support us can delete the specific monthCard by id")
+	public void lockCard(@PathVariable("username") String username, @RequestParam(name = "ids", required = true) String ids) {
+		String[] idsArray  = ids.split(",");
+		for(String id : idsArray) {
+			MonthlyCardDto  cardDto = monthCardsService.getById(Long.valueOf(id));
+			if(cardDto !=  null  && cardDto.getId() != null)  {
+				cardDto.setDisabled(true);
+				cardDto.setDeleted(true);
+				cardDto.setUpdated(Calendar.getInstance().getTimeInMillis());
+				monthCardsService.save(cardDto);
+			}
+		}
 	}
 
 	@GetMapping(path = "/checkCard")

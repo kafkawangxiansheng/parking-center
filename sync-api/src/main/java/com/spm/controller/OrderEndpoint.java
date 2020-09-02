@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spm.constant.MessageConstants;
+import com.spm.dtos.MonthlyCardDto;
 import com.spm.dtos.OrderDto;
 import com.spm.service.OrderService;
 
@@ -31,7 +33,7 @@ public class OrderEndpoint {
 	
 	@PostMapping(value = "/batchinsert")
 	@ApiOperation("Orders batch syncs")
-	public void batchSync(@RequestBody List<OrderDto> ordersDtos) {
+	public String batchSync(@RequestBody List<OrderDto> ordersDtos) {
 		for(OrderDto orderDto : ordersDtos) {
 			OrderDto existingDto = parkingService.findByOrderIdAndProjectId(orderDto.getOrderId(), orderDto.getProjectId());
 			if(existingDto != null) {
@@ -39,7 +41,17 @@ public class OrderEndpoint {
 				orderDto.setId(existingDto.getId());
 			}
 		}
-		parkingService.save(ordersDtos);
+		
+		try {
+			List<OrderDto>  dtos = parkingService.save(ordersDtos);
+			if (dtos != null) {
+				return MessageConstants.SUCCESS;
+			}
+		} catch (Exception e) {
+			return MessageConstants.ERROR;
+		}
+		return MessageConstants.ERROR;
+		
 		
 	}
 	
